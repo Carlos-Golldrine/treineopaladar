@@ -1,0 +1,123 @@
+/* ============================================================
+   Reset e regras de plataforma (PWA que parece app nativo).
+   Checklist tecnico: BRIEF-DESIGN.md secao 4.
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  overflow-x: hidden;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  /* clip (e nao hidden): hidden criaria um scroll container no body
+     e quebraria o position: sticky da tab bar */
+  overflow-x: clip;
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--neutral-700);
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Em standalone: mata pull-to-refresh e bounce */
+@media (display-mode: standalone) {
+  html,
+  body {
+    overscroll-behavior: none;
+  }
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+}
+
+/* Inputs sempre >= 16px: iOS nao da zoom */
+input,
+select,
+textarea {
+  font-family: var(--font-ui);
+  font-size: 16px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--wine-700);
+  outline-offset: 2px;
+}
+
+/* Chrome do app sem selecao de texto (conteudo continua selecionavel) */
+.app-chrome {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Estado :active desenhado em 100% dos tocaveis */
+.tap {
+  transition: transform 150ms ease-out;
+}
+
+.tap:active {
+  transform: scale(0.98);
+}
+
+/* Icones inline: SVG do Material Symbols Rounded, so os usados */
+.icon {
+  display: inline-flex;
+  flex: none;
+}
+
+.icon svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

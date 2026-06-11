@@ -1,0 +1,61 @@
+/* ============================================================
+   Tokens do design system. Fonte da verdade: BRIEF-DESIGN.md.
+   Toda cor tem papel nomeado. Nunca introduzir cor sem papel.
+   ============================================================ */
+:root {
+  /* Marca (hex travados) */
+  --wine-900: #4a1f24; /* texto display, fundos profundos */
+  --wine-700: #722f37; /* acao primaria, selecao */
+  --gold-700: #b8894a; /* tier medio de match; icone de cristal sobre fundo claro */
+  --gold-500: #d4a574; /* recompensa, destaque, cristais */
+  --bg: #fafaf8; /* fundo base quente, nunca branco puro */
+
+  /* Semanticas */
+  --ok-700: #2e5734; /* verde de acerto */
+  --ok-100: #e3ebe0; /* fundo de acerto, derivado do ok-700 sobre bg */
+  --warm-700: #a0522d; /* erro em tom terroso, nunca vermelho agressivo */
+  --warm-100: #f4e5db; /* fundo de erro, derivado do warm-700 sobre bg */
+  --ember-500: #d98e32; /* streak: ambar de fogo proprio */
+  --xp: var(--gold-500); /* XP e energia derivam do gold */
+
+  /* Neutros quentes proprios (8 passos, levemente avermelhados,
+     nunca cinza azulado de framework) */
+  --neutral-50: #f6f3f1;
+  --neutral-100: #ede8e5;
+  --neutral-200: #ded5d1;
+  --neutral-300: #c5bab4;
+  --neutral-400: #a39690;
+  --neutral-500: #857770;
+  --neutral-600: #645850;
+  --neutral-700: #463c37;
+
+  /* Tipografia (papeis fixos) */
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-ui: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Mono', monospace;
+
+  /* Escala modular: 13 / 15 / 17 / 22 / 28 / 36 */
+  --text-xs: 13px;
+  --text-sm: 15px;
+  --text-md: 17px;
+  --text-lg: 22px;
+  --text-xl: 28px;
+  --text-2xl: 36px;
+
+  /* Espaco, grid 8pt: 4 / 8 / 12 / 16 / 24 / 32 */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+
+  /* Raios com intencao: 3 e somente 3 */
+  --radius-control: 8px; /* inputs e chips */
+  --radius-card: 16px; /* cards */
+  --radius-pill: 999px; /* botoes de acao */
+
+  /* Sombras: 2 niveis, tingidas de vinho, nunca preto puro */
+  --shadow-sm: 0 1px 2px rgba(74, 31, 36, 0.08), 0 1px 4px rgba(74, 31, 36, 0.06);
+  --shadow-md: 0 2px 6px rgba(74, 31, 36, 0.1), 0 10px 24px rgba(74, 31, 36, 0.12);
+}

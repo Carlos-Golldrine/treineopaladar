@@ -1,0 +1,64 @@
+﻿{
+    "verdicts":  [
+                     {
+                         "claimIndex":  1,
+                         "verdict":  "confirmado",
+                         "note":  "Abstract no PubMed bate verbatim: \u0027839 assessments of distributed practice in 317 experiments located in 184 articles\u0027, com pratica distribuida superando massificada em retencao e o gap otimo crescendo com o intervalo de retencao. https://pubmed.ncbi.nlm.nih.gov/16719566/"
+                     },
+                     {
+                         "claimIndex":  2,
+                         "verdict":  "nuance",
+                         "note":  "O n\u003e1.350 e a conclusao qualitativa (reestudo dias depois, nunca na mesma sessao; gap otimo ~11 dias para reter ~35 dias) batem, mas o numero e impreciso: o abstract diz que o gap otimo cai de 20-40% do intervalo (1 semana) para 5-10% (1 ano) — nao \u002710-20%\u0027. https://pubmed.ncbi.nlm.nih.gov/19076480/"
+                     },
+                     {
+                         "claimIndex":  5,
+                         "verdict":  "confirmado",
+                         "note":  "Blog oficial do Duolingo (Kai Herng Loh, 2017) diz verbatim que \u0027learners who binge... were much more likely to abandon the app\u0027 e que usuarios com Weekend Amulet foram \u00274% more likely to come back a week later\u0027 (e 5% menos propensos a perder o streak). https://blog.duolingo.com/how-streaks-keep-duolingo-learners-committed-to-their-language-goals/"
+                     },
+                     {
+                         "claimIndex":  11,
+                         "verdict":  "confirmado",
+                         "note":  "Deslauriers et al. 2019 (PNAS): alunos de aula ativa pontuaram +0,46 DP no teste de aprendizado e reportaram sentimento de aprendizado -0,56 DP vs aula passiva, exatamente como alegado. https://pmc.ncbi.nlm.nih.gov/articles/PMC6765278/"
+                     },
+                     {
+                         "claimIndex":  12,
+                         "verdict":  "confirmado",
+                         "note":  "Mesmo paper: apos apresentacao de ~20 min do instrutor no semestre seguinte, 65% reportaram que sua atitude sobre aula ativa melhorou e 75% disseram que a intervencao em si ajudou. Numeros exatos confirmados na fonte primaria. https://pmc.ncbi.nlm.nih.gov/articles/PMC6765278/"
+                     },
+                     {
+                         "claimIndex":  14,
+                         "verdict":  "confirmado",
+                         "note":  "PDF do paper (Roediger \u0026 Karpicke 2006) confirma: Exp. 2 em 1 semana, 61% (STTT) vs 40% (SSSS) verbatim, e grupo de releitura previu lembrar mais (JOL 4,8 vs 4,0) embora retivesse menos; os 83%/71% correspondem ao teste de 5 min do Exp. 2 (no Exp. 1 foi 81% vs 75%). https://colinallen.dnsalias.org/Readings/2006_Roediger_Karpicke_PsychSci.pdf"
+                     },
+                     {
+                         "claimIndex":  16,
+                         "verdict":  "confirmado",
+                         "note":  "Wilson et al. 2019 (Nat Commun): taxa otima de erro de treino de 15,87% derivada matematicamente e demonstrada em redes neurais artificiais (MNIST) e biologicamente plausiveis. Ressalva de escopo: vale para classificacao binaria com aprendizado tipo gradiente, nao foi validada experimentalmente em humanos nesse paper. https://pubmed.ncbi.nlm.nih.gov/31690723/"
+                     },
+                     {
+                         "claimIndex":  20,
+                         "verdict":  "nuance",
+                         "note":  "A parte oficial bate: blog do Duolingo e o S-1 na SEC confirmam que o Birdbrain preve a probabilidade de acerto e calibra dificuldade \u0027just right\u0027 (nem frustrante nem entediante). Mas o alvo especifico de 80% nao aparece em NENHUMA fonte primaria — so em blogs de terceiros como o alegado (rockflow.ai); trate o numero como nao oficial. https://blog.duolingo.com/learning-how-to-help-you-learn-introducing-birdbrain/"
+                     },
+                     {
+                         "claimIndex":  21,
+                         "verdict":  "confirmado",
+                         "note":  "Freeman et al. 2014 (PNAS, 225 estudos): notas de exame +6% (~0,47 DP) com aprendizagem ativa e reprovacao 33,8% vs 21,8% (1,5x mais sob aula expositiva). Numeros exatos confirmados; a aplicacao a \u0027multipla escolha passiva\u0027 e extrapolacao de produto, nao achado do paper. https://pubmed.ncbi.nlm.nih.gov/24821756/"
+                     },
+                     {
+                         "claimIndex":  34,
+                         "verdict":  "confirmado",
+                         "note":  "Estudo do lava-rapido de Nunes \u0026 Dreze 2006 (JCR): cartao de 10 selos com 2 ja carimbados teve 34% de resgate vs 19% do cartao de 8 selos em branco, mesmo esforco real (8 lavagens) — numeros corroborados em multiplas fontes que citam o paper original. https://www.researchgate.net/publication/23547282_The_Endowed_Progress_Effect_How_Artificial_Advancement_Increases_Effort"
+                     },
+                     {
+                         "claimIndex":  41,
+                         "verdict":  "confirmado",
+                         "note":  "First Round Review (entrevista com Gina Gotthilf) diz verbatim: \u0027moving the sign-up screen back a few steps led to about a 20% increase in DAUs\u0027; o mesmo artigo confirma os +8,2% de DAU dos soft/hard walls e o botao \u0027Later\u0027 (claim 42) e os +7,2% D14 do mascote coach (claim 50). https://review.firstround.com/the-tenets-of-a-b-testing-from-duolingos-master-growth-hacker/"
+                     },
+                     {
+                         "claimIndex":  49,
+                         "verdict":  "nuance",
+                         "note":  "Mazal confirma DAU 4,5x em 4 anos e leaderboards aumentando tempo de aprendizado em 17% (verbatim), mas o \u0027-40% de churn\u0027 e especificamente a reducao do churn DIARIO dos melhores usuarios, derivada de +21% em CURR — nao churn geral do app; e o 4,5x veio de varias apostas (streak, notificacoes, leaderboards, etc.), nao so gamificacao. https://www.lennysnewsletter.com/p/how-duolingo-reignited-user-growth"
+                     }
+                 ]
+}

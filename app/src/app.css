@@ -1,0 +1,185 @@
+/* ============================================================
+   Shell do app: coluna mobile-first, tab bar fixa, skeletons.
+   ============================================================ */
+
+#root {
+  min-height: 100dvh;
+}
+
+.shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background: var(--bg);
+}
+
+/* Desktop: coluna central de 480px sobre fundo neutro quente */
+@media (min-width: 520px) {
+  body {
+    background: var(--neutral-100);
+  }
+
+  .shell {
+    max-width: 480px;
+    margin-inline: auto;
+    box-shadow: var(--shadow-md);
+  }
+}
+
+.screen {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Cabecalho padrao de tela (respeita notch) */
+.screen-header {
+  padding: max(env(safe-area-inset-top), 12px) var(--space-4) var(--space-3);
+}
+
+.screen-title {
+  font: 600 var(--text-xl) / 1.15 var(--font-display);
+  color: var(--wine-900);
+}
+
+.screen-sub {
+  margin-top: var(--space-1);
+  font-size: var(--text-sm);
+  color: var(--neutral-500);
+}
+
+/* ---------- Tab bar ---------- */
+.tabbar {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  display: flex;
+  background: var(--bg);
+  border-top: 1px solid var(--neutral-100);
+  padding: 6px var(--space-2) max(env(safe-area-inset-bottom), 8px);
+}
+
+.tab {
+  flex: 1;
+  min-height: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  border-radius: var(--radius-control);
+  color: var(--neutral-400);
+  font-size: var(--text-xs);
+  font-weight: 500;
+}
+
+.tab .icon {
+  width: 26px;
+  height: 26px;
+}
+
+.tab-active {
+  color: var(--wine-700);
+  font-weight: 600;
+}
+
+@media (hover: hover) {
+  .tab:hover {
+    color: var(--wine-700);
+  }
+}
+
+.tab-avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-pill);
+  display: grid;
+  place-items: center;
+  background: var(--neutral-400);
+  color: var(--bg);
+  font: 600 13px / 1 var(--font-display);
+}
+
+.tab-active .tab-avatar {
+  background: var(--wine-700);
+}
+
+/* ---------- Skeleton (so aparece apos 300ms) ---------- */
+.skeleton-slot {
+  flex: 1;
+  padding: var(--space-4);
+}
+
+.skeleton {
+  border-radius: var(--radius-card);
+  background: var(--neutral-100);
+  animation: skeleton-pulse 1.2s ease-out infinite;
+}
+
+.skeleton + .skeleton {
+  margin-top: var(--space-3);
+}
+
+.skeleton-header {
+  height: 48px;
+  border-radius: var(--radius-control);
+}
+
+.skeleton-card {
+  height: 148px;
+}
+
+.skeleton-row {
+  height: 72px;
+}
+
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.55;
+  }
+}
+
+/* ---------- Botoes de acao (pill) ---------- */
+.btn {
+  min-height: 48px;
+  padding: 0 var(--space-5);
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.btn-primary {
+  background: var(--wine-700);
+  color: var(--bg);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:disabled {
+  background: var(--neutral-200);
+  color: var(--neutral-500);
+  box-shadow: none;
+}
+
+.btn-outline {
+  border: 1.5px solid var(--wine-700);
+  color: var(--wine-700);
+}
+
+@media (hover: hover) {
+  .btn-primary:not(:disabled):hover {
+    background: color-mix(in srgb, var(--wine-700) 88%, #000);
+  }
+
+  .btn-outline:hover {
+    background: rgba(114, 47, 55, 0.06);
+  }
+}

@@ -1,0 +1,202 @@
+﻿[
+    {
+        "claim":  "Meta-analise de Cepeda et al. 2006 (184 estudos, 317 experimentos) confirma que pratica distribuida entre sessoes gera retencao de longo prazo substancialmente maior que pratica massificada na mesma sessao.",
+        "source":  "https://pubmed.ncbi.nlm.nih.gov/16719566/"
+    },
+    {
+        "claim":  "Cepeda et al. 2008 (n\u003e1350) acharam que o gap otimo entre sessoes e de 10 a 20 por cento do intervalo de retencao; para lembrar em 30 dias, o reestudo ideal ocorre dias depois, nunca na mesma sessao.",
+        "source":  "https://escholarship.org/uc/item/0kp5q19x"
+    },
+    {
+        "claim":  "Rohrer e Taylor 2006: overlearning (continuar praticando na mesma sessao apos dominar) tem ganho quase nulo de retencao de longo prazo; distribuir a mesma pratica entre sessoes gera ganho forte.",
+        "source":  "https://files.eric.ed.gov/fulltext/ED505642.pdf"
+    },
+    {
+        "claim":  "Estudo de binge-watching (Horvath et al. 2017): consumo em binge gera memorias que decaem mais rapido (pior recognicao em 140 dias) e menor prazer do que consumo diario ou semanal.",
+        "source":  "https://firstmonday.org/ojs/index.php/fm/article/view/7729/6532"
+    },
+    {
+        "claim":  "Duolingo afirma oficialmente que usuarios que fazem binge de licoes abandonam o app muito mais que os que se pacejam, e que dar folga (Weekend Amulet) aumentou retorno semanal em 4 por cento.",
+        "source":  "https://blog.duolingo.com/how-streaks-keep-duolingo-learners-committed-to-their-language-goals/"
+    },
+    {
+        "claim":  "Hammedi et al. 2023 (Journal of Service Research, 10 estudos): alta repeticao da mesma atividade gamificada reduz qualidade da experiencia e engajamento (saciacao); remedios validados sao variedade, periodo de recuperacao e quase-vitoria.",
+        "source":  "https://journals.sagepub.com/doi/10.1177/10946705231190873"
+    },
+    {
+        "claim":  "Kivetz, Urminsky e Zheng 2006: esforco acelera perto da meta (goal gradient) e cai apos a recompensa (post-reward reset), logo a recompensa deve fechar a meta diaria curta para que a queda vire o ponto natural de parada do dia.",
+        "source":  "https://home.uchicago.edu/ourminsky/Goal-Gradient_Illusionary_Goal_Progress.pdf"
+    },
+    {
+        "claim":  "Anki limita por default a 20 cartoes novos por dia (com teto separado de 200 revisoes) para manter a carga futura de revisao sustentavel, modelo de racionar conteudo novo sem bloquear revisao.",
+        "source":  "https://docs.ankiweb.net/deck-options.html"
+    },
+    {
+        "claim":  "O limite de 1 puzzle por dia do Wordle criou ritual social e uma onda de jogos once-a-day, e o NYT usa esses jogos diarios como ancora de habito com mais de 1 milhao de assinaturas de Games.",
+        "source":  "https://digiday.com/media/the-next-level-for-us-the-new-york-times-eyes-longer-play-sessions-for-games-in-subscription-drive/"
+    },
+    {
+        "claim":  "Estudo real-world do Headspace: o preditor de resultado e o numero de dias ativos por semana (consistencia), nao o volume por sessao, sustentando otimizar para voltar amanha em vez de fazer mais hoje.",
+        "source":  "https://pmc.ncbi.nlm.nih.gov/articles/PMC10986332/"
+    },
+    {
+        "claim":  "Em experimento randomizado em Harvard, alunos de aula ativa aprenderam mais (+0,46 DP no teste) mas sentiram que aprenderam menos (-0,56 DP na percepção) que alunos de aula passiva.",
+        "source":  "https://www.pnas.org/doi/10.1073/pnas.1821936116"
+    },
+    {
+        "claim":  "Uma explicação breve do instrutor sobre por que o esforço sinaliza aprendizado reverteu a percepção negativa: 65% dos alunos passaram a avaliar melhor a aula ativa e 75% disseram que a explicação em si ajudou.",
+        "source":  "https://pmc.ncbi.nlm.nih.gov/articles/PMC6765278/"
+    },
+    {
+        "claim":  "Releitura gera ilusão de competência via fluência: 84% dos estudantes listam releitura entre suas estratégias preferidas, embora retrieval produza retenção muito superior.",
+        "source":  "https://link.springer.com/article/10.3758/BF03194055"
+    },
+    {
+        "claim":  "Testing effect: quem releu venceu 5 minutos depois (83% vs 71% de recall) e previu lembrar mais, mas 1 semana depois reteve só 40% contra 61% do grupo que praticou evocação.",
+        "source":  "https://journals.sagepub.com/doi/10.1111/j.1467-9280.2006.01693.x"
+    },
+    {
+        "claim":  "Dificuldades desejáveis (espaçamento, interleaving, retrieval) pioram desempenho e sensação durante a prática mas melhoram retenção e transferência; prática blocada gera superconfiança marcada, interleaving gera previsões calibradas.",
+        "source":  "https://bjorklab.psych.ucla.edu/wp-content/uploads/sites/13/2016/04/EBjork_RBjork_2011.pdf"
+    },
+    {
+        "claim":  "Regra dos 85%: a velocidade de aprendizado é máxima com taxa de erro de treino em torno de 15,87% (acerto ~85%), demonstrado matematicamente e em redes neurais artificiais e biologicamente plausíveis.",
+        "source":  "https://www.nature.com/articles/s41467-019-12552-4"
+    },
+    {
+        "claim":  "Errar seguido de feedback corretivo imediato beneficia o aprendizado, e erros cometidos com alta confiança são os mais corrigidos (efeito de hipercorreção), pois a surpresa da correção intensifica a codificação.",
+        "source":  "https://www.annualreviews.org/doi/10.1146/annurev-psych-010416-044022"
+    },
+    {
+        "claim":  "Metas próximas combinadas com feedback visível de progresso elevam autoeficácia, interesse e desempenho mais que qualquer condição isolada (linha Bandura/Schunk), tornando o marcador de progresso a base durável da sensação de aprendizado.",
+        "source":  "https://libres.uncg.edu/ir/uncg/f/D_Schunk_Goal_1990.pdf"
+    },
+    {
+        "claim":  "Praticar retrieval melhora a própria calibração metacognitiva: falhar ao evocar reduz a superconfiança e torna os julgamentos do que se sabe mais precisos, ou seja, o quiz ensina e calibra a sensação ao mesmo tempo.",
+        "source":  "https://www.sciencedirect.com/science/article/abs/pii/S1053810014001469"
+    },
+    {
+        "claim":  "O Birdbrain do Duolingo estima a probabilidade de acerto de cada exercício e calibra a dificuldade para manter o usuário em torno de 80% de acerto; abaixo disso há desistência por frustração, acima por tédio.",
+        "source":  "https://help.rockflow.ai/blog/duolingo/"
+    },
+    {
+        "claim":  "Aprendizagem ativa melhora notas em ~6% e aula passiva tem 1,5x mais reprovação (meta-análise de 225 estudos), justificando formatos de interação ativa em vez de múltipla escolha passiva.",
+        "source":  "https://www.pnas.org/doi/10.1073/pnas.1319030111"
+    },
+    {
+        "claim":  "Efeito de hipercorreção: erros cometidos com alta confiança são os mais corrigidos na memória quando o feedback surpreende, o que valida formatos de chute calibrado tipo slider de estimativa.",
+        "source":  "https://www.columbia.edu/cu/psychology/metcalfe/PDFs/MetcalfeFinn2011.pdf"
+    },
+    {
+        "claim":  "Revisão de 93 estudos conclui que o Kahoot tem efeito positivo em desempenho, dinâmica de sala e engajamento, e o Kahoot oferece slider, puzzle/ordenação e pin-on-image como question types avançados.",
+        "source":  "https://www.sciencedirect.com/science/article/pii/S0360131520300208"
+    },
+    {
+        "claim":  "NYT Games passou de ~300 mil para 2M+ jogadores diários após comprar o Wordle e soma 9M+ assinantes de Games em 2024, com puzzle diário único, streak e compartilhamento como mecanismos centrais de hábito.",
+        "source":  "https://www.ivey.uwo.ca/hba/blog/2025/03/the-daily-puzzle-phenomenon-how-nyt-turned-games-into-a-subscription-goldmine/"
+    },
+    {
+        "claim":  "A escassez de um único puzzle por dia, igual para todos, é apontada como motor central do engajamento do Wordle: aumenta o desejo e cria conversa social compartilhada.",
+        "source":  "https://uxmag.com/articles/the-fascinating-psychology-tricks-that-make-wordle-so-addictive"
+    },
+    {
+        "claim":  "Cenários ramificados sustentam engajamento ao longo do tempo em e-learning corporativo ao simular decisões reais com consequências, padrão ideal para cenários de compra de vinho no supermercado.",
+        "source":  "https://www.emerald.com/ijotb/article/29/1/110/1297056/"
+    },
+    {
+        "claim":  "O swipe binário do Tinder é um padrão de UX de baixíssima fricção que elimina sobrecarga e cria ritmo, sendo o gesto mais natural do toque mobile para julgamentos rápidos tipo harmoniza/não harmoniza.",
+        "source":  "https://medium.com/design-bootcamp/why-tinders-swipe-interaction-was-a-ux-masterstroke-e583d5eddfd1"
+    },
+    {
+        "claim":  "Distinção categórica melhora memória de reconhecimento, dando base científica aos formatos de agrupamento (Connections) e ache o intruso (odd one out).",
+        "source":  "https://online.ucpress.edu/collabra/article/10/1/94321/200161/"
+    },
+    {
+        "claim":  "Image hotspots interativos (H5P) em instrução real aumentam engajamento e produzem aprendizado situado sobre o artefato autêntico, padrão ideal para exercícios de toque em rótulos reais de vinho.",
+        "source":  "https://pmc.ncbi.nlm.nih.gov/articles/PMC10863974/"
+    },
+    {
+        "claim":  "A Brilliant construiu seu produto sobre learning by doing com manipuláveis interativos e alega maior retenção e transferência que vídeo ou drill, modelo para exercícios exploratórios tipo monte seu vinho.",
+        "source":  "https://brilliant.org/help/why-brilliant/"
+    },
+    {
+        "claim":  "Pontos funcionam como medium que altera escolhas via ilusoes de vantagem, certeza e linearidade, mas so existem como motivador se a troca por valor for visivel (Hsee et al. 2003).",
+        "source":  "https://academic.oup.com/jcr/article-abstract/30/1/1/1801715"
+    },
+    {
+        "claim":  "Pela heuristica de numerosidade, 100 pontos parecem valer muito mais que R$1 equivalente, por isso a granularidade ideal e dezenas por sessao e centenas por semana.",
+        "source":  "https://loyaltyrewardco.com/100-loyalty-points-sounds-like-a-lot-more-than-1-why-loyalty-psychology-tells-us/"
+    },
+    {
+        "claim":  "Goal gradient em campo real: membros de programa de fidelidade aceleram ~20% o ritmo de compra conforme se aproximam da recompensa (Kivetz, Urminsky \u0026 Zheng 2006).",
+        "source":  "https://home.uchicago.edu/ourminsky/Goal-Gradient_Illusionary_Goal_Progress.pdf"
+    },
+    {
+        "claim":  "Endowed progress: cartao com 2 selos ja carimbados elevou conclusao de 19% para 34% com o mesmo esforco real, justificando bonus inicial de cristais que preenche a primeira barra (Nunes \u0026 Dreze 2006).",
+        "source":  "https://www.researchgate.net/publication/23547282_The_Endowed_Progress_Effect_How_Artificial_Advancement_Increases_Effort"
+    },
+    {
+        "claim":  "Resgatar nao quebra o habito: apos o resgate ha efeito rewarded behavior com gasto ~17,5% acima da linha de base nas semanas seguintes (Taylor \u0026 Neslin 2005).",
+        "source":  "https://www.semanticscholar.org/paper/The-Current-and-Future-Sales-Impact-of-a-Retail-Taylor-Neslin/3b415374ea65dcab9fffd81d5d368f27a7640f95"
+    },
+    {
+        "claim":  "A frequencia de resgate e o fator que mais influencia engajamento subsequente, mais que recencia ou volume, sustentando resgates pequenos e semanais mais uma poupanca de medio prazo (Dorotic et al. 2014).",
+        "source":  "https://www.sciencedirect.com/science/article/abs/pii/S0167811614000457"
+    },
+    {
+        "claim":  "Em economias F2P, toda torneira de moeda precisa de ralo recorrente; sem sinks o saldo acumula e a moeda inflaciona, dai o guardrail de saldo mediano abaixo de 2x o maior preco da loja.",
+        "source":  "https://machinations.io/articles/game-economy-design-free-to-play-games"
+    },
+    {
+        "claim":  "Recompensas tangiveis nao monetarias motivam mais esforco que dinheiro equivalente por avaliacao hedonica, justificabilidade e memoria mais duradoura (Jeffrey 2009; Choi \u0026 Presslee 2022).",
+        "source":  "https://www.sciencedirect.com/science/article/abs/pii/S0361368222000563"
+    },
+    {
+        "claim":  "Overjustification: recompensas tangiveis e esperadas contingentes a engajamento ou desempenho minam a motivacao intrinseca, logo vinho e desconto nao podem ser pagamento previsivel por estudar (Deci, Koestner \u0026 Ryan 1999, meta-analise).",
+        "source":  "https://home.ubalt.edu/tmitch/642/articles%20syllabus/Deci%20Koestner%20Ryan%20meta%20IM%20psy%20bull%2099.pdf"
+    },
+    {
+        "claim":  "Motivating-uncertainty effect: recompensas incertas geram mais esforco que recompensas certas de valor esperado maior quando o foco esta no processo, validando sorteio mensal escasso como formato do premio real (Shen, Fishbach \u0026 Hsee 2015).",
+        "source":  "https://static1.squarespace.com/static/5466fcd7e4b0d83293697c8b/t/595679ce9f745699c67567ec/1498839503095/2015_ShenFishbachHsee_Uncertainty_GoalPersuit_JCR.pdf"
+    },
+    {
+        "claim":  "Mover a tela de cadastro do Duolingo para depois da primeira licao gerou cerca de 20% de aumento em DAUs, segundo Gina Gotthilf, VP de Growth.",
+        "source":  "https://review.firstround.com/the-tenets-of-a-b-testing-from-duolingos-master-growth-hacker/"
+    },
+    {
+        "claim":  "A otimizacao posterior de soft walls (botao Depois) e hard wall de cadastro rendeu +8,2% de DAU adicionais ao Duolingo, e trocar o botao punitivo \u0027Discard my progress\u0027 por \u0027Later\u0027 moveu metricas.",
+        "source":  "https://review.firstround.com/the-tenets-of-a-b-testing-from-duolingos-master-growth-hacker/"
+    },
+    {
+        "claim":  "O app movel medio perde 77% dos DAUs nos primeiros 3 dias apos a instalacao e 90% em 30 dias, o que torna cada tela pre-valor um vazamento critico do funil.",
+        "source":  "https://andrewchen.com/new-data-shows-why-losing-80-of-your-mobile-users-is-normal-and-that-the-best-apps-do-much-better/"
+    },
+    {
+        "claim":  "George Fan (Plants vs Zombies, GDC 2012): misturar o tutorial ao jogo, fazer em vez de ler, espalhar o ensino das mecanicas, maximo de 8 palavras na tela e mensagens adaptativas so para quem erra.",
+        "source":  "https://www.gamedeveloper.com/design/gdc-2012-10-tutorial-tips-from-i-plants-vs-zombies-i-creator-george-fan"
+    },
+    {
+        "claim":  "Super Mario Bros 1-1 ensina todas as mecanicas centrais sem texto, por level design deliberado, como explicado pelo proprio Miyamoto.",
+        "source":  "https://www.eurogamer.net/video-miyamoto-on-how-nintendo-made-marios-most-iconic-level"
+    },
+    {
+        "claim":  "Contextual teaching: introduzir cada mecanica exatamente no momento em que o jogador precisa dela, criando a situacao que exige a mecanica, em vez de explicar antes.",
+        "source":  "https://gdevelop.io/blog/improve-game-tutorials"
+    },
+    {
+        "claim":  "Progressive disclosure (NN/g): adiar recursos avancados ou raramente usados para um segundo momento torna a aplicacao mais facil de aprender e menos propensa a erro.",
+        "source":  "https://www.nngroup.com/articles/progressive-disclosure/"
+    },
+    {
+        "claim":  "O Duolingo pergunta meta e motivacao no inicio em formato de 1 toque com reacao do mascote, porque meta definida pelo usuario aumenta motivacao e retencao (completion bias e goal gradient) e permite personalizar, com cadastro opcional so em momentos logicos da jornada.",
+        "source":  "https://goodux.appcues.com/blog/duolingo-user-onboarding"
+    },
+    {
+        "claim":  "O trabalho de gamificacao do Duolingo (streaks, leaderboards, notificacoes) levou a DAU 4,5x, churn -40% e leaderboards aumentaram o tempo de aprendizado em 17%, segundo o ex-CPO Jorge Mazal.",
+        "source":  "https://www.lennysnewsletter.com/p/how-duolingo-reignited-user-growth"
+    },
+    {
+        "claim":  "O mascote Duo atuando como coach dentro da licao com copy de growth mindset gerou +7,2% de retencao D14, validando o mascote que ensina e encoraja durante o jogo.",
+        "source":  "https://review.firstround.com/the-tenets-of-a-b-testing-from-duolingos-master-growth-hacker/"
+    }
+]
