@@ -1,0 +1,165 @@
+{
+  "id": "u1-l1",
+  "unidade": "u1",
+  "ordem": 1,
+  "titulo": "Tanino: por que o vinho seca a boca",
+  "habilidade": "tanino",
+  "hook": "Aquela secura na boca depois de um gole de tinto tem nome, e você já conhece a sensação de outro lugar.",
+  "fichaCanonica": [
+    "Tanino é um polifenol natural presente na casca, na semente e no engaço da uva, e também na madeira dos barris de carvalho.",
+    "O tanino se liga às proteínas da saliva e provoca adstringência, a sensação de boca seca e áspera.",
+    "A adstringência do tanino é uma sensação tátil, percebida na gengiva, na língua e nas bochechas, e não um dos cinco gostos básicos.",
+    "Vinhos tintos têm mais tanino que vinhos brancos porque fermentam em contato com as cascas da uva.",
+    "Chá preto em infusão longa é rico em taninos e produz a mesma secura na boca de um tinto tânico.",
+    "Proteínas e gorduras dos alimentos, como as da carne vermelha e dos queijos, se ligam ao tanino e suavizam a sensação de secura."
+  ],
+  "exercicios": [
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Você toma um gole de chá preto que ficou tempo demais em infusão. O que acontece na sua boca?",
+      "opcoes": [
+        "Ela fica seca e áspera, como se algo agarrasse a língua",
+        "Ela enche de água na hora",
+        "Ela sente um doce suave"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Guarde essa secura: ela vai abrir muita porta por aqui.",
+      "erroMsg": "Quase. Chá preto carregado deixa a boca seca e áspera. Vale provar em casa para sentir.",
+      "porque": "O chá preto é cheio de tanino, o mesmo composto que seca a boca no vinho tinto."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Essa mesma secura aparece quando você bebe qual destes?",
+      "opcoes": [
+        "Um vinho tinto firme",
+        "Um suco de laranja",
+        "Um copo de leite"
+      ],
+      "correta": 0,
+      "okMsg": "Exato. Tinto e chá preto são parentes nessa sensação.",
+      "erroMsg": "Tudo bem. A secura aparece no vinho tinto: suco de laranja e leite seguem outros caminhos.",
+      "porque": "O tinto carrega tanino das cascas da uva, e tanino seca a boca."
+    },
+    {
+      "tipo": "swipe",
+      "dificuldade": 2,
+      "instrucao": "Tem tanino aqui ou não tem? Deslize.",
+      "cartas": [
+        {
+          "texto": "O tanino vem da casca da uva",
+          "verdade": true,
+          "porque": "A casca é a maior fonte de tanino do vinho."
+        },
+        {
+          "texto": "O tanino vem do açúcar da uva",
+          "verdade": false,
+          "porque": "Açúcar dá doçura. O tanino é outro composto, que vem da casca, da semente e do engaço."
+        },
+        {
+          "texto": "Barril de madeira também passa tanino ao vinho",
+          "verdade": true,
+          "porque": "O carvalho solta taninos próprios enquanto o vinho descansa nele."
+        },
+        {
+          "texto": "Chá preto forte tem tanino",
+          "verdade": true,
+          "porque": "Por isso ele seca a boca igual a um tinto firme."
+        },
+        {
+          "texto": "Tanino é um aroma adicionado ao vinho na fábrica",
+          "verdade": false,
+          "porque": "Tanino é natural da uva e da madeira. Ninguém precisa adicionar nada."
+        }
+      ]
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 2,
+      "pergunta": "Onde o tanino dá as caras quando você bebe um tinto?",
+      "opcoes": [
+        "Na gengiva e na língua, como uma lixa bem fininha",
+        "Na ponta do nariz, como um aroma",
+        "Na garganta, como ardência de pimenta"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Tanino se sente no toque, com a boca inteira.",
+      "erroMsg": "Quase. O tanino trabalha no tato: ele seca a gengiva e a língua, sem cheiro e sem ardência.",
+      "porque": "O tanino prende a saliva e deixa uma aspereza de toque, parecida com lixa fininha na gengiva."
+    },
+    {
+      "tipo": "slider",
+      "dificuldade": 2,
+      "pergunta": "Na régua do tanino, onde fica um chá preto que passou muito do ponto?",
+      "labelMin": "quase zero",
+      "labelMax": "muito tanino",
+      "alvo": 85,
+      "tolerancia": 15,
+      "porque": "Infusão longa solta tanino em quantidade. Chá passado do ponto vive no topo da régua."
+    },
+    {
+      "tipo": "duasverdades",
+      "dificuldade": 2,
+      "calibrar": true,
+      "tema": "Tanino",
+      "afirmacoes": [
+        "O tanino se prende à saliva e por isso a boca resseca",
+        "Vinhos tintos costumam ter mais tanino que os brancos",
+        "O tanino é o que deixa o vinho doce"
+      ],
+      "mentira": 2,
+      "porque": "Doçura vem do açúcar da uva. O tanino faz o caminho contrário: seca a boca e dá firmeza ao vinho."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 3,
+      "pergunta": "Por que o tinto seca a boca bem mais que o branco?",
+      "opcoes": [
+        "Porque ele fermenta em contato com as cascas da uva",
+        "Porque ele sempre tem mais álcool",
+        "Porque ele é servido menos gelado"
+      ],
+      "correta": 0,
+      "okMsg": "Bonito. Você acabou de entender o tinto por dentro.",
+      "erroMsg": "Quase. O segredo está nas cascas: o tinto fermenta com elas, e é dali que o tanino vem.",
+      "porque": "A casca é a grande fonte de tanino, e o tinto passa dias fermentando em contato com ela."
+    },
+    {
+      "tipo": "intruso",
+      "dificuldade": 3,
+      "calibrar": true,
+      "pergunta": "Qual destes NÃO costuma deixar a boca seca e áspera?",
+      "opcoes": [
+        "Chá preto forte",
+        "Caqui ainda verde",
+        "Melancia madura",
+        "Vinho tinto jovem"
+      ],
+      "intruso": 2,
+      "regra": "Chá preto, caqui verde e tinto jovem são ricos em tanino, e tanino amarra a boca."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Para fechar: a secura na boca depois de um gole de tinto é sinal de quê?",
+      "opcoes": [
+        "Tanino",
+        "Açúcar",
+        "Gás carbônico"
+      ],
+      "correta": 0,
+      "okMsg": "Você acabou de ganhar a primeira palavra do seu novo vocabulário de vinho.",
+      "erroMsg": "Respira. Boca seca depois do gole é o tanino se apresentando. Você já sabe reconhecer.",
+      "porque": "Secura e aspereza na boca são a assinatura do tanino."
+    }
+  ],
+  "aplicacao": "Na próxima taça de tinto que secar sua boca, você vai poder dizer com calma: esse aqui é tânico.",
+  "recap": "Tanino vem da casca da uva, agarra a sua saliva e deixa a boca seca como chá preto forte.",
+  "voceAgoraSabe": [
+    "Você reconhece tanino pela secura na gengiva, a mesma do chá preto forte",
+    "Você sabe por que o tinto seca mais que o branco: ele fermenta junto com as cascas da uva"
+  ],
+  "curiosidade": "O tanino é um conservante natural do vinho. É um dos motivos de certos tintos atravessarem décadas na garrafa ficando ainda mais interessantes.",
+  "teaser": "Na próxima lição, o efeito oposto: o vinho que faz a boca encher de água."
+}

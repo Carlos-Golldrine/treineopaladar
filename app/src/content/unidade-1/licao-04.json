@@ -1,0 +1,179 @@
+{
+  "id": "u1-l4",
+  "unidade": "u1",
+  "ordem": 4,
+  "titulo": "Doçura: seco, suave e o fim de um mito",
+  "habilidade": "docura",
+  "hook": "Seco, meio seco, suave: o rótulo fala essa língua o tempo todo. Hoje você passa a falar também, sem precisar de pose.",
+  "fichaCanonica": [
+    "A doçura do vinho vem do açúcar residual: o açúcar da uva que não foi transformado em álcool durante a fermentação.",
+    "Em um vinho seco, a fermentação consumiu praticamente todo o açúcar da uva, deixando doçura mínima ou imperceptível.",
+    "Pela legislação brasileira, o vinho seco tem até 4 gramas de açúcar por litro, o meio seco entre 4 e 25 gramas por litro, e o suave ou doce passa de 25 gramas por litro.",
+    "No Brasil, grande parte dos vinhos rotulados como suaves recebe adição de açúcar após a fermentação, prática prevista na legislação; já os clássicos vinhos doces do mundo concentram o açúcar natural da própria uva.",
+    "Alguns dos vinhos mais celebrados e caros do mundo são doces, como o Sauternes francês, o Tokaji húngaro e o vinho do Porto.",
+    "A acidez alta equilibra e disfarça a doçura: um vinho com muito açúcar e muita acidez pode parecer bem menos doce do que é."
+  ],
+  "exercicios": [
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Café sem açúcar e café adoçado: o que muda de um para o outro?",
+      "opcoes": [
+        "Só a doçura, o café continua o mesmo",
+        "A cafeína aumenta",
+        "A temperatura sobe"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Doçura é um eixo separado: dá para mexer nela sem mudar o resto.",
+      "erroMsg": "Quase. Açúcar muda a doçura e mais nada. Guarde essa ideia: ela vale para o vinho inteiro.",
+      "porque": "No vinho funciona igual: seco e suave são o mesmo universo, mudando a quantidade de açúcar."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "De onde vem a doçura de um vinho?",
+      "opcoes": [
+        "Do açúcar da uva que sobrou da fermentação",
+        "Do álcool em excesso",
+        "Da casca da uva"
+      ],
+      "correta": 0,
+      "okMsg": "Exato. A uva chega doce, e parte desse doce pode ficar no vinho.",
+      "erroMsg": "Quase. A levedura transforma o açúcar da uva em álcool. O que sobra desse processo é a doçura que você sente.",
+      "porque": "Doçura é açúcar residual: o açúcar que a fermentação não transformou em álcool."
+    },
+    {
+      "tipo": "swipe",
+      "dificuldade": 2,
+      "instrucao": "Verdade ou mito? Deslize.",
+      "cartas": [
+        {
+          "texto": "Vinho seco quer dizer praticamente sem açúcar",
+          "verdade": true,
+          "porque": "No seco, a fermentação consumiu quase todo o açúcar da uva."
+        },
+        {
+          "texto": "Gostar de vinho suave é coisa de quem não entende",
+          "verdade": false,
+          "porque": "Gosto se treina, nunca se julga. Doçura é um eixo do vinho como qualquer outro."
+        },
+        {
+          "texto": "Existem vinhos doces premiados no mundo inteiro",
+          "verdade": true,
+          "porque": "Sauternes, Tokaji e Porto são doces e disputados há séculos."
+        },
+        {
+          "texto": "Quanto mais seco, melhor o vinho",
+          "verdade": false,
+          "porque": "Seco e doce são estilos. Qualidade é outra conversa, e ela existe nos dois times."
+        },
+        {
+          "texto": "Um vinho pode cheirar doce e ser seco na boca",
+          "verdade": true,
+          "porque": "Aroma de fruta madura engana o nariz. Doçura de verdade se confirma na boca."
+        }
+      ]
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 2,
+      "pergunta": "No rótulo brasileiro, um vinho marcado como seco carrega quanto açúcar?",
+      "opcoes": [
+        "Quase nenhum, até 4 gramas por litro",
+        "Bastante, acima de 25 gramas por litro",
+        "O rótulo não diz nada sobre açúcar"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Seco é o time do quase zero açúcar.",
+      "erroMsg": "Quase. Seco no Brasil significa até 4 gramas de açúcar por litro, pertinho do zero.",
+      "porque": "A lei brasileira define o vinho seco como aquele com até 4 gramas de açúcar por litro."
+    },
+    {
+      "tipo": "slider",
+      "dificuldade": 2,
+      "pergunta": "Na régua do açúcar, onde fica um vinho rotulado como seco?",
+      "labelMin": "zero açúcar",
+      "labelMax": "muito doce",
+      "alvo": 5,
+      "tolerancia": 15,
+      "porque": "Seco mora coladinho no zero: até 4 gramas de açúcar por litro."
+    },
+    {
+      "tipo": "ordenar",
+      "dificuldade": 2,
+      "instrucao": "Organize a prateleira do mais seco ao mais doce.",
+      "itens": [
+        "Suave",
+        "Seco",
+        "Colheita tardia bem doce",
+        "Meio seco"
+      ],
+      "ordemCorreta": [1, 3, 0, 2],
+      "porque": "Essa é a régua do açúcar: do quase zero do seco até o néctar da colheita tardia."
+    },
+    {
+      "tipo": "duasverdades",
+      "dificuldade": 3,
+      "calibrar": true,
+      "tema": "O mito do suave",
+      "afirmacoes": [
+        "Alguns dos vinhos mais caros do mundo são doces",
+        "A acidez alta pode disfarçar a doçura de um vinho",
+        "Quem entende de vinho bebe somente seco"
+      ],
+      "mentira": 2,
+      "porque": "Sauternes e Tokaji são doces, caríssimos e reverenciados. Beber só seco por obrigação é pose, e pose não treina paladar."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 3,
+      "pergunta": "Dois vinhos com o mesmo açúcar. Um tem acidez alta, o outro baixa. Qual parece menos doce na boca?",
+      "opcoes": [
+        "O de acidez alta",
+        "O de acidez baixa",
+        "Os dois parecem idênticos"
+      ],
+      "correta": 0,
+      "okMsg": "Excelente. Você acabou de descobrir o segredo dos grandes vinhos doces.",
+      "erroMsg": "Quase. A acidez rebate o açúcar: quanto mais frescor, menos doce o vinho parece.",
+      "porque": "A acidez equilibra o açúcar na boca, e por isso vinhos doces com frescor nunca enjoam."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 3,
+      "calibrar": true,
+      "pergunta": "Você cheira um vinho e ele parece doce, cheio de fruta madura. Já dá para cravar que ele é doce?",
+      "opcoes": [
+        "Ainda não, doçura se confirma na boca",
+        "Sim, o nariz não erra",
+        "Sim, fruta madura sempre vem com açúcar"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. O nariz sente aroma e a língua sente açúcar. São canais diferentes.",
+      "erroMsg": "Quase. O aroma de fruta madura engana: muito vinho cheira doce e termina sequíssimo na boca.",
+      "porque": "Aroma é cheiro e doçura é gosto: só a boca confirma o açúcar residual."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Para fechar: alguém prefere vinho suave. Esse gosto é...",
+      "opcoes": [
+        "Tão válido quanto qualquer outro",
+        "Um estágio a ser superado",
+        "Motivo para esconder a taça"
+      ],
+      "correta": 0,
+      "okMsg": "Exatamente. Paladar se treina com curiosidade, nunca com vergonha.",
+      "erroMsg": "Olha de novo: gosto se treina e se respeita. O suave é porta de entrada e também é destino para muita gente boa.",
+      "porque": "Doçura é um eixo do vinho, e preferir mais ou menos açúcar é escolha de paladar, sem hierarquia."
+    }
+  ],
+  "aplicacao": "Na próxima compra, leia seco ou suave no rótulo já sabendo o que vem na taça, e escolha pelo seu gosto, sem pedir desculpa.",
+  "recap": "Doçura é o açúcar que ficou no vinho, o rótulo brasileiro conta a quantidade, e gostar dela é tão legítimo quanto qualquer outro gosto.",
+  "voceAgoraSabe": [
+    "Você sabe que seco no Brasil significa até 4 gramas de açúcar por litro",
+    "Você desmonta o preconceito com fatos: Sauternes, Tokaji e Porto são doces e estão entre os vinhos mais cobiçados do mundo"
+  ],
+  "curiosidade": "Diz a tradição que Luís XIV chamou o Tokaji doce da Hungria de vinho dos reis, rei dos vinhos. Houve época em que doçura era o maior luxo da mesa.",
+  "teaser": "Última lição da unidade: juntar tanino, acidez, corpo e doçura e ler um vinho inteiro logo no primeiro gole."
+}

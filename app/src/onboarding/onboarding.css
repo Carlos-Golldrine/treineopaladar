@@ -1,0 +1,566 @@
+/* ============================================================
+   Onboarding FTUE: splash, Licao 1 (7 jogadas), conclusao do aha,
+   soft wall e revelacoes progressivas. So transform/opacity,
+   150-250ms ease-out. BRIEF-DESIGN.md.
+   ============================================================ */
+
+/* ----------------------------- Splash -------------------------------- */
+
+.splash {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  padding: max(env(safe-area-inset-top), 24px) var(--space-5) max(env(safe-area-inset-bottom), 20px);
+  background: var(--bg);
+}
+
+@media (min-width: 520px) {
+  .splash {
+    max-width: 480px;
+    margin-inline: auto;
+    box-shadow: var(--shadow-md);
+  }
+}
+
+.splash-alto {
+  margin-top: 16vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  animation: surge 250ms ease-out both;
+}
+
+.splash-wordmark {
+  margin-top: var(--space-3);
+  font: 600 var(--text-lg) / 1.2 var(--font-display);
+  color: var(--wine-900);
+}
+
+.splash-by {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold-700);
+}
+
+.splash-frase {
+  margin-top: auto;
+  padding-left: var(--space-4);
+  border-left: 3px solid var(--gold-500);
+  font: 600 italic var(--text-2xl) / 1.15 var(--font-display);
+  color: var(--wine-900);
+}
+
+.splash-acao {
+  margin-top: var(--space-6);
+}
+
+.splash-footer {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+
+.splash-18 {
+  flex: none;
+  min-width: 34px;
+  padding: 7px 6px;
+  border: 1.5px solid var(--neutral-300);
+  border-radius: var(--radius-control);
+  text-align: center;
+  font: 600 var(--text-xs) / 1 var(--font-mono);
+  color: var(--neutral-500);
+}
+
+.splash-footer p {
+  font-size: var(--text-xs);
+  line-height: 1.5;
+  color: var(--neutral-500);
+}
+
+/* ------------------------ Mascote: balao e toast ---------------------- */
+
+.balao {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+  animation: entra 200ms ease-out both;
+}
+
+.balao > svg {
+  flex: none;
+}
+
+.balao-texto {
+  position: relative;
+  background: var(--neutral-50);
+  border: 1.5px solid var(--neutral-200);
+  border-radius: var(--radius-card);
+  padding: 10px 14px;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--wine-900);
+}
+
+.balao-texto::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  background: var(--neutral-50);
+  border-left: 1.5px solid var(--neutral-200);
+  border-bottom: 1.5px solid var(--neutral-200);
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.mtoast {
+  position: absolute;
+  left: var(--space-4);
+  right: var(--space-4);
+  top: calc(max(env(safe-area-inset-top), 12px) + 52px);
+  z-index: 25;
+}
+
+/* Faixa reservada do mascote no FTUE: o toast entra aqui, em fluxo,
+   sem cobrir a pergunta nem empurrar as opcoes (altura fixa) */
+.ftue-faixa {
+  min-height: 66px;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-4);
+}
+
+.mtoast-inline {
+  width: 100%;
+}
+
+.mtoast-fixa {
+  position: fixed;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  width: min(448px, calc(100vw - 32px));
+  top: calc(max(env(safe-area-inset-top), 12px) + 60px);
+  z-index: 45;
+}
+
+.mtoast-caixa {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 10px var(--space-4);
+  background: var(--bg);
+  border: 1.5px solid var(--neutral-200);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-md);
+  animation: surge 220ms ease-out both;
+}
+
+.mtoast-caixa > svg {
+  flex: none;
+}
+
+.mtoast-texto {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--wine-900);
+  text-align: left;
+}
+
+@keyframes surge {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.ftue-surge {
+  animation: surge 220ms ease-out both;
+}
+
+/* --------------------- J1: cartas visuais (tacas) --------------------- */
+
+.visual-grade {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.carta-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-3);
+}
+
+.carta-visual .ilustra {
+  width: 86px;
+  height: auto;
+}
+
+.carta-visual-rotulo {
+  font-weight: 600;
+}
+
+/* ------------------- J3 e J6: cartas de 1 toque ----------------------- */
+
+.carta-grande {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 64px;
+}
+
+.carta-icone {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-pill);
+  background: rgba(114, 47, 55, 0.07);
+  color: var(--wine-700);
+}
+
+.opcao-sel .carta-icone {
+  background: var(--wine-700);
+  color: var(--bg);
+}
+
+.carta-pontos {
+  flex: none;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+}
+
+.carta-ponto {
+  width: 7px;
+  height: 7px;
+  border-radius: var(--radius-pill);
+  background: var(--neutral-200);
+}
+
+.carta-ponto-on {
+  background: var(--wine-700);
+}
+
+.carta-rotulo {
+  flex: 1;
+}
+
+/* --------------------- Conclusao da Licao 1 (aha) --------------------- */
+
+.c1-mascote {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-5);
+  animation: mascote-pop 360ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes mascote-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+
+  70% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.c1 .conclusao-cabeca {
+  margin-top: var(--space-3);
+}
+
+.c1-xp {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-5);
+}
+
+.c1-xp-num {
+  font: 500 52px / 1 var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--gold-700);
+}
+
+.c1-xp-rotulo {
+  font: 600 var(--text-md) / 1 var(--font-ui);
+  letter-spacing: 0.04em;
+  color: var(--neutral-500);
+}
+
+.c1-xp-nota {
+  margin-top: var(--space-3);
+  padding-inline: var(--space-4);
+  text-align: center;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--neutral-600);
+}
+
+.c1-streak {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+  padding: var(--space-4);
+  border-radius: var(--radius-card);
+  background: var(--neutral-50);
+}
+
+.c1-streak .icon {
+  flex: none;
+  color: var(--ember-500);
+}
+
+.c1-streak p {
+  font-size: var(--text-sm);
+  line-height: 1.45;
+  color: var(--neutral-700);
+}
+
+.c1-meta {
+  margin-top: var(--space-6);
+  padding-bottom: var(--space-5);
+}
+
+.c1-meta-titulo {
+  font: 600 var(--text-lg) / 1.25 var(--font-display);
+  color: var(--wine-900);
+}
+
+.c1-meta-sub {
+  margin-top: var(--space-1);
+  font-size: var(--text-xs);
+  color: var(--neutral-500);
+}
+
+.c1-meta-opcoes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+}
+
+.meta-carta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: var(--space-4);
+  border-radius: var(--radius-card);
+  border: 1.5px solid var(--neutral-200);
+  background: var(--bg);
+  text-align: left;
+}
+
+.meta-carta-sel {
+  border-color: var(--wine-700);
+  background: rgba(114, 47, 55, 0.06);
+}
+
+.meta-nome {
+  font: 600 var(--text-md) / 1.2 var(--font-display);
+  color: var(--wine-900);
+}
+
+.meta-desc {
+  margin-top: var(--space-1);
+  font-size: var(--text-sm);
+  color: var(--neutral-700);
+}
+
+.meta-tempo {
+  margin-top: 2px;
+  font-size: var(--text-xs);
+  color: var(--neutral-500);
+}
+
+/* ------------------------------ Soft wall ----------------------------- */
+
+.wall {
+  justify-content: flex-start;
+}
+
+.wall-conteudo {
+  flex: 1;
+  overflow-y: auto;
+  padding: calc(max(env(safe-area-inset-top), 16px) + 28px) var(--space-5) var(--space-4);
+}
+
+.wall-titulo {
+  margin-top: var(--space-2);
+  font: 600 var(--text-xl) / 1.15 var(--font-display);
+  color: var(--wine-900);
+}
+
+.wall-sub {
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--neutral-600);
+}
+
+.wall-lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+
+.wall-lista li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-card);
+  background: var(--neutral-50);
+  font-size: var(--text-sm);
+  line-height: 1.45;
+  color: var(--neutral-700);
+}
+
+.wall-icone {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-pill);
+  background: var(--bg);
+  box-shadow: var(--shadow-sm);
+}
+
+.wall-icone-xp {
+  color: var(--gold-700);
+}
+
+.wall-icone-streak {
+  color: var(--ember-500);
+}
+
+.wall-icone-trilha {
+  color: var(--wine-700);
+}
+
+.wall-mono {
+  font: 600 var(--text-sm) / 1 var(--font-mono);
+  color: var(--gold-700);
+}
+
+.wall-acoes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4) max(env(safe-area-inset-bottom), 16px);
+}
+
+.btn-depois {
+  min-height: 48px;
+  border-radius: var(--radius-pill);
+  color: var(--neutral-500);
+  font-weight: 600;
+}
+
+/* ------------------ Coleta de cristais (Trilha) ----------------------- */
+
+.coleta {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  padding: var(--space-5);
+}
+
+.coleta-veu {
+  position: absolute;
+  inset: 0;
+  background: rgba(74, 31, 36, 0.42);
+  animation: coleta-veu 200ms ease-out both;
+}
+
+@keyframes coleta-veu {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.coleta-cartao {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  width: min(320px, 100%);
+  padding: var(--space-5);
+  border-radius: var(--radius-card);
+  background: var(--bg);
+  box-shadow: var(--shadow-md);
+  animation: surge 220ms ease-out both;
+}
+
+.coleta-seta {
+  color: var(--gold-700);
+  animation: salto 700ms ease-out 4;
+}
+
+@keyframes salto {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  40% {
+    transform: translateY(7px);
+  }
+}
+
+.coleta-cristal {
+  color: var(--gold-500);
+}
+
+.coleta-num {
+  font: 500 var(--text-xl) / 1 var(--font-mono);
+  color: var(--gold-700);
+}
+
+.coleta-rotulo {
+  font-size: var(--text-xs);
+  color: var(--neutral-500);
+}
+
+.coleta-texto {
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  text-align: center;
+  color: var(--wine-900);
+}

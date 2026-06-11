@@ -1,0 +1,160 @@
+{
+  "id": "u1-l3",
+  "unidade": "u1",
+  "ordem": 3,
+  "titulo": "Corpo: do leve ao encorpado",
+  "habilidade": "corpo",
+  "hook": "Água, leite e creme de leite pesam diferente na boca. O vinho tem essa mesma balança, e ela se chama corpo.",
+  "fichaCanonica": [
+    "Corpo é a sensação de peso e textura que o vinho provoca na boca.",
+    "O álcool é o principal componente do corpo: quanto maior o teor alcoólico, mais encorpado o vinho tende a ser.",
+    "Açúcar residual e a concentração de compostos extraídos da uva também aumentam a sensação de corpo.",
+    "Como referência geral, vinhos com menos de 12,5% de álcool tendem a ser leves e vinhos acima de 13,5% tendem a ser encorpados.",
+    "Uvas de climas quentes acumulam mais açúcar, que a fermentação transforma em mais álcool, gerando vinhos tendencialmente mais encorpados.",
+    "Corpo descreve o estilo do vinho e não indica qualidade: há vinhos leves e encorpados igualmente bons."
+  ],
+  "exercicios": [
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Feche os olhos e imagine: qual destes pesa mais na boca?",
+      "opcoes": [
+        "Creme de leite",
+        "Água",
+        "Leite desnatado"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Esse peso na boca tem nome no vinho: corpo.",
+      "erroMsg": "Quase. O creme de leite forra a boca com peso e textura. Essa sensação vai guiar a lição.",
+      "porque": "Peso e textura na boca são a definição de corpo, no creme de leite e no vinho."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Um vinho leve lembra qual dessas texturas?",
+      "opcoes": [
+        "Água fresca",
+        "Creme de leite",
+        "Mel"
+      ],
+      "correta": 0,
+      "okMsg": "Exato. Leve desliza como água.",
+      "erroMsg": "Tudo bem. Vinho leve escorre fácil como água. Creme e mel ficam no time dos encorpados.",
+      "porque": "Vinho de corpo leve passa pela boca com a fluidez da água."
+    },
+    {
+      "tipo": "ordenar",
+      "dificuldade": 2,
+      "instrucao": "Monte a escada do peso, do mais leve ao mais pesado na boca.",
+      "itens": [
+        "Leite integral",
+        "Água",
+        "Creme de leite",
+        "Leite desnatado"
+      ],
+      "ordemCorreta": [1, 3, 0, 2],
+      "porque": "Essa escada de texturas é exatamente a régua do corpo do vinho, sem nenhum mistério."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 2,
+      "pergunta": "O que mais pesa na balança do corpo de um vinho?",
+      "opcoes": [
+        "O teor de álcool",
+        "O formato da garrafa",
+        "A idade do rótulo"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. O álcool é o motor do corpo.",
+      "erroMsg": "Quase. Quem manda no corpo é o álcool: mais graduação, mais peso na boca.",
+      "porque": "O álcool dá peso e textura ao gole, e por isso é o principal responsável pelo corpo."
+    },
+    {
+      "tipo": "slider",
+      "dificuldade": 2,
+      "pergunta": "Um tinto de 14,5% de álcool entra em que ponto da régua do corpo?",
+      "labelMin": "leve",
+      "labelMax": "encorpado",
+      "alvo": 85,
+      "tolerancia": 15,
+      "porque": "Acima de 13,5% de álcool, o vinho costuma jogar no time dos encorpados."
+    },
+    {
+      "tipo": "duasverdades",
+      "dificuldade": 2,
+      "calibrar": true,
+      "tema": "Corpo",
+      "afirmacoes": [
+        "O álcool é o principal responsável pelo corpo do vinho",
+        "Vinho encorpado é sempre melhor que vinho leve",
+        "Uvas de clima quente tendem a dar vinhos mais encorpados"
+      ],
+      "mentira": 1,
+      "porque": "Corpo é estilo, e estilo se escolhe pela ocasião: um branco leve e gelado no calor vale ouro."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 3,
+      "pergunta": "Mesma uva, duas regiões: uma bem quente, outra fria. De qual tende a sair o vinho mais encorpado?",
+      "opcoes": [
+        "Da região quente",
+        "Da região fria",
+        "O corpo não depende do clima"
+      ],
+      "correta": 0,
+      "okMsg": "Bonito. Mais sol enche a uva de açúcar, e esse açúcar acaba virando álcool e corpo.",
+      "erroMsg": "Quase. No calor a uva acumula mais açúcar, a fermentação gera mais álcool e o vinho ganha peso.",
+      "porque": "Clima quente carrega a uva de açúcar, que fermenta em mais álcool e dá mais corpo."
+    },
+    {
+      "tipo": "intruso",
+      "dificuldade": 3,
+      "calibrar": true,
+      "pergunta": "Qual destes NÃO soma peso ao corpo do vinho?",
+      "opcoes": [
+        "Álcool",
+        "Açúcar residual",
+        "Acidez alta",
+        "Concentração da uva"
+      ],
+      "intruso": 2,
+      "regra": "Álcool, açúcar e concentração engordam o gole. A acidez puxa o vinho para o lado leve e fresco."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Para fechar: corpo do vinho é...",
+      "opcoes": [
+        "O peso que ele tem na boca",
+        "O tamanho da garrafa",
+        "A cor do líquido"
+      ],
+      "correta": 0,
+      "okMsg": "Fechado. Você agora carrega uma balança embutida no paladar.",
+      "erroMsg": "Respira. Corpo é o peso do vinho na boca, da água ao creme de leite. Você já sentiu isso hoje.",
+      "porque": "Corpo é a sensação de peso e textura do vinho na boca."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Você quer um vinho com presença de creme de leite, que forre a boca. Você pede um...",
+      "opcoes": [
+        "Encorpado",
+        "Leve",
+        "Bem gelado"
+      ],
+      "correta": 0,
+      "okMsg": "Pedido feito com confiança. É disso que essa trilha é feita.",
+      "erroMsg": "Quase. Presença e peso na boca são o território dos encorpados.",
+      "porque": "Encorpado é o nome do vinho que preenche a boca com peso e textura."
+    }
+  ],
+  "aplicacao": "Na gôndola, o teor de álcool já entrega o corpo: perto de 12% promete leveza, perto de 14% promete um vinho que enche a boca.",
+  "recap": "Corpo é o peso do vinho na boca, e quem mais manda nele é o álcool.",
+  "voceAgoraSabe": [
+    "Você estima o corpo de um vinho olhando o teor de álcool no rótulo",
+    "Você descreve textura com a escada da água ao creme de leite, sem precisar de palavra difícil"
+  ],
+  "curiosidade": "As lágrimas que escorrem devagar pela parede da taça indicam um vinho com mais álcool. Bonitas de ver, mas a boca segue sendo o melhor medidor de corpo.",
+  "teaser": "Na próxima lição, a gente desmonta o mito mais injusto do mundo do vinho: o de que gostar de suave seria motivo de vergonha."
+}

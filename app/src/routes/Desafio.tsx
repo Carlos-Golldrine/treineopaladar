@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Icon } from '../components/Icon';
 
 import scheduleIcon from '@material-symbols/svg-500/rounded/schedule-fill.svg?raw';
@@ -13,7 +14,36 @@ const steps = [
   { icon: tableIcon, text: 'Compare seu resultado com a sua mesa, sem spoiler.' },
 ];
 
+/** Ms ate a proxima meia-noite de Brasilia (reset oficial do Desafio do Dia). */
+function msAteMeiaNoiteBrasilia(agora: number): number {
+  const partes = new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'America/Sao_Paulo',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false,
+  }).formatToParts(agora);
+  const valor = (tipo: string) => Number(partes.find((p) => p.type === tipo)?.value ?? 0);
+  const decorrido = (((valor('hour') % 24) * 60 + valor('minute')) * 60 + valor('second')) * 1000 + (agora % 1000);
+  return 24 * 3600 * 1000 - decorrido;
+}
+
+function formatarContagem(ms: number): string {
+  const s = Math.max(0, Math.floor(ms / 1000));
+  const h = Math.floor(s / 3600);
+  const m = Math.floor((s % 3600) / 60);
+  const seg = s % 60;
+  return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(seg).padStart(2, '0')}`;
+}
+
 export default function Desafio() {
+  const [restante, setRestante] = useState(() => msAteMeiaNoiteBrasilia(Date.now()));
+
+  useEffect(() => {
+    const id = window.setInterval(() => setRestante(msAteMeiaNoiteBrasilia(Date.now())), 1000);
+    return () => window.clearInterval(id);
+  }, []);
+
   return (
     <>
       <header className="screen-header app-chrome">
@@ -30,7 +60,9 @@ export default function Desafio() {
           Estamos preparando o primeiro rótulo. Vale a pena esperar.
         </p>
         <p className="daily-count-label">Abre em</p>
-        <p className="daily-count">07:42:19</p>
+        <p className="daily-count" aria-live="off">
+          {formatarContagem(restante)}
+        </p>
       </section>
 
       <section className="how" aria-label="Como funciona">

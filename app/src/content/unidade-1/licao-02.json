@@ -1,0 +1,165 @@
+{
+  "id": "u1-l2",
+  "unidade": "u1",
+  "ordem": 2,
+  "titulo": "Acidez: por que dá água na boca",
+  "habilidade": "acidez",
+  "hook": "Tem vinho que faz a boca encher de água só de lembrar dele. Existe uma explicação, e ela mora na uva.",
+  "fichaCanonica": [
+    "A acidez do vinho vem de ácidos naturais da própria uva, principalmente o ácido tartárico e o ácido málico.",
+    "A acidez estimula a salivação: a boca encher de água depois de engolir é o sinal clássico de um vinho de acidez alta.",
+    "A acidez corresponde ao gosto azedo, um dos cinco gostos básicos do paladar humano.",
+    "Uvas cultivadas em climas mais frios tendem a preservar mais acidez, porque o calor consome o ácido málico durante o amadurecimento.",
+    "Vinhos brancos e espumantes costumam apresentar acidez mais marcada que os tintos.",
+    "A acidez atua como conservante natural do vinho e é responsável pela sensação de frescor."
+  ],
+  "exercicios": [
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Você morde um limão. O que a sua boca faz primeiro?",
+      "opcoes": [
+        "Enche de água",
+        "Fica seca e áspera",
+        "Sente um doce leve"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Essa água na boca vai ser a sua bússola nesta lição.",
+      "erroMsg": "Quase. Limão faz a boca encher de água na hora. Esse reflexo é o nosso ponto de partida.",
+      "porque": "Coisa ácida chama saliva. É um reflexo do corpo, e o limão é o exemplo máximo."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "No vinho, essa mesma água na boca depois do gole é a assinatura de quê?",
+      "opcoes": [
+        "Da acidez",
+        "Do tanino",
+        "Do açúcar"
+      ],
+      "correta": 0,
+      "okMsg": "Exato. Acidez chama saliva, no limão e no vinho.",
+      "erroMsg": "Tudo bem. Água na boca é a acidez se apresentando. O tanino faz o contrário: seca.",
+      "porque": "A acidez do vinho ativa a salivação, igual uma limonada bem feita."
+    },
+    {
+      "tipo": "slider",
+      "dificuldade": 2,
+      "pergunta": "Na régua da acidez, onde entra uma limonada sem açúcar?",
+      "labelMin": "quase nada",
+      "labelMax": "acidez no topo",
+      "alvo": 80,
+      "tolerancia": 15,
+      "porque": "Limonada pura é ácida de fazer careta, bem perto do topo da régua."
+    },
+    {
+      "tipo": "swipe",
+      "dificuldade": 2,
+      "instrucao": "Isso é sinal de acidez alta? Deslize.",
+      "cartas": [
+        {
+          "texto": "A boca enche de água depois de engolir",
+          "verdade": true,
+          "porque": "Salivação é o sinal número um da acidez."
+        },
+        {
+          "texto": "A boca fica seca e amarrada",
+          "verdade": false,
+          "porque": "Secura é assinatura do tanino. A acidez faz o oposto: traz saliva."
+        },
+        {
+          "texto": "O vinho parece fresco e vivo",
+          "verdade": true,
+          "porque": "Frescor é o jeito mais comum de descrever um vinho de boa acidez."
+        },
+        {
+          "texto": "O vinho parece pesado e parado",
+          "verdade": false,
+          "porque": "Quando falta acidez, o vinho fica com cara de cansado. Acidez alta acorda o gole."
+        },
+        {
+          "texto": "A sensação lembra morder um limão",
+          "verdade": true,
+          "porque": "O limão é o professor particular da acidez."
+        }
+      ]
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 2,
+      "pergunta": "Duas videiras da mesma uva: uma cresce em região fria, outra em região quente. Qual tende a dar o vinho mais ácido?",
+      "opcoes": [
+        "A da região fria",
+        "A da região quente",
+        "O clima não muda nada"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Frio preserva o frescor da uva.",
+      "erroMsg": "Quase. O calor vai consumindo o ácido da uva enquanto ela amadurece. No frio, a acidez fica guardada.",
+      "porque": "Em clima frio a uva amadurece devagar e segura mais ácido málico, que o calor consumiria."
+    },
+    {
+      "tipo": "duasverdades",
+      "dificuldade": 2,
+      "calibrar": true,
+      "tema": "Acidez",
+      "afirmacoes": [
+        "A acidez ajuda a conservar o vinho",
+        "Brancos e espumantes costumam ser mais ácidos que tintos",
+        "Acidez e tanino são a mesma coisa com nomes diferentes"
+      ],
+      "mentira": 2,
+      "porque": "Acidez traz água na boca e tanino seca. São sensações opostas, e você já sabe separar as duas."
+    },
+    {
+      "tipo": "intruso",
+      "dificuldade": 3,
+      "pergunta": "Qual destes NÃO costuma fazer a boca encher de água?",
+      "opcoes": [
+        "Limonada",
+        "Abacaxi",
+        "Banana madura",
+        "Vinho branco bem fresco"
+      ],
+      "intruso": 2,
+      "regra": "Limão, abacaxi e branco fresco são ácidos, e acidez chama saliva. Banana madura é doce e mansa."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 3,
+      "calibrar": true,
+      "pergunta": "Primeiro gole: a boca enche de água. Segundo gole, de outra taça: a boca resseca. O que você acabou de provar?",
+      "opcoes": [
+        "Um vinho ácido e depois um tânico",
+        "Um vinho tânico e depois um ácido",
+        "Dois vinhos doces"
+      ],
+      "correta": 0,
+      "okMsg": "Que leitura. Você já distingue as duas sensações mais importantes do tinto.",
+      "erroMsg": "Quase. Água na boca veio primeiro, então o primeiro era o ácido. A secura do segundo é tanino.",
+      "porque": "Água na boca é acidez, secura é tanino. Essa dupla resolve metade das conversas sobre vinho."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Para fechar: vinho que dá água na boca é vinho de...",
+      "opcoes": [
+        "Acidez marcante",
+        "Tanino pesado",
+        "Muita doçura"
+      ],
+      "correta": 0,
+      "okMsg": "Fechou. Limão de um lado, chá preto do outro: seu mapa começou.",
+      "erroMsg": "Respira. Água na boca é acidez, e você acabou de treinar isso. Fica para a próxima rodada.",
+      "porque": "Salivar depois do gole é o sinal clássico de acidez alta."
+    }
+  ],
+  "aplicacao": "No restaurante, quando quiser um branco refrescante, peça um de acidez alta. Agora você sabe exatamente o que vai sentir.",
+  "recap": "Acidez vem da uva, faz a boca encher de água e é o frescor do vinho.",
+  "voceAgoraSabe": [
+    "Você reconhece acidez pela água na boca, o mesmo reflexo de morder um limão",
+    "Você separa acidez de tanino sem medo: uma molha a boca, o outro seca"
+  ],
+  "curiosidade": "O ácido tartárico da uva pode formar pequenos cristais no fundo da garrafa ou na rolha. Parecem caquinhos de vidro, mas são inofensivos e indicam um vinho pouco manipulado.",
+  "teaser": "Na próxima lição, a balança: por que alguns vinhos parecem água fresca e outros parecem veludo."
+}

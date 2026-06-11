@@ -174,6 +174,125 @@
   color: var(--wine-700);
 }
 
+/* ---------- Bottom sheet (folha) ---------- */
+.folha {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+}
+
+.folha-fundo {
+  position: absolute;
+  inset: 0;
+  background: rgba(74, 31, 36, 0.42);
+  animation: folha-veu 200ms ease-out both;
+}
+
+@keyframes folha-veu {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.folha-painel {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 480px;
+  padding: var(--space-3) var(--space-4) calc(var(--space-4) + env(safe-area-inset-bottom));
+  border-radius: var(--radius-card) var(--radius-card) 0 0;
+  background: var(--bg);
+  box-shadow: 0 -6px 24px rgba(74, 31, 36, 0.16);
+  animation: folha-sobe 220ms ease-out both;
+}
+
+@keyframes folha-sobe {
+  from {
+    transform: translateX(-50%) translateY(100%);
+  }
+
+  to {
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.folha-alca {
+  width: 36px;
+  height: 4px;
+  margin: 0 auto var(--space-3);
+  border-radius: var(--radius-pill);
+  background: var(--neutral-200);
+}
+
+.folha-titulo {
+  font: 600 var(--text-lg) / 1.2 var(--font-display);
+  color: var(--wine-900);
+}
+
+.folha-conteudo {
+  margin-top: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.folha-fechar {
+  width: 100%;
+  margin-top: var(--space-4);
+}
+
+.folha-numero {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font: 500 var(--text-xl) / 1 var(--font-mono);
+  color: var(--neutral-700);
+}
+
+.folha-num-streak .icon {
+  color: var(--ember-500);
+}
+
+.folha-num-cristais .icon {
+  color: var(--gold-700);
+}
+
+.folha-texto {
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--neutral-600);
+}
+
+.folha-suave {
+  color: var(--neutral-500);
+  font-size: var(--text-xs);
+}
+
+.folha-mono {
+  font: 600 var(--text-sm) / 1 var(--font-mono);
+  color: var(--wine-700);
+  font-variant-numeric: tabular-nums;
+}
+
+.folha-coracoes {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.folha-coracoes .vida {
+  color: var(--neutral-200);
+}
+
+.folha-coracoes .vida-cheia {
+  color: var(--wine-700);
+}
+
 @media (hover: hover) {
   .btn-primary:not(:disabled):hover {
     background: color-mix(in srgb, var(--wine-700) 88%, #000);

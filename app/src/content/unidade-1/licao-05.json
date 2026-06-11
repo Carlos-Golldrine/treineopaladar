@@ -1,0 +1,183 @@
+{
+  "id": "u1-l5",
+  "unidade": "u1",
+  "ordem": 5,
+  "titulo": "Os 4 juntos: leia o vinho inteiro",
+  "habilidade": "corpo",
+  "hook": "Secura, água na boca, peso e açúcar: você já conhece os 4 sinais. Hoje eles tocam juntos, como uma banda.",
+  "fichaCanonica": [
+    "Doçura e acidez são gostos básicos; o tanino é uma sensação tátil de adstringência; o corpo é a percepção de peso e textura. Os quatro chegam ao cérebro por canais diferentes.",
+    "Na prova técnica, o vinho é avaliado em sequência: a doçura na entrada, a acidez pela salivação, o tanino pela secura e o corpo pelo peso do conjunto.",
+    "A uva Pinot Noir produz tintos tipicamente leves de corpo, com tanino baixo e acidez alta.",
+    "A uva Cabernet Sauvignon produz tintos tipicamente encorpados e de tanino alto.",
+    "A uva Sauvignon Blanc produz brancos tipicamente secos, leves e de acidez alta.",
+    "Espumantes de uva Moscatel, como o Moscatel de Asti e os moscatéis brasileiros, são tipicamente doces, leves e de baixo teor alcoólico."
+  ],
+  "exercicios": [
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Rodada de aquecimento. A boca seca depois do gole: quem chegou?",
+      "opcoes": [
+        "O tanino",
+        "A acidez",
+        "A doçura"
+      ],
+      "correta": 0,
+      "okMsg": "De primeira. O chá preto mandou lembranças.",
+      "erroMsg": "Quase. Secura é a assinatura do tanino, aquele do chá preto. Vem comigo que hoje tudo se encaixa.",
+      "porque": "O tanino prende a saliva e resseca a boca."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Agora a boca encheu de água: quem foi?",
+      "opcoes": [
+        "A acidez",
+        "O tanino",
+        "O corpo"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. O limão também mandou lembranças.",
+      "erroMsg": "Tudo bem. Água na boca é acidez, o reflexo do limão. Os quatro vão aparecer hoje.",
+      "porque": "A acidez estimula a salivação."
+    },
+    {
+      "tipo": "ordenar",
+      "dificuldade": 2,
+      "instrucao": "Você deu um gole. Coloque na ordem em que o vinho se apresenta na boca.",
+      "itens": [
+        "Tanino pela secura",
+        "Doçura logo na entrada",
+        "Corpo pelo peso do conjunto",
+        "Acidez pela água na boca"
+      ],
+      "ordemCorreta": [1, 3, 0, 2],
+      "porque": "Essa é a sequência da prova clássica: o açúcar fala primeiro e o peso fecha a conta."
+    },
+    {
+      "tipo": "intruso",
+      "dificuldade": 2,
+      "pergunta": "Qual destes se percebe pelo toque, e não como gosto?",
+      "opcoes": [
+        "Doçura",
+        "Acidez",
+        "Tanino",
+        "Salgado"
+      ],
+      "intruso": 2,
+      "regra": "Tanino é textura: seca e dá aspereza. Os outros são gostos que a língua reconhece."
+    },
+    {
+      "tipo": "swipe",
+      "dificuldade": 2,
+      "instrucao": "Esse perfil faz sentido? Deslize.",
+      "cartas": [
+        {
+          "texto": "Tinto leve, de pouco tanino e acidez viva: pode ser um Pinot Noir",
+          "verdade": true,
+          "porque": "Esse é o retrato clássico do Pinot Noir."
+        },
+        {
+          "texto": "Tinto encorpado e bem tânico: pode ser um Cabernet Sauvignon",
+          "verdade": true,
+          "porque": "Cabernet é o exemplo de tinto de estrutura, com tanino firme."
+        },
+        {
+          "texto": "Branco seco, leve e refrescante: pode ser um Sauvignon Blanc",
+          "verdade": true,
+          "porque": "Sauvignon Blanc é o branco fresco por excelência."
+        },
+        {
+          "texto": "Espumante doce e levinho: pode ser um Moscatel",
+          "verdade": true,
+          "porque": "Moscatel é doce assumido, leve e de pouco álcool."
+        },
+        {
+          "texto": "Tinto que dá muita água na boca: sinal de açúcar alto",
+          "verdade": false,
+          "porque": "Água na boca é assinatura da acidez. Açúcar aparece na doçura da entrada."
+        },
+        {
+          "texto": "Todo vinho encorpado é doce",
+          "verdade": false,
+          "porque": "Peso e açúcar andam separados: muitos encorpados são sequíssimos."
+        }
+      ]
+    },
+    {
+      "tipo": "duasverdades",
+      "dificuldade": 2,
+      "tema": "Lendo o vinho inteiro",
+      "afirmacoes": [
+        "Um mesmo vinho pode ser encorpado e ácido ao mesmo tempo",
+        "Os 4 eixos são independentes e se combinam em qualquer arranjo",
+        "Vinho seco e vinho leve são a mesma coisa"
+      ],
+      "mentira": 2,
+      "porque": "Seco fala de açúcar e leve fala de peso: existem secos encorpados e doces levinhos."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 3,
+      "calibrar": true,
+      "pergunta": "Um tinto seca bastante a boca, pesa na língua e quase não dá água na boca. Como você o descreve?",
+      "opcoes": [
+        "Tânico, encorpado e de acidez baixa",
+        "Leve, doce e bem ácido",
+        "Suave, leve e fresco"
+      ],
+      "correta": 0,
+      "okMsg": "Que leitura. Você descreveu um vinho inteiro em uma frase.",
+      "erroMsg": "Vamos por partes: secura é tanino, peso é corpo, pouca água na boca é acidez baixa. Releia o gole com calma.",
+      "porque": "Cada sensação aponta um eixo: secura, peso e pouca salivação desenham um tinto tânico, encorpado e de acidez baixa."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 3,
+      "pergunta": "Sua amiga quer um tinto levinho, fresco, que não trave a boca. Que perfil você sugere?",
+      "opcoes": [
+        "Um Pinot Noir: corpo leve, tanino baixo, acidez alta",
+        "Um Cabernet Sauvignon: encorpado e tânico",
+        "Qualquer um, tinto é tudo igual"
+      ],
+      "correta": 0,
+      "okMsg": "Sugestão certeira. Ela vai voltar a te perguntar.",
+      "erroMsg": "Quase. Levinho, fresco e sem travar a boca é o mapa do Pinot Noir. O Cabernet entrega o oposto.",
+      "porque": "Corpo leve, tanino baixo e acidez alta formam a assinatura clássica do Pinot Noir."
+    },
+    {
+      "tipo": "slider",
+      "dificuldade": 3,
+      "calibrar": true,
+      "pergunta": "Um espumante Moscatel entra onde na régua da doçura?",
+      "labelMin": "seco",
+      "labelMax": "bem doce",
+      "alvo": 85,
+      "tolerancia": 15,
+      "porque": "Moscatel é o doce assumido da prateleira: leve, perfumado e cheio de açúcar natural da uva."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Para fechar a unidade: quais são os 4 eixos que você já lê em qualquer taça?",
+      "opcoes": [
+        "Tanino, acidez, corpo e doçura",
+        "Cor, preço, rótulo e safra",
+        "Uva, rolha, taça e barril"
+      ],
+      "correta": 0,
+      "okMsg": "Unidade 1 completa. Esses 4 eixos agora são seus, para qualquer vinho do mundo.",
+      "erroMsg": "Respira: tanino, acidez, corpo e doçura. Você treinou cada um deles, e esse mapa já é seu.",
+      "porque": "Esses 4 eixos formam a base de leitura de qualquer vinho."
+    }
+  ],
+  "aplicacao": "No próximo jantar, experimente dizer em voz alta: este aqui é encorpado, tânico e fresco. Você vai notar que sabe do que está falando.",
+  "recap": "Com tanino, acidez, corpo e doçura você lê um vinho inteiro: a secura, a água na boca, o peso e o açúcar.",
+  "voceAgoraSabe": [
+    "Você descreve um vinho inteiro pelos 4 eixos, sem decorar rótulo",
+    "Você sugere um perfil de vinho a partir do gosto de quem pediu"
+  ],
+  "curiosidade": "Provadores profissionais avaliam centenas de vinhos seguindo a mesma sequência que você treinou hoje: doçura, acidez, tanino e corpo. O método da sua mesa é o mesmo dos grandes salões.",
+  "teaser": "Na Unidade 2, as uvas tintas entram em cena: Malbec, Cabernet e Pinot Noir, cada uma com seu jeito de ocupar a taça."
+}
