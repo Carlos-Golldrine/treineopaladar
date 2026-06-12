@@ -62,7 +62,8 @@ def preenchido(v):
 # \blicor\b nao casa com "licoroso" (boundary), entao vinho licoroso esta a salvo.
 RE_NAO_VINHO_SEMPRE = re.compile(
     r"\b(gin|cacha[çc]a|licor|brandy|conhaque|whisk(?:e)?y|vodka|sucos?|"
-    r"vinagres?|sacolas?|ta[çc]as?|saca[\s\-]?rolhas?)\b",
+    r"vinagres?|sacolas?|ta[çc]as?|saca[\s\-]?rolhas?|"
+    r"coolers?|sangrias?|coquetel|coquet[eé]is)\b",
     re.IGNORECASE,
 )
 # Termos ambiguos (ha vinhos reais com esses nomes, ex. "Abridor Blend 2019"):

@@ -1,0 +1,166 @@
+{
+  "id": "u4-l3",
+  "unidade": "u4",
+  "ordem": 3,
+  "titulo": "Preço: a curva que achata",
+  "habilidade": "rotulo",
+  "hook": "Entre o vinho de 25 e o de 250 reais existe uma curva, e ela não é a que o preço sugere. Hoje você descobre onde cada real rende mais.",
+  "fichaCanonica": [
+    "Toda garrafa carrega custos que não dependem do líquido, como vidro, rolha, rótulo, impostos e transporte; num vinho muito barato, esses custos engolem quase tudo e sobra pouco para o vinho em si.",
+    "A relação entre preço e qualidade não é linear: sair de um vinho muito barato para uma faixa intermediária tende a trazer salto perceptível na taça, e a partir de certo ponto cada real a mais compra diferenças cada vez menores.",
+    "Acima das faixas intermediárias, o preço passa a pagar sobretudo raridade, prestígio da marca e potencial de guarda, fatores que mudam pouco o sabor para quem está começando.",
+    "No estudo Do More Expensive Wines Taste Better?, publicado no Journal of Wine Economics em 2008, milhares de degustações às cegas mostraram que pessoas sem treino formal não preferem os vinhos mais caros; na média, as notas foram até levemente melhores para os mais baratos.",
+    "Por acordos comerciais do Mercosul e com o Chile, vinhos chilenos e argentinos entram no Brasil sem o imposto de importação que encarece os europeus, o que ajuda a relação preço-qualidade desses vizinhos."
+  ],
+  "exercicios": [
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Pense numa caneta de 2 reais e numa de 20. A de 20 escreve 10 vezes melhor?",
+      "opcoes": [
+        "Não, ela escreve melhor, mas a diferença é bem menor que o preço sugere",
+        "Sim, preço e qualidade andam sempre colados",
+        "Não, as duas são idênticas"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. O preço sobe em linha reta e a diferença vai achatando.",
+      "erroMsg": "Quase. A de 20 escreve melhor, só que não 10 vezes melhor. Guarde essa curva: ela vale pra gôndola inteira.",
+      "porque": "No vinho é parecido: a qualidade sobe com o preço, mas cada real a mais rende cada vez menos na taça."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Numa garrafa muito barata, pra onde vai a maior parte do dinheiro?",
+      "opcoes": [
+        "Pra vidro, rolha, rótulo, impostos e transporte",
+        "Pro vinho dentro dela",
+        "Pra publicidade da vinícola"
+      ],
+      "correta": 0,
+      "okMsg": "Exato. No vinho muito barato, a embalagem e os impostos comem quase tudo.",
+      "erroMsg": "Quase. Vidro, rolha, impostos e frete custam o mesmo em qualquer garrafa; no vinho muito barato, sobra pouco pro líquido.",
+      "porque": "Os custos fixos da garrafa não dependem da qualidade do vinho, e na garrafa barata eles engolem quase todo o preço."
+    },
+    {
+      "tipo": "slider",
+      "dificuldade": 2,
+      "pergunta": "Na régua do ganho na taça, quanto rende sair do vinho mais barato da gôndola pra faixa intermediária?",
+      "labelMin": "quase nada",
+      "labelMax": "salto grande",
+      "alvo": 80,
+      "tolerancia": 15,
+      "porque": "É o trecho onde cada real rende mais: os custos fixos ficam pequenos e entra vinho de verdade na conta."
+    },
+    {
+      "tipo": "swipe",
+      "dificuldade": 2,
+      "instrucao": "Vale pagar mais por isso? Deslize.",
+      "cartas": [
+        {
+          "texto": "Sair do vinho mais barato da prateleira pra faixa intermediária",
+          "verdade": true,
+          "porque": "É o trecho de maior salto na taça: a curva ainda está subindo forte."
+        },
+        {
+          "texto": "Garrafa bem mais pesada, então vinho bem melhor",
+          "verdade": false,
+          "porque": "Vidro grosso é custo de embalagem, e embalagem não muda o líquido."
+        },
+        {
+          "texto": "Vinho caro sempre agrada mais que o barato",
+          "verdade": false,
+          "porque": "Às cegas, milhares de provas mostraram que gente sem treino não prefere os caros."
+        },
+        {
+          "texto": "Chilenos e argentinos chegam ao Brasil sem imposto de importação",
+          "verdade": true,
+          "porque": "Acordos do Mercosul e com o Chile zeram esse imposto, e sobra mais vinho no preço."
+        },
+        {
+          "texto": "Pagar muito caro compra sobretudo raridade e prestígio",
+          "verdade": true,
+          "porque": "No topo da curva, o preço paga história e escassez, que valem em ocasião especial."
+        }
+      ]
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 2,
+      "pergunta": "Num estudo com milhares de degustações às cegas, o que aconteceu quando pessoas comuns provaram vinhos sem ver o preço?",
+      "opcoes": [
+        "Não preferiram os caros; na média, os baratos levaram notas até levemente melhores",
+        "Acertaram o preço de cada garrafa pelo gosto",
+        "Preferiram sempre os mais caros"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Sem o rótulo soprando o preço, o paladar vota livre.",
+      "erroMsg": "Surpresa boa: às cegas, gente sem treino formal não preferiu os caros. O preço influencia mais a cabeça que a língua.",
+      "porque": "O estudo Do More Expensive Wines Taste Better?, de 2008, encontrou esse resultado em milhares de provas às cegas."
+    },
+    {
+      "tipo": "duasverdades",
+      "dificuldade": 3,
+      "calibrar": true,
+      "tema": "Preço na gôndola",
+      "afirmacoes": [
+        "Custos como vidro, rolha e impostos pesam mais, em proporção, no vinho barato",
+        "A partir de certo preço, cada real a mais compra diferenças cada vez menores na taça",
+        "Se custa caro, o vinho é garantidamente melhor pro seu gosto"
+      ],
+      "mentira": 2,
+      "porque": "Às cegas, quem não tem treino formal não prefere os caros: preço alto paga raridade e prestígio, e o seu gosto não assina embaixo automaticamente."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 3,
+      "calibrar": true,
+      "pergunta": "Por que um chileno de 50 reais costuma entregar mais vinho que um europeu de 50 reais?",
+      "opcoes": [
+        "O chileno entra sem imposto de importação, então sobra mais do preço pro vinho",
+        "Porque o Chile faz vinho melhor que a Europa",
+        "Porque o frete da Europa vem de avião"
+      ],
+      "correta": 0,
+      "okMsg": "Conta redonda. O imposto que o europeu paga, o chileno transforma em vinho.",
+      "erroMsg": "Quase. Ninguém faz vinho melhor por decreto: a diferença é o imposto de importação, que o vizinho não paga.",
+      "porque": "Acordos do Mercosul e com o Chile zeram o imposto de importação dos vizinhos; do europeu, parte do preço vira imposto antes de virar vinho."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 2,
+      "pergunta": "Quando faz sentido pagar bem mais caro numa garrafa?",
+      "opcoes": [
+        "Em ocasião especial, quando raridade, história e guarda têm valor pra você",
+        "Sempre, vinho em conta é tempo perdido",
+        "Nunca, vinho é tudo igual"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. No topo da curva se compra história, e história tem hora.",
+      "erroMsg": "Quase. Acima da faixa intermediária o preço compra raridade, prestígio e guarda. Se isso vale pra ocasião, o gasto faz sentido.",
+      "porque": "No topo da curva o preço paga fatores além do sabor, e eles valem quando a ocasião pede memória, não só taça."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Pra fechar: onde mora o melhor custo-benefício pra quem está treinando o paladar?",
+      "opcoes": [
+        "Na faixa intermediária da gôndola",
+        "No vinho mais caro da loja",
+        "No mais barato de todos, sempre"
+      ],
+      "correta": 0,
+      "okMsg": "Fechou. A faixa do meio é o playground do seu treino.",
+      "erroMsg": "Respira: na faixa do meio os custos fixos já ficaram pequenos e a curva ainda não achatou. É ali que cada real rende mais.",
+      "porque": "Na faixa intermediária o dinheiro vira vinho de verdade, e a diferença pros topos de linha ainda é pequena pra quem está começando."
+    }
+  ],
+  "aplicacao": "Na próxima compra, mire a faixa do meio da gôndola: entre cerca de 30 e 80 reais já mora muito vinho honesto, e os vizinhos do Mercosul fazem o real render.",
+  "recap": "A qualidade sobe com o preço mas a curva achata: o salto grande é sair do muito barato pra faixa intermediária, e lá em cima se paga raridade, não sabor garantido.",
+  "voceAgoraSabe": [
+    "Você sabe por que o vinho muito barato rende pouco: os custos fixos engolem o preço",
+    "Você sabe onde cada real rende mais: na faixa intermediária, antes da curva achatar",
+    "Você tem um estudo às cegas no bolso pra ninguém te intimidar com preço de vinho"
+  ],
+  "curiosidade": "O estudo das degustações às cegas tem mais de 6 mil provas registradas e um achado divertido: quem tinha treino formal de vinho até dava notas um pouco melhores aos caros. Paladar se treina, e é exatamente isso que você está fazendo aqui.",
+  "teaser": "Na próxima lição, onde comprar: o que o mercado, a loja especializada e a internet fazem de melhor por você."
+}

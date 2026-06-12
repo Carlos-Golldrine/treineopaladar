@@ -1,0 +1,179 @@
+{
+  "id": "u3-l4",
+  "unidade": "u3",
+  "ordem": 4,
+  "titulo": "Espumante seco: bolhas para todo dia",
+  "habilidade": "acidez",
+  "hook": "As bolhas da taça não vêm de gás de fábrica. Elas nascem de um truque antigo, e combinam com pastel mais do que você imagina.",
+  "fichaCanonica": [
+    "As bolhas do espumante nascem de uma segunda fermentação: leveduras transformam açúcar em álcool e gás carbônico, e o gás fica preso no líquido.",
+    "No método tradicional, usado no Champagne, a segunda fermentação acontece dentro da própria garrafa; no método Charmat, usado na maioria dos Proseccos, ela acontece em grandes tanques.",
+    "Só pode se chamar Champagne o espumante feito na região de Champagne, na França; fora dela, o vinho com bolhas atende por espumante, Cava, Prosecco e outros nomes.",
+    "Pela legislação brasileira, o espumante nature tem até 3 gramas de açúcar por litro e o brut fica na faixa de 8 a 15 gramas por litro: os dois são estilos secos.",
+    "A acidez alta e as bolhas do espumante seco limpam a gordura da boca, e por isso ele tende a combinar com frituras como pastel, coxinha e batata frita.",
+    "Espumante costuma ser servido bem gelado, em torno de 6 a 8 graus."
+  ],
+  "exercicios": [
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "De onde vêm as bolhas do espumante?",
+      "opcoes": [
+        "De uma segunda fermentação, que cria gás dentro do vinho",
+        "De uma máquina de refrigerante",
+        "De bicarbonato na garrafa"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. As leveduras fazem a festa, e o gás fica preso no vinho.",
+      "erroMsg": "Quase. Nada de máquina: leveduras comem açúcar e soltam gás carbônico, que fica preso no líquido.",
+      "porque": "Leveduras comem açúcar e soltam gás carbônico: preso no vinho, ele vira a dança de bolhas da taça."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Você comeu um pedaço de pastel e a boca ficou gordurosa. O que um gole de espumante seco faz?",
+      "opcoes": [
+        "Limpa a gordura com acidez e bolhas, e prepara a próxima mordida",
+        "Aumenta a sensação de gordura",
+        "Adoça a boca"
+      ],
+      "correta": 0,
+      "okMsg": "Exato. É quase uma vassoura de frescor.",
+      "erroMsg": "Quase. Acidez alta e bolhas varrem a gordura da boca: por isso espumante e fritura se entendem tão bem.",
+      "porque": "Acidez alta e bolhas varrem a gordura da boca, e cada gole renova o paladar para a próxima mordida."
+    },
+    {
+      "tipo": "ordenar",
+      "dificuldade": 2,
+      "instrucao": "Organize os estilos de espumante do menos doce ao mais doce.",
+      "itens": [
+        "Doce",
+        "Brut",
+        "Nature",
+        "Meio doce"
+      ],
+      "ordemCorreta": [2, 1, 3, 0],
+      "porque": "O nature fica rente ao zero de açúcar, o brut segue seco, e daí a régua sobe até o doce."
+    },
+    {
+      "tipo": "swipe",
+      "dificuldade": 2,
+      "instrucao": "Verdade ou mito sobre as bolhas? Deslize.",
+      "cartas": [
+        {
+          "texto": "Todo espumante é Champagne",
+          "verdade": false,
+          "porque": "Champagne é só o da região de Champagne. O resto do mundo faz espumante com outros nomes."
+        },
+        {
+          "texto": "Brut quer dizer espumante seco",
+          "verdade": true,
+          "porque": "Brut carrega pouco açúcar: no Brasil, entre 8 e 15 gramas por litro."
+        },
+        {
+          "texto": "As bolhas nascem de uma segunda fermentação",
+          "verdade": true,
+          "porque": "Leveduras, açúcar e paciência: nasce o gás que vira festa."
+        },
+        {
+          "texto": "Espumante é bebida só de réveillon",
+          "verdade": false,
+          "porque": "Espumante seco acompanha o dia a dia, da fritura ao jantar inteiro."
+        },
+        {
+          "texto": "O método Charmat usa grandes tanques",
+          "verdade": true,
+          "porque": "É o caminho da maioria dos Proseccos e de muitos espumantes brasileiros."
+        }
+      ]
+    },
+    {
+      "tipo": "slider",
+      "dificuldade": 2,
+      "pergunta": "Na régua do açúcar, onde fica um espumante nature?",
+      "labelMin": "zero açúcar",
+      "labelMax": "bem doce",
+      "alvo": 5,
+      "tolerancia": 12,
+      "porque": "O nature é o mais seco da prateleira: até 3 gramas de açúcar por litro, coladinho no zero."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 2,
+      "pergunta": "No método tradicional, o do Champagne, onde acontece a segunda fermentação?",
+      "opcoes": [
+        "Dentro da própria garrafa",
+        "Em piscinas abertas",
+        "Não existe segunda fermentação"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Cada garrafa é uma pequena fábrica de bolhas.",
+      "erroMsg": "Quase. No método tradicional, o vinho ganha as bolhas dentro da própria garrafa em que será vendido.",
+      "porque": "No método tradicional, cada garrafa é uma pequena fábrica de bolhas."
+    },
+    {
+      "tipo": "duasverdades",
+      "dificuldade": 3,
+      "calibrar": true,
+      "tema": "Espumante sem mistério",
+      "afirmacoes": [
+        "Espumante seco não existe, todos são doces",
+        "O método Charmat faz a segunda fermentação em tanques",
+        "Espumante gosta de gelo: o ideal fica em torno de 6 a 8 graus"
+      ],
+      "mentira": 0,
+      "porque": "Os secos dominam a prateleira: nature e brut carregam pouco açúcar e brilham à mesa."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 3,
+      "calibrar": true,
+      "pergunta": "Noite de boteco: pastel, coxinha e batata frita na mesa. Qual garrafa tende a transformar a noite?",
+      "opcoes": [
+        "Um espumante brut bem gelado",
+        "Um tinto encorpado de tanino bravo",
+        "Um vinho doce de sobremesa"
+      ],
+      "correta": 0,
+      "okMsg": "Combinação de mestre. A fritura agradece as bolhas.",
+      "erroMsg": "Quase. Fritura pede acidez e bolhas para limpar a gordura: o brut gelado é o par perfeito do pastel.",
+      "porque": "Acidez alta e gás carbônico cortam a gordura da fritura, e cada gole renova a boca."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 3,
+      "pergunta": "Por que um espumante de fora da região de Champagne não pode usar esse nome?",
+      "opcoes": [
+        "O nome é protegido e pertence só àquela região da França",
+        "Porque o gosto é sempre inferior",
+        "Porque as bolhas são diferentes em cada país"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Champagne é endereço, e endereço protegido por lei.",
+      "erroMsg": "Quase. Champagne é nome de lugar protegido: espumantes de outras origens usam outros nomes, sem demérito algum.",
+      "porque": "Champagne é nome de lugar protegido por lei: espumantes de outras origens usam outros nomes, sem demérito algum."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Para fechar: você quer um espumante bem seco para a fritura. No rótulo, você procura as palavras...",
+      "opcoes": [
+        "Nature ou brut",
+        "Doce ou suave",
+        "Tinto ou rosé"
+      ],
+      "correta": 0,
+      "okMsg": "Rótulo decifrado. Bolhas secas a caminho.",
+      "erroMsg": "Respira. Os secos da prateleira atendem por nature e brut. É essa dupla que você procura.",
+      "porque": "Nature e brut são os estilos secos: pouco açúcar e muito frescor."
+    }
+  ],
+  "aplicacao": "Na próxima fritura, da coxinha ao pastel de feira, abra um espumante brut gelado e deixe as bolhas limparem o caminho.",
+  "recap": "Bolhas nascem de uma segunda fermentação, brut e nature são os secos da turma, e fritura com espumante é dupla campeã.",
+  "voceAgoraSabe": [
+    "Você lê o rótulo de espumante sem susto: nature é o mais seco, brut vem logo depois",
+    "Você sabe a regra de ouro do boteco: acidez e bolhas limpam a gordura da fritura"
+  ],
+  "curiosidade": "No método tradicional, o espumante repousa com as leveduras dentro da garrafa por meses ou anos. São elas que deixam aquele gostinho de pão fresco em certos espumantes.",
+  "teaser": "Na última lição da unidade, a doçura levanta a cabeça: o moscatel e os vinhos doces que merecem todo respeito."
+}

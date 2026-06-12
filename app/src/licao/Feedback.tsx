@@ -55,7 +55,8 @@ export function trechoFicha(licao: Licao, porque: string): string {
 interface PainelRevealProps {
   resolucao: ResolucaoExercicio;
   calibracao: Calibracao | null;
-  licao: Licao;
+  /** Sem licao (pratica e Desafio do Dia) o "Entenda melhor" nao aparece. */
+  licao?: Licao;
   rotuloContinuar: string;
   onContinuar: () => void;
   /** So para a cena de screenshot: abre o "Entenda melhor" ja expandido. */
@@ -94,7 +95,7 @@ export function PainelReveal({
       </div>
       <p className="reveal-porque">{porque}</p>
       {nota && <p className="reveal-nota">{nota}</p>}
-      {!correto && (
+      {!correto && licao && (
         <div className="entenda">
           <button
             type="button"

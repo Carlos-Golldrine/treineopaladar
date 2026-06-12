@@ -1,0 +1,164 @@
+{
+  "id": "u5-l1",
+  "unidade": "u5",
+  "ordem": 1,
+  "titulo": "A regra de ouro: peso com peso",
+  "habilidade": "harmonizacao",
+  "hook": "Existe uma regra que resolve metade das harmonizações antes de pensar em uva: peso com peso. E você já sabe pesar um vinho desde a primeira unidade.",
+  "fichaCanonica": [
+    "A regra de ouro da harmonização é equilibrar peso com peso: prato leve com vinho leve, prato intenso com vinho encorpado, para que nenhum dos dois apague o outro.",
+    "Quando o vinho é muito mais pesado que o prato, ele atropela a comida; quando o prato é muito mais pesado, o vinho desaparece.",
+    "O modo de preparo e o molho mudam o peso do prato: um frango grelhado é leve, e o mesmo frango ao molho cremoso fica bem mais pesado.",
+    "Peixe branco grelhado com branco leve e fresco é um par clássico de pesos parecidos; carnes ao molho escuro e queijos curados pedem tintos de mais corpo.",
+    "Harmonização é um conjunto de diretrizes para comida e vinho ficarem melhores juntos; o seu gosto faz parte da conta."
+  ],
+  "exercicios": [
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Num show, um violão acompanha bem uma voz suave. E se uma bateria pesada entrar do nada?",
+      "opcoes": [
+        "A voz some atrás da bateria",
+        "A voz fica mais nítida",
+        "Nada muda"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Dois sons só convivem no mesmo volume.",
+      "erroMsg": "Quase. A bateria engole a voz. Prato e vinho funcionam igual: precisam tocar na mesma altura.",
+      "porque": "Harmonizar é equilibrar volumes: quando um lado pesa demais, o outro desaparece."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Qual é a regra de ouro pra começar qualquer harmonização?",
+      "opcoes": [
+        "Peso com peso: prato leve, vinho leve; prato intenso, vinho encorpado",
+        "Cor com cor: comida clara, vinho claro",
+        "Preço com preço: prato caro, vinho caro"
+      ],
+      "correta": 0,
+      "okMsg": "Exato. Antes de uva, região ou safra, vem o peso.",
+      "erroMsg": "Quase. A regra que resolve metade das mesas é peso com peso: nenhum dos dois pode apagar o outro.",
+      "porque": "Equilibrar a intensidade do prato com o corpo do vinho evita que um atropele o outro."
+    },
+    {
+      "tipo": "swipe",
+      "dificuldade": 2,
+      "instrucao": "Os pesos batem? Deslize.",
+      "cartas": [
+        {
+          "texto": "Peixe branco grelhado com branco leve e fresco",
+          "verdade": true,
+          "porque": "Par clássico: dois leves conversando no mesmo volume."
+        },
+        {
+          "texto": "Salada fresca com tinto bem encorpado",
+          "verdade": false,
+          "porque": "O vinho atropela: a salada nem chega a falar."
+        },
+        {
+          "texto": "Carne ao molho escuro com tinto encorpado",
+          "verdade": true,
+          "porque": "Prato de peso pede vinho de corpo: os dois ficam de pé."
+        },
+        {
+          "texto": "Queijo curado intenso com vinho bem levinho",
+          "verdade": false,
+          "porque": "O queijo engole o vinho, que desaparece da taça."
+        },
+        {
+          "texto": "Frango ao molho cremoso com branco de mais corpo",
+          "verdade": true,
+          "porque": "O molho deixou o prato mais pesado, e o vinho acompanhou a subida."
+        }
+      ]
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 2,
+      "pergunta": "Mesmo frango, dois destinos: grelhado ou ao molho cremoso. O que muda na escolha do vinho?",
+      "opcoes": [
+        "O molho deixa o prato mais pesado e pede vinho de mais corpo",
+        "Nada, frango é frango",
+        "O grelhado é que pede o vinho mais pesado"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Quem manda no peso do prato muitas vezes é o molho.",
+      "erroMsg": "Quase. O molho cremoso engorda o prato inteiro, e o vinho precisa subir junto.",
+      "porque": "O modo de preparo e o molho mudam o peso do prato, e a regra de ouro acompanha essa mudança."
+    },
+    {
+      "tipo": "intruso",
+      "dificuldade": 2,
+      "pergunta": "Qual destes pratos NÃO joga no time pesado?",
+      "opcoes": [
+        "Feijoada",
+        "Costela assada",
+        "Salada de folhas com peixe branco",
+        "Queijo curado intenso"
+      ],
+      "intruso": 2,
+      "regra": "Feijoada, costela e queijo curado são pesos-pesados; a salada com peixe branco é a leve da turma."
+    },
+    {
+      "tipo": "duasverdades",
+      "dificuldade": 2,
+      "calibrar": true,
+      "tema": "Peso com peso",
+      "afirmacoes": [
+        "Quando o prato é bem mais pesado que o vinho, o vinho desaparece",
+        "O molho pode mudar o peso do prato inteiro",
+        "Existe uma tabela oficial com a única harmonização certa pra cada prato"
+      ],
+      "mentira": 2,
+      "porque": "Harmonização é diretriz, e o seu gosto faz parte da conta; a regra do peso só garante que ninguém apague ninguém."
+    },
+    {
+      "tipo": "slider",
+      "dificuldade": 2,
+      "pergunta": "Na régua do peso, onde entra uma feijoada?",
+      "labelMin": "leve como salada",
+      "labelMax": "peso máximo",
+      "alvo": 85,
+      "tolerancia": 15,
+      "porque": "Feijoada é prato de peso máximo: pede vinho com corpo pra ficar de pé ao lado dela."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 3,
+      "calibrar": true,
+      "pergunta": "Jantar caprichado: risoto delicado de limão. Qual taça respeita o prato?",
+      "opcoes": [
+        "Um branco leve e fresco",
+        "Um tinto encorpado e tânico",
+        "Qualquer um, risoto aceita tudo"
+      ],
+      "correta": 0,
+      "okMsg": "Escolha de quem já harmoniza de ouvido. O prato delicado segue no centro do palco.",
+      "erroMsg": "Quase. Prato delicado pede vinho no mesmo volume; um tinto parrudo atropelaria o limão.",
+      "porque": "Pesos parecidos deixam o risoto e o vinho brilharem juntos, sem disputa."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Pra fechar: a primeira pergunta antes de escolher o vinho do jantar é...",
+      "opcoes": [
+        "O prato é leve ou pesado?",
+        "O vinho é caro ou barato?",
+        "A garrafa é bonita?"
+      ],
+      "correta": 0,
+      "okMsg": "Fechou. Com essa pergunta você já entra em qualquer cozinha.",
+      "erroMsg": "Respira: comece pelo peso do prato. O resto da harmonização se constrói em cima disso.",
+      "porque": "O peso do prato define o corpo do vinho, e essa é a base de toda harmonização."
+    }
+  ],
+  "aplicacao": "No próximo jantar, pese o prato antes de abrir a garrafa: leve pede leve, intenso pede corpo. Só essa pergunta já evita a maioria dos vexames.",
+  "recap": "Peso com peso: prato leve com vinho leve, prato intenso com vinho encorpado, e o molho pode mudar o peso do jogo.",
+  "voceAgoraSabe": [
+    "Você aplica a regra de ouro: equilibrar o peso do prato com o corpo do vinho",
+    "Você sabe que o molho muda o peso do prato, e a escolha do vinho vai junto"
+  ],
+  "curiosidade": "Muito sommelier resume o ofício numa frase generosa: o vinho certo é o que deixa a comida melhor, e a comida certa é a que deixa o vinho melhor. A regra do peso existe pra essa conversa ser entre iguais.",
+  "teaser": "Na próxima lição, o caso de amor mais famoso da mesa: gordura e tanino."
+}

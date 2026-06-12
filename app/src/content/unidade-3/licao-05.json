@@ -1,0 +1,179 @@
+{
+  "id": "u3-l5",
+  "unidade": "u3",
+  "ordem": 5,
+  "titulo": "Moscatel: doçura de respeito",
+  "habilidade": "docura",
+  "hook": "Tem vinho que cheira à própria uva e não pede desculpa pelo açúcar. O moscatel chegou para fechar a unidade com leveza.",
+  "fichaCanonica": [
+    "A família Moscatel é uma das mais antigas do mundo do vinho, cultivada desde a Antiguidade na região do Mediterrâneo.",
+    "O moscatel é um dos poucos vinhos cujo aroma lembra a própria uva fresca, somado a notas como flor de laranjeira e pêssego.",
+    "O Moscato d'Asti, do Piemonte, na Itália, é doce, levemente frisante, com bolhas suaves, e de álcool baixo, em torno de 5,5 por cento.",
+    "Farroupilha, na Serra Gaúcha, tem Indicação de Procedência, um selo oficial de origem, dedicada aos seus moscatéis, e concentra cerca de metade da produção brasileira de uvas moscatel.",
+    "Espumantes moscatéis brasileiros já conquistaram medalhas em concursos internacionais de vinho.",
+    "A doçura do vinho acalma a pimenta: vinhos doces e aromáticos tendem a acompanhar bem pratos picantes e sobremesas."
+  ],
+  "exercicios": [
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Qual vinho é famoso por cheirar à própria uva?",
+      "opcoes": [
+        "O moscatel",
+        "O Cabernet Sauvignon",
+        "O Chablis"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. O moscatel é a uva que se apresenta pelo perfume.",
+      "erroMsg": "Quase. O moscatel é dos raros vinhos com aroma de uva fresca saindo da taça.",
+      "porque": "O moscatel é dos raros vinhos com aroma de uva fresca saindo da taça."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Você lembra da Unidade 1: gostar de vinho doce é...",
+      "opcoes": [
+        "Tão legítimo quanto gostar de seco",
+        "Algo a esconder dos amigos",
+        "Sinal de paladar fraco"
+      ],
+      "correta": 0,
+      "okMsg": "Exato. Doçura é eixo de paladar, nunca motivo de vergonha.",
+      "erroMsg": "Olha de novo: Sauternes, Tokaji e Porto são doces e reverenciados. Gosto se treina, nunca se julga.",
+      "porque": "Doçura é um dos eixos do vinho, e alguns dos rótulos mais celebrados do mundo são doces."
+    },
+    {
+      "tipo": "swipe",
+      "dificuldade": 2,
+      "instrucao": "Verdade ou mito sobre os doces? Deslize.",
+      "cartas": [
+        {
+          "texto": "O Moscato d'Asti tem álcool baixo, perto de 5,5 por cento",
+          "verdade": true,
+          "porque": "É um dos vinhos mais leves em álcool da prateleira."
+        },
+        {
+          "texto": "Moscatel brasileiro já ganhou medalha internacional",
+          "verdade": true,
+          "porque": "Os espumantes moscatéis da Serra Gaúcha colecionam prêmios mundo afora."
+        },
+        {
+          "texto": "Vinho doce é sempre de baixa qualidade",
+          "verdade": false,
+          "porque": "Qualidade e doçura correm em raias separadas: há doces extraordinários."
+        },
+        {
+          "texto": "Doçura ajuda a acalmar pratos apimentados",
+          "verdade": true,
+          "porque": "O açúcar abraça a pimenta e a boca agradece."
+        },
+        {
+          "texto": "Quem entende de vinho bebe somente seco",
+          "verdade": false,
+          "porque": "Quem entende bebe o que ama. Pose não treina paladar."
+        }
+      ]
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 2,
+      "pergunta": "Qual cidade da Serra Gaúcha concentra a produção de moscatel do Brasil e tem selo de origem dedicado a ele?",
+      "opcoes": [
+        "Farroupilha",
+        "Curitiba",
+        "Petrolina"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Farroupilha é a casa brasileira do moscatel.",
+      "erroMsg": "Quase. É Farroupilha, na Serra Gaúcha: selo de origem próprio e cerca de metade da produção nacional da uva.",
+      "porque": "Farroupilha tem Indicação de Procedência para seus moscatéis e responde por cerca de metade da produção nacional da uva."
+    },
+    {
+      "tipo": "slider",
+      "dificuldade": 2,
+      "pergunta": "Na régua do álcool dos vinhos, onde fica um Moscato d'Asti?",
+      "labelMin": "álcool bem baixo",
+      "labelMax": "álcool alto",
+      "alvo": 10,
+      "tolerancia": 15,
+      "porque": "Com cerca de 5,5 por cento, o Moscato d'Asti fica no comecinho da régua: leveza até no álcool."
+    },
+    {
+      "tipo": "intruso",
+      "dificuldade": 2,
+      "pergunta": "Qual destes NÃO é aroma típico de moscatel?",
+      "opcoes": [
+        "Uva fresca",
+        "Couro",
+        "Flor de laranjeira",
+        "Pêssego"
+      ],
+      "intruso": 1,
+      "regra": "O moscatel é perfume de uva, flor e fruta de caroço. Couro é aroma de tintos maduros, de outra prateleira."
+    },
+    {
+      "tipo": "duasverdades",
+      "dificuldade": 3,
+      "calibrar": true,
+      "tema": "Doçura de respeito",
+      "afirmacoes": [
+        "A família Moscatel é cultivada desde a Antiguidade",
+        "A acidez é o que impede um vinho doce de enjoar",
+        "Todo espumante doce é vinho de segunda linha"
+      ],
+      "mentira": 2,
+      "porque": "Doce bem feito é alta costura: com acidez para equilibrar, vira vinho de prêmio e de memória."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 3,
+      "calibrar": true,
+      "pergunta": "Jantar tailandês, prato bem apimentado. Por que um moscatel gelado tende a funcionar?",
+      "opcoes": [
+        "A doçura acalma a pimenta e o álcool baixo não joga lenha no fogo",
+        "O açúcar deixa a pimenta mais forte",
+        "Vinho nunca acompanha pimenta"
+      ],
+      "correta": 0,
+      "okMsg": "Harmonização corajosa e certeira. A doçura é o bombeiro da pimenta.",
+      "erroMsg": "Quase. Açúcar acalma a ardência, e álcool alto faria o contrário. O moscatel tem o pacote ideal.",
+      "porque": "Doçura suaviza a ardência da pimenta, e o álcool baixo do moscatel evita aumentar o fogo."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 3,
+      "pergunta": "O que um grande vinho doce precisa ter para não enjoar no segundo gole?",
+      "opcoes": [
+        "Acidez viva para equilibrar o açúcar",
+        "Mais açúcar ainda",
+        "Tanino bem alto"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. O frescor é o segredo dos doces elegantes.",
+      "erroMsg": "Quase. Você viu na Unidade 1: a acidez rebate o açúcar e mantém o doce gostoso até o fim da taça.",
+      "porque": "A acidez rebate o açúcar, e é ela que mantém o vinho doce elegante até o fim da taça."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Para fechar a unidade: a sobremesa chegou e você quer bolhas docinhas e leves, com orgulho. Você pede...",
+      "opcoes": [
+        "Um espumante moscatel",
+        "Um tinto tânico",
+        "Um nature sequíssimo"
+      ],
+      "correta": 0,
+      "okMsg": "Pedido perfeito. Unidade 3 completa: brancos, rosé e bolhas, todos no seu mapa.",
+      "erroMsg": "Respira. Para sobremesa com bolhas leves e doces, o moscatel é o nome. E pode pedir sem cerimônia.",
+      "porque": "O espumante moscatel é doce assumido, leve e perfumado: par natural da sobremesa."
+    }
+  ],
+  "aplicacao": "Na sobremesa ou no prato apimentado, peça um moscatel gelado sem cerimônia: doçura é escolha de paladar, e a sua agora tem fundamento.",
+  "recap": "O moscatel cheira à própria uva, brilha em Asti e em Farroupilha, e prova que doçura e qualidade andam juntas há milênios.",
+  "voceAgoraSabe": [
+    "Você sabe onde o moscatel brilha: na Itália com o Asti e no Brasil com Farroupilha",
+    "Você defende a doçura com fatos: equilíbrio com acidez, prêmios internacionais e tradição milenar"
+  ],
+  "curiosidade": "Até o nome do moscatel é perfumado: uma das explicações mais aceitas liga a palavra ao almíscar, perfume célebre da Antiguidade, por causa do aroma intenso da uva.",
+  "teaser": "Na Unidade 4, a missão fica prática: entrar no mercado, ler qualquer rótulo e sair com a garrafa certa, sem medo."
+}

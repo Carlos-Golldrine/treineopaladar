@@ -1,0 +1,179 @@
+{
+  "id": "u2-l4",
+  "unidade": "u2",
+  "ordem": 4,
+  "titulo": "Pinot Noir: o tinto leve e fresco",
+  "habilidade": "acidez",
+  "hook": "Levante a taça contra a luz: tem tinto que deixa você enxergar através dele. Esse é o convidado de hoje.",
+  "fichaCanonica": [
+    "A Pinot Noir é originária da Borgonha, na França, onde é cultivada há séculos, com registros desde a Idade Média.",
+    "É uma uva de casca fina e cultivo delicado, sensível ao clima, que prefere regiões frias.",
+    "O perfil clássico do Pinot Noir é corpo leve, tanino baixo e acidez alta, com aromas de frutas vermelhas frescas como cereja, morango e framboesa.",
+    "A casca fina passa pouca cor e pouco tanino ao vinho, e por isso o Pinot Noir costuma ser claro e translúcido na taça.",
+    "A Pinot Noir é uma das três uvas principais do Champagne: para o espumante sair branco, o suco é separado das cascas logo na prensagem.",
+    "Tintos leves como o Pinot Noir costumam ir bem levemente refrescados, em torno de 12 a 16 graus, e acompanham pratos delicados como salmão e cogumelos."
+  ],
+  "exercicios": [
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Você levanta duas taças de tinto contra a luz: uma é quase opaca, a outra deixa a luz passar. Qual tem mais chance de ser um Pinot Noir?",
+      "opcoes": [
+        "A translúcida",
+        "A quase opaca",
+        "Cor não diz nada sobre a uva"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. O Pinot Noir se apresenta até na cor.",
+      "erroMsg": "Quase. A casca fina da Pinot Noir passa pouca cor: o vinho nasce claro, de enxergar através.",
+      "porque": "A casca fina da Pinot Noir passa pouca cor: o vinho sai claro e translúcido."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "No nariz, o Pinot Noir costuma lembrar quais frutas?",
+      "opcoes": [
+        "Cereja, morango e framboesa",
+        "Ameixa escura e amora",
+        "Banana e abacaxi"
+      ],
+      "correta": 0,
+      "okMsg": "Exato. Fruta vermelha fresquinha é a assinatura dele.",
+      "erroMsg": "Tudo bem. Guarde assim: o Pinot Noir cheira a cesta de frutas vermelhas frescas.",
+      "porque": "Frutas vermelhas frescas são a assinatura aromática do Pinot Noir."
+    },
+    {
+      "tipo": "swipe",
+      "dificuldade": 2,
+      "instrucao": "Combina com o Pinot Noir? Deslize.",
+      "cartas": [
+        {
+          "texto": "Boca que enche de água depois do gole",
+          "verdade": true,
+          "porque": "Acidez alta é parte central do perfil do Pinot Noir."
+        },
+        {
+          "texto": "Secura forte de chá preto passado do ponto",
+          "verdade": false,
+          "porque": "Tanino baixo é a regra: o Pinot Noir raramente amarra a boca."
+        },
+        {
+          "texto": "Corpo leve, quase de branco",
+          "verdade": true,
+          "porque": "É o tinto que pisa leve, lá no comecinho da escada do corpo."
+        },
+        {
+          "texto": "Casca grossa e cor fechada",
+          "verdade": false,
+          "porque": "A casca da Pinot Noir é fina, e a cor sai clara."
+        },
+        {
+          "texto": "Preferência por climas frios",
+          "verdade": true,
+          "porque": "O frio preserva a acidez e o charme delicado da uva."
+        }
+      ]
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 2,
+      "pergunta": "Por que o Pinot Noir quase não seca a boca?",
+      "opcoes": [
+        "A casca fina da uva passa pouco tanino",
+        "Ele é cheio de açúcar",
+        "Ele é servido quente"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Pouca casca, pouco tanino, boca livre.",
+      "erroMsg": "Quase. Tanino vem da casca, e a da Pinot Noir é fininha: sobra pouco para ressecar.",
+      "porque": "Tanino vem da casca, e a casca da Pinot Noir é fina: pouco tanino, pouca secura."
+    },
+    {
+      "tipo": "slider",
+      "dificuldade": 2,
+      "pergunta": "Na régua da acidez, onde costuma ficar um Pinot Noir?",
+      "labelMin": "acidez baixa",
+      "labelMax": "acidez alta",
+      "alvo": 75,
+      "tolerancia": 15,
+      "porque": "Acidez alta é o frescor que faz o Pinot Noir dar água na boca."
+    },
+    {
+      "tipo": "duasverdades",
+      "dificuldade": 2,
+      "calibrar": true,
+      "tema": "Pinot Noir",
+      "afirmacoes": [
+        "A Pinot Noir é uma das três uvas principais do Champagne",
+        "A uva é cultivada na Borgonha desde a Idade Média",
+        "A Pinot Noir foi criada em laboratório nos anos 1980"
+      ],
+      "mentira": 2,
+      "porque": "A Pinot Noir é uma senhora antiquíssima da Borgonha, e ainda estrela os espumantes mais famosos do mundo."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 3,
+      "pergunta": "Dia quente, e o Pinot Noir está a 24 graus na cozinha. O que fazer antes de servir?",
+      "opcoes": [
+        "Refrescar a garrafa por um tempo: tinto leve gosta de 12 a 16 graus",
+        "Servir assim mesmo, tinto nunca vai à geladeira",
+        "Esquentar mais um pouco"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Meia hora de geladeira e o Pinot agradece.",
+      "erroMsg": "Quase. Tinto leve fica mais gostoso levemente refrescado, em torno de 12 a 16 graus. Geladeira é amiga, sim.",
+      "porque": "Tintos leves como o Pinot Noir costumam brilhar levemente refrescados, entre 12 e 14 graus."
+    },
+    {
+      "tipo": "intruso",
+      "dificuldade": 3,
+      "calibrar": true,
+      "pergunta": "Qual destes NÃO faz parte do retrato do Pinot Noir?",
+      "opcoes": [
+        "Cereja fresca",
+        "Toque verde de pimentão",
+        "Acidez que dá água na boca",
+        "Corpo leve"
+      ],
+      "intruso": 1,
+      "regra": "Fruta vermelha, frescor e leveza desenham o Pinot Noir. O toque de pimentão pertence a uvas como a Carmenère."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 3,
+      "pergunta": "O Champagne é branco e borbulhante. Como a tinta Pinot Noir consegue entrar nessa história?",
+      "opcoes": [
+        "O suco é separado das cascas logo na prensagem, e sai claro",
+        "As uvas são descoloridas com produtos",
+        "O Champagne nunca usa Pinot Noir"
+      ],
+      "correta": 0,
+      "okMsg": "Bonito. Você acabou de aprender um segredo de bastidor do Champagne.",
+      "erroMsg": "Quase. A cor mora na casca: tirando o suco de perto dela bem rápido, até uva tinta dá vinho branco.",
+      "porque": "A cor mora na casca: prensando rápido e separando o suco, até uva tinta dá vinho branco."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Para fechar: alguém pede um tinto levinho e fresco, que não trave a boca. Sua carta na manga é...",
+      "opcoes": [
+        "Pinot Noir",
+        "Tannat",
+        "Cabernet Sauvignon"
+      ],
+      "correta": 0,
+      "okMsg": "Carta certeira. O tinto leve da Borgonha resolve.",
+      "erroMsg": "Respira. Leve, fresco e de tanino baixo é o mapa do Pinot Noir. Os outros dois jogam no time pesado.",
+      "porque": "Corpo leve, tanino baixo e acidez alta formam a assinatura do Pinot Noir."
+    }
+  ],
+  "aplicacao": "Quando o prato for delicado, salmão, cogumelos ou aves, lembre do Pinot Noir levemente refrescado: um tinto que acompanha sem atropelar.",
+  "recap": "Pinot Noir é o tinto de casca fina da Borgonha: claro na taça, leve no corpo, baixo em tanino e alto em frescor.",
+  "voceAgoraSabe": [
+    "Você identifica um provável Pinot Noir só de olhar a taça contra a luz",
+    "Você sabe que tinto leve pode e deve passar um tempo na geladeira antes de servir"
+  ],
+  "curiosidade": "O nome Pinot lembra pinha em francês, e faz sentido: o cacho da Pinot Noir é pequeno e compacto, parecido com uma pinha fechada.",
+  "teaser": "Na última lição da unidade, o gigante do churrasco: o Tannat, tinto de tanino bravo que a costela doma."
+}

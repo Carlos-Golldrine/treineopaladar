@@ -1,0 +1,165 @@
+{
+  "id": "u4-l2",
+  "unidade": "u4",
+  "ordem": 2,
+  "titulo": "Seco, suave e as pegadinhas",
+  "habilidade": "rotulo",
+  "hook": "Seco, meio seco, suave: você já conhece a régua do açúcar. Hoje ela ganha os números da lei e a versão espumante, com as pegadinhas do caminho.",
+  "fichaCanonica": [
+    "Pela legislação brasileira, na Instrução Normativa 14 de 2018 do MAPA, o vinho seco tem até 4 gramas de açúcar por litro, o meio seco entre 4 e 25 gramas, e o suave ou doce passa de 25 gramas por litro.",
+    "Nos espumantes, a régua da doçura tem nomes próprios e cresce nesta ordem: nature, extra-brut, brut, seco, meio seco e doce.",
+    "Brut é o estilo mais comum de espumante e fica no lado seco da régua; um espumante demi-sec, apesar do nome, é claramente adocicado.",
+    "No Brasil, grande parte dos vinhos rotulados como suaves recebe adição de açúcar depois da fermentação, prática prevista na legislação.",
+    "Seco no rótulo fala somente de açúcar: existe vinho seco leve e vinho seco encorpado, barato e caro.",
+    "Aroma de fruta madura pode dar impressão de doçura no nariz, mas doçura de verdade é açúcar residual, que se confirma na boca."
+  ],
+  "exercicios": [
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Na prateleira, um rótulo diz seco e outro diz suave. Qual é a única coisa que essas palavras contam?",
+      "opcoes": [
+        "A quantidade de açúcar no vinho",
+        "A qualidade do vinho",
+        "O peso do vinho na boca"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Seco e suave falam de açúcar, e de mais nada.",
+      "erroMsg": "Quase. Seco e suave medem só o açúcar. Qualidade e corpo são outras réguas.",
+      "porque": "Seco e suave são classificações de açúcar definidas em lei, sem relação com qualidade ou corpo."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Pela lei brasileira, suave no rótulo quer dizer o quê?",
+      "opcoes": [
+        "Mais de 25 gramas de açúcar por litro",
+        "Vinho macio, de pouco tanino",
+        "Vinho leve, com pouco álcool"
+      ],
+      "correta": 0,
+      "okMsg": "Exato. Suave é açúcar declarado, com número de lei.",
+      "erroMsg": "Tudo bem. Suave na lei brasileira é açúcar acima de 25 gramas por litro; maciez e leveza são outras conversas.",
+      "porque": "A legislação brasileira define o suave ou doce como o vinho com mais de 25 gramas de açúcar por litro."
+    },
+    {
+      "tipo": "slider",
+      "dificuldade": 2,
+      "pergunta": "Um espumante brut entra onde na régua da doçura?",
+      "labelMin": "nada doce",
+      "labelMax": "bem doce",
+      "alvo": 15,
+      "tolerancia": 15,
+      "porque": "Brut mora no lado seco da régua dos espumantes, pertinho do nature e do extra-brut."
+    },
+    {
+      "tipo": "ordenar",
+      "dificuldade": 2,
+      "instrucao": "Organize os espumantes do menos doce ao mais doce.",
+      "itens": [
+        "Brut",
+        "Nature",
+        "Demi-sec",
+        "Doce"
+      ],
+      "ordemCorreta": [1, 0, 2, 3],
+      "porque": "A régua dos espumantes cresce assim: nature, extra-brut, brut, seco, meio seco e doce."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 2,
+      "calibrar": true,
+      "pergunta": "Você quer um espumante pouco doce e vê demi-sec no rótulo. Compra?",
+      "opcoes": [
+        "Não, demi-sec em espumante é claramente adocicado",
+        "Sim, demi-sec quer dizer quase seco",
+        "Sim, todo espumante é seco"
+      ],
+      "correta": 0,
+      "okMsg": "Pegadinha desarmada. Demi-sec promete metade e entrega doçura inteira.",
+      "erroMsg": "Essa pegadinha derruba muita gente: demi-sec no espumante fica no lado doce da régua, apesar do nome.",
+      "porque": "Na régua dos espumantes o demi-sec vem depois do seco, já no território adocicado."
+    },
+    {
+      "tipo": "swipe",
+      "dificuldade": 2,
+      "instrucao": "Verdade ou pegadinha de rótulo? Deslize.",
+      "cartas": [
+        {
+          "texto": "Seco quer dizer até 4 gramas de açúcar por litro",
+          "verdade": true,
+          "porque": "É o número da lei brasileira: seco mora coladinho no zero."
+        },
+        {
+          "texto": "Vinho suave é sempre de qualidade inferior",
+          "verdade": false,
+          "porque": "Doçura é estilo, qualidade é outra régua. Gosto se treina, nunca se julga."
+        },
+        {
+          "texto": "No Brasil, muitos suaves recebem açúcar depois da fermentação",
+          "verdade": true,
+          "porque": "A prática é prevista na legislação, e explica boa parte dos suaves da gôndola."
+        },
+        {
+          "texto": "Demi-sec em espumante quer dizer quase sem açúcar",
+          "verdade": false,
+          "porque": "Apesar do nome, o demi-sec é claramente adocicado. O quase sem açúcar é o nature."
+        },
+        {
+          "texto": "Existe vinho seco leve e vinho seco encorpado",
+          "verdade": true,
+          "porque": "Seco fala só de açúcar; o corpo é outra régua, e as duas se combinam livremente."
+        }
+      ]
+    },
+    {
+      "tipo": "duasverdades",
+      "dificuldade": 3,
+      "calibrar": true,
+      "tema": "A régua na gôndola",
+      "afirmacoes": [
+        "Pela lei brasileira, o vinho seco tem até 4 gramas de açúcar por litro",
+        "Nos espumantes, nature é menos doce que brut",
+        "Espumante é sempre seco, espumante doce não existe"
+      ],
+      "mentira": 2,
+      "porque": "Existe espumante pela régua inteira, do nature ao moscatel bem doce; o brut é só o estilo mais comum."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 3,
+      "pergunta": "Presente pra sua tia que adora vinho bem docinho. Qual rótulo acerta?",
+      "opcoes": [
+        "Suave, que por lei passa de 25 gramas de açúcar por litro",
+        "Seco, que tem até 4 gramas",
+        "Espumante nature"
+      ],
+      "correta": 0,
+      "okMsg": "Presente certeiro. Você leu o gosto dela direto no rótulo.",
+      "erroMsg": "Quase. Pra quem ama doçura, o rótulo amigo é o suave: acima de 25 gramas por litro. Seco e nature moram no extremo oposto.",
+      "porque": "O suave é a classificação legal com mais açúcar, e açúcar é exatamente o que esse paladar procura."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Pra fechar: nature, extra-brut e brut moram em qual lado da régua do açúcar?",
+      "opcoes": [
+        "No lado de pouco açúcar",
+        "No lado bem doce",
+        "Fora da régua"
+      ],
+      "correta": 0,
+      "okMsg": "Fechou. A régua dos espumantes agora é sua.",
+      "erroMsg": "Respira: nature, extra-brut e brut são o trio do lado seco. A doçura cresce dali em diante.",
+      "porque": "A régua dos espumantes começa no nature, quase zero açúcar, e cresce até o doce."
+    }
+  ],
+  "aplicacao": "Na próxima compra de espumante, escolha pelo nome da régua: brut pra brindar sem doçura, demi-sec ou moscatel quando a sobremesa chamar.",
+  "recap": "A lei brasileira dá números pra seco, meio seco e suave, os espumantes têm régua própria do nature ao doce, e o demi-sec é a pegadinha que você já desarmou.",
+  "voceAgoraSabe": [
+    "Você lê seco, meio seco e suave com os números da lei: até 4, de 4 a 25 e acima de 25 gramas por litro",
+    "Você ordena a régua dos espumantes do nature ao doce sem cair na pegadinha do demi-sec"
+  ],
+  "curiosidade": "Diz a história que o nome brut nasceu como reclamação: quando o champanhe seco apareceu, no século 19, clientes acostumados ao doce acharam o estilo bruto demais. O apelido pegou e virou padrão mundial.",
+  "teaser": "Na próxima lição, a pergunta de ouro da gôndola: vinho caro é vinho melhor?"
+}

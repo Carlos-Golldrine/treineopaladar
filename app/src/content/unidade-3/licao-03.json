@@ -1,0 +1,179 @@
+{
+  "id": "u3-l3",
+  "unidade": "u3",
+  "ordem": 3,
+  "titulo": "Rosé: a cor que vem da casca",
+  "habilidade": "frutado",
+  "hook": "O rosé carrega um segredo de fabricação e uma fama injusta. Hoje você descobre o primeiro e aposenta a segunda.",
+  "fichaCanonica": [
+    "O rosé é feito de uvas tintas: o suco fica em contato com as cascas por pouco tempo, em geral algumas horas, o suficiente para tingir levemente o vinho.",
+    "Quanto mais tempo de contato com as cascas, mais escura a cor: o espectro do rosé vai do salmão pálido ao rosa profundo.",
+    "Rosé não costuma ser mistura de vinho tinto com branco: na Europa, a prática é proibida para os rosés tranquilos, e a exceção famosa é o Champagne rosé.",
+    "A Provence, no sul da França, é a região símbolo do rosé: a maior parte do vinho produzido lá é rosé, tipicamente seco e de cor clara.",
+    "O perfil clássico do rosé seco é frutado e fresco, com aromas que lembram morango, framboesa e frutas cítricas.",
+    "Qualquer uva tinta pode dar origem a um rosé, de Pinot Noir a Malbec, e existem rosés do leve ao encorpado, do seco ao doce."
+  ],
+  "exercicios": [
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "De onde vem o rosa do rosé?",
+      "opcoes": [
+        "Das cascas de uvas tintas, que tingem o suco por pouco tempo",
+        "De corante de morango",
+        "Da mistura de qualquer tinto com qualquer branco"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. A casca pinta, e o tempo decide o tom.",
+      "erroMsg": "Quase. A cor mora na casca da uva tinta: poucas horas de contato pintam o vinho de rosa.",
+      "porque": "A cor mora na casca da uva tinta: poucas horas de contato bastam para tingir o vinho de rosa."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "No nariz, um rosé seco costuma lembrar o quê?",
+      "opcoes": [
+        "Morango e framboesa frescos",
+        "Café torrado",
+        "Pimentão verde"
+      ],
+      "correta": 0,
+      "okMsg": "Exato. Fruta vermelha fresca é o perfume do rosé.",
+      "erroMsg": "Tudo bem. Guarde assim: rosé cheira a morango e framboesa com um toque cítrico.",
+      "porque": "Frutas vermelhas frescas e um toque cítrico são a assinatura aromática do rosé."
+    },
+    {
+      "tipo": "ordenar",
+      "dificuldade": 2,
+      "instrucao": "Organize pelo tempo de contato com as cascas, do menor para o maior.",
+      "itens": [
+        "Vinho tinto",
+        "Vinho branco",
+        "Rosé bem clarinho",
+        "Rosé de rosa profundo"
+      ],
+      "ordemCorreta": [1, 2, 3, 0],
+      "porque": "Sem casca nasce o branco, horas de casca fazem o rosé, e dias ou semanas de casca constroem o tinto."
+    },
+    {
+      "tipo": "swipe",
+      "dificuldade": 2,
+      "instrucao": "Verdade ou mito sobre o rosé? Deslize.",
+      "cartas": [
+        {
+          "texto": "Rosé é feito de uva tinta",
+          "verdade": true,
+          "porque": "A casca tinta empresta a cor por algumas horas."
+        },
+        {
+          "texto": "Rosé comum é tinto misturado com branco",
+          "verdade": false,
+          "porque": "Na Europa, misturar os dois para fazer rosé tranquilo é proibido. A cor vem da casca."
+        },
+        {
+          "texto": "Todo rosé é doce",
+          "verdade": false,
+          "porque": "Os rosés da Provence, referência mundial, são secos."
+        },
+        {
+          "texto": "A cor clara ou escura depende do tempo de casca",
+          "verdade": true,
+          "porque": "Mais horas de contato, mais cor na taça."
+        },
+        {
+          "texto": "Existe rosé sério, premiado e respeitado",
+          "verdade": true,
+          "porque": "A Provence inteira vive disso, e o mundo brinda junto."
+        }
+      ]
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 2,
+      "pergunta": "Por que o rosé é chamado de coringa da mesa?",
+      "opcoes": [
+        "Ele junta o frescor de um branco com a fruta de um tinto leve",
+        "Porque combina apenas com sobremesa",
+        "Porque é sempre o mais barato"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Um pé em cada mundo, e lugar em quase toda mesa.",
+      "erroMsg": "Quase. O segredo é o meio do caminho: frescor de branco com fruta vermelha de tinto leve.",
+      "porque": "Frescor de branco com fruta de tinto leve: o rosé conversa com muitos pratos ao mesmo tempo."
+    },
+    {
+      "tipo": "slider",
+      "dificuldade": 2,
+      "pergunta": "Um rosé ficou só algumas horinhas com as cascas. Onde a cor dele cai na régua?",
+      "labelMin": "salmão pálido",
+      "labelMax": "rosa profundo",
+      "alvo": 20,
+      "tolerancia": 15,
+      "porque": "Pouco tempo de casca, pouca cor: nasce um rosé clarinho, no estilo da Provence."
+    },
+    {
+      "tipo": "duasverdades",
+      "dificuldade": 2,
+      "calibrar": true,
+      "tema": "A fama do rosé",
+      "afirmacoes": [
+        "Qualquer uva tinta pode virar rosé",
+        "O Champagne rosé pode nascer da mistura de vinho tinto com branco",
+        "Rosé é vinho fraco, feito para quem não gosta de vinho"
+      ],
+      "mentira": 2,
+      "porque": "Vinho não tem hierarquia de cor: o rosé seco da Provence é referência mundial e leva o vinho tão a sério quanto qualquer tinto."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 3,
+      "calibrar": true,
+      "pergunta": "Mesa variada: frango assado, petiscos, salada caprichada e gostos diferentes. Qual garrafa única tende a agradar o conjunto?",
+      "opcoes": [
+        "Um rosé seco e fresco",
+        "Um tinto de tanino bravo",
+        "Um vinho de sobremesa bem doce"
+      ],
+      "correta": 0,
+      "okMsg": "Escolha de anfitrião esperto: o coringa rosa em ação.",
+      "erroMsg": "Quase. Para mesa variada, o rosé seco transita melhor: fresco para a salada, frutado para o frango.",
+      "porque": "O rosé seco tem frescor e fruta na medida para acompanhar pratos variados sem brigar com nenhum."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 3,
+      "pergunta": "Um rosé clarinho da Provence e um rosé escuro de Tannat. O que explica a diferença de cor?",
+      "opcoes": [
+        "O tempo de casca e a uva usada",
+        "A cor da garrafa",
+        "A temperatura de serviço"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Cada uva tem sua força de cor, e cada vinícola escolhe o tempo de casca.",
+      "erroMsg": "Quase. A receita da cor tem dois ingredientes: quanto tempo de casca e qual uva tinta entrou na história.",
+      "porque": "Cada uva tinta tem sua força de cor, e cada vinícola escolhe o tempo de casca: o espectro vai do salmão ao rosa profundo."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Para fechar: alguém na mesa solta que rosé é vinho de mulher e ponto final. Com fatos, você responde que...",
+      "opcoes": [
+        "Gosto não tem gênero, e o rosé seco é levado a sério no mundo todo",
+        "É verdade, melhor trocar de taça",
+        "Rosé nem é vinho de verdade"
+      ],
+      "correta": 0,
+      "okMsg": "Resposta elegante. Mito aposentado com fatos e um brinde.",
+      "erroMsg": "Respira. O rosé é vinho de uva tinta, seco e premiado mundo afora. Gosto se respeita, nunca se rotula.",
+      "porque": "O rosé é vinho de verdade, da uva tinta à taça, e preferência de cor ou estilo é questão de paladar, nunca de gênero."
+    }
+  ],
+  "aplicacao": "Quando a mesa for variada ou o dia pedir leveza com fruta, o rosé seco e gelado é o coringa que raramente erra.",
+  "recap": "Rosé nasce de uva tinta com poucas horas de casca, vai do salmão ao rosa profundo e merece respeito de taça cheia.",
+  "voceAgoraSabe": [
+    "Você explica a cor do rosé em uma frase: casca de uva tinta por pouco tempo",
+    "Você desmonta o mito com fatos: rosé seco é tradição respeitada, e gosto não tem gênero"
+  ],
+  "curiosidade": "A Provence faz vinho desde os gregos antigos, que fundaram Marselha há mais de 2.500 anos. Conta-se que os primeiros vinhos da região eram claros, bem mais próximos de um rosé do que de um tinto.",
+  "teaser": "Na próxima lição, as bolhas entram em cena: de onde elas vêm e por que espumante seco com fritura é casamento perfeito."
+}

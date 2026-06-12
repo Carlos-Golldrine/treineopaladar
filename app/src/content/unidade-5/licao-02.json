@@ -1,0 +1,164 @@
+{
+  "id": "u5-l2",
+  "unidade": "u5",
+  "ordem": 2,
+  "titulo": "Gordura ama tanino",
+  "habilidade": "harmonizacao",
+  "hook": "Aquela secura do tinto que você aprendeu a reconhecer tem uma alma gêmea na cozinha: a gordura. Hoje você entende o churrasco com outros olhos.",
+  "fichaCanonica": [
+    "O tanino se liga às proteínas e às gorduras da comida; ocupado com elas, ele deixa de ressecar a boca e o vinho fica mais macio.",
+    "Carnes vermelhas gordas, como as do churrasco, amaciam tintos tânicos; em troca, o tanino limpa a gordura da boca e prepara o próximo garfo.",
+    "Queijos duros e curados, como o parmesão, costumam acompanhar bem tintos estruturados.",
+    "Tinto muito tânico com peixe delicado tende a dar errado: o tanino pode deixar na boca um gosto metálico e amargo.",
+    "A Tannat, uva emblema do Uruguai, está entre as mais tânicas do mundo, e por isso é parceira clássica da carne na brasa."
+  ],
+  "exercicios": [
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Chá preto forte com um pedaço de queijo: o que acontece com aquela secura na boca?",
+      "opcoes": [
+        "Ela diminui, o queijo amacia o chá",
+        "Ela dobra de tamanho",
+        "Nada muda"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Gordura e proteína ocupam o tanino, e a secura vai embora.",
+      "erroMsg": "Quase. A gordura do queijo se liga ao tanino e a aspereza amansa. É o truque que o churrasco usa com o tinto.",
+      "porque": "O tanino se prende às proteínas e gorduras da comida e para de ressecar a sua boca."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Por que tinto tânico e churrasco se dão tão bem?",
+      "opcoes": [
+        "A gordura amacia o tanino, e o tanino limpa a boca pro próximo garfo",
+        "Porque os dois são vermelhos",
+        "Porque o álcool cozinha a carne"
+      ],
+      "correta": 0,
+      "okMsg": "Exato. É uma troca: cada um deixa o outro melhor.",
+      "erroMsg": "Quase. O segredo é a troca: a carne gorda amansa o vinho, e o vinho limpa a gordura da boca.",
+      "porque": "Gordura ocupa o tanino e o tanino varre a gordura: o casamento funciona nos dois sentidos."
+    },
+    {
+      "tipo": "swipe",
+      "dificuldade": 2,
+      "instrucao": "Esse par funciona? Deslize.",
+      "cartas": [
+        {
+          "texto": "Picanha gorda com um tinto tânico",
+          "verdade": true,
+          "porque": "O clássico dos clássicos: a gordura amansa o tanino e a mesa agradece."
+        },
+        {
+          "texto": "Peixe branco delicado com tinto bem tânico",
+          "verdade": false,
+          "porque": "O tanino pode soltar gosto metálico no peixe, e o peso esmaga o prato."
+        },
+        {
+          "texto": "Parmesão com tinto estruturado",
+          "verdade": true,
+          "porque": "Queijo duro e curado tem proteína e gordura de sobra pra abraçar o tanino."
+        },
+        {
+          "texto": "Tinto tânico de estômago vazio, pra quem o acha áspero",
+          "verdade": false,
+          "porque": "Sem gordura pra ocupar o tanino, a aspereza fica toda na sua gengiva; com comida, ele amansa."
+        },
+        {
+          "texto": "Costela na brasa com Tannat",
+          "verdade": true,
+          "porque": "Uma das uvas mais tânicas do mundo com uma das carnes mais gordas: par de fronteira."
+        }
+      ]
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 2,
+      "pergunta": "Você achou um tinto áspero demais bebendo sozinho. O que tende a salvá-lo no jantar?",
+      "opcoes": [
+        "Um prato com gordura e proteína, tipo carne ou queijo duro",
+        "Uma salada verde com limão",
+        "Uma sobremesa bem doce"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Muito tinto bravo vira manso com o prato certo.",
+      "erroMsg": "Quase. O que doma tanino é gordura e proteína: carne e queijo duro fazem o serviço.",
+      "porque": "Proteínas e gorduras se ligam ao tanino e suavizam a adstringência, deixando o vinho mais macio."
+    },
+    {
+      "tipo": "duasverdades",
+      "dificuldade": 2,
+      "calibrar": true,
+      "tema": "Tanino na mesa",
+      "afirmacoes": [
+        "O tanino se prende às proteínas e gorduras da comida",
+        "A Tannat está entre as uvas mais tânicas do mundo",
+        "Tinto combina com qualquer prato, sempre"
+      ],
+      "mentira": 2,
+      "porque": "Com peixe delicado, o tanino pode soltar gosto metálico: tinto tânico pede prato com gordura à altura."
+    },
+    {
+      "tipo": "intruso",
+      "dificuldade": 2,
+      "pergunta": "Qual destes NÃO é bom par pra um tinto bem tânico?",
+      "opcoes": [
+        "Churrasco gordo",
+        "Queijo parmesão",
+        "Peixe branco no vapor",
+        "Costela assada"
+      ],
+      "intruso": 2,
+      "regra": "Tanino quer gordura e proteína; o peixe delicado fica pra trás e ainda pode puxar gosto metálico."
+    },
+    {
+      "tipo": "slider",
+      "dificuldade": 3,
+      "calibrar": true,
+      "pergunta": "Na régua do tanino, onde joga a Tannat do Uruguai?",
+      "labelMin": "tanino discreto",
+      "labelMax": "topo do mundo",
+      "alvo": 90,
+      "tolerancia": 10,
+      "porque": "A Tannat está entre as uvas mais tânicas que existem; até o nome dela lembra tanino."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 3,
+      "pergunta": "No rodízio, oferecem um tinto leve, de pouco tanino, pra acompanhar costela gorda. O que tende a acontecer?",
+      "opcoes": [
+        "A gordura engole o vinho, que some da mesa",
+        "O par fica perfeito",
+        "O vinho fica mais tânico"
+      ],
+      "correta": 0,
+      "okMsg": "Leitura fina. Faltou músculo pro vinho segurar a costela.",
+      "erroMsg": "Quase. Sem tanino e corpo pra rebater, o vinho leve desaparece atrás da gordura. Peso com peso, lembra?",
+      "porque": "Carne gorda pede tanino e corpo; o vinho leve não tem com que limpar a gordura e se apaga."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Pra fechar: a frase desta lição é...",
+      "opcoes": [
+        "Gordura ama tanino",
+        "Gordura odeia tanino",
+        "Tanino ama açúcar"
+      ],
+      "correta": 0,
+      "okMsg": "Fechou. Esse amor resolve o churrasco da sua vida inteira.",
+      "erroMsg": "Respira: gordura ama tanino. A carne amansa o vinho e o vinho limpa a boca. Amor correspondido.",
+      "porque": "Gordura e proteína amansam o tanino, e o tanino limpa a gordura: cada um melhora o outro."
+    }
+  ],
+  "aplicacao": "No próximo churrasco, leve um tinto de tanino firme sem medo: a picanha vai amansá-lo e ele vai limpar a boca a cada garfada.",
+  "recap": "Gordura e proteína amansam o tanino, o tanino limpa a gordura, e por isso churrasco e tinto firme são o par mais confiável da mesa.",
+  "voceAgoraSabe": [
+    "Você sabe por que churrasco pede tinto tânico: a gordura ocupa o tanino e os dois melhoram",
+    "Você evita a cilada do tinto tânico com peixe delicado, que pode soltar gosto metálico"
+  ],
+  "curiosidade": "No Uruguai, Tannat com parrilla é quase patrimônio nacional: uma das uvas mais tânicas do mundo encontrou no país vizinho a churrasqueira perfeita.",
+  "teaser": "Na próxima lição, o limão da taça: a acidez que corta fritura e refresca a mesa inteira."
+}

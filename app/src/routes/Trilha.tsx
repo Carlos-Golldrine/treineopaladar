@@ -1,11 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { licoesPorId, unidade1Meta } from '../content';
-import { VIDAS_MAX, useProgresso, useWallet } from '../engine';
+import { unidades } from '../content';
+import type { Unidade } from '../content';
+import { PRECOS_LOJA, obterStore, useProgresso, useWallet, VIDAS_MAX } from '../engine';
+import type { ProgressoLicao } from '../engine';
 import { Icon } from '../components/Icon';
 import { Sheet } from '../components/Sheet';
 import { Taca } from '../components/Taca';
 import type { EstadoTaca } from '../components/Taca';
+import { desbloquearUnidade, useDesbloqueios } from '../trilha/desbloqueios';
 import { useFtueFlags } from '../onboarding/flags';
 import { RevelacaoCristais } from '../onboarding/RevelacoesTrilha';
 import { MascoteToast } from '../onboarding/Mascote';
@@ -15,10 +18,17 @@ import fireIcon from '@material-symbols/svg-500/rounded/local_fire_department-fi
 import heartIcon from '@material-symbols/svg-500/rounded/favorite-fill.svg?raw';
 import diamondIcon from '@material-symbols/svg-500/rounded/diamond-fill.svg?raw';
 import crownIcon from '@material-symbols/svg-500/rounded/crown-fill.svg?raw';
+import lockIcon from '@material-symbols/svg-500/rounded/lock-fill.svg?raw';
+import flagIcon from '@material-symbols/svg-500/rounded/flag-fill.svg?raw';
+import wineIcon from '@material-symbols/svg-500/rounded/wine_bar-fill.svg?raw';
+import chevronIcon from '@material-symbols/svg-500/rounded/chevron_right.svg?raw';
 
 import './trilha.css';
 
 type Aba = 'streak' | 'vidas' | 'cristais' | null;
+
+/** Cores de unidade claras (gold) pedem texto escuro sobre o card. */
+const CORES_CLARAS = new Set(['#D4A574', '#B8894A']);
 
 function formatarRegen(ms: number | null): string {
   if (ms === null || ms <= 0) return '0:00:00';
@@ -40,11 +50,49 @@ function useTique(ativo: boolean): number {
   return agora;
 }
 
+interface VistaUnidade {
+  unidade: Unidade;
+  indice: number;
+  concluidas: number;
+  completa: boolean;
+  aberta: boolean;
+  compravel: boolean;
+}
+
+function montarVistas(
+  progresso: Record<string, ProgressoLicao>,
+  desbloqueios: readonly string[],
+): VistaUnidade[] {
+  const vistas: VistaUnidade[] = [];
+  for (let i = 0; i < unidades.length; i++) {
+    const unidade = unidades[i];
+    const concluidas = unidade.licoes.filter(
+      (l) => (progresso[l.id]?.vezesConcluida ?? 0) > 0,
+    ).length;
+    const anterior = vistas[i - 1];
+    const aberta = i === 0 || anterior.completa || desbloqueios.includes(unidade.meta.id);
+    vistas.push({
+      unidade,
+      indice: i,
+      concluidas,
+      completa: concluidas === unidade.licoes.length,
+      aberta,
+      compravel: false,
+    });
+  }
+  /* So a primeira unidade fechada oferece o desbloqueio antecipado */
+  const primeiraFechada = vistas.find((v) => !v.aberta);
+  if (primeiraFechada) primeiraFechada.compravel = true;
+  return vistas;
+}
+
 export default function Trilha() {
   const navigate = useNavigate();
   const { wallet, streakEfetivo, streakEmRisco, proximaVidaEmMs } = useWallet();
-  const { progresso, revisoesVencidas, onboardingCompleto } = useProgresso();
+  const { progresso, revisoesVencidas, checkpoints, onboardingCompleto } = useProgresso();
+  const desbloqueios = useDesbloqueios();
   const [aba, setAba] = useState<Aba>(null);
+  const [unidadeComprando, setUnidadeComprando] = useState<VistaUnidade | null>(null);
   useTique(aba === 'vidas' && proximaVidaEmMs !== null);
 
   /* Revelacao progressiva (FTUE): cristais so entram no HUD apos o
@@ -52,17 +100,34 @@ export default function Trilha() {
   const [ftue, marcarFtue] = useFtueFlags();
   const [recemColetado, setRecemColetado] = useState(false);
 
-  const licoes = unidade1Meta.ordemLicoes
-    .map((id) => licoesPorId[id])
-    .filter((l) => l !== undefined);
-  const concluidas = licoes.filter((l) => (progresso[l.id]?.vezesConcluida ?? 0) > 0).length;
+  const vistas = useMemo(() => montarVistas(progresso, desbloqueios), [progresso, desbloqueios]);
+  const totalConcluidas = vistas.reduce((soma, v) => soma + v.concluidas, 0);
 
-  const mostrarColeta = onboardingCompleto && !ftue.cristaisColetados && concluidas > 0;
+  /* O no "atual" (pill Comecar) e a 1a licao nao concluida da 1a unidade
+     aberta e incompleta; outras unidades abertas tem a 1a pendente livre */
+  const vistaAtual = vistas.find((v) => v.aberta && !v.completa);
+  const idAtual = vistaAtual?.unidade.licoes.find(
+    (l) => (progresso[l.id]?.vezesConcluida ?? 0) === 0,
+  )?.id;
+
+  const mostrarColeta = onboardingCompleto && !ftue.cristaisColetados && totalConcluidas > 0;
   const mostrarLoja =
     onboardingCompleto && !ftue.lojaVista && !mostrarColeta && wallet.vidas === 0;
 
-  /* A primeira licao sem conclusao e a atual; as seguintes ficam bloqueadas */
-  const idxAtual = licoes.findIndex((l) => (progresso[l.id]?.vezesConcluida ?? 0) === 0);
+  /* Quem ja avancou de unidade abre a trilha no proprio no atual */
+  useEffect(() => {
+    if (!vistaAtual || vistaAtual.indice === 0) return;
+    document
+      .querySelector('.trail-item.current')
+      ?.scrollIntoView({ block: 'center', behavior: 'auto' });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const comprarDesbloqueio = (vista: VistaUnidade) => {
+    const ok = obterStore().comprar('desbloqueioUnidade');
+    if (ok) desbloquearUnidade(vista.unidade.meta.id);
+    setUnidadeComprando(null);
+  };
 
   return (
     <>
@@ -98,90 +163,181 @@ export default function Trilha() {
         )}
       </header>
 
-      <section className="unit-card" aria-label="Unidade atual">
-        <p className="unit-eyebrow">Unidade 1</p>
-        <h1 className="unit-title">{unidade1Meta.titulo}</h1>
-        <p className="unit-desc">{unidade1Meta.subtitulo}</p>
-        <div className="unit-progress">
-          <div
-            className="unit-bar"
-            role="progressbar"
-            aria-valuenow={concluidas}
-            aria-valuemin={0}
-            aria-valuemax={licoes.length}
-            aria-label={`${concluidas} de ${licoes.length} lições concluídas`}
-          >
-            <div className="unit-bar-fill" style={{ width: `${(concluidas / licoes.length) * 100}%` }} />
-          </div>
-          <span className="unit-count">
-            {concluidas}/{licoes.length}
+      {totalConcluidas > 0 && (
+        <button
+          type="button"
+          className="pratica-card tap"
+          onClick={() => navigate('/pratica')}
+          aria-label="Abrir a prática livre"
+        >
+          <span className="pratica-selo">
+            <Icon svg={wineIcon} size={22} />
           </span>
-        </div>
-      </section>
+          <span className="pratica-textos">
+            <span className="pratica-titulo">Prática livre</span>
+            <span className="pratica-sub">Rodadas de 8 com rótulos de verdade. Sem gastar vida.</span>
+          </span>
+          <Icon svg={chevronIcon} size={22} className="pratica-seta" />
+        </button>
+      )}
 
-      <ol className="trail" aria-label="Lições da unidade">
-        {licoes.map((licao, i) => {
-          const p = progresso[licao.id];
-          const coroas = p?.coroas ?? 0;
-          const feita = (p?.vezesConcluida ?? 0) > 0;
-          const atual = i === idxAtual;
-          const bloqueada = !feita && !atual;
-          const revisar = revisoesVencidas.includes(licao.id);
+      {vistas.map((vista) => {
+        const { meta, licoes } = vista.unidade;
+        const clara = CORES_CLARAS.has(meta.cor.toUpperCase());
+        const numero = vista.indice + 1;
 
-          const estado: EstadoTaca = bloqueada
-            ? 'bloqueada'
-            : feita
-              ? coroas >= 3
-                ? 'ouro'
-                : 'concluida'
-              : 'disponivel';
-
-          const classe = `trail-item${atual ? ' current' : ''}${feita || atual ? ' reached' : ''}${bloqueada ? ' locked' : ''}`;
-
+        if (!vista.aberta) {
           return (
-            <li className={classe} key={licao.id}>
-              {bloqueada ? (
-                <div className="node node-taca" aria-label={`${licao.titulo}, bloqueada`}>
-                  <Taca estado="bloqueada" />
-                </div>
-              ) : (
+            <section
+              className="unit-locked"
+              key={meta.id}
+              aria-label={`Unidade ${numero}, ${meta.titulo}, bloqueada`}
+            >
+              <span className="unit-locked-selo">
+                <Icon svg={lockIcon} size={18} />
+              </span>
+              <div className="unit-locked-textos">
+                <p className="unit-locked-eyebrow">Unidade {numero}</p>
+                <h2 className="unit-locked-titulo">{meta.titulo}</h2>
+                <p className="unit-locked-sub">
+                  Abre quando a unidade {numero - 1} estiver completa.
+                </p>
+              </div>
+              {vista.compravel && (
                 <button
                   type="button"
-                  className={`node node-taca tap${atual ? ' node-atual' : ''}`}
-                  aria-label={
-                    atual
-                      ? `Começar a lição ${licao.titulo}`
-                      : revisar
-                        ? `Revisar a lição ${licao.titulo}`
-                        : `Treinar de novo a lição ${licao.titulo}`
-                  }
-                  onClick={() => navigate(`/licao/${licao.id}`)}
+                  className="unit-abrir tap"
+                  onClick={() => setUnidadeComprando(vista)}
                 >
-                  {atual && (
-                    <span className="start-pill" aria-hidden="true">
-                      Começar
-                    </span>
-                  )}
-                  {!atual && revisar && (
-                    <span className="start-pill pill-revisar" aria-hidden="true">
-                      Revisar
-                    </span>
-                  )}
-                  <Taca estado={estado} coroas={coroas} />
+                  <Icon svg={diamondIcon} size={16} />
+                  Abrir antes
                 </button>
               )}
-              {feita && (
-                <span className="node-coroas" aria-label={`${coroas} de 3 coroas`}>
-                  {[1, 2, 3].map((n) => (
-                    <Icon key={n} svg={crownIcon} size={13} className={n <= coroas ? 'coroa coroa-ganha' : 'coroa'} />
-                  ))}
-                </span>
-              )}
-              <span className="node-label">{licao.titulo.split(':')[0]}</span>
-            </li>
+            </section>
           );
-        })}
-      </ol>
+        }
+
+        return (
+          <section key={meta.id} aria-label={`Unidade ${numero}: ${meta.titulo}`}>
+            <div
+              className={`unit-card${clara ? ' unit-card-clara' : ''}`}
+              style={{ background: meta.cor }}
+            >
+              <p className="unit-eyebrow">Unidade {numero}</p>
+              <h2 className="unit-title">{meta.titulo}</h2>
+              <p className="unit-desc">{meta.subtitulo}</p>
+              <div className="unit-progress">
+                <div
+                  className="unit-bar"
+                  role="progressbar"
+                  aria-valuenow={vista.concluidas}
+                  aria-valuemin={0}
+                  aria-valuemax={licoes.length}
+                  aria-label={`${vista.concluidas} de ${licoes.length} lições concluídas`}
+                >
+                  <div
+                    className="unit-bar-fill"
+                    style={{ width: `${(vista.concluidas / licoes.length) * 100}%` }}
+                  />
+                </div>
+                <span className="unit-count">
+                  {vista.concluidas}/{licoes.length}
+                </span>
+              </div>
+            </div>
+
+            <ol className="trail" aria-label={`Lições da unidade ${numero}`}>
+              {licoes.map((licao) => {
+                const p = progresso[licao.id];
+                const coroas = p?.coroas ?? 0;
+                const feita = (p?.vezesConcluida ?? 0) > 0;
+                const atual = licao.id === idAtual;
+                const primeiraPendente =
+                  !feita && licoes.find((l) => (progresso[l.id]?.vezesConcluida ?? 0) === 0)?.id === licao.id;
+                const bloqueada = !feita && !primeiraPendente;
+                const revisar = revisoesVencidas.includes(licao.id);
+
+                const estado: EstadoTaca = bloqueada
+                  ? 'bloqueada'
+                  : feita
+                    ? coroas >= 3
+                      ? 'ouro'
+                      : 'concluida'
+                    : 'disponivel';
+
+                const classe = `trail-item${atual ? ' current' : ''}${feita || !bloqueada ? ' reached' : ''}${bloqueada ? ' locked' : ''}`;
+
+                return (
+                  <li className={classe} key={licao.id}>
+                    {bloqueada ? (
+                      <div className="node node-taca" aria-label={`${licao.titulo}, bloqueada`}>
+                        <Taca estado="bloqueada" />
+                      </div>
+                    ) : (
+                      <button
+                        type="button"
+                        className={`node node-taca tap${atual ? ' node-atual' : ''}`}
+                        aria-label={
+                          atual
+                            ? `Começar a lição ${licao.titulo}`
+                            : revisar
+                              ? `Revisar a lição ${licao.titulo}`
+                              : feita
+                                ? `Treinar de novo a lição ${licao.titulo}`
+                                : `Começar a lição ${licao.titulo}`
+                        }
+                        onClick={() => navigate(`/licao/${licao.id}`)}
+                      >
+                        {atual && (
+                          <span className="start-pill" aria-hidden="true">
+                            Começar
+                          </span>
+                        )}
+                        {!atual && revisar && (
+                          <span className="start-pill pill-revisar" aria-hidden="true">
+                            Revisar
+                          </span>
+                        )}
+                        <Taca estado={estado} coroas={coroas} />
+                      </button>
+                    )}
+                    {feita && (
+                      <span className="node-coroas" aria-label={`${coroas} de 3 coroas`}>
+                        {[1, 2, 3].map((n) => (
+                          <Icon
+                            key={n}
+                            svg={crownIcon}
+                            size={13}
+                            className={n <= coroas ? 'coroa coroa-ganha' : 'coroa'}
+                          />
+                        ))}
+                      </span>
+                    )}
+                    <span className="node-label">{licao.titulo.split(':')[0]}</span>
+                  </li>
+                );
+              })}
+              <li
+                className={`trail-item trail-checkpoint${vista.completa ? ' reached' : ''}`}
+                aria-label={
+                  checkpoints.includes(meta.id)
+                    ? `Checkpoint da unidade ${numero} conquistado`
+                    : `Checkpoint da unidade ${numero}: complete as 5 lições e ganhe 50 XP`
+                }
+              >
+                <span
+                  className={`checkpoint-selo${checkpoints.includes(meta.id) ? ' checkpoint-ganho' : ''}`}
+                >
+                  <Icon svg={flagIcon} size={20} />
+                </span>
+                <span className="node-label">
+                  {checkpoints.includes(meta.id) ? 'Checkpoint, 50 XP' : 'Checkpoint'}
+                </span>
+              </li>
+            </ol>
+          </section>
+        );
+      })}
 
       {aba === 'streak' && (
         <Sheet titulo="Sua sequência" onFechar={() => setAba(null)}>
@@ -237,6 +393,38 @@ export default function Trilha() {
             Cristais valem treino. Você ganha estudando e gasta para proteger sua sequência, recuperar vidas e
             abrir novos modos.
           </p>
+        </Sheet>
+      )}
+
+      {unidadeComprando && (
+        <Sheet
+          titulo={`Abrir a Unidade ${unidadeComprando.indice + 1} agora?`}
+          onFechar={() => setUnidadeComprando(null)}
+        >
+          <p className="folha-texto">
+            {unidadeComprando.unidade.meta.titulo} abre de graça quando a unidade anterior estiver
+            completa. Para abrir agora: {PRECOS_LOJA.desbloqueioUnidade} cristais, cerca de uma semana
+            de treino.
+          </p>
+          <p className="folha-numero folha-num-cristais" aria-label={`Você tem ${wallet.cristais} cristais`}>
+            <Icon svg={diamondIcon} size={20} />
+            {wallet.cristais}
+            <span className="folha-saldo-rotulo">seu saldo</span>
+          </p>
+          {wallet.cristais < PRECOS_LOJA.desbloqueioUnidade && (
+            <p className="folha-texto folha-suave">
+              Faltam {PRECOS_LOJA.desbloqueioUnidade - wallet.cristais} cristais. Lições, metas e
+              sequência enchem o cofre.
+            </p>
+          )}
+          <button
+            type="button"
+            className="btn btn-primary btn-cheio tap"
+            disabled={wallet.cristais < PRECOS_LOJA.desbloqueioUnidade}
+            onClick={() => comprarDesbloqueio(unidadeComprando)}
+          >
+            Abrir por {PRECOS_LOJA.desbloqueioUnidade} cristais
+          </button>
         </Sheet>
       )}
 

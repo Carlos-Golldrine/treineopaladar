@@ -176,6 +176,39 @@
   color: var(--wine-900);
 }
 
+/* ---------------- Rotulo real acima da pergunta ---------------- */
+
+.rotulo-figura {
+  display: grid;
+  place-items: center;
+  margin: 0 0 var(--space-4);
+  min-height: 140px;
+  max-height: 40vh;
+  padding: var(--space-3);
+  border-radius: var(--radius-card);
+  /* Excecao consciente ao bg quente: as fotos de rotulo vem compostas
+     sobre branco; o container branco evita a emenda visivel */
+  background: #fff;
+  border: 1px solid var(--neutral-100);
+  overflow: hidden;
+}
+
+.rotulo-figura-skeleton {
+  animation: skeleton-pulse 1.2s ease-out infinite;
+}
+
+.rotulo-img {
+  max-width: min(60%, 220px);
+  max-height: calc(40vh - 2 * var(--space-3));
+  object-fit: contain;
+  opacity: 0;
+}
+
+.rotulo-img-pronta {
+  opacity: 1;
+  transition: opacity 200ms ease-out;
+}
+
 .ex-dica {
   margin-top: var(--space-1);
   font-size: var(--text-xs);
@@ -996,6 +1029,14 @@
 
 .placar-streak .icon {
   color: var(--ember-500);
+}
+
+.placar-checkpoint {
+  color: var(--gold-700);
+}
+
+.placar-checkpoint .icon {
+  color: var(--gold-700);
 }
 
 .placar-rotulo {

@@ -7,6 +7,7 @@
 
 import type {
   Coroas,
+  Dificuldade,
   EstadoV1,
   Habilidade,
   Licao,
@@ -22,13 +23,19 @@ import {
   CRISTAIS_META_DIARIA,
   META_DIARIA_PADRAO,
   PRECOS_LOJA,
+  XP_CHECKPOINT,
+  XP_DESAFIO_DIA,
+  XP_REVISAO,
   ehD0,
+  multiplicadorSoftCap,
 } from './economia';
 import type { ItemLoja } from './economia';
 import { VIDAS_MAX, ganhar, perder, podeIniciar, proximaVidaEmMs, regenerar } from './vidas';
 import { registrarDiaConcluido, streakEfetivo, streakEmRisco } from './streak';
 import { proximaRevisaoTs, revisoesVencidas } from './revisao';
 import {
+  PALADAR_GANHO,
+  PALADAR_MAX,
   aplicarPaladar,
   decairPaladar,
   finalizarSessao,
@@ -63,6 +70,7 @@ function walletInicial(agora: number): Wallet {
     xpHoje: 0,
     dataHoje: dataLocal(agora),
     licoesHoje: 0,
+    praticasHoje: 0,
     criadoEm: agora,
   };
 }
@@ -86,6 +94,8 @@ export function estadoInicial(agora: number): EstadoV1 {
     progresso: {},
     scorePaladar: scoreZerado(),
     scorePaladarTs: tsZerado(agora),
+    checkpoints: [],
+    ultimoDesafioXp: null,
     objetivo: null,
     nivelDeclarado: null,
     onboardingCompleto: false,
@@ -124,6 +134,10 @@ export function migrar(bruto: unknown, agora: number): EstadoV1 {
       ...base.scorePaladarTs,
       ...((dado.scorePaladarTs ?? {}) as Partial<Record<Habilidade, number>>),
     },
+    checkpoints: Array.isArray(dado.checkpoints)
+      ? dado.checkpoints.filter((c): c is string => typeof c === 'string')
+      : [],
+    ultimoDesafioXp: typeof dado.ultimoDesafioXp === 'string' ? dado.ultimoDesafioXp : null,
     objetivo: (dado.objetivo as Objetivo | undefined) ?? null,
     nivelDeclarado: (dado.nivelDeclarado as Nivel | undefined) ?? null,
     onboardingCompleto: dado.onboardingCompleto === true,
@@ -146,6 +160,22 @@ function carregar(storage: StorageLike, agora: number): EstadoV1 {
 export interface SessaoAtiva {
   sessao: Sessao;
   licao: Licao;
+}
+
+/** Resposta de um exercicio do modo pratica (drill do banco da fabrica). */
+export interface RespostaPratica {
+  correto: boolean;
+  dificuldade: Dificuldade;
+  habilidade: Habilidade;
+}
+
+export interface ResultadoPratica {
+  acertos: number;
+  erros: number;
+  /** XP de revisao (10), com soft cap proprio do dia (D0 isento). */
+  xp: number;
+  /** True quando a sessao devolveu 1 vida (regra de revisao do engine). */
+  vidaRecuperada: boolean;
 }
 
 type Ouvinte = () => void;
@@ -234,7 +264,7 @@ export class TPStore {
 
     const hoje = dataLocal(agora);
     if (w.dataHoje !== hoje) {
-      w = { ...w, dataHoje: hoje, xpHoje: 0, licoesHoje: 0 };
+      w = { ...w, dataHoje: hoje, xpHoje: 0, licoesHoje: 0, praticasHoje: 0 };
       mudou = true;
     }
 
@@ -374,6 +404,97 @@ export class TPStore {
     if (!this.sessaoAtiva) return;
     this.sessaoAtiva = null;
     this.notificar();
+  }
+
+  /* --------------- Eventos de XP fora de sessao --------------- */
+
+  /**
+   * Paga o checkpoint da unidade (XP 50), uma unica vez por unidade.
+   * Chamar quando a ultima licao da unidade for concluida.
+   * Retorna o XP pago, ou null se este checkpoint ja foi pago.
+   */
+  concluirCheckpoint(unidadeId: string): number | null {
+    this.sincronizar();
+    if (this.estado.checkpoints.includes(unidadeId)) return null;
+    const wallet = this.aplicarXpAvulso(this.estado.wallet, XP_CHECKPOINT);
+    this.commit({
+      ...this.estado,
+      wallet,
+      checkpoints: [...this.estado.checkpoints, unidadeId],
+    });
+    return XP_CHECKPOINT;
+  }
+
+  /**
+   * Paga o XP do Desafio do Dia (30), uma unica vez por dia.
+   * `dia` e a data oficial do desafio (YYYY-MM-DD em America/Sao_Paulo).
+   * Retorna o XP pago, ou null se o desafio de hoje ja foi premiado.
+   */
+  concluirDesafioDia(dia: string): number | null {
+    this.sincronizar();
+    if (this.estado.ultimoDesafioXp === dia) return null;
+    const wallet = this.aplicarXpAvulso(this.estado.wallet, XP_DESAFIO_DIA);
+    this.commit({ ...this.estado, wallet, ultimoDesafioXp: dia });
+    return XP_DESAFIO_DIA;
+  }
+
+  /**
+   * Conclui uma sessao do modo pratica (drill do banco da fabrica):
+   * XP de revisao (10) com soft cap proprio por sessoes de pratica do dia
+   * (D0 isento), +1 vida (regra de revisao), streak do dia e Score de
+   * Paladar por habilidade de cada acerto. Nunca exige vidas.
+   */
+  concluirPratica(respostas: readonly RespostaPratica[]): ResultadoPratica {
+    this.sincronizar();
+    const agora = this.agora();
+    let w = this.estado.wallet;
+
+    const mult = ehD0(w.criadoEm, agora) ? 1 : multiplicadorSoftCap(w.praticasHoje);
+    const xp = Math.round(XP_REVISAO * mult);
+    w = this.aplicarXpAvulso(w, xp);
+    w = { ...w, praticasHoje: w.praticasHoje + 1 };
+
+    /* Streak: pratica tambem garante o dia (e revisao) */
+    const s = registrarDiaConcluido(w, agora);
+    w = { ...w, streak: s.streak, bestStreak: s.bestStreak, freezes: s.freezes, lastDone: s.lastDone };
+
+    /* Concluir sessao de revisao recupera 1 vida */
+    const antes = w.vidas;
+    const r = ganhar({ vidas: w.vidas, vidasTs: w.vidasTs }, 1, agora);
+    w = { ...w, vidas: r.vidas, vidasTs: r.vidasTs };
+
+    /* Score de Paladar: decai lazy e soma acerto a acerto, por habilidade */
+    const scorePaladar = { ...this.estado.scorePaladar };
+    const scorePaladarTs = { ...this.estado.scorePaladarTs };
+    for (const resposta of respostas) {
+      if (!resposta.correto) continue;
+      const h = resposta.habilidade;
+      const decaido = decairPaladar(scorePaladar[h], scorePaladarTs[h], agora);
+      scorePaladar[h] = Math.min(
+        PALADAR_MAX,
+        decaido + (PALADAR_MAX - decaido) * PALADAR_GANHO * resposta.dificuldade,
+      );
+      scorePaladarTs[h] = agora;
+    }
+
+    this.commit({ ...this.estado, wallet: w, scorePaladar, scorePaladarTs });
+    const acertos = respostas.filter((resposta) => resposta.correto).length;
+    return {
+      acertos,
+      erros: respostas.length - acertos,
+      xp,
+      vidaRecuperada: w.vidas > antes,
+    };
+  }
+
+  /** Aplica XP no placar e no dia, pagando +10 cristais ao cruzar a meta. */
+  private aplicarXpAvulso(w: Wallet, xp: number): Wallet {
+    const xpHoje = w.xpHoje + xp;
+    let cristais = w.cristais;
+    if (w.xpHoje < w.metaDiaria && xpHoje >= w.metaDiaria) {
+      cristais += CRISTAIS_META_DIARIA;
+    }
+    return { ...w, xpTotal: w.xpTotal + xp, xpHoje, cristais };
   }
 
   /* -------------------------- Loja ---------------------------- */

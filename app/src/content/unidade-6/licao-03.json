@@ -1,0 +1,165 @@
+{
+  "id": "u6-l3",
+  "unidade": "u6",
+  "ordem": 3,
+  "titulo": "Vale do São Francisco: vinho de sol",
+  "habilidade": "corpo",
+  "hook": "No sertão entre Pernambuco e Bahia, a videira esqueceu o que é inverno. Terceira parada: o vinho tropical que o mundo veio conhecer de perto.",
+  "fichaCanonica": [
+    "O Vale do São Francisco fica no sertão semiárido, entre Pernambuco e Bahia, a cerca de 9 graus do Equador: uma das regiões vinícolas mais próximas da linha do Equador no mundo.",
+    "Lá não existe inverno para a videira: com irrigação do rio São Francisco e poda programada, a planta pode dar duas safras por ano, e há colheita o ano inteiro na região.",
+    "O sol intenso amadurece muito a uva: os tintos do Vale tendem a ser encorpados, de fruta madura e acidez mais baixa.",
+    "A Syrah é uma das uvas tintas que melhor se adaptou ao Vale do São Francisco.",
+    "O Vale também é forte em espumante moscatel, doce e leve."
+  ],
+  "exercicios": [
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Manga criada no sol forte do sertão: como ela costuma chegar na sua mão?",
+      "opcoes": [
+        "Bem madura e doce",
+        "Verde e azeda",
+        "Sem sabor nenhum"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Sol forte carrega a fruta de açúcar e maturação.",
+      "erroMsg": "Quase. Sol de sertão entrega fruta madura e doce, e com a uva acontece o mesmo. Isso desenha o vinho de lá.",
+      "porque": "O sol intenso amadurece a fruta por inteiro, e a uva do Vale segue essa mesma lógica."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Vinho no sertão semiárido, entre Pernambuco e Bahia: o que torna isso possível?",
+      "opcoes": [
+        "A irrigação com a água do rio São Francisco",
+        "A neve da serra",
+        "Estufas refrigeradas gigantes"
+      ],
+      "correta": 0,
+      "okMsg": "Exato. O Velho Chico rega as parreiras do sertão.",
+      "erroMsg": "Quase. O segredo é o rio: a irrigação do São Francisco transforma o semiárido em vinhedo.",
+      "porque": "A água do rio São Francisco irriga as videiras e viabiliza a viticultura no semiárido."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 2,
+      "pergunta": "O que a videira do Vale faz que quase nenhuma outra no mundo consegue?",
+      "opcoes": [
+        "Dar duas safras por ano, sem inverno pra interromper",
+        "Produzir uva azul",
+        "Crescer sem água"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. A planta não tira férias no sertão.",
+      "erroMsg": "Quase. Sem inverno e com poda programada, a videira não para: são duas safras por ano.",
+      "porque": "Sem inverno e com poda programada, a planta produz duas vezes por ano, e há colheita o ano inteiro no Vale."
+    },
+    {
+      "tipo": "slider",
+      "dificuldade": 2,
+      "calibrar": true,
+      "pergunta": "Na régua do corpo, onde costuma jogar um tinto do Vale do São Francisco?",
+      "labelMin": "leve",
+      "labelMax": "encorpado",
+      "alvo": 80,
+      "tolerancia": 15,
+      "porque": "Sol intenso enche a uva de maturação: o tinto sai encorpado e de fruta madura."
+    },
+    {
+      "tipo": "swipe",
+      "dificuldade": 2,
+      "instrucao": "Vale do São Francisco: verdade ou mito? Deslize.",
+      "cartas": [
+        {
+          "texto": "É uma das regiões vinícolas mais próximas do Equador no mundo",
+          "verdade": true,
+          "porque": "Fica a cerca de 9 graus de latitude sul, em pleno trópico."
+        },
+        {
+          "texto": "A Syrah se adaptou bem por lá",
+          "verdade": true,
+          "porque": "A uva gosta de calor e virou destaque tinto do Vale."
+        },
+        {
+          "texto": "Vinho só nasce em clima frio",
+          "verdade": false,
+          "porque": "O Vale prova o contrário há décadas: viticultura tropical com sol e irrigação."
+        },
+        {
+          "texto": "O Vale faz espumante moscatel doce e leve",
+          "verdade": true,
+          "porque": "O moscatel do sertão é uma das caras da região."
+        },
+        {
+          "texto": "No Vale, a colheita acontece só em março",
+          "verdade": false,
+          "porque": "Com poda programada, há colheita o ano inteiro na região."
+        }
+      ]
+    },
+    {
+      "tipo": "duasverdades",
+      "dificuldade": 2,
+      "tema": "Vinho de sol",
+      "afirmacoes": [
+        "Os tintos do Vale tendem à fruta madura e à acidez mais baixa",
+        "Não existe inverno pra videira no Vale",
+        "Quanto mais sol, mais ácido o vinho fica"
+      ],
+      "mentira": 2,
+      "porque": "É o contrário: o calor consome o ácido da uva enquanto ela amadurece; sol alto, acidez mais baixa e corpo cheio."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 3,
+      "calibrar": true,
+      "pergunta": "Prova às cegas: tinto encorpado, fruta bem madura, acidez baixa. Entre Serra Gaúcha e Vale do São Francisco, qual palpite tem mais chance?",
+      "opcoes": [
+        "Vale do São Francisco, o vinho de sol",
+        "Serra Gaúcha, a terra do espumante",
+        "Impossível ter qualquer pista"
+      ],
+      "correta": 0,
+      "okMsg": "Palpite de provador. Você leu o clima dentro da taça.",
+      "erroMsg": "Quase. Corpo cheio, fruta madura e pouca acidez são a assinatura do sol; a Serra fala mais em frescor e bolha.",
+      "porque": "O sol intenso do sertão desenha exatamente esse perfil de tinto, o oposto do frescor da serra."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 2,
+      "pergunta": "Qual uva tinta virou destaque do Vale?",
+      "opcoes": [
+        "Syrah",
+        "Pinot Noir",
+        "Riesling"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. A Syrah abraçou o calor do sertão.",
+      "erroMsg": "Quase. A Syrah é a tinta que se adaptou ao Vale; Pinot Noir prefere frio, e Riesling nem é tinta.",
+      "porque": "A Syrah gosta de calor e se firmou como a tinta de referência do Vale do São Francisco."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Pra fechar: o vinho do sertão é filho de quem?",
+      "opcoes": [
+        "Do sol forte e do rio São Francisco",
+        "Da neblina e do frio",
+        "Do mar"
+      ],
+      "correta": 0,
+      "okMsg": "Fechou. Sol na uva, rio na raiz: esse é o vinho do sertão.",
+      "erroMsg": "Respira: sol pra amadurecer e rio pra irrigar. É essa dupla que faz o vinho tropical brasileiro.",
+      "porque": "O sol intenso dá corpo e fruta madura, e a irrigação do rio viabiliza a videira no semiárido."
+    }
+  ],
+  "aplicacao": "Quando vir um Syrah do Vale do São Francisco na gôndola, você já sabe o que esperar: corpo, fruta madura e sol na taça.",
+  "recap": "O Vale do São Francisco faz vinho tropical a 9 graus do Equador: sol intenso e irrigação do rio dão tintos encorpados de fruta madura e duas safras por ano.",
+  "voceAgoraSabe": [
+    "Você sabe por que o sertão produz vinho: sol pra maturação e rio pra irrigação",
+    "Você reconhece o perfil do vinho de sol: encorpado, fruta madura, acidez mais baixa"
+  ],
+  "curiosidade": "Em boa parte do mundo, a vinícola colhe uma vez por ano e descansa. No Vale do São Francisco dá pra agendar a colheita pro mês que se quiser: é só programar a poda. Tem visitante vendo vindima em pleno julho.",
+  "teaser": "Agora a viagem cruza a fronteira: Argentina, o gigante da altitude, bem além do Malbec."
+}

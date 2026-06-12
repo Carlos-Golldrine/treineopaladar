@@ -43,6 +43,34 @@ const SEED_COLETA = {
   flags: JSON.stringify({ cristaisColetados: false, lojaVista: true }),
 };
 
+/* Meio da jornada: Unidade 1 completa (checkpoint pago), Unidade 2 aberta */
+const progressoFeito = {};
+for (const id of ['u1-l1', 'u1-l2', 'u1-l3', 'u1-l4', 'u1-l5']) {
+  progressoFeito[id] = {
+    coroas: 2,
+    vezesConcluida: 2,
+    ultimaConclusao: Date.now(),
+    proximaRevisao: null,
+    errosPendentes: [],
+  };
+}
+const SEED_PROGRESSO = {
+  estado: JSON.stringify({
+    versao: 1,
+    onboardingCompleto: true,
+    progresso: progressoFeito,
+    checkpoints: ['u1'],
+    wallet: { cristais: 230, xpTotal: 320, streak: 4, bestStreak: 4 },
+  }),
+  flags: JSON.stringify({ cristaisColetados: true, lojaVista: true }),
+};
+
+/* Desafio do Dia ja jogado hoje (o dia oficial e calculado na pagina) */
+const SEED_DESAFIO_FEITO = {
+  ...SEED_PROGRESSO,
+  desafioHoje: { acertos: 3, grade: '■■□■' },
+};
+
 const grupos = [
   {
     seed: null,
@@ -60,7 +88,7 @@ const grupos = [
     seed: SEED_APP,
     routes: [
       ['trilha', '/'],
-      ['desafio', '/desafio'],
+      ['desafio-aberto', '/desafio'],
       ['mesa', '/mesa'],
       ['perfil', '/perfil'],
       // Player de licao: cenas demo por tipo de exercicio + feedback de erro + conclusao
@@ -72,11 +100,30 @@ const grupos = [
       ['licao-intruso', '/licao/u1-l1?cena=intruso'],
       ['licao-duasverdades', '/licao/u1-l1?cena=duasverdades'],
       ['licao-conclusao', '/licao/u1-l1?cena=conclusao'],
+      // Conteudo novo das unidades 2-6 no player real de demo
+      ['licao-u2-mc', '/licao/u2-l1?cena=mc'],
+      ['licao-u6-mc', '/licao/u6-l3?cena=mc'],
     ],
   },
   {
     seed: SEED_COLETA,
     routes: [['trilha-coleta', '/']],
+  },
+  {
+    seed: SEED_PROGRESSO,
+    routes: [
+      // Trilha com 6 unidades: checkpoint pago, unidade 2 aberta, 3+ bloqueadas
+      ['trilha-progresso', '/'],
+      ['trilha-progresso-full', '/', { fullPage: true }],
+      // Pratica livre: convite e rodada deterministica
+      ['pratica', '/pratica'],
+      ['pratica-jogo', '/pratica?cena=jogo'],
+      ['pratica-rotulo', '/pratica?cena=rotulo'],
+    ],
+  },
+  {
+    seed: SEED_DESAFIO_FEITO,
+    routes: [['desafio-resultado', '/desafio']],
   },
 ];
 
@@ -107,6 +154,16 @@ for (const vp of viewports) {
         try {
           localStorage.setItem('tp.v1', seed.estado);
           localStorage.setItem('tp.ftue.v1', seed.flags);
+          if (seed.desafioHoje) {
+            // O dia oficial (America/Sao_Paulo) e calculado aqui, na pagina
+            const dia = new Intl.DateTimeFormat('en-CA', {
+              timeZone: 'America/Sao_Paulo',
+              year: 'numeric',
+              month: '2-digit',
+              day: '2-digit',
+            }).format(Date.now());
+            localStorage.setItem('tp.desafio.v1', JSON.stringify({ data: dia, ...seed.desafioHoje }));
+          }
         } catch {
           /* sem localStorage */
         }
@@ -121,13 +178,13 @@ for (const vp of viewports) {
       });
     }
     const page = await ctx.newPage();
-    for (const [name, route] of grupo.routes) {
+    for (const [name, route, opcoes] of grupo.routes) {
       await page
         .goto(`http://localhost:${PORT}${route}`, { waitUntil: 'networkidle' })
         .catch(() => {});
       await page.waitForTimeout(900);
       const file = path.join(shotsDir, `${name}-${vp.width}x${vp.height}.png`);
-      await page.screenshot({ path: file });
+      await page.screenshot({ path: file, fullPage: opcoes?.fullPage === true });
       console.log('shot', path.basename(file));
     }
     await ctx.close();

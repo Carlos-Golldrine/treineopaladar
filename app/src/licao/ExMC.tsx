@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { ExercicioMC } from '../engine';
 import type { FaseExercicio, ResolucaoExercicio } from './tipos';
+import { RotuloFigura } from './RotuloFigura';
 
 interface Props {
   ex: ExercicioMC;
@@ -24,6 +25,7 @@ export function ExMC({ ex, fase, onResolver, presetErro }: Props) {
 
   return (
     <div className="ex">
+      {ex.imagem && <RotuloFigura src={ex.imagem} />}
       <h2 className="ex-pergunta">{ex.pergunta}</h2>
       <div className="ex-opcoes" role="group" aria-label="Opções de resposta">
         {ex.opcoes.map((opcao, i) => {

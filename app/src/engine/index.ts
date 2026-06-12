@@ -104,7 +104,13 @@ export {
   obterStore,
   resetarStorePadrao,
 } from './store';
-export type { OpcoesStore, SessaoAtiva, StorageLike } from './store';
+export type {
+  OpcoesStore,
+  RespostaPratica,
+  ResultadoPratica,
+  SessaoAtiva,
+  StorageLike,
+} from './store';
 
 /* Hooks React finos */
 export { useProgresso, useSessao, useWallet } from './hooks';

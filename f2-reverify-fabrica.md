@@ -1,0 +1,23 @@
+﻿RE-AUDITORIA INDEPENDENTE — fabrica corrigida (verificada do zero contra `data\vinhos_clean.csv`, sem confiar no relatorio do corretor)
+
+| # | Checagem | Numeros apurados | Status |
+|---|---|---|---|
+| 1 | Banco: contagem / schema / ids | 480/480 exercicios; 480 ids unicos (0 dup); 0 violacoes de schema vs `types.ts` (campos, tipos, indices em range, dificuldade 1-3, opcoes unicas, habilidades validas, paths `/rotulos/*.webp`); meta interna == recontagem; 480/480 vinhoId (e vinhoIdB) existem no CSV e estao na view_estrita | PASS |
+| 2 | Balanceamento | Habilidade: rotulo 162 (33,8%), harmonizacao 78 (16,2%), acidez 69 (14,4%), frutado 59 (12,3%), tanino 42 (8,8%), docura 36 (7,5%), corpo 34 (7,1%) — max 33,8% <= 40%. Template: qual-uva 90, de-onde-vem 90, mais-encorpado 90 (18,8% cada), harmoniza 78, rotulo 72, intruso-uva 60. Dificuldade: 1=186 (38,8%), 2=186 (38,8%), 3=108 (22,5%) | PASS |
+| 3 | Amostra dura 30 (seed 99) | 30/30 respostas corretas batem com o CSV (uva, pais, regiao, tipo, 5D dos pares mais-encorpado, harmonizacao); 0 distratores acidentalmente corretos; fui alem e conferi TODOS os 480: 90/90 mais-encorpado com valor maior na correta, 252/252 qual-uva/de-onde-vem/rotulo, 60/60 intruso-uva com cores de uva consistentes. POREM 1 exercicio da amostra tem leak de docura (abaixo) | FAIL (so pelo leak) |
+| 3b | Anti-vazamento (varredura exaustiva) | regiao-que-denuncia-pais em pergunta de pais: 0/66 (correcao funcionou; ids antigos `de-onde-vem-40c3db1106`/`4dd7db2d14` sumiram). Regiao no nome em pergunta de regiao: 0/24. MAS: 1 leak duro de uva — `qual-uva-0abfb0ab73` pergunta a uva do "Luis Pato Espumante **Baga** Rosado" (resposta: Baga, escrita no enunciado). E 7/36 docura com estilo doce no nome, SEMPRE na opcao correta: Beerenauslese (x2: `29d22db083`, `36834dce2d`), Eiswein (`4f65e808cd`), Passito (`5add36e9a0` — esta caiu na amostra seed 99), Recioto (`a05426a30b`), Vin Santo (`11511403a0`), Maury (`61629da8f0`). Pelo padrao do proprio corretor (que removeu malmsey/bual/rich), sao leaks — a alegacao "0 leaks de docura, re-conferido com lista independente" esta REFUTADA | FAIL |
+| 4 | cooler/sangria/coquetel | 0 ocorrencias nas 12.597 linhas do clean, 0 nas 10.717 da view_estrita, 0 no banco-pratica.json, 0 no desafios.json | PASS |
+| 5 | Imagens | 112 referenciadas (banco+desafios) = 112 em disco em `app\public\rotulos\`; 0 quebradas, 0 orfas, 0 com 0 bytes, 100% webp; peso total 0,79 MB | PASS |
+| 6 | Desafios | 40 desafios x 4 perguntas = 160; 40/40 vinhoId validos, na view_estrita e com imagem existente; respostas tipo/pais/uva/harmonizacao conferem com o CSV; bloco `vinho` consistente; 0 distratores corretos. Ressalva: `desafio-39` p2 marca "Tempranillo" enquanto a ficha e o proprio card `vinho` exibem "Aragonez" (mesma uva, mas inconsistente na mesma tela) | PASS c/ ressalva |
+| 7 | Copy | 0 travessao (em e en dash), 0 emoji nos 640 itens. POREM 5 itens com artefato "( )" deixado pela limpeza de "(375ml)" do nome: `de-onde-vem-060d6117d9` (no proprio enunciado: "Sophenia Altosur Malbec ( )?"), `mais-encorpado-docura-36834dce2d`, `-5add36e9a0`, `-7c87ee4fa5`, `mais-encorpado-corpo-16b84c213c` | PASS na letra, com defeito de copy |
+
+VEREDITO: **REPROVADO** (reprovacao pontual; estrutura, balanceamento, CSV, imagens e desafios estao solidos e os numeros do corretor conferem — mas a alegacao central de "0 leaks de docura" e falsa e ha sujeira de copy).
+
+Lista objetiva do que corrigir em `scripts\fabrica_questoes.py` e regenerar:
+1. LEAK_DOCURA incompleto: adicionar estilos que denunciam doce no nome (eiswein/icewine, beerenauslese, trockenbeerenauslese, passito, recioto, vin santo, maury, banyuls) — 7 exercicios afetados (ids acima), todos com o termo na resposta correta.
+2. Leak de uva no enunciado: `qual-uva-0abfb0ab73` ("Baga" no nome do vinho da pergunta) — o filtro de uva-no-nome nao cobre este caso.
+3. Limpeza de nome deixa "( )" ao remover volume entre parenteses — corrigir regex e regenerar; 5 itens afetados (1 com artefato dentro da pergunta).
+4. Menor: `harmoniza-02e97bd4c7` afirma "A ficha deste rotulo sugere sobremesa de chocolate" mas a ficha diz "Sobremesas a base de frutas" (atribuicao inventada; viola "IA nunca inventa fato"). Os outros casos de chocolate (Portos/Madeiras com ficha generica "Sobremesas") sao defensaveis.
+5. Menor: `desafio-39` — alinhar "Tempranillo" vs "Aragonez" entre pergunta e card do vinho.
+
+Observacao (nao e defeito): 4 respostas exibem sinonimo da uva do CSV (Primitivo/Zinfandel, Carignan/Carinena, Pinot Grigio/pinot gris, Sangiovese/Sangiovese Grosso) — factualmente corretas e sem colisao com distratores (0 colisoes de sinonimo em todo o banco e desafios).

@@ -1,0 +1,165 @@
+{
+  "id": "u2-l1",
+  "unidade": "u2",
+  "ordem": 1,
+  "titulo": "Cabernet Sauvignon: o clássico estruturado",
+  "habilidade": "tanino",
+  "hook": "Tem um tinto que aparece em quase toda carta de vinhos do planeta. Hoje você aperta a mão dele.",
+  "fichaCanonica": [
+    "A Cabernet Sauvignon nasceu na região de Bordeaux, na França, de um cruzamento natural entre a tinta Cabernet Franc e a branca Sauvignon Blanc, confirmado por testes de DNA na década de 1990.",
+    "A Cabernet Sauvignon é apontada como a uva de vinho mais plantada do mundo, presente em quase todos os países produtores.",
+    "Suas bagas são pequenas e de casca grossa, o que tende a gerar vinhos de cor intensa e tanino alto.",
+    "O perfil clássico do Cabernet Sauvignon é encorpado e de tanino firme, com aromas de frutas escuras como a ameixa e o cassis, também chamado de groselha-preta, podendo trazer um toque verde que lembra pimentão.",
+    "Muitos Cabernet Sauvignon passam por barril de carvalho, que costuma somar notas de baunilha, cedro e especiarias.",
+    "O tanino firme do Cabernet Sauvignon se liga às proteínas e gorduras da carne vermelha, e por isso a uva é parceira clássica de carnes como bife e cordeiro."
+  ],
+  "exercicios": [
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Primeiro gole de um Cabernet Sauvignon clássico. Pelo que você já sabe dos tintos firmes, o que a boca tende a sentir?",
+      "opcoes": [
+        "Uma secura que lembra chá preto forte",
+        "Uma doçura de mel",
+        "Bolhas como as de refrigerante"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. O Cabernet é o território do tanino firme.",
+      "erroMsg": "Quase. Cabernet é tinto de tanino alto: a boca seca, igual no chá preto carregado.",
+      "porque": "O Cabernet Sauvignon é um tinto de tanino alto, e tanino seca a boca."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Qual aroma costuma chegar primeiro num Cabernet Sauvignon?",
+      "opcoes": [
+        "Frutas escuras, como ameixa e amora",
+        "Maracujá fresquinho",
+        "Pipoca amanteigada"
+      ],
+      "correta": 0,
+      "okMsg": "Exato. Fruta escura é a assinatura da casa.",
+      "erroMsg": "Tudo bem. Guarde assim: Cabernet cheira a fruta escura, com a ameixa na frente.",
+      "porque": "Ameixa e frutas escuras como o cassis são os aromas clássicos do Cabernet Sauvignon."
+    },
+    {
+      "tipo": "swipe",
+      "dificuldade": 2,
+      "instrucao": "Verdade ou mito sobre o Cabernet? Deslize.",
+      "cartas": [
+        {
+          "texto": "O Cabernet Sauvignon nasceu em Bordeaux, na França",
+          "verdade": true,
+          "porque": "Bordeaux é o berço da uva, que de lá ganhou o mundo."
+        },
+        {
+          "texto": "A casca grossa da uva dá tanino firme ao vinho",
+          "verdade": true,
+          "porque": "Casca grossa significa mais tanino e mais cor na taça."
+        },
+        {
+          "texto": "Cabernet Sauvignon costuma ser leve como água",
+          "verdade": false,
+          "porque": "O perfil clássico é o oposto: encorpado, com presença na boca."
+        },
+        {
+          "texto": "Barril de carvalho pode somar baunilha e cedro ao Cabernet",
+          "verdade": true,
+          "porque": "A madeira empresta esses aromas enquanto o vinho descansa nela."
+        },
+        {
+          "texto": "Cabernet Sauvignon é uma uva branca",
+          "verdade": false,
+          "porque": "É tinta, e das mais famosas. A branca da história é a mãe dela, a Sauvignon Blanc."
+        }
+      ]
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 2,
+      "pergunta": "Por que o Cabernet tem tanino tão presente?",
+      "opcoes": [
+        "As bagas são pequenas e de casca grossa, e casca é fonte de tanino",
+        "O vinho recebe tanino em pó na fábrica",
+        "As uvas são colhidas verdes de propósito"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Muita casca para pouco suco: nasce um tinto firme.",
+      "erroMsg": "Quase. O segredo está na uva: baga pequena de casca grossa entrega tanino de sobra.",
+      "porque": "Bagas pequenas de casca grossa entregam mais tanino e mais cor ao vinho."
+    },
+    {
+      "tipo": "slider",
+      "dificuldade": 2,
+      "pergunta": "Na régua do tanino, onde costuma ficar um Cabernet Sauvignon clássico?",
+      "labelMin": "tanino baixo",
+      "labelMax": "tanino alto",
+      "alvo": 85,
+      "tolerancia": 15,
+      "porque": "Cabernet é referência de tanino alto: firme, presente, daquele que seca a boca."
+    },
+    {
+      "tipo": "duasverdades",
+      "dificuldade": 2,
+      "calibrar": true,
+      "tema": "Cabernet Sauvignon",
+      "afirmacoes": [
+        "A Cabernet Sauvignon nasceu do cruzamento natural de Cabernet Franc com Sauvignon Blanc",
+        "Ela é apontada como a uva de vinho mais plantada do mundo",
+        "Ela é uma uva rara, cultivada somente na França"
+      ],
+      "mentira": 2,
+      "porque": "Raridade é o oposto do Cabernet: testes de DNA revelaram os pais franceses, e hoje a uva cresce em quase todo país produtor."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 3,
+      "calibrar": true,
+      "pergunta": "Um Cabernet descansou anos em barril de carvalho. Que aromas a madeira tende a somar?",
+      "opcoes": [
+        "Baunilha, cedro e especiarias",
+        "Maracujá e abacaxi",
+        "Sal e azeitona"
+      ],
+      "correta": 0,
+      "okMsg": "Bonito. Você já lê o vinho e o barril dele.",
+      "erroMsg": "Quase. O carvalho tem perfume próprio: baunilha, cedro e especiarias entram na taça com o tempo.",
+      "porque": "O carvalho empresta baunilha, cedro e especiarias ao vinho durante o descanso."
+    },
+    {
+      "tipo": "intruso",
+      "dificuldade": 3,
+      "pergunta": "Qual destes NÃO costuma aparecer num Cabernet Sauvignon?",
+      "opcoes": [
+        "Cassis, a groselha-preta",
+        "Banana madura",
+        "Ameixa escura",
+        "Toque verde de pimentão"
+      ],
+      "intruso": 1,
+      "regra": "Fruta escura e um toque verde de pimentão fazem parte do mapa do Cabernet. Banana madura mora em outras taças."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Para fechar: o jantar é um bife suculento. Por que o Cabernet costuma brilhar ao lado dele?",
+      "opcoes": [
+        "A gordura e a proteína da carne abraçam o tanino e o vinho fica macio",
+        "O vinho esquenta a carne",
+        "A carne deixa o vinho mais doce"
+      ],
+      "correta": 0,
+      "okMsg": "Fechou. Tanino firme pede mesa farta, e o Cabernet agradece.",
+      "erroMsg": "Respira. A carne segura o tanino do vinho e os dois ficam melhores juntos. Você viu isso na Unidade 1.",
+      "porque": "Proteína e gordura se ligam ao tanino e suavizam a secura, por isso Cabernet e carne vermelha são dupla clássica."
+    }
+  ],
+  "aplicacao": "Na churrascaria ou no jantar com bife, peça um Cabernet Sauvignon já sabendo o que vem: corpo, fruta escura e um tanino firme que a carne amansa.",
+  "recap": "Cabernet Sauvignon é o tinto estruturado de Bordeaux para o mundo: casca grossa, tanino alto, fruta escura e amizade antiga com a carne vermelha.",
+  "voceAgoraSabe": [
+    "Você sabe por que o Cabernet seca a boca: bagas pequenas de casca grossa, cheias de tanino",
+    "Você sabe a hora certa de pedir um Cabernet: quando há carne vermelha na mesa"
+  ],
+  "curiosidade": "O sobrenome do Cabernet veio à tona em 1997: testes de DNA da Universidade da Califórnia revelaram que ele é filho da tinta Cabernet Franc com a branca Sauvignon Blanc. Um casamento entre tinto e branco deu origem ao tinto mais famoso do mundo.",
+  "teaser": "Na próxima lição, o tinto que conquistou o Brasil com maciez: o Malbec argentino."
+}

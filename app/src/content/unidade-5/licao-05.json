@@ -1,0 +1,168 @@
+{
+  "id": "u5-l5",
+  "unidade": "u5",
+  "ordem": 5,
+  "titulo": "Comida brasileira na taça",
+  "habilidade": "harmonizacao",
+  "hook": "Feijoada, moqueca, churrasco, pizza. Suas quatro regras de harmonização foram feitas exatamente pra essa mesa, e hoje elas entram em campo.",
+  "fichaCanonica": [
+    "Feijoada é prato pesado e gorduroso: costuma pedir tinto de acidez viva e corpo presente, com frescor para limpar a boca entre as garfadas.",
+    "Moqueca, com dendê e leite de coco, é rica e perfumada: brancos aromáticos de acidez alta e espumantes tendem a refrescar o conjunto.",
+    "Churrasco com tintos tânicos e encorpados, como Malbec e Tannat, é o par mais clássico da América do Sul: a gordura da carne amansa o tanino.",
+    "O molho de tomate da pizza é ácido, e prato ácido pede vinho de acidez igual ou maior: tintos jovens e frescos tendem a funcionar melhor que tintos pesados de barrica.",
+    "Queijo coalho na brasa é salgado e tostado: espumante brut e brancos frescos limpam o sal e refrescam a boca."
+  ],
+  "exercicios": [
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "A mesa brasileira chegou. Qual kit de regras você já carrega pra harmonizar tudo nela?",
+      "opcoes": [
+        "Peso com peso, gordura ama tanino, acidez refresca, doce com doce",
+        "Uma tabela decorada de pratos e rótulos",
+        "Servir sempre o vinho mais caro da casa"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Quatro regras no bolso e nenhuma fórmula mágica.",
+      "erroMsg": "Tudo bem. São as quatro regras das últimas lições: peso, gordura, acidez e doçura. Hoje elas jogam juntas.",
+      "porque": "As quatro regras cobrem quase toda mesa do dia a dia, da feijoada à sobremesa."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Churrasco no domingo. Pela regra da gordura, qual taça entra em campo?",
+      "opcoes": [
+        "Tinto tânico e encorpado, tipo Malbec ou Tannat",
+        "Branco bem levinho",
+        "Espumante doce"
+      ],
+      "correta": 0,
+      "okMsg": "Exato. A picanha amansa o tanino e o tanino limpa a boca.",
+      "erroMsg": "Quase. Carne gorda na brasa pede tanino e corpo: Malbec e Tannat são os clássicos do continente.",
+      "porque": "Gordura ama tanino, e o churrasco com tinto estruturado é o par mais famoso da América do Sul."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 2,
+      "pergunta": "Feijoada completa: pesada e gorda. O que o tinto dela precisa ter?",
+      "opcoes": [
+        "Acidez viva pra limpar a boca e corpo pra não sumir",
+        "Muito açúcar pra adoçar o sal",
+        "Só tanino, nada mais importa"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Duas regras na mesma taça: peso com peso e frescor cortando gordura.",
+      "erroMsg": "Quase. A feijoada exige dois músculos do vinho: corpo pra ficar de pé e acidez pra limpar a gordura.",
+      "porque": "Prato pesado e gordo pede vinho com corpo presente e acidez viva, as duas regras trabalhando juntas."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 2,
+      "pergunta": "Moqueca de dendê e leite de coco: rica e perfumada. Quem refresca esse abraço?",
+      "opcoes": [
+        "Branco aromático de acidez alta ou espumante",
+        "Tinto pesado de muita barrica",
+        "Vinho do Porto"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Perfume conversa com perfume, e a acidez corta o dendê.",
+      "erroMsg": "Quase. A moqueca é rica e aromática: pede branco perfumado de acidez alta ou espumante pra refrescar.",
+      "porque": "O dendê e o leite de coco pedem frescor, e o vinho aromático acompanha o perfume do prato."
+    },
+    {
+      "tipo": "swipe",
+      "dificuldade": 2,
+      "instrucao": "Mesa brasileira: o par convence? Deslize.",
+      "cartas": [
+        {
+          "texto": "Pizza com tinto jovem e fresco",
+          "verdade": true,
+          "porque": "O molho de tomate é ácido e o tinto jovem tem acidez pra acompanhar."
+        },
+        {
+          "texto": "Pizza com tinto pesado de muita barrica",
+          "verdade": false,
+          "porque": "O tomate ácido faz o tinto pesado parecer cansado; a pizza pede frescor."
+        },
+        {
+          "texto": "Queijo coalho na brasa com espumante brut",
+          "verdade": true,
+          "porque": "Sal e tostado pedem bolha e frescor: o brut limpa e refresca."
+        },
+        {
+          "texto": "Moqueca com branco aromático",
+          "verdade": true,
+          "porque": "Perfume com perfume, e a acidez do branco corta a riqueza do dendê."
+        },
+        {
+          "texto": "Feijoada com vinho mole, sem acidez",
+          "verdade": false,
+          "porque": "Sem frescor, a gordura da feijoada forra a boca e o vinho afunda junto."
+        }
+      ]
+    },
+    {
+      "tipo": "duasverdades",
+      "dificuldade": 2,
+      "calibrar": true,
+      "tema": "Pizza e vinho",
+      "afirmacoes": [
+        "O molho de tomate é ácido e pede vinho de acidez igual ou maior",
+        "Tintos jovens e frescos tendem a acompanhar pizza melhor que tintos pesados",
+        "Comida de dia a dia não merece vinho, vinho é só pra ocasião especial"
+      ],
+      "mentira": 2,
+      "porque": "Pizza, feijoada e churrasco estão entre as melhores mesas pro vinho: harmonizar é pra toda sexta, sem cerimônia."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 3,
+      "calibrar": true,
+      "pergunta": "Prova de mestre: um só vinho pra mesa de petiscos com queijo coalho, pastel e frutos do mar. Qual resolve?",
+      "opcoes": [
+        "Espumante brut: acidez e bolha limpam sal, fritura e gordura",
+        "Tinto tânico e encorpado",
+        "Suave bem doce"
+      ],
+      "correta": 0,
+      "okMsg": "Resposta de anfitrião experiente. Uma garrafa, três problemas resolvidos.",
+      "erroMsg": "Quase. O brut atende as três frentes: corta a fritura do pastel, limpa o sal do coalho e respeita o peso leve dos petiscos.",
+      "porque": "Acidez alta e bolhas funcionam com sal, gordura e fritura ao mesmo tempo, e o peso leve não atropela nada."
+    },
+    {
+      "tipo": "intruso",
+      "dificuldade": 3,
+      "pergunta": "Qual destes pares desafina na mesa brasileira?",
+      "opcoes": [
+        "Churrasco com Tannat",
+        "Moqueca com branco fresco",
+        "Peixe delicado no vapor com tinto bem tânico",
+        "Pizza com tinto jovem"
+      ],
+      "intruso": 2,
+      "regra": "Tanino pesado com peixe delicado pode soltar gosto metálico; o resto da mesa está afinado."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Pra fechar a unidade: harmonizar é...",
+      "opcoes": [
+        "Equilibrar pesos e sensações pra comida e vinho ficarem melhores juntos",
+        "Seguir uma tabela sagrada sem errar nunca",
+        "Escolher sempre o vinho mais seco"
+      ],
+      "correta": 0,
+      "okMsg": "Unidade fechada. Quatro regras, zero fórmula mágica, e a sua mesa agradece.",
+      "erroMsg": "Respira: harmonizar é equilíbrio, com as quatro regras de guia e o seu gosto no comando.",
+      "porque": "Peso, gordura, acidez e doçura são diretrizes pra mesa inteira; quem decide a taça final é você."
+    }
+  ],
+  "aplicacao": "Na próxima feijoada, moqueca ou pizza, escolha o vinho pelas regras que você treinou: a mesa brasileira é o melhor laboratório de harmonização que existe.",
+  "recap": "Feijoada quer frescor e corpo, moqueca quer aroma e acidez, churrasco quer tanino, pizza quer tinto jovem e o coalho quer bolha: as quatro regras aplicadas na nossa mesa.",
+  "voceAgoraSabe": [
+    "Você harmoniza feijoada, moqueca, churrasco, pizza e queijo coalho com as quatro regras",
+    "Você sabe que o espumante brut é o canivete suíço da mesa de petiscos brasileira"
+  ],
+  "curiosidade": "A dupla churrasco e tinto atravessa fronteiras: no Uruguai e na Argentina, a parrilla com Tannat ou Malbec é programa de domingo igual ao nosso. A próxima unidade visita essa vizinhança.",
+  "teaser": "Na Unidade 6, a viagem: Serra Gaúcha, pampa, sertão e os vizinhos Argentina, Chile e Uruguai."
+}

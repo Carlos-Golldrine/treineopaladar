@@ -1,0 +1,178 @@
+{
+  "id": "u3-l2",
+  "unidade": "u3",
+  "ordem": 2,
+  "titulo": "Chardonnay: a uva camaleão",
+  "habilidade": "corpo",
+  "hook": "Dois brancos na mesa: um leve e cítrico, outro cremoso com gosto de baunilha. Surpresa: os dois podem nascer da mesma uva.",
+  "fichaCanonica": [
+    "A Chardonnay nasceu na Borgonha, na França, e está entre as uvas brancas mais plantadas do mundo.",
+    "É uma uva de perfil camaleão: o estilo do vinho depende muito das escolhas da vinícola, a começar por usar ou não barril de carvalho.",
+    "Chardonnay sem madeira, fermentado em tanque de inox, tende a ser mais leve e fresco, com aromas cítricos e de maçã verde; o Chablis francês é o exemplo clássico desse estilo.",
+    "Chardonnay com passagem por barril de carvalho tende a ganhar mais corpo e notas de baunilha; o toque de manteiga vem da fermentação malolática, um processo natural que suaviza os ácidos do vinho.",
+    "A Chardonnay é uma das três uvas principais do Champagne, e os espumantes rotulados Blanc de Blancs, branco de uvas brancas, costumam ser feitos só com ela.",
+    "Testes de DNA mostraram que a Chardonnay é um cruzamento natural entre a tinta Pinot Noir e a antiga uva branca Gouais Blanc."
+  ],
+  "exercicios": [
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Um branco leve e cítrico e um branco cremoso de baunilha podem nascer da mesma uva?",
+      "opcoes": [
+        "Sim, se a uva for camaleoa como a Chardonnay",
+        "Nunca, cada uva dá um único estilo",
+        "Só se forem misturadas uvas tintas"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Uma uva, dois figurinos.",
+      "erroMsg": "Quase. A Chardonnay muda de cara conforme a vinícola: tanque de inox para um lado, barril para o outro.",
+      "porque": "A Chardonnay muda de estilo conforme a vinícola: inox para frescor, barril de carvalho para corpo e baunilha."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "De onde vem o gosto de baunilha de certos Chardonnay?",
+      "opcoes": [
+        "Do barril de carvalho",
+        "De baunilha adicionada na garrafa",
+        "Da casca da uva"
+      ],
+      "correta": 0,
+      "okMsg": "Exato. A madeira tem perfume próprio e divide com o vinho.",
+      "erroMsg": "Quase. Ninguém pinga baunilha no vinho: é o carvalho do barril que empresta esse aroma.",
+      "porque": "O carvalho empresta baunilha ao vinho, no branco e no tinto."
+    },
+    {
+      "tipo": "swipe",
+      "dificuldade": 2,
+      "instrucao": "Essa pista aponta para um Chardonnay COM barril? Deslize.",
+      "cartas": [
+        {
+          "texto": "Notas de baunilha",
+          "verdade": true,
+          "porque": "Baunilha é presente do carvalho."
+        },
+        {
+          "texto": "Toque de manteiga",
+          "verdade": true,
+          "porque": "A manteiga vem da fermentação malolática, parceira comum do estilo com madeira."
+        },
+        {
+          "texto": "Maçã verde fresquinha e leveza",
+          "verdade": false,
+          "porque": "Esse é o time do inox: fresco, direto e sem madeira."
+        },
+        {
+          "texto": "Corpo mais cheio e textura cremosa",
+          "verdade": true,
+          "porque": "Barril e malolática engordam o gole."
+        },
+        {
+          "texto": "Estilo de um Chablis clássico",
+          "verdade": false,
+          "porque": "O Chablis clássico aposta no frescor, com pouca ou nenhuma madeira nova."
+        }
+      ]
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 2,
+      "pergunta": "Você quer um Chardonnay leve, sem gosto de madeira. Qual rótulo francês é a aposta clássica?",
+      "opcoes": [
+        "Chablis",
+        "Champagne rosé",
+        "Vinho do Porto"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Chablis é o Chardonnay em versão fresca.",
+      "erroMsg": "Quase. Chablis é Chardonnay da Borgonha em estilo leve e cortante, com pouca ou nenhuma madeira nova.",
+      "porque": "Chablis é Chardonnay da Borgonha em estilo fresco, com pouca ou nenhuma madeira nova."
+    },
+    {
+      "tipo": "slider",
+      "dificuldade": 2,
+      "pergunta": "Na régua do corpo, onde costuma ficar um Chardonnay com barril e malolática?",
+      "labelMin": "leve",
+      "labelMax": "encorpado",
+      "alvo": 75,
+      "tolerancia": 15,
+      "porque": "Madeira e malolática empurram o Chardonnay para o lado encorpado e cremoso da régua."
+    },
+    {
+      "tipo": "ordenar",
+      "dificuldade": 2,
+      "instrucao": "Coloque na ordem o caminho de um Chardonnay com barril, da uva à taça.",
+      "itens": [
+        "O vinho descansa no barril de carvalho",
+        "A uva é colhida no vinhedo",
+        "O suco fermenta e vira vinho",
+        "O vinho vai para a garrafa"
+      ],
+      "ordemCorreta": [1, 2, 0, 3],
+      "porque": "Colheita, fermentação, descanso na madeira e garrafa: é nesse caminho que o camaleão ganha corpo e baunilha."
+    },
+    {
+      "tipo": "duasverdades",
+      "dificuldade": 2,
+      "calibrar": true,
+      "tema": "Chardonnay",
+      "afirmacoes": [
+        "A Chardonnay é uma das três uvas principais do Champagne",
+        "A Chardonnay nasceu na Borgonha",
+        "A Chardonnay tem um único estilo, sempre amanteigado"
+      ],
+      "mentira": 2,
+      "porque": "Estilo único é o que a Chardonnay menos tem: do Chablis cortante ao cremoso de barril, ela é a camaleoa da prateleira."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 3,
+      "calibrar": true,
+      "pergunta": "De onde vem exatamente o toque de manteiga de certos Chardonnay?",
+      "opcoes": [
+        "De uma transformação natural do vinho, a fermentação malolática",
+        "De manteiga de verdade batida no tanque",
+        "Do açúcar que sobrou da uva"
+      ],
+      "correta": 0,
+      "okMsg": "Resposta de quem já lê o vinho por dentro.",
+      "erroMsg": "Quase. Ninguém derrete manteiga no tanque: é a fermentação malolática que cria esse aroma.",
+      "porque": "A fermentação malolática suaviza os ácidos do vinho e gera compostos de aroma amanteigado."
+    },
+    {
+      "tipo": "intruso",
+      "dificuldade": 3,
+      "pergunta": "Qual destas NÃO é uva clássica do Champagne?",
+      "opcoes": [
+        "Chardonnay",
+        "Pinot Noir",
+        "Malbec",
+        "Pinot Meunier"
+      ],
+      "intruso": 2,
+      "regra": "O trio clássico do Champagne é Chardonnay, Pinot Noir e Pinot Meunier. O Malbec brilha em outra estrada, a argentina."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Para fechar: por que a Chardonnay é chamada de uva camaleão?",
+      "opcoes": [
+        "Porque muda de estilo conforme as escolhas da vinícola",
+        "Porque muda de cor na taça",
+        "Porque só cresce escondida"
+      ],
+      "correta": 0,
+      "okMsg": "Fechou. Uma uva, muitos vinhos: o rótulo de Chardonnay agora conta mais história para você.",
+      "erroMsg": "Respira. O camaleão está no estilo: inox para frescor, barril para corpo e baunilha.",
+      "porque": "Da vinificação em inox à barrica com malolática, a Chardonnay troca de roupa como poucas uvas."
+    }
+  ],
+  "aplicacao": "Na loja, pergunte se o Chardonnay passou por madeira: a resposta diz se vem frescor cítrico ou abraço cremoso na taça.",
+  "recap": "Chardonnay é a branca camaleoa da Borgonha: leve e cítrica no inox, encorpada e amanteigada no barril.",
+  "voceAgoraSabe": [
+    "Você prevê o estilo de um Chardonnay com uma pergunta só: passou por madeira?",
+    "Você sabe de onde vem cada aroma: a baunilha, do carvalho; a manteiga, da fermentação malolática"
+  ],
+  "curiosidade": "A camaleoa tem pais ilustres e improváveis: testes de DNA revelaram que a Chardonnay é filha da tinta Pinot Noir com a humilde branca Gouais Blanc, que hoje quase ninguém cultiva.",
+  "teaser": "Na próxima lição, a cor rosa entra em cena: como nasce um rosé e por que ele anda com a fama errada."
+}

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import { licoesPorId } from '../content';
+import { licoesPorId, unidadeDaLicao } from '../content';
 import {
   ehD0,
   finalizarSessao,
@@ -227,7 +227,7 @@ type Etapa =
   | { t: 'aviso-pacing' }
   | { t: 'sem-vidas' }
   | { t: 'jogando' }
-  | { t: 'conclusao'; resultado: ResultadoSessao };
+  | { t: 'conclusao'; resultado: ResultadoSessao; xpCheckpoint: number | null };
 
 function PlayerReal({ licao }: { licao: Licao }) {
   const navigate = useNavigate();
@@ -317,8 +317,17 @@ function PlayerReal({ licao }: { licao: Licao }) {
     const ativa = store.getSessao();
     if (!ativa || sessaoConcluida(ativa.sessao)) {
       const r = finalizar();
-      if (r) setEtapa({ t: 'conclusao', resultado: r });
-      else navigate('/');
+      if (!r) {
+        navigate('/');
+        return;
+      }
+      /* Checkpoint: a conclusao que fecha a unidade paga 50 XP, uma vez */
+      const unidade = unidadeDaLicao(licao.id);
+      const fechouUnidade =
+        unidade !== undefined &&
+        unidade.licoes.every((l) => (store.getEstado().progresso[l.id]?.vezesConcluida ?? 0) > 0);
+      const xpCheckpoint = fechouUnidade ? store.concluirCheckpoint(unidade.meta.id) : null;
+      setEtapa({ t: 'conclusao', resultado: r, xpCheckpoint });
       return;
     }
     fases.reset();
@@ -381,6 +390,7 @@ function PlayerReal({ licao }: { licao: Licao }) {
         resultado={etapa.resultado}
         tipo={tipo}
         streak={streakEfetivo}
+        xpCheckpoint={etapa.xpCheckpoint}
         onTrilha={() => navigate('/')}
         onRevisar={() => comecar('revisao')}
       />

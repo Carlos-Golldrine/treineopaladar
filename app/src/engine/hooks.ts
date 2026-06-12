@@ -48,6 +48,8 @@ export interface UseProgresso {
   progresso: Record<string, ProgressoLicao>;
   scorePaladar: ScorePaladar;
   revisoesVencidas: string[];
+  /** Unidades cujo checkpoint (XP 50) ja foi pago. */
+  checkpoints: string[];
   objetivo: EstadoV1['objetivo'];
   nivelDeclarado: EstadoV1['nivelDeclarado'];
   onboardingCompleto: boolean;
@@ -62,6 +64,7 @@ export function useProgresso(): UseProgresso {
       progresso: estado.progresso,
       scorePaladar: store.scorePaladarAtual(),
       revisoesVencidas: store.revisoesVencidas(),
+      checkpoints: estado.checkpoints,
       objetivo: estado.objetivo,
       nivelDeclarado: estado.nivelDeclarado,
       onboardingCompleto: estado.onboardingCompleto,

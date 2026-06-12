@@ -41,7 +41,37 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,png,svg,woff2}'],
+        /* Rotulos reais e bancos de conteudo lazy ficam FORA do precache:
+           caem no runtime caching (decisao F2, ~351KB a menos na instalacao) */
+        globIgnores: ['**/rotulos/**', '**/banco-pratica-*.js', '**/desafios-*.js'],
         navigateFallback: '/index.html',
+        runtimeCaching: [
+          {
+            urlPattern: ({ url }) => url.pathname.startsWith('/rotulos/'),
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'rotulos-v1',
+              expiration: {
+                maxEntries: 60,
+                maxAgeSeconds: 60 * 24 * 60 * 60,
+              },
+            },
+          },
+          {
+            /* chunks de conteudo lazy excluidos do precache: ficam offline
+               apos o primeiro uso (hash no nome garante invalidacao) */
+            urlPattern: ({ url }) =>
+              /\/assets\/(banco-pratica|desafios)-[\w-]+\.js$/.test(url.pathname),
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'conteudo-lazy-v1',
+              expiration: {
+                maxEntries: 8,
+                maxAgeSeconds: 60 * 24 * 60 * 60,
+              },
+            },
+          },
+        ],
       },
     }),
   ],

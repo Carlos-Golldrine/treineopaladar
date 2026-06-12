@@ -241,7 +241,8 @@ try {
   let trilhaPosFtue = null;
   await step('(g-pre) estado da Trilha logo apos o FTUE', async () => {
     trilhaPosFtue = await page.evaluate(() => {
-      const itens = [...document.querySelectorAll('.trail-item')];
+      // F2 adicionou o no de checkpoint ao fim de cada unidade; aqui contamos so licoes
+      const itens = [...document.querySelectorAll('.trail-item:not(.trail-checkpoint)')];
       return itens.map((li) => ({
         classe: li.className,
         pill: li.querySelector('.start-pill')?.textContent ?? null,

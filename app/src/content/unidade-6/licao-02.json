@@ -1,0 +1,164 @@
+{
+  "id": "u6-l2",
+  "unidade": "u6",
+  "ordem": 2,
+  "titulo": "Campanha: tintos da fronteira",
+  "habilidade": "tanino",
+  "hook": "Lá embaixo no mapa, onde o Rio Grande encosta no Uruguai, o pampa cria tintos de músculo. Segunda parada: a Campanha Gaúcha.",
+  "fichaCanonica": [
+    "A Campanha Gaúcha fica no extremo sul do Rio Grande do Sul, na fronteira com o Uruguai, em paisagem de pampa.",
+    "Comparada à Serra Gaúcha, a Campanha é mais quente e seca, com mais horas de sol: a uva amadurece com mais facilidade e os tintos tendem a sair maduros e estruturados.",
+    "Na Campanha se destacam uvas tintas como Cabernet Sauvignon, Merlot e Tannat.",
+    "A Campanha Gaúcha conquistou em 2020 a Indicação de Procedência, selo que reconhece a origem dos seus vinhos.",
+    "Tanino maduro, de uva que pegou bastante sol, tende a ser mais macio e redondo que o tanino verde de uva que não completou o amadurecimento."
+  ],
+  "exercicios": [
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Uma fruta bem madura e uma fruta verde: qual é mais áspera de comer?",
+      "opcoes": [
+        "A verde",
+        "A madura",
+        "As duas são iguais"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Maturação arredonda, e com a uva é igual.",
+      "erroMsg": "Quase. Fruta verde amarra a boca; a madura é redonda e gentil. Guarde isso: é a história dos tintos da Campanha.",
+      "porque": "O amadurecimento suaviza a aspereza da fruta, e o tanino da uva segue o mesmo caminho."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Onde fica a Campanha Gaúcha?",
+      "opcoes": [
+        "No extremo sul do Rio Grande do Sul, na fronteira com o Uruguai",
+        "No litoral de Santa Catarina",
+        "Na divisa com a Bolívia"
+      ],
+      "correta": 0,
+      "okMsg": "Exato. É o Brasil de bombacha, pampa e parreira.",
+      "erroMsg": "Quase. A Campanha é o pampa da fronteira com o Uruguai, lá no extremo sul do mapa.",
+      "porque": "A Campanha Gaúcha ocupa o pampa do extremo sul gaúcho, colada no Uruguai."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 2,
+      "pergunta": "Mais sol e menos chuva que a Serra: o que isso faz com os tintos da Campanha?",
+      "opcoes": [
+        "A uva amadurece com mais facilidade e os tintos saem maduros e estruturados",
+        "Os vinhos ficam mais magros e ácidos",
+        "Nada, sol não muda uva"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Sol de pampa é maturação no ponto.",
+      "erroMsg": "Quase. Com mais sol e menos chuva, a uva completa o amadurecimento, e o tinto ganha estrutura e maciez.",
+      "porque": "O clima mais quente e seco da Campanha favorece a maturação completa das tintas, que saem estruturadas."
+    },
+    {
+      "tipo": "slider",
+      "dificuldade": 2,
+      "calibrar": true,
+      "pergunta": "Na régua do tanino, onde costuma jogar um Tannat da fronteira?",
+      "labelMin": "tanino discreto",
+      "labelMax": "tanino firme",
+      "alvo": 85,
+      "tolerancia": 15,
+      "porque": "A Tannat é uva de tanino dos mais firmes, e na Campanha ela amadurece bem: estrutura com maciez."
+    },
+    {
+      "tipo": "swipe",
+      "dificuldade": 2,
+      "instrucao": "Campanha: verdade ou mito? Deslize.",
+      "cartas": [
+        {
+          "texto": "A Campanha conquistou Indicação de Procedência em 2020",
+          "verdade": true,
+          "porque": "O selo reconhece a origem e o padrão dos vinhos da região."
+        },
+        {
+          "texto": "O pampa da fronteira é paisagem de serra alta",
+          "verdade": false,
+          "porque": "Pampa é campo aberto e horizonte plano, o oposto da serra."
+        },
+        {
+          "texto": "Cabernet Sauvignon, Merlot e Tannat se destacam por lá",
+          "verdade": true,
+          "porque": "O trio tinto encontrou no sol do pampa a maturação que pedia."
+        },
+        {
+          "texto": "Tanino maduro tende a ser mais macio que tanino verde",
+          "verdade": true,
+          "porque": "Sol completando a maturação arredonda o tanino, como arredonda a fruta."
+        },
+        {
+          "texto": "Vinho gaúcho de verdade só existe na Serra",
+          "verdade": false,
+          "porque": "A Campanha mostra outro Rio Grande: pampa, sol e tintos de músculo."
+        }
+      ]
+    },
+    {
+      "tipo": "duasverdades",
+      "dificuldade": 2,
+      "tema": "Tanino da fronteira",
+      "afirmacoes": [
+        "Tanino de uva bem madura tende a ser mais redondo",
+        "A Campanha é mais quente e seca que a Serra",
+        "Tanino firme é defeito de fabricação"
+      ],
+      "mentira": 2,
+      "porque": "Tanino firme é estilo e estrutura: com o prato certo, como você viu na harmonização, ele vira virtude."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 3,
+      "calibrar": true,
+      "pergunta": "Um tinto estruturado da Campanha na mesa: qual prato faz par à altura?",
+      "opcoes": [
+        "Churrasco gordo, no melhor estilo da própria fronteira",
+        "Salada leve de folhas",
+        "Sorvete de creme"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Gordura ama tanino, e o churrasco é vizinho de pasto desses tintos.",
+      "erroMsg": "Quase. Tinto de músculo pede prato de músculo: a regra da gordura aponta direto pro churrasco.",
+      "porque": "Tanino firme pede gordura e proteína, e o churrasco nasceu no mesmo pampa desses vinhos."
+    },
+    {
+      "tipo": "intruso",
+      "dificuldade": 3,
+      "pergunta": "Qual uva NÃO é destaque tinto da Campanha?",
+      "opcoes": [
+        "Cabernet Sauvignon",
+        "Merlot",
+        "Chardonnay",
+        "Tannat"
+      ],
+      "intruso": 2,
+      "regra": "Chardonnay é uva branca; o trio tinto da fronteira é Cabernet, Merlot e Tannat."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Pra fechar: o pampa da fronteira entrega tintos de que perfil?",
+      "opcoes": [
+        "Maduros e estruturados, de tanino presente",
+        "Doces e gaseificados",
+        "Leves como água de coco"
+      ],
+      "correta": 0,
+      "okMsg": "Fechou. Serra é bolha, Campanha é músculo. O mapa está se desenhando.",
+      "erroMsg": "Respira: sol de pampa faz uva madura, e uva madura faz tinto estruturado de tanino redondo.",
+      "porque": "O sol e a secura da Campanha completam a maturação das tintas, que saem estruturadas e de tanino presente."
+    }
+  ],
+  "aplicacao": "No próximo churrasco em família, procure um tinto da Campanha Gaúcha na gôndola: é o par da casa, criado no mesmo pampa da carne.",
+  "recap": "A Campanha é o pampa quente e seco da fronteira com o Uruguai, onde Cabernet, Merlot e Tannat amadurecem por inteiro e dão tintos estruturados de tanino redondo.",
+  "voceAgoraSabe": [
+    "Você sabe onde fica a Campanha e por que o sol do pampa dá tintos estruturados",
+    "Você diferencia tanino maduro, redondo, de tanino verde, áspero"
+  ],
+  "curiosidade": "A Campanha divide o pampa com o Uruguai: do lado de lá, Tannat; do lado de cá, Tannat também. A fronteira existe no mapa, mas o copo borra a linha.",
+  "teaser": "Próxima parada: o sertão. Sim, existe vinho nascendo a 9 graus do Equador, e ele é filho do sol."
+}

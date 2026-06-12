@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { ExercicioIntruso } from '../engine';
 import type { FaseExercicio, ResolucaoExercicio } from './tipos';
+import { RotuloFigura } from './RotuloFigura';
 
 interface Props {
   ex: ExercicioIntruso;
@@ -24,6 +25,7 @@ export function ExIntruso({ ex, fase, onResolver }: Props) {
 
   return (
     <div className="ex">
+      {ex.imagem && <RotuloFigura src={ex.imagem} />}
       <h2 className="ex-pergunta">{ex.pergunta}</h2>
       <div className="ex-opcoes ex-grade" role="group" aria-label="Opções">
         {ex.opcoes.map((opcao, i) => {

@@ -1,0 +1,178 @@
+{
+  "id": "u2-l3",
+  "unidade": "u2",
+  "ordem": 3,
+  "titulo": "Merlot e Carmenère: os tintos de entrada",
+  "habilidade": "corpo",
+  "hook": "Dois tintos macios e uma história de identidade trocada: durante décadas, o Chile vendeu um deles pensando que era o outro.",
+  "fichaCanonica": [
+    "A Merlot nasceu em Bordeaux, na França, e está entre as uvas de vinho mais plantadas do mundo.",
+    "O perfil clássico do Merlot é corpo médio, tanino macio e aromas de ameixa e cereja, o que faz dele um tinto de entrada clássico.",
+    "A Carmenère também nasceu em Bordeaux, mas praticamente desapareceu da França depois da filoxera, uma praga de inseto que devastou os vinhedos europeus no século XIX.",
+    "No Chile, vinhas de Carmenère cresceram durante décadas misturadas às de Merlot; em 1994, o pesquisador francês Jean-Michel Boursiquot identificou que parte do Merlot chileno era, na verdade, Carmenère.",
+    "O Chile é hoje o principal produtor mundial de Carmenère, que dá tintos de corpo médio, tanino macio e uma nota verde característica, lembrando pimentão.",
+    "No Brasil, a Merlot é a uva emblemática do Vale dos Vinhedos, na Serra Gaúcha, e é a variedade principal dos tintos da Denominação de Origem da região, o selo oficial que protege esses vinhos."
+  ],
+  "exercicios": [
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Na escada de texturas da Unidade 1, da água ao creme de leite, onde mora um tinto de corpo médio como o Merlot?",
+      "opcoes": [
+        "No meio, como um leite integral",
+        "Na ponta da água",
+        "Na ponta do creme de leite"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Corpo médio é o meio da escada.",
+      "erroMsg": "Quase. O Merlot fica no meio do caminho: presença na boca sem peso de creme.",
+      "porque": "Corpo médio é o meio da escada de texturas: nem água, nem creme de leite."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Por que o Merlot é tão indicado para quem está começando nos tintos?",
+      "opcoes": [
+        "Tanino macio e fruta: ele agrada sem travar a boca",
+        "Porque é sempre o mais barato da loja",
+        "Porque é sempre doce"
+      ],
+      "correta": 0,
+      "okMsg": "Exato. O Merlot é um aperto de mão gentil com o mundo dos tintos.",
+      "erroMsg": "Quase. O segredo do Merlot é a gentileza: ameixa, cereja e tanino macio.",
+      "porque": "O Merlot entrega ameixa e cereja com tanino gentil, sem amarrar a boca de ninguém."
+    },
+    {
+      "tipo": "swipe",
+      "dificuldade": 2,
+      "instrucao": "Verdade ou mito sobre essa dupla? Deslize.",
+      "cartas": [
+        {
+          "texto": "Merlot e Carmenère nasceram em Bordeaux",
+          "verdade": true,
+          "porque": "As duas são francesas de nascença, mesmo brilhando longe de casa."
+        },
+        {
+          "texto": "A Carmenère quase sumiu da França no século XIX",
+          "verdade": true,
+          "porque": "A praga da filoxera devastou os vinhedos, e a Carmenère praticamente desapareceu de lá."
+        },
+        {
+          "texto": "No Chile, a Carmenère passou décadas confundida com o Merlot",
+          "verdade": true,
+          "porque": "As vinhas cresciam misturadas, e a confusão só terminou em 1994."
+        },
+        {
+          "texto": "A Carmenère foi criada em laboratório no Chile",
+          "verdade": false,
+          "porque": "Ela é uma francesa antiga que encontrou no Chile uma segunda casa."
+        },
+        {
+          "texto": "O Merlot costuma ter tanino agressivo",
+          "verdade": false,
+          "porque": "O tanino do Merlot é dos mais macios entre os tintos famosos."
+        }
+      ]
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 2,
+      "pergunta": "Como a confusão entre Merlot e Carmenère foi desfeita?",
+      "opcoes": [
+        "Em 1994, um pesquisador francês reconheceu a Carmenère nas vinhas chilenas",
+        "Um cozinheiro notou a diferença num jantar",
+        "As garrafas tinham cores diferentes"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Um olhar treinado resolveu um mistério de décadas.",
+      "erroMsg": "Quase. Foi um estudioso de videiras, em 1994, quem percebeu que parte do Merlot chileno era outra uva.",
+      "porque": "Jean-Michel Boursiquot, estudioso de videiras, identificou em 1994 que parte do Merlot chileno era Carmenère."
+    },
+    {
+      "tipo": "ordenar",
+      "dificuldade": 2,
+      "instrucao": "Monte a escada do corpo, do tinto mais leve ao mais encorpado.",
+      "itens": [
+        "Cabernet Sauvignon",
+        "Pinot Noir",
+        "Merlot"
+      ],
+      "ordemCorreta": [1, 2, 0],
+      "porque": "O Pinot Noir joga no time leve, o Merlot segura o meio e o Cabernet fecha a escada com corpo cheio."
+    },
+    {
+      "tipo": "slider",
+      "dificuldade": 2,
+      "pergunta": "Na régua do corpo, onde costuma ficar um Merlot?",
+      "labelMin": "leve",
+      "labelMax": "encorpado",
+      "alvo": 55,
+      "tolerancia": 15,
+      "porque": "O Merlot é o retrato do corpo médio: presença na boca, sem peso de gigante."
+    },
+    {
+      "tipo": "duasverdades",
+      "dificuldade": 2,
+      "calibrar": true,
+      "tema": "Carmenère",
+      "afirmacoes": [
+        "O Chile é hoje o principal produtor de Carmenère do mundo",
+        "A Carmenère é uma uva branca de sobremesa",
+        "A Carmenère costuma trazer uma nota verde que lembra pimentão"
+      ],
+      "mentira": 1,
+      "porque": "A Carmenère é tinta e seca: francesa de origem, chilena de coração, com seu toque verde charmoso."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 3,
+      "calibrar": true,
+      "pergunta": "Tinto chileno, corpo médio, fruta madura e um toque verde de pimentão. A pista aponta para qual uva?",
+      "opcoes": [
+        "Carmenère",
+        "Pinot Noir",
+        "Moscatel"
+      ],
+      "correta": 0,
+      "okMsg": "Detetive de taça. O pimentão entregou a chilena.",
+      "erroMsg": "Quase. O toque verde de pimentão num tinto chileno é a digital da Carmenère.",
+      "porque": "A nota verde que lembra pimentão é a marca registrada da Carmenère chilena."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 3,
+      "pergunta": "No rótulo de um tinto do Vale dos Vinhedos com Denominação de Origem, qual uva você espera como protagonista?",
+      "opcoes": [
+        "Merlot",
+        "Carmenère",
+        "Sauvignon Blanc"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. A Serra Gaúcha escolheu o Merlot como bandeira.",
+      "erroMsg": "Quase. O tinto com o selo de origem do Vale dos Vinhedos tem o Merlot como variedade principal.",
+      "porque": "A Merlot é a uva emblemática do Vale dos Vinhedos e lidera os tintos da Denominação de Origem da região."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Para fechar: você quer um tinto gentil para uma noite tranquila, sem boca amarrada. Quais desta lição cumprem a missão?",
+      "opcoes": [
+        "Merlot e Carmenère",
+        "Somente tintos de tanino altíssimo",
+        "Nenhum tinto serve para isso"
+      ],
+      "correta": 0,
+      "okMsg": "Fechou. Os dois gentis de Bordeaux: um pelo mundo, outro pelo Chile.",
+      "erroMsg": "Respira. Merlot e Carmenère são os tintos de corpo médio e tanino macio desta lição. Missão cumprida.",
+      "porque": "Corpo médio e tanino macio fazem dos dois os tintos de entrada por excelência."
+    }
+  ],
+  "aplicacao": "Na gôndola, Merlot e Carmenère são as apostas gentis: corpo médio e tanino macio para qualquer noite sem cerimônia.",
+  "recap": "Merlot e Carmenère são irmãos de Bordeaux, tintos de corpo médio e tanino macio: um consagrado no mundo inteiro, o outro renascido no Chile.",
+  "voceAgoraSabe": [
+    "Você conhece a história da identidade trocada: o Merlot chileno que era Carmenère até 1994",
+    "Você reconhece a Carmenère pela nota verde de pimentão e o Merlot pela ameixa macia"
+  ],
+  "curiosidade": "O nome Carmenère vem de carmim, o vermelho intenso que as folhas da videira ganham no outono. A uva avisa sua cor antes mesmo da colheita.",
+  "teaser": "Na próxima lição, o tinto que parece branco no corpo: leve, fresco e translúcido, o Pinot Noir."
+}

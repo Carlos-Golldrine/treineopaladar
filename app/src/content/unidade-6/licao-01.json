@@ -1,0 +1,166 @@
+{
+  "id": "u6-l1",
+  "unidade": "u6",
+  "ordem": 1,
+  "titulo": "Serra Gaúcha: a terra da bolha",
+  "habilidade": "acidez",
+  "hook": "O vinho brasileiro tem um cartão de visita que coleciona medalha lá fora, e ele borbulha. A viagem começa na serra que ensinou o Brasil a brindar.",
+  "fichaCanonica": [
+    "A Serra Gaúcha, no Rio Grande do Sul, concentra a maior parte da produção de vinhos finos do Brasil, com polos como Bento Gonçalves, Garibaldi e Farroupilha.",
+    "O espumante é o cartão de visita do vinho brasileiro: espumantes da Serra Gaúcha acumulam medalhas em concursos internacionais.",
+    "A Serra Gaúcha fica em altitudes em torno de 400 a 800 metros; as noites mais frescas ajudam a uva a guardar acidez, e acidez alta é a espinha dorsal de um bom espumante.",
+    "O Vale dos Vinhedos, na Serra Gaúcha, conquistou a primeira Denominação de Origem de vinhos do Brasil.",
+    "A vitivinicultura da Serra Gaúcha foi plantada por imigrantes italianos a partir de 1875.",
+    "Os espumantes brasileiros são feitos tanto pelo método tradicional, com segunda fermentação na garrafa, quanto pelo método Charmat, em tanques; Farroupilha é o polo nacional do moscatel espumante."
+  ],
+  "exercicios": [
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Se o vinho brasileiro tivesse um cartão de visita pro mundo, qual seria?",
+      "opcoes": [
+        "O espumante",
+        "O vinho de garrafão",
+        "O quentão de festa junina"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. A bolha brasileira é a nossa embaixadora.",
+      "erroMsg": "Tudo bem. É o espumante: o estilo brasileiro mais premiado lá fora, criado principalmente na Serra Gaúcha.",
+      "porque": "Os espumantes da Serra Gaúcha acumulam medalhas em concursos internacionais e apresentam o Brasil ao mundo do vinho."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Onde se concentra a produção de vinhos finos do Brasil?",
+      "opcoes": [
+        "Na Serra Gaúcha, no Rio Grande do Sul",
+        "No litoral de São Paulo",
+        "Na floresta amazônica"
+      ],
+      "correta": 0,
+      "okMsg": "Exato. A serra dos imigrantes italianos é o coração do vinho nacional.",
+      "erroMsg": "Quase. O coração do vinho fino brasileiro bate na Serra Gaúcha, com Bento Gonçalves, Garibaldi e Farroupilha.",
+      "porque": "A Serra Gaúcha concentra a maior parte da produção de vinhos finos do país."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 2,
+      "pergunta": "Noites frescas de serra ajudam o espumante como?",
+      "opcoes": [
+        "A uva guarda acidez, que é a espinha dorsal do espumante",
+        "O frio deixa o vinho mais doce",
+        "A neblina é que cria as bolhas"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Você lembrou da lição da acidez: frio guarda frescor.",
+      "erroMsg": "Quase. Lembra da Unidade 1? Frio preserva o ácido da uva, e o espumante vive de acidez.",
+      "porque": "Noites frescas seguram o ácido da uva durante o amadurecimento, e o espumante precisa dessa acidez pra ser vibrante."
+    },
+    {
+      "tipo": "swipe",
+      "dificuldade": 2,
+      "instrucao": "Serra Gaúcha: verdade ou lenda? Deslize.",
+      "cartas": [
+        {
+          "texto": "Imigrantes italianos plantaram a vitivinicultura da Serra a partir de 1875",
+          "verdade": true,
+          "porque": "As famílias italianas trouxeram a videira e a cultura do vinho pra serra."
+        },
+        {
+          "texto": "O Vale dos Vinhedos tem a primeira Denominação de Origem de vinho do Brasil",
+          "verdade": true,
+          "porque": "Foi a primeira região brasileira a conquistar o selo de origem mais exigente."
+        },
+        {
+          "texto": "Espumante brasileiro nunca ganhou prêmio internacional",
+          "verdade": false,
+          "porque": "É o contrário: os espumantes da Serra colecionam medalhas em concursos pelo mundo."
+        },
+        {
+          "texto": "Farroupilha é o polo nacional do moscatel espumante",
+          "verdade": true,
+          "porque": "A cidade é a capital do moscatel brasileiro, doce, leve e perfumado."
+        },
+        {
+          "texto": "Vinho bom só existe na Europa",
+          "verdade": false,
+          "porque": "As medalhas internacionais dos espumantes da Serra desmontam essa lenda faz tempo."
+        }
+      ]
+    },
+    {
+      "tipo": "slider",
+      "dificuldade": 2,
+      "calibrar": true,
+      "pergunta": "Na régua da acidez, onde joga a uva colhida pra virar espumante na Serra?",
+      "labelMin": "acidez baixa",
+      "labelMax": "acidez alta",
+      "alvo": 80,
+      "tolerancia": 15,
+      "porque": "Noites frescas de serra guardam o ácido da uva, e o espumante precisa dessa acidez pra ser vibrante."
+    },
+    {
+      "tipo": "duasverdades",
+      "dificuldade": 2,
+      "tema": "Serra Gaúcha",
+      "afirmacoes": [
+        "A Serra concentra a maior parte dos vinhos finos do país",
+        "Lá se faz espumante pelo método tradicional e pelo Charmat",
+        "A Serra Gaúcha fica no nível do mar"
+      ],
+      "mentira": 2,
+      "porque": "A Serra fica em torno de 400 a 800 metros de altitude, e é essa altura que refresca as noites da uva."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 3,
+      "calibrar": true,
+      "pergunta": "Método tradicional e método Charmat: qual é a diferença de berço das bolhas?",
+      "opcoes": [
+        "No tradicional, a segunda fermentação acontece na garrafa; no Charmat, em tanque",
+        "No tradicional, o gás é injetado na fábrica",
+        "No Charmat se usa garrafa e no tradicional, tanque"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. As bolhas sempre nascem de fermentação; muda o berço delas.",
+      "erroMsg": "Quase. Nos dois métodos a bolha nasce de uma segunda fermentação; no tradicional ela acontece na garrafa, no Charmat em tanque.",
+      "porque": "A segunda fermentação cria o gás naturalmente: na garrafa no método tradicional, em tanque no Charmat."
+    },
+    {
+      "tipo": "intruso",
+      "dificuldade": 2,
+      "pergunta": "Qual destes lugares NÃO fica na Serra Gaúcha?",
+      "opcoes": [
+        "Vale dos Vinhedos",
+        "Farroupilha",
+        "Vale do São Francisco",
+        "Bento Gonçalves"
+      ],
+      "intruso": 2,
+      "regra": "O Vale do São Francisco fica no Nordeste, entre Pernambuco e Bahia, e é o destino de uma próxima lição."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Pra fechar: o espumante brasileiro premiado nasce principalmente onde?",
+      "opcoes": [
+        "Na Serra Gaúcha",
+        "Nos Alpes",
+        "No Pantanal"
+      ],
+      "correta": 0,
+      "okMsg": "Fechou. A primeira parada da viagem está no mapa.",
+      "erroMsg": "Respira: é a Serra Gaúcha, a serra que os imigrantes italianos plantaram de videiras.",
+      "porque": "A Serra Gaúcha é o coração do vinho fino brasileiro e a casa dos espumantes premiados."
+    }
+  ],
+  "aplicacao": "Na próxima comemoração, experimente um espumante brut da Serra Gaúcha no lugar do importado de sempre: o troco costuma vir em frescor.",
+  "recap": "A Serra Gaúcha é o coração do vinho fino do Brasil, e suas noites frescas guardam a acidez que faz do espumante brasileiro um campeão de medalhas.",
+  "voceAgoraSabe": [
+    "Você sabe que o espumante é o cartão de visita do vinho brasileiro, criado na Serra Gaúcha",
+    "Você entende por que serra e espumante combinam: noite fresca guarda acidez",
+    "Você conhece o Vale dos Vinhedos, dono da primeira Denominação de Origem do país"
+  ],
+  "curiosidade": "Garibaldi, na Serra Gaúcha, é chamada de capital brasileira do espumante: a cidade inteira vive em função da bolha, das vinícolas centenárias às festas da colheita.",
+  "teaser": "Da serra para o pampa: a próxima lição desce à fronteira com o Uruguai, onde os tintos gaúchos mostram músculo."
+}

@@ -1,0 +1,180 @@
+{
+  "id": "u4-l1",
+  "unidade": "u4",
+  "ordem": 1,
+  "titulo": "Rótulo em 10 segundos",
+  "habilidade": "rotulo",
+  "hook": "Você já sabe ler a taça. Hoje aprende a ler a garrafa: três informações do rótulo resolvem a compra em 10 segundos.",
+  "fichaCanonica": [
+    "A safra indicada no rótulo é o ano em que as uvas foram colhidas, e não o ano de engarrafamento ou de chegada à loja.",
+    "Vinhos do Novo Mundo, como Brasil, Argentina e Chile, costumam estampar o nome da uva no rótulo; rótulos europeus tradicionais costumam destacar a região, como Rioja ou Chianti, e deixar a uva subentendida.",
+    "A grande maioria dos vinhos do mundo é feita para ser bebida jovem, poucos anos depois da safra; só uma pequena parcela ganha com longa guarda.",
+    "No Brasil, a legislação separa o vinho fino, feito de uvas viníferas como Cabernet Sauvignon e Chardonnay, do vinho de mesa, feito de uvas americanas ou híbridas como Isabel e Bordô.",
+    "Na Espanha, termos como Crianza, Reserva e Gran Reserva têm exigências legais de tempo de amadurecimento; em boa parte do Novo Mundo, palavras como Reservado não seguem regra de envelhecimento e funcionam como nome comercial.",
+    "O rótulo brasileiro traz por obrigação informações como teor alcoólico, volume e identificação do produtor."
+  ],
+  "exercicios": [
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Um rótulo de vinho parece prova de vestibular, mas três informações resolvem a maior parte da compra. Quais?",
+      "opcoes": [
+        "Uva, região e safra",
+        "Fonte da letra, desenho do castelo e cor da cápsula",
+        "Código de barras, nome do importador e peso da garrafa"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Esse trio é o seu mapa em qualquer gôndola do mundo.",
+      "erroMsg": "Tudo bem. O trio que importa é uva, região e safra. O resto do rótulo é quase paisagem.",
+      "porque": "A uva conta o estilo, a região conta o sotaque e a safra conta a idade do vinho."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Safra 2023 escrito no rótulo quer dizer o quê?",
+      "opcoes": [
+        "Que as uvas foram colhidas em 2023",
+        "Que o vinho foi engarrafado em 2023",
+        "Que o vinho vence em 2023"
+      ],
+      "correta": 0,
+      "okMsg": "Exato. Safra é o ano da colheita, a certidão de nascimento do vinho.",
+      "erroMsg": "Quase. A safra marca o ano da colheita das uvas, não o engarrafamento nem validade.",
+      "porque": "A safra registra o ano em que as uvas saíram do pé, e cada ano de clima deixa sua marca."
+    },
+    {
+      "tipo": "swipe",
+      "dificuldade": 2,
+      "instrucao": "Isso merece os seus 10 segundos? Deslize.",
+      "cartas": [
+        {
+          "texto": "O nome da uva",
+          "verdade": true,
+          "porque": "A uva é a maior pista do estilo: você já sabe o que esperar de um Cabernet ou de um Moscatel."
+        },
+        {
+          "texto": "O desenho do castelo no rótulo",
+          "verdade": false,
+          "porque": "Castelo bonito é decoração. Nenhuma lei exige castelo de verdade atrás do desenho."
+        },
+        {
+          "texto": "A região de origem",
+          "verdade": true,
+          "porque": "A região conta clima e sotaque: você já viu que frio guarda acidez e sol carrega corpo."
+        },
+        {
+          "texto": "A palavra Reservado como selo de qualidade",
+          "verdade": false,
+          "porque": "Em boa parte do Novo Mundo, Reservado é nome comercial, sem regra de envelhecimento por trás."
+        },
+        {
+          "texto": "A safra",
+          "verdade": true,
+          "porque": "Ela diz a idade do vinho, e a grande maioria dos vinhos brilha jovem."
+        }
+      ]
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 2,
+      "pergunta": "Você procura o nome da uva num rótulo europeu tradicional e não encontra. O que aconteceu?",
+      "opcoes": [
+        "Rótulos europeus tradicionais destacam a região e deixam a uva subentendida",
+        "O vinho foi feito sem uva definida",
+        "A uva é segredo guardado pela vinícola"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Na Europa tradicional, o lugar é a estrela do rótulo.",
+      "erroMsg": "Calma, a uva está lá, só que escondida no nome do lugar: quem conhece a região sabe a uva da casa.",
+      "porque": "Na tradição europeia a região define o vinho, e a uva fica subentendida, como no Chianti e no Rioja."
+    },
+    {
+      "tipo": "intruso",
+      "dificuldade": 2,
+      "pergunta": "Qual destes NÃO é nome de uva?",
+      "opcoes": [
+        "Chardonnay",
+        "Merlot",
+        "Rioja",
+        "Cabernet Sauvignon"
+      ],
+      "intruso": 2,
+      "regra": "Rioja é uma região da Espanha, e nos rótulos europeus a região costuma ser a estrela."
+    },
+    {
+      "tipo": "duasverdades",
+      "dificuldade": 2,
+      "calibrar": true,
+      "tema": "Safra e tempo",
+      "afirmacoes": [
+        "A grande maioria dos vinhos é feita para ser bebida jovem",
+        "A safra é o ano em que as uvas foram colhidas",
+        "Todo vinho melhora quanto mais anos passa guardado"
+      ],
+      "mentira": 2,
+      "porque": "Só uma pequena parcela dos vinhos ganha com longa guarda; a maioria está no melhor momento jovem, com a fruta fresca."
+    },
+    {
+      "tipo": "slider",
+      "dificuldade": 2,
+      "pergunta": "Na régua do tempo, quando a grande maioria dos vinhos está no ponto de beber?",
+      "labelMin": "jovem, logo após a safra",
+      "labelMax": "décadas depois",
+      "alvo": 12,
+      "tolerancia": 15,
+      "porque": "A grande maioria dos vinhos nasce pronta: poucos anos depois da safra ela está no auge."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 3,
+      "calibrar": true,
+      "pergunta": "No mercado, uma garrafa diz vinho fino e a outra diz vinho de mesa. O que a lei brasileira está te contando?",
+      "opcoes": [
+        "Fino é de uvas viníferas, como Cabernet; de mesa é de uvas americanas ou híbridas, como Isabel",
+        "Fino é o mais caro da prateleira",
+        "De mesa é o indicado para beber comendo"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Fino e de mesa falam da família da uva, e a lei define os dois.",
+      "erroMsg": "Quase. Fino e de mesa não falam de preço nem de ocasião: falam da família da uva, viníferas de um lado, americanas e híbridas do outro.",
+      "porque": "Pela legislação brasileira, vinho fino vem de uvas viníferas e vinho de mesa vem de uvas americanas ou híbridas, como Isabel e Bordô."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 3,
+      "pergunta": "Um Gran Reserva da Espanha e um Reservado de um país do Novo Mundo. Qual leitura está certa?",
+      "opcoes": [
+        "O espanhol seguiu regra legal de envelhecimento; o Reservado costuma ser só nome comercial",
+        "Os dois passaram pelo mesmo tempo de barril, é lei mundial",
+        "Reservado quer dizer vinho doce"
+      ],
+      "correta": 0,
+      "okMsg": "Leitura de gente grande. A mesma palavra muda de peso conforme o país.",
+      "erroMsg": "Quase. Na Espanha, Reserva e Gran Reserva têm lei de envelhecimento; em boa parte do Novo Mundo, Reservado é nome de fantasia.",
+      "porque": "Crianza, Reserva e Gran Reserva têm exigências legais de tempo na Espanha; Reservado, em boa parte do Novo Mundo, não segue regra de envelhecimento."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Para fechar: os três itens do rótulo que valem os seus 10 segundos são...",
+      "opcoes": [
+        "Uva, região e safra",
+        "Castelo, medalha e cápsula",
+        "Importador, código de barras e slogan"
+      ],
+      "correta": 0,
+      "okMsg": "Fechou. A gôndola acabou de ficar bem menor e mais amigável.",
+      "erroMsg": "Respira: uva, região e safra. Esse trio você leva pra qualquer loja do mundo.",
+      "porque": "Uva, região e safra contam estilo, sotaque e idade: o essencial de qualquer garrafa."
+    }
+  ],
+  "aplicacao": "Na próxima gôndola, vire a garrafa com calma e procure o trio: uva, região e safra. O resto pode esperar.",
+  "recap": "Rótulo se lê em 10 segundos: a uva conta o estilo, a região conta o sotaque, a safra conta a idade, e palavras como Reservado merecem desconfiança carinhosa.",
+  "voceAgoraSabe": [
+    "Você encontra as três informações que importam em qualquer rótulo: uva, região e safra",
+    "Você sabe que a maioria dos vinhos é feita pra beber jovem, sem culpa de não guardar",
+    "Você separa vinho fino de vinho de mesa pela família da uva, como define a lei brasileira"
+  ],
+  "curiosidade": "Alguns dos rótulos mais famosos do mundo não dizem a uva em lugar nenhum: um Chablis da França é Chardonnay puro, e o rótulo simplesmente assume que você sabe. Agora você sabe.",
+  "teaser": "Na próxima lição, a palavra mais traiçoeira da gôndola brasileira: suave, com os números da lei e as pegadinhas do espumante."
+}

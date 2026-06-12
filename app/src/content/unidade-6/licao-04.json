@@ -1,0 +1,166 @@
+{
+  "id": "u6-l4",
+  "unidade": "u6",
+  "ordem": 4,
+  "titulo": "Argentina além do Malbec",
+  "habilidade": "frutado",
+  "hook": "Todo mundo conhece o Malbec. Poucos sabem que ele é só a porta de entrada de um país que planta uva quase no céu.",
+  "fichaCanonica": [
+    "A Argentina é historicamente o maior produtor de vinho da América do Sul, e Mendoza concentra a maior parte dessa produção.",
+    "Os vinhedos argentinos estão entre os mais altos do mundo: Mendoza planta em torno de 600 a 1.500 metros, e em Salta, no norte, há vinhedos acima de 2.000 metros.",
+    "Na altitude, o sol forte de dia amadurece a fruta e as noites frias guardam a acidez: o resultado tende a ser vinho frutado e fresco ao mesmo tempo.",
+    "A Torrontés é a uva branca emblemática da Argentina: muito aromática e floral no nariz, e tipicamente seca na boca.",
+    "O Malbec chegou à Argentina vindo da França no século 19 e encontrou em Mendoza o lugar onde virou estrela mundial.",
+    "Depois do Malbec, a Bonarda está entre as uvas tintas mais plantadas da Argentina."
+  ],
+  "exercicios": [
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Você sobe a serra num dia quente. O que muda quando a noite chega lá em cima?",
+      "opcoes": [
+        "Esfria bem mais que na cidade baixa",
+        "Fica ainda mais quente",
+        "Nada muda"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Altitude esfria a noite, e a uva argentina vive disso.",
+      "erroMsg": "Quase. Quanto mais alto, mais fria a noite. Os vinhedos argentinos usam essa gangorra a favor da uva.",
+      "porque": "A altitude derruba a temperatura noturna, e essa gangorra de calor e frio desenha o vinho argentino."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Qual país é historicamente o maior produtor de vinho da América do Sul?",
+      "opcoes": [
+        "Argentina",
+        "Bolívia",
+        "Equador"
+      ],
+      "correta": 0,
+      "okMsg": "Exato. E o coração dessa produção bate em Mendoza.",
+      "erroMsg": "Quase. É a Argentina, com Mendoza concentrando a maior parte das parreiras do país.",
+      "porque": "A Argentina lidera historicamente a produção sul-americana, com Mendoza como capital do vinho do país."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 2,
+      "pergunta": "Dia de sol forte, noite fria: o que essa gangorra da altitude faz com a uva?",
+      "opcoes": [
+        "Amadurece a fruta de dia e guarda a acidez à noite",
+        "Congela a uva no pé",
+        "Apaga o aroma da fruta"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. É a receita do frutado com frescor, a assinatura argentina.",
+      "erroMsg": "Quase. O sol enche a uva de fruta madura e a noite fria segura o ácido: vinho frutado e fresco ao mesmo tempo.",
+      "porque": "A amplitude entre dia quente e noite fria entrega maturação e acidez na mesma uva."
+    },
+    {
+      "tipo": "slider",
+      "dificuldade": 2,
+      "pergunta": "Na régua do frutado, onde costuma jogar um Malbec de Mendoza?",
+      "labelMin": "frutado discreto",
+      "labelMax": "fruta em primeiro plano",
+      "alvo": 80,
+      "tolerancia": 15,
+      "porque": "O sol de altitude enche o Malbec de fruta madura, com o frescor das noites frias segurando o conjunto."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 2,
+      "calibrar": true,
+      "pergunta": "Você cheira uma taça de Torrontés: flores e perfume adocicado no nariz. E na boca?",
+      "opcoes": [
+        "Tipicamente seca: o perfume era aroma, açúcar é outra conversa",
+        "Doce como o aroma promete",
+        "Sem gosto nenhum"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Você não caiu na pegadinha mais elegante da Argentina.",
+      "erroMsg": "Quase. Aroma é cheiro e doçura é açúcar na boca: a Torrontés perfuma como doce e termina seca.",
+      "porque": "A Torrontés é muito aromática e floral no nariz, e tipicamente seca na boca."
+    },
+    {
+      "tipo": "swipe",
+      "dificuldade": 2,
+      "instrucao": "Argentina: verdade ou mito? Deslize.",
+      "cartas": [
+        {
+          "texto": "Mendoza concentra a maior parte da produção argentina",
+          "verdade": true,
+          "porque": "Mendoza é a capital do vinho do país, aos pés dos Andes."
+        },
+        {
+          "texto": "Em Salta há vinhedos acima de 2.000 metros",
+          "verdade": true,
+          "porque": "O norte argentino planta uva em altitudes de tirar o fôlego, entre as maiores do mundo."
+        },
+        {
+          "texto": "O Malbec nasceu na Argentina",
+          "verdade": false,
+          "porque": "Ele veio da França no século 19; a Argentina foi onde virou estrela."
+        },
+        {
+          "texto": "A Torrontés é a branca emblemática do país",
+          "verdade": true,
+          "porque": "Perfumada no nariz e seca na boca, ela é a assinatura branca argentina."
+        },
+        {
+          "texto": "A Argentina só sabe fazer Malbec",
+          "verdade": false,
+          "porque": "Torrontés, Bonarda, Cabernet e espumantes: o país vai bem além de uma uva."
+        }
+      ]
+    },
+    {
+      "tipo": "duasverdades",
+      "dificuldade": 3,
+      "calibrar": true,
+      "tema": "Altitude argentina",
+      "afirmacoes": [
+        "Os vinhedos argentinos estão entre os mais altos do mundo",
+        "Noites frias de altitude guardam a acidez da uva",
+        "Altitude deixa o vinho sem acidez"
+      ],
+      "mentira": 2,
+      "porque": "É o oposto: a noite fria da montanha segura o ácido da uva, e o vinho sai fresco."
+    },
+    {
+      "tipo": "intruso",
+      "dificuldade": 2,
+      "pergunta": "Qual destes NÃO é uva?",
+      "opcoes": [
+        "Malbec",
+        "Torrontés",
+        "Mendoza",
+        "Bonarda"
+      ],
+      "intruso": 2,
+      "regra": "Mendoza é a região, a casa das outras três; no rótulo argentino, uva e lugar dividem a cena."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Pra fechar: a assinatura do vinho argentino de altitude é...",
+      "opcoes": [
+        "Fruta madura com frescor",
+        "Doçura com bolha",
+        "Madeira e nada mais"
+      ],
+      "correta": 0,
+      "okMsg": "Fechou. Sol de dia, frio de noite, fruta e frescor na taça.",
+      "erroMsg": "Respira: a gangorra da montanha entrega fruta madura de dia e acidez guardada à noite.",
+      "porque": "A altitude combina sol forte e noite fria, e a taça reflete isso: frutada e fresca ao mesmo tempo."
+    }
+  ],
+  "aplicacao": "Na carne de domingo, o Malbec de Mendoza segue aposta segura; pra surpreender, chegue antes com uma Torrontés gelada de entrada.",
+  "recap": "A Argentina planta uva quase no céu: a altitude dá vinhos frutados e frescos, o Malbec é a estrela importada da França e a Torrontés é o perfume seco do norte.",
+  "voceAgoraSabe": [
+    "Você sabe por que altitude dá vinho frutado e fresco: sol de dia, frio à noite",
+    "Você conhece a Torrontés e não confunde perfume doce com açúcar na boca",
+    "Você sabe que o Malbec é um francês que deu certo em Mendoza"
+  ],
+  "curiosidade": "O Malbec quase desapareceu da França depois de geadas e do avanço de outras uvas. Do outro lado do oceano, Mendoza o adotou, e hoje o mundo fala Malbec com sotaque argentino.",
+  "teaser": "Última parada da viagem: Chile e Uruguai, uma uva que voltou do desaparecimento e outra que virou churrasco com nome."
+}

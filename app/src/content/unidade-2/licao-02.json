@@ -1,0 +1,165 @@
+{
+  "id": "u2-l2",
+  "unidade": "u2",
+  "ordem": 2,
+  "titulo": "Malbec: o abraço argentino",
+  "habilidade": "frutado",
+  "hook": "Existe um tinto famoso por ser macio como um abraço. Ele fala espanhol, mas nasceu falando francês.",
+  "fichaCanonica": [
+    "A Malbec é uma uva tinta de origem francesa: na região de Cahors, no sudoeste da França, ela é cultivada há séculos sob os nomes de Côt e Auxerrois.",
+    "A Malbec chegou à Argentina em 1853, levada pelo agrônomo francês Michel Aimé Pouget.",
+    "A Argentina é hoje o maior produtor mundial de Malbec, com mais vinhedos da uva do que a própria França.",
+    "Mendoza, aos pés da Cordilheira dos Andes, concentra a maior parte do Malbec argentino, com muitos vinhedos plantados em altitude elevada.",
+    "O perfil clássico do Malbec argentino é frutado e aveludado, com aromas de ameixa e amora, corpo de médio a encorpado e tanino mais macio que o do Cabernet Sauvignon.",
+    "Frutado descreve aroma e sabor que lembram fruta, e um vinho frutado pode ser totalmente seco: a maior parte dos Malbec é seca, mesmo cheirando a fruta madura."
+  ],
+  "exercicios": [
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Você abre um Malbec argentino e aproxima o nariz. O que costuma chegar primeiro?",
+      "opcoes": [
+        "Cheiro de ameixa e amora maduras",
+        "Cheiro de grama cortada",
+        "Cheiro de manteiga derretida"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Ameixa madura é o perfume da casa.",
+      "erroMsg": "Tudo bem. Guarde a dupla: ameixa e amora são os aromas clássicos do Malbec.",
+      "porque": "Ameixa e amora são a dupla aromática clássica do Malbec."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Na boca, o Malbec ficou famoso por qual sensação?",
+      "opcoes": [
+        "Maciez, um tinto que desce como veludo",
+        "Aspereza de lixa grossa",
+        "Doçura de calda de pudim"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Maciez é o cartão de visita do Malbec.",
+      "erroMsg": "Quase. O Malbec é o abraço da prateleira: tanino presente, porém macio.",
+      "porque": "O tanino do Malbec tende a ser mais macio que o de tintos como o Cabernet, e a fruta madura completa o veludo."
+    },
+    {
+      "tipo": "swipe",
+      "dificuldade": 2,
+      "instrucao": "Verdade ou mito sobre o Malbec? Deslize.",
+      "cartas": [
+        {
+          "texto": "A Malbec nasceu na França",
+          "verdade": true,
+          "porque": "Cahors, no sudoeste francês, cultiva a uva há séculos com o nome de Côt."
+        },
+        {
+          "texto": "A Malbec é uma invenção argentina dos anos 1990",
+          "verdade": false,
+          "porque": "Ela chegou à Argentina em 1853, pelas mãos do francês Michel Aimé Pouget."
+        },
+        {
+          "texto": "Mendoza fica aos pés da Cordilheira dos Andes",
+          "verdade": true,
+          "porque": "É lá que mora a maior parte do Malbec argentino."
+        },
+        {
+          "texto": "Se o vinho cheira a fruta madura, ele é doce",
+          "verdade": false,
+          "porque": "Frutado fala do aroma. Doçura é açúcar na boca. A maior parte dos Malbec é seca."
+        },
+        {
+          "texto": "A Argentina é o maior produtor de Malbec do mundo",
+          "verdade": true,
+          "porque": "Hoje há mais Malbec plantado na Argentina do que na França."
+        }
+      ]
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 2,
+      "pergunta": "Frutado e doce: qual a diferença?",
+      "opcoes": [
+        "Frutado é aroma e sabor de fruta; doce é açúcar de verdade na boca",
+        "São a mesma coisa dita de dois jeitos",
+        "Frutado é o nome do vinho mais caro"
+      ],
+      "correta": 0,
+      "okMsg": "Exato. O nariz sente a fruta, a língua mede o açúcar.",
+      "erroMsg": "Quase. São eixos separados: um Malbec seco pode cheirar a ameixa madura o dia inteiro.",
+      "porque": "O nariz sente fruta e a língua mede açúcar: por isso existe vinho frutado e sequíssimo ao mesmo tempo."
+    },
+    {
+      "tipo": "slider",
+      "dificuldade": 2,
+      "pergunta": "Na régua do frutado, onde costuma ficar um Malbec argentino jovem?",
+      "labelMin": "discreto em fruta",
+      "labelMax": "explosão de fruta",
+      "alvo": 80,
+      "tolerancia": 15,
+      "porque": "Malbec jovem é generoso em fruta: ameixa e amora na frente do palco."
+    },
+    {
+      "tipo": "duasverdades",
+      "dificuldade": 2,
+      "calibrar": true,
+      "tema": "Malbec",
+      "afirmacoes": [
+        "Todo vinho frutado é doce",
+        "A Malbec chegou à Argentina em 1853",
+        "Muitos vinhedos de Mendoza ficam em altitude elevada"
+      ],
+      "mentira": 0,
+      "porque": "Fruta no nariz e açúcar na boca andam separados: o Malbec costuma cheirar a ameixa madura e terminar seco."
+    },
+    {
+      "tipo": "intruso",
+      "dificuldade": 3,
+      "calibrar": true,
+      "pergunta": "Qual destes NÃO costuma aparecer num Malbec argentino?",
+      "opcoes": [
+        "Ameixa madura",
+        "Amora",
+        "Floral de violeta",
+        "Toque verde de pimentão"
+      ],
+      "intruso": 3,
+      "regra": "Ameixa, amora e um floral de violeta desenham o Malbec. O toque de pimentão verde é marca de outras uvas, como o Cabernet e a Carmenère."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 3,
+      "pergunta": "Dois tintos na mesa: um seca a boca com força, o outro desliza macio e cheio de ameixa. Qual é o provável Malbec?",
+      "opcoes": [
+        "O macio e cheio de ameixa",
+        "O que seca a boca com força",
+        "Impossível ter pistas sem ler o rótulo"
+      ],
+      "correta": 0,
+      "okMsg": "Que leitura. O abraço entregou o Malbec.",
+      "erroMsg": "Quase. Tanino firme aponta para o Cabernet; maciez e ameixa apontam para o Malbec.",
+      "porque": "Tanino macio e fruta madura formam a assinatura do Malbec argentino."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Para fechar: o amigo quer um tinto saboroso e fácil de gostar, sem boca amarrada. Você sugere...",
+      "opcoes": [
+        "Um Malbec argentino",
+        "O tinto mais tânico da loja",
+        "Qualquer garrafa, tinto é tudo igual"
+      ],
+      "correta": 0,
+      "okMsg": "Sugestão de quem sabe. O abraço argentino raramente decepciona quem está chegando.",
+      "erroMsg": "Respira. Para agradar sem travar a boca, o Malbec é o caminho: macio e frutado.",
+      "porque": "O Malbec combina fruta generosa com tanino macio, um tinto de portas abertas."
+    }
+  ],
+  "aplicacao": "Na próxima ida ao mercado, um Malbec argentino é aposta segura para agradar as visitas: frutado, macio e fácil de amar.",
+  "recap": "Malbec nasceu na França, virou orgulho da Argentina e conquista pela fruta madura com tanino macio.",
+  "voceAgoraSabe": [
+    "Você separa frutado de doce: aroma de fruta no nariz, açúcar na boca",
+    "Você conta a história em uma linha: Cahors criou a Malbec e Mendoza a consagrou"
+  ],
+  "curiosidade": "O Malbec tem feriado próprio: 17 de abril é o Dia Mundial do Malbec, em memória de 1853, o ano em que a uva começou sua vida argentina.",
+  "teaser": "Na próxima lição, uma dupla de tintos gentis e um caso de identidade trocada que durou décadas no Chile."
+}

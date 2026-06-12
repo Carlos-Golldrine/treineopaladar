@@ -6,6 +6,7 @@ import checkIcon from '@material-symbols/svg-500/rounded/check.svg?raw';
 import diamondIcon from '@material-symbols/svg-500/rounded/diamond-fill.svg?raw';
 import fireIcon from '@material-symbols/svg-500/rounded/local_fire_department-fill.svg?raw';
 import heartIcon from '@material-symbols/svg-500/rounded/favorite-fill.svg?raw';
+import flagIcon from '@material-symbols/svg-500/rounded/flag-fill.svg?raw';
 
 /* --------------------------- Count-up de XP -------------------------- */
 
@@ -58,11 +59,21 @@ interface ConclusaoProps {
   resultado: ResultadoSessao;
   tipo: TipoSessao;
   streak: number;
+  /** XP do checkpoint quando esta conclusao fechou a unidade (50), senao null. */
+  xpCheckpoint?: number | null;
   onTrilha: () => void;
   onRevisar: () => void;
 }
 
-export function Conclusao({ licao, resultado, tipo, streak, onTrilha, onRevisar }: ConclusaoProps) {
+export function Conclusao({
+  licao,
+  resultado,
+  tipo,
+  streak,
+  xpCheckpoint = null,
+  onTrilha,
+  onRevisar,
+}: ConclusaoProps) {
   const xp = useCountUp(resultado.xp);
   const { perfeita } = resultado;
   const xpCheio = tipo === 'revisao' || resultado.xp >= (perfeita ? 25 : 20);
@@ -105,6 +116,15 @@ export function Conclusao({ licao, resultado, tipo, streak, onTrilha, onRevisar 
                 +1
               </span>
               <span className="placar-rotulo">vida</span>
+            </div>
+          )}
+          {xpCheckpoint !== null && (
+            <div className="placar-item">
+              <span className="placar-num placar-checkpoint">
+                <Icon svg={flagIcon} size={20} />
+                +{xpCheckpoint}
+              </span>
+              <span className="placar-rotulo">checkpoint</span>
             </div>
           )}
           <div className="placar-item">

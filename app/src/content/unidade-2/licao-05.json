@@ -1,0 +1,179 @@
+{
+  "id": "u2-l5",
+  "unidade": "u2",
+  "ordem": 5,
+  "titulo": "Tannat: o tinto do churrasco",
+  "habilidade": "harmonizacao",
+  "hook": "Tem um tinto com tanino tão bravo que pede carne na mesa. No Uruguai e na fronteira gaúcha, ele virou rei do churrasco.",
+  "fichaCanonica": [
+    "A Tannat nasceu no sudoeste da França, onde é a uva principal dos tintos da região de Madiran.",
+    "A Tannat chegou ao Uruguai no século XIX, levada por imigrantes bascos, e se tornou a uva emblemática do país.",
+    "A Tannat está entre as uvas mais tânicas do mundo e produz tintos encorpados, de cor profunda e tanino alto.",
+    "No Brasil, a Tannat também é cultivada na Campanha Gaúcha, região de fronteira com o Uruguai.",
+    "Proteínas e gorduras da carne se ligam ao tanino e suavizam a adstringência, aquela secura na boca: por isso tintos tânicos tendem a combinar com as carnes gordas do churrasco.",
+    "A Tannat é rica em polifenóis, compostos naturais vindos da casca e da semente da uva, o que ajuda a explicar sua cor intensa e seu tanino firme."
+  ],
+  "exercicios": [
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "O nome Tannat lembra uma palavra que você já domina. Qual?",
+      "opcoes": [
+        "Tanino",
+        "Taça",
+        "Tampa"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Nome honesto: a Tannat avisa de longe o que traz.",
+      "erroMsg": "Olha de novo: Tannat, tanino. A uva carrega a fama no próprio nome.",
+      "porque": "A Tannat está entre as uvas mais tânicas do mundo, e o nome entrega a alma dela."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Por que um tinto bem tânico fica mais macio ao lado de uma costela gorda?",
+      "opcoes": [
+        "A gordura e a proteína da carne seguram o tanino",
+        "O calor da carne evapora o tanino",
+        "A carne adoça o vinho"
+      ],
+      "correta": 0,
+      "okMsg": "Exato. A carne entra na frente da sua saliva e amansa o vinho.",
+      "erroMsg": "Quase. Proteína e gordura se ligam ao tanino antes da saliva, e a secura diminui. Você viu isso na Unidade 1.",
+      "porque": "Proteína e gordura se ligam ao tanino antes da sua saliva, e a sensação de secura diminui."
+    },
+    {
+      "tipo": "swipe",
+      "dificuldade": 2,
+      "instrucao": "Harmoniza ou não harmoniza? Deslize.",
+      "cartas": [
+        {
+          "texto": "Costela gorda de churrasco com Tannat",
+          "verdade": true,
+          "porque": "Gordura de sobra para domar o tanino bravo: dupla perfeita."
+        },
+        {
+          "texto": "Peixe branco delicado com Tannat",
+          "verdade": false,
+          "porque": "O tanino atropela o peixe. Prato delicado pede vinho delicado."
+        },
+        {
+          "texto": "Queijo coalho assado com tinto tânico",
+          "verdade": true,
+          "porque": "Gordura e proteína do queijo abraçam o tanino."
+        },
+        {
+          "texto": "Salada de folhas com limão e Tannat",
+          "verdade": false,
+          "porque": "Folhas leves pedem vinhos leves e frescos. O Tannat pisa forte demais aqui."
+        },
+        {
+          "texto": "Linguiça gorda na brasa com Malbec ou Tannat",
+          "verdade": true,
+          "porque": "Gordura e fruta se entendem: o churrasco recebe os dois tintos de braços abertos."
+        }
+      ]
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 2,
+      "pergunta": "Qual país fez da Tannat a sua uva emblemática?",
+      "opcoes": [
+        "Uruguai",
+        "Portugal",
+        "Alemanha"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. A francesa de Madiran virou bandeira uruguaia.",
+      "erroMsg": "Quase. Imigrantes bascos levaram a Tannat ao Uruguai no século XIX, e ela virou a tinta símbolo do país.",
+      "porque": "A Tannat chegou ao Uruguai no século XIX com imigrantes bascos e virou a tinta símbolo do país."
+    },
+    {
+      "tipo": "ordenar",
+      "dificuldade": 2,
+      "instrucao": "Monte a escada do tanino, da boca mais livre à mais amarrada.",
+      "itens": [
+        "Tannat",
+        "Pinot Noir",
+        "Cabernet Sauvignon",
+        "Merlot"
+      ],
+      "ordemCorreta": [1, 3, 2, 0],
+      "porque": "O Pinot pisa leve, o Merlot é gentil, o Cabernet aperta firme e a Tannat fecha a escada amarrando a boca."
+    },
+    {
+      "tipo": "slider",
+      "dificuldade": 2,
+      "pergunta": "Na régua do tanino, onde costuma ficar um Tannat jovem?",
+      "labelMin": "tanino baixo",
+      "labelMax": "tanino no topo",
+      "alvo": 90,
+      "tolerancia": 10,
+      "porque": "A Tannat mora no topo da régua: é dela a fama de uva entre as mais tânicas do mundo."
+    },
+    {
+      "tipo": "duasverdades",
+      "dificuldade": 3,
+      "calibrar": true,
+      "tema": "Vinho na mesa do churrasco",
+      "afirmacoes": [
+        "A gordura da carne suaviza o tanino do vinho",
+        "A Tannat também cresce na Campanha Gaúcha, na fronteira com o Uruguai",
+        "Quanto mais caro o vinho, melhor a harmonização"
+      ],
+      "mentira": 2,
+      "porque": "Harmonização é conversa de perfis, e preço não participa dela: um Tannat honesto vence vinho caro errado ao lado da costela."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 3,
+      "calibrar": true,
+      "pergunta": "Churrasco de domingo: costela e picanha gordas na grelha. Qual garrafa tende a brilhar?",
+      "opcoes": [
+        "Um Tannat encorpado",
+        "Um branco bem leve",
+        "Um espumante doce"
+      ],
+      "correta": 0,
+      "okMsg": "Mesa montada. Tanino bravo e gordura: cada um doma o outro.",
+      "erroMsg": "Quase. Carne gorda pede tanino firme: o tanino limpa a gordura, e a gordura amansa o tanino.",
+      "porque": "Carnes gordas e tintos tânicos se equilibram: a gordura abraça o tanino e o vinho refresca a boca para o próximo pedaço."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 3,
+      "pergunta": "O mesmo Tannat parece áspero sozinho e macio durante o churrasco. O que mudou?",
+      "opcoes": [
+        "A proteína e a gordura da carne ocuparam o tanino antes da saliva",
+        "O vinho perdeu álcool ao ar livre",
+        "O calor do fogo cozinhou o vinho"
+      ],
+      "correta": 0,
+      "okMsg": "Que leitura. O vinho é o mesmo, a mesa que muda tudo.",
+      "erroMsg": "Quase. Quando a carne entra em cena, o tanino se prende a ela e sobra menos para ressecar a sua boca.",
+      "porque": "Com a carne na jogada, o tanino se liga à proteína e à gordura do prato, e sobra menos para a sua saliva."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Para fechar a unidade: qual o par clássico do tinto bem tânico?",
+      "opcoes": [
+        "Carne gorda e suculenta",
+        "Sorvete de creme",
+        "Salada de frutas"
+      ],
+      "correta": 0,
+      "okMsg": "Unidade 2 no bolso. Você já escolhe tinto como quem monta a mesa.",
+      "erroMsg": "Respira. Tanino firme pede gordura e proteína, e o churrasco tem os dois de sobra.",
+      "porque": "Proteína e gordura suavizam o tanino: o par clássico do tinto tânico é a carne."
+    }
+  ],
+  "aplicacao": "No próximo churrasco, leve um Tannat do Uruguai ou da Campanha Gaúcha e veja o tanino bravo virar seda ao lado da costela.",
+  "recap": "Tannat é o tinto de tanino alto que nasceu na França, virou bandeira do Uruguai e encontrou no churrasco o seu lugar à mesa.",
+  "voceAgoraSabe": [
+    "Você monta a escada do tanino de cabeça: Pinot Noir, Merlot, Cabernet e Tannat",
+    "Você sabe o segredo do churrasco: gordura e proteína amansam tanino bravo"
+  ],
+  "curiosidade": "A Tannat é campeã de polifenóis, os compostos naturais da casca e da semente da uva. Essa riqueza fez dela uma das uvas mais estudadas por pesquisadores do mundo todo.",
+  "teaser": "Na Unidade 3, mudamos de cor: brancos frescos, rosés versáteis e o mundo das bolhas."
+}

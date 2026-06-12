@@ -29,6 +29,7 @@ const Desafio = lazy(() => import('./routes/Desafio'));
 const Mesa = lazy(() => import('./routes/Mesa'));
 const Perfil = lazy(() => import('./routes/Perfil'));
 const PlayerLicao = lazy(() => import('./licao/Player'));
+const Pratica = lazy(() => import('./routes/Pratica'));
 
 const router = createBrowserRouter([
   {
@@ -62,6 +63,15 @@ const router = createBrowserRouter([
     element: (
       <Suspense fallback={null}>
         <PlayerLicao />
+      </Suspense>
+    ),
+  },
+  {
+    /* Pratica livre em tela cheia: drill do banco da fabrica, sem vidas */
+    path: '/pratica',
+    element: (
+      <Suspense fallback={null}>
+        <Pratica />
       </Suspense>
     ),
   },

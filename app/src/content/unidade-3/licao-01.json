@@ -1,0 +1,165 @@
+{
+  "id": "u3-l1",
+  "unidade": "u3",
+  "ordem": 1,
+  "titulo": "Sauvignon Blanc: o branco que acorda a boca",
+  "habilidade": "acidez",
+  "hook": "Imagine o cheiro de grama recém-cortada e um gole que enche a boca de água. Esse branco existe, e o nome dele é Sauvignon Blanc.",
+  "fichaCanonica": [
+    "A Sauvignon Blanc é uma uva branca originária da França, ligada ao Vale do Loire e a Bordeaux.",
+    "Seu perfil clássico é um branco seco, leve e de acidez alta, com aromas que lembram limão, maracujá e capim recém-cortado.",
+    "O Sauvignon Blanc costuma ser feito sem barril de madeira e bebido jovem, para preservar o frescor.",
+    "A Sauvignon Blanc é a uva mais plantada da Nova Zelândia, que ficou famosa a partir dos anos 1980 pelo estilo frutado e explosivo da região de Marlborough.",
+    "Brancos leves e ácidos como o Sauvignon Blanc costumam ser servidos bem gelados, em torno de 7 a 10 graus.",
+    "Do cruzamento natural da Sauvignon Blanc com a tinta Cabernet Franc nasceu a Cabernet Sauvignon, apontada como a uva de vinho mais plantada do mundo."
+  ],
+  "exercicios": [
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Primeiro gole de um Sauvignon Blanc. Pelo perfil de acidez alta, o que a sua boca faz?",
+      "opcoes": [
+        "Enche de água, como ao morder um limão",
+        "Fica seca como no chá preto",
+        "Sente espuma de refrigerante"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. O limão da Unidade 1 mandou lembranças.",
+      "erroMsg": "Quase. Acidez alta chama saliva: a boca enche de água, igual com limão.",
+      "porque": "Acidez alta chama saliva: é o reflexo do limão, agora na taça de branco."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Qual conjunto de aromas é a cara do Sauvignon Blanc?",
+      "opcoes": [
+        "Limão, maracujá e capim cortado",
+        "Chocolate e café",
+        "Baunilha e coco"
+      ],
+      "correta": 0,
+      "okMsg": "Exato. Fresco e verde, do nariz ao gole.",
+      "erroMsg": "Tudo bem. Guarde o trio: cítricos, maracujá e aquele verde de capim cortado.",
+      "porque": "Aromas cítricos, maracujá e o verde de capim cortado são a assinatura da uva."
+    },
+    {
+      "tipo": "slider",
+      "dificuldade": 2,
+      "pergunta": "Na régua da acidez, onde costuma ficar um Sauvignon Blanc?",
+      "labelMin": "manso",
+      "labelMax": "acidez vibrante",
+      "alvo": 85,
+      "tolerancia": 15,
+      "porque": "O Sauvignon Blanc vive no topo da régua: acidez viva é a alma dele."
+    },
+    {
+      "tipo": "swipe",
+      "dificuldade": 2,
+      "instrucao": "Verdade ou mito sobre o Sauvignon Blanc? Deslize.",
+      "cartas": [
+        {
+          "texto": "Costuma ser bebido jovem, pouco depois de engarrafado",
+          "verdade": true,
+          "porque": "O charme dele é o frescor, que o tempo apaga aos poucos."
+        },
+        {
+          "texto": "Precisa de décadas de barril de madeira",
+          "verdade": false,
+          "porque": "A maior parte é feita em tanque, sem madeira, justamente para guardar o frescor."
+        },
+        {
+          "texto": "É a uva mais plantada da Nova Zelândia",
+          "verdade": true,
+          "porque": "Marlborough transformou a uva francesa em bandeira neozelandesa."
+        },
+        {
+          "texto": "Branco se serve na temperatura da sala",
+          "verdade": false,
+          "porque": "Branco leve e ácido pede gelo no balde: 7 a 10 graus."
+        },
+        {
+          "texto": "É mãe da Cabernet Sauvignon",
+          "verdade": true,
+          "porque": "O cruzamento com a Cabernet Franc deu origem à tinta mais plantada do mundo."
+        }
+      ]
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 2,
+      "pergunta": "O que a Nova Zelândia fez pelo Sauvignon Blanc?",
+      "opcoes": [
+        "Criou um estilo explosivo de maracujá que conquistou o mundo",
+        "Inventou a uva do zero",
+        "Transformou a uva em tinto"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Uma francesa antiga ganhou sotaque novo do outro lado do mundo.",
+      "erroMsg": "Quase. A uva já era francesa: a Nova Zelândia criou um estilo vibrante que virou referência mundial.",
+      "porque": "A partir dos anos 1980, Marlborough revelou um Sauvignon Blanc vibrante e frutado que virou referência mundial."
+    },
+    {
+      "tipo": "intruso",
+      "dificuldade": 2,
+      "pergunta": "Qual destes NÃO é aroma típico de Sauvignon Blanc?",
+      "opcoes": [
+        "Limão",
+        "Chocolate ao leite",
+        "Maracujá",
+        "Capim cortado"
+      ],
+      "intruso": 1,
+      "regra": "Cítricos, fruta tropical fresca e notas verdes formam o buquê do Sauvignon Blanc. Chocolate mora nos tintos que passaram por barril."
+    },
+    {
+      "tipo": "duasverdades",
+      "dificuldade": 3,
+      "calibrar": true,
+      "tema": "Sauvignon Blanc",
+      "afirmacoes": [
+        "O Sauvignon Blanc costuma ser doce como suco de uva",
+        "A acidez alta torna o Sauvignon Blanc refrescante",
+        "A uva tem berço na França, ligada ao Vale do Loire e a Bordeaux"
+      ],
+      "mentira": 0,
+      "porque": "O clássico é sequíssimo: fruta no nariz, acidez viva na boca e quase nenhum açúcar."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 3,
+      "calibrar": true,
+      "pergunta": "Almoço de verão: peixe grelhado com bastante limão. Por que o Sauvignon Blanc tende a funcionar?",
+      "opcoes": [
+        "A acidez do vinho conversa de igual para igual com a do limão",
+        "O vinho deixa o peixe mais gordo",
+        "Branco combina com qualquer prato, sempre"
+      ],
+      "correta": 0,
+      "okMsg": "Harmonização de gente grande: frescor com frescor.",
+      "erroMsg": "Quase. Prato ácido pede vinho de acidez à altura, senão o vinho parece apagado ao lado dele.",
+      "porque": "Quando o prato é ácido, o vinho precisa de acidez parecida para não parecer mole na comparação."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Para fechar: dia quente, vontade de um branco que refresque de verdade. Você procura na prateleira um...",
+      "opcoes": [
+        "Sauvignon Blanc",
+        "Tinto tânico",
+        "Vinho doce de sobremesa"
+      ],
+      "correta": 0,
+      "okMsg": "Escolha refrescante. Bem gelado, ele é quase um mergulho.",
+      "erroMsg": "Respira. Para refrescar, o caminho é acidez alta e leveza: Sauvignon Blanc na ponta da língua.",
+      "porque": "Acidez viva, leveza e aromas frescos fazem do Sauvignon Blanc o branco refrescante por excelência."
+    }
+  ],
+  "aplicacao": "No calor, procure um Sauvignon Blanc e sirva bem gelado: acidez viva e aromas frescos são quase um ventilador na taça.",
+  "recap": "Sauvignon Blanc é o branco seco de acidez alta, com limão, maracujá e capim no nariz, feito para beber jovem e gelado.",
+  "voceAgoraSabe": [
+    "Você reconhece o Sauvignon Blanc pela acidez viva e pelos aromas verdes",
+    "Você serve branco leve do jeito certo: bem gelado, entre 7 e 10 graus"
+  ],
+  "curiosidade": "Sauvignon vem provavelmente de sauvage, selvagem em francês: a uva crescia como videira brava pelos campos antes de ganhar lugar de honra nos vinhedos.",
+  "teaser": "Na próxima lição, a uva camaleão: o Chardonnay, que muda de cara conforme a vinícola decide."
+}

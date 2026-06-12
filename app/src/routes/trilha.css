@@ -44,14 +44,89 @@
   color: var(--neutral-300);
 }
 
+/* ---------- Cartao de pratica livre ---------- */
+.pratica-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: var(--space-2) var(--space-4) 0;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-card);
+  border: 1.5px solid var(--neutral-200);
+  background: var(--neutral-50);
+  text-align: left;
+}
+
+.pratica-selo {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-pill);
+  background: rgba(114, 47, 55, 0.08);
+  color: var(--wine-700);
+}
+
+.pratica-textos {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pratica-titulo {
+  font: 600 var(--text-md) / 1.2 var(--font-display);
+  color: var(--wine-900);
+}
+
+.pratica-sub {
+  font-size: var(--text-xs);
+  line-height: 1.4;
+  color: var(--neutral-500);
+}
+
+.pratica-seta {
+  color: var(--neutral-300);
+}
+
 /* ---------- Cartao da unidade ---------- */
 .unit-card {
-  margin: var(--space-2) var(--space-4) 0;
+  margin: var(--space-5) var(--space-4) 0;
   padding: var(--space-4);
   border-radius: var(--radius-card);
   background: var(--wine-900);
   color: var(--bg);
   box-shadow: var(--shadow-md);
+}
+
+section:first-of-type > .unit-card {
+  margin-top: var(--space-2);
+}
+
+/* Unidades de cor clara (gold): texto escuro por contraste */
+.unit-card-clara {
+  color: var(--wine-900);
+}
+
+.unit-card-clara .unit-eyebrow {
+  color: var(--wine-700);
+}
+
+.unit-card-clara .unit-desc {
+  color: rgba(74, 31, 36, 0.72);
+}
+
+.unit-card-clara .unit-bar {
+  background: rgba(74, 31, 36, 0.18);
+}
+
+.unit-card-clara .unit-bar-fill {
+  background: var(--wine-700);
+}
+
+.unit-card-clara .unit-count {
+  color: var(--wine-900);
 }
 
 .unit-eyebrow {
@@ -105,8 +180,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* Folga extra no topo: o pill "Começar" do no atual flutua acima dele */
-  padding: 64px var(--space-4) var(--space-6);
+  padding: var(--space-4) var(--space-4) var(--space-5);
+}
+
+/* Folga extra so quando o pill "Começar" flutua acima do 1o no da unidade */
+.trail > .trail-item.current:first-child {
+  margin-top: 52px;
 }
 
 .trail-item {
@@ -239,4 +318,111 @@
   font-size: var(--text-sm);
   font-weight: 600;
   color: var(--wine-900);
+}
+
+/* ---------- Checkpoint no fim de cada unidade ---------- */
+.trail-checkpoint {
+  margin-top: var(--space-2);
+}
+
+.checkpoint-selo {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-pill);
+  border: 2px dashed var(--neutral-300);
+  color: var(--neutral-300);
+  background: var(--bg);
+}
+
+.checkpoint-ganho {
+  border: none;
+  background: var(--gold-500);
+  color: var(--wine-900);
+  box-shadow: var(--shadow-sm);
+}
+
+.trail-checkpoint .node-label {
+  margin-top: var(--space-2);
+}
+
+/* ---------- Unidade bloqueada (cartao compacto) ---------- */
+.unit-locked {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin: var(--space-5) var(--space-4) 0;
+  padding: var(--space-4);
+  border-radius: var(--radius-card);
+  border: 1.5px dashed var(--neutral-200);
+  background: var(--neutral-50);
+}
+
+.unit-locked-selo {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-pill);
+  background: var(--neutral-100);
+  color: var(--neutral-400);
+}
+
+.unit-locked-textos {
+  flex: 1;
+  min-width: 0;
+}
+
+.unit-locked-eyebrow {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--neutral-400);
+}
+
+.unit-locked-titulo {
+  margin-top: 2px;
+  font: 600 var(--text-md) / 1.25 var(--font-display);
+  color: var(--neutral-600);
+}
+
+.unit-locked-sub {
+  margin-top: var(--space-1);
+  font-size: var(--text-xs);
+  line-height: 1.4;
+  color: var(--neutral-400);
+}
+
+.unit-abrir {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--gold-700);
+  color: var(--gold-700);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  align-self: center;
+}
+
+@media (hover: hover) {
+  .unit-abrir:hover {
+    background: rgba(184, 137, 74, 0.08);
+  }
+}
+
+.folha-saldo-rotulo {
+  font: 500 var(--text-xs) / 1 var(--font-ui);
+  color: var(--neutral-500);
+}
+
+/* Ultima unidade: respiro antes da tab bar */
+.shell section:last-of-type .trail {
+  padding-bottom: var(--space-6);
 }

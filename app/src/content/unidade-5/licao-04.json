@@ -1,0 +1,164 @@
+{
+  "id": "u5-l4",
+  "unidade": "u5",
+  "ordem": 4,
+  "titulo": "Doce com doce, sal com doce",
+  "habilidade": "harmonizacao",
+  "hook": "Queijo com goiabada já te ensinou metade desta lição. A outra metade é uma regra que salva qualquer sobremesa: doce com doce.",
+  "fichaCanonica": [
+    "Com sobremesas, o vinho precisa ser pelo menos tão doce quanto o prato: se a sobremesa é mais doce que o vinho, o vinho parece magro e azedo.",
+    "O sal realça a fruta do vinho e suaviza tanino e amargor, e por isso sal e doce formam pares famosos na taça.",
+    "Queijo gorgonzola com vinho do Porto é um par clássico: o sal pungente do queijo abraça a doçura do vinho.",
+    "O vinho do Porto é um fortificado doce do vale do Douro, em Portugal, com teor alcoólico mais alto que o dos vinhos de mesa.",
+    "Espumante moscatel, doce e leve, acompanha bem sobremesas de frutas."
+  ],
+  "exercicios": [
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Queijo com goiabada, pipoca doce com sal: por que essas duplas funcionam?",
+      "opcoes": [
+        "Sal e doce se realçam um ao outro",
+        "Porque são baratas",
+        "Funcionam por acaso"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Romeu e Julieta é aula de harmonização.",
+      "erroMsg": "Quase. O sal puxa o doce pra cima, e o doce acalma o sal. O vinho usa esse mesmo truque.",
+      "porque": "Sal realça doçura e suaviza amargor: a dupla se valoriza nos dois sentidos."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Pra acompanhar uma sobremesa, o vinho precisa ser...",
+      "opcoes": [
+        "Pelo menos tão doce quanto ela",
+        "Bem mais seco que ela",
+        "Sempre tinto"
+      ],
+      "correta": 0,
+      "okMsg": "Exato. Doce com doce: ninguém apaga ninguém.",
+      "erroMsg": "Quase. Se o prato é mais doce que o vinho, o vinho parece magro e azedo. A taça precisa estar à altura do açúcar.",
+      "porque": "A sobremesa mais doce que o vinho rouba a cena e deixa a taça com cara de azeda."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 2,
+      "pergunta": "Gorgonzola com vinho do Porto: por que esse par virou clássico?",
+      "opcoes": [
+        "O sal pungente do queijo abraça a doçura do Porto",
+        "Os dois nasceram na mesma cidade",
+        "O queijo deixa o vinho mais alcoólico"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Sal com doce, agora em versão de gala.",
+      "erroMsg": "Quase. É o jogo do sal com o doce: o queijo azul puxa a fruta do Porto e o Porto acalma o sal.",
+      "porque": "O sal do queijo realça a doçura e a fruta do vinho, e a doçura arredonda a pungência do queijo."
+    },
+    {
+      "tipo": "swipe",
+      "dificuldade": 2,
+      "instrucao": "Esse final de jantar fecha bem? Deslize.",
+      "cartas": [
+        {
+          "texto": "Pudim com espumante moscatel",
+          "verdade": true,
+          "porque": "Doce com doce e leveza de bolha: o pudim segue doce e o vinho segue vivo."
+        },
+        {
+          "texto": "Torta de chocolate bem doce com vinho sequíssimo",
+          "verdade": false,
+          "porque": "A torta é mais doce que o vinho, e o vinho fica magro e azedo na comparação."
+        },
+        {
+          "texto": "Gorgonzola com Porto",
+          "verdade": true,
+          "porque": "O par clássico do sal com o doce, testado por gerações."
+        },
+        {
+          "texto": "Salada de frutas com moscatel leve",
+          "verdade": true,
+          "porque": "Sobremesa de frutas com vinho doce e leve: pesos e açúcares alinhados."
+        },
+        {
+          "texto": "Sobremesa combina só com café, vinho não entra",
+          "verdade": false,
+          "porque": "Doce com doce é das harmonizações mais antigas da mesa; a regra é só escolher o vinho à altura."
+        }
+      ]
+    },
+    {
+      "tipo": "duasverdades",
+      "dificuldade": 2,
+      "calibrar": true,
+      "tema": "Sal e açúcar na taça",
+      "afirmacoes": [
+        "O sal realça a fruta do vinho e suaviza o amargor",
+        "O Porto é um vinho fortificado doce do Douro, em Portugal",
+        "Sobremesa pede o vinho mais seco possível, pra equilibrar"
+      ],
+      "mentira": 2,
+      "porque": "É o contrário: vinho menos doce que a sobremesa parece magro e azedo; doce pede doce à altura."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 3,
+      "calibrar": true,
+      "pergunta": "Sobremesa bem doce na mesa e duas garrafas: um moscatel doce e um brut sequíssimo. Qual segura a onda?",
+      "opcoes": [
+        "O moscatel: doce com doce, ninguém apaga ninguém",
+        "O brut: o contraste seco refresca",
+        "Tanto faz, espumante é tudo igual"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. O contraste seco parece elegante, mas a sobremesa engole o brut.",
+      "erroMsg": "Essa engana muita gente: ao lado de muito açúcar, o brut parece azedo e magro. A sobremesa pede um vinho no mínimo tão doce quanto ela.",
+      "porque": "O açúcar do prato rebaixa a doçura percebida do vinho; só um vinho doce de verdade fica de pé ao lado da sobremesa."
+    },
+    {
+      "tipo": "slider",
+      "dificuldade": 2,
+      "pergunta": "Na régua da doçura, onde está um Porto clássico?",
+      "labelMin": "seco",
+      "labelMax": "bem doce",
+      "alvo": 80,
+      "tolerancia": 15,
+      "porque": "O Porto é fortificado e doce: mora no lado direito da régua, pronto pra sobremesa e pro queijo azul."
+    },
+    {
+      "tipo": "intruso",
+      "dificuldade": 3,
+      "pergunta": "Qual destes NÃO é um par de sal com doce?",
+      "opcoes": [
+        "Gorgonzola com Porto",
+        "Queijo coalho com goiabada",
+        "Alface com azeite",
+        "Parmesão com mel"
+      ],
+      "intruso": 2,
+      "regra": "Sal realçando doce é o jogo dos outros três; a salada de alface nem entrou no estádio."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Pra fechar: a sobremesa nunca pode ser mais doce que...",
+      "opcoes": [
+        "O vinho na taça",
+        "O café",
+        "O prato principal"
+      ],
+      "correta": 0,
+      "okMsg": "Fechou. Doce com doce, e a sobremesa nunca por cima.",
+      "erroMsg": "Respira: o vinho precisa empatar ou ganhar no açúcar, senão ele azeda na comparação.",
+      "porque": "Se a sobremesa supera o vinho em doçura, o vinho parece magro e azedo: o açúcar da taça manda."
+    }
+  ],
+  "aplicacao": "No próximo jantar com sobremesa, troque o brut de sempre por um moscatel ou um Porto: o final da noite muda de categoria.",
+  "recap": "Doce pede vinho no mínimo tão doce quanto ele, e o sal é o melhor amigo do vinho doce: gorgonzola com Porto é a prova.",
+  "voceAgoraSabe": [
+    "Você sabe a regra da sobremesa: o doce do prato nunca maior que o do vinho",
+    "Você entende por que sal com doce funciona e tem o par gorgonzola com Porto no repertório"
+  ],
+  "curiosidade": "O Porto nasceu de uma solução prática: diz a história mais contada que a aguardente entrava no vinho pra ele aguentar a viagem de navio até a Inglaterra. O reforço interrompia a fermentação, guardava o açúcar da uva e criou um clássico.",
+  "teaser": "Na próxima lição, tudo junto na mesa mais nossa: feijoada, moqueca, churrasco, pizza e queijo coalho."
+}

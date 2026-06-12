@@ -1,0 +1,43 @@
+/* ---------- Pratica livre: drill do banco da fabrica ---------- */
+
+.pratica-contagem {
+  font: 500 var(--text-sm) / 1 var(--font-mono);
+  color: var(--neutral-500);
+  font-variant-numeric: tabular-nums;
+}
+
+.pratica-nota {
+  font-size: var(--text-xs);
+  color: var(--neutral-500);
+}
+
+.vazio-selo-ok {
+  background: var(--ok-100);
+  color: var(--ok-700);
+}
+
+.pratica-placar {
+  display: flex;
+  gap: var(--space-3);
+  margin: var(--space-2) 0;
+}
+
+.pratica-ganho {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 0 var(--space-4);
+  border-radius: var(--radius-pill);
+  font: 500 var(--text-sm) / 1 var(--font-mono);
+}
+
+.pratica-ganho-xp {
+  background: rgba(212, 165, 116, 0.18);
+  color: var(--gold-700);
+}
+
+.pratica-ganho-vida {
+  background: rgba(114, 47, 55, 0.08);
+  color: var(--wine-700);
+}

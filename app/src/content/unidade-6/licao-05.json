@@ -1,0 +1,168 @@
+{
+  "id": "u6-l5",
+  "unidade": "u6",
+  "ordem": 5,
+  "titulo": "Chile e Uruguai: vizinhos de taça",
+  "habilidade": "harmonizacao",
+  "hook": "Uma uva que o mundo deu por desaparecida vivia escondida no Chile. E o Uruguai transformou a uva mais tânica do mundo em programa de domingo. Última parada da viagem.",
+  "fichaCanonica": [
+    "A Carmenère é uma uva de Bordeaux que praticamente sumiu da Europa no século 19 e foi redescoberta no Chile em 1994, onde passava por Merlot havia décadas.",
+    "O Chile é protegido por barreiras naturais, com o deserto do Atacama ao norte, os Andes a leste e o oceano Pacífico a oeste, o que ajudou seus vinhedos a escaparem da filoxera, praga que devastou a Europa.",
+    "Nos vales costeiros frios do Chile, como Casablanca, refrescados pela corrente de Humboldt, nascem brancos frescos como o Sauvignon Blanc, que acompanham bem peixes e frutos do mar.",
+    "A Tannat é a uva emblemática do Uruguai, levada por imigrantes bascos no século 19, e está entre as mais tânicas do mundo: parceira clássica da carne na brasa.",
+    "A Carmenère costuma dar tintos de corpo médio, com tanino mais macio que o do Cabernet Sauvignon, e tem fama de acompanhar bem massas de molho encorpado e carnes assadas."
+  ],
+  "exercicios": [
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Em 1994, um pesquisador olhou de perto um vinhedo de Merlot no Chile e descobriu outra coisa. O quê?",
+      "opcoes": [
+        "Que ali crescia Carmenère, uva dada como sumida da Europa",
+        "Que as videiras eram de plástico",
+        "Que era uva de mesa comum"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. A uva passou décadas disfarçada de Merlot, e a confusão virou orgulho nacional.",
+      "erroMsg": "Tudo bem. Era a Carmenère, que a Europa dava por perdida: ela vivia escondida entre os Merlot chilenos.",
+      "porque": "A Carmenère sumiu de Bordeaux no século 19 e reapareceu em 1994 no Chile, confundida com Merlot."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Qual uva é o emblema do Uruguai?",
+      "opcoes": [
+        "Tannat",
+        "Chardonnay",
+        "Sangiovese"
+      ],
+      "correta": 0,
+      "okMsg": "Exato. A velha conhecida da régua do tanino tem passaporte uruguaio.",
+      "erroMsg": "Quase. É a Tannat, a uva de tanino firme que os imigrantes bascos levaram pro Uruguai.",
+      "porque": "A Tannat chegou com imigrantes bascos no século 19 e virou a bandeira do vinho uruguaio."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 2,
+      "pergunta": "Deserto ao norte, Andes a leste, Pacífico a oeste: o que esse cercado natural deu ao Chile?",
+      "opcoes": [
+        "Vinhedos protegidos, que escaparam da praga filoxera",
+        "Vinho com gosto de sal",
+        "Uvas sem casca"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. A geografia virou muralha, e as videiras agradecem até hoje.",
+      "erroMsg": "Quase. As barreiras naturais isolaram os vinhedos, e a filoxera que devastou a Europa quase não entrou.",
+      "porque": "Atacama, Andes e Pacífico isolaram o Chile, e seus vinhedos escaparam da praga que arrasou a Europa."
+    },
+    {
+      "tipo": "swipe",
+      "dificuldade": 2,
+      "instrucao": "Harmonização dos vizinhos: o par convence? Deslize.",
+      "cartas": [
+        {
+          "texto": "Sauvignon Blanc da costa fria com frutos do mar",
+          "verdade": true,
+          "porque": "Frescor da corrente de Humboldt com maresia do prato: pesos e acidez alinhados."
+        },
+        {
+          "texto": "Tannat com churrasco gordo",
+          "verdade": true,
+          "porque": "A uva mais tânica com a carne mais gorda: gordura ama tanino."
+        },
+        {
+          "texto": "Tannat com peixe branco delicado",
+          "verdade": false,
+          "porque": "Tanino firme com peixe delicado pode soltar gosto metálico, e o peso esmaga o prato."
+        },
+        {
+          "texto": "Carmenère com massa de molho encorpado",
+          "verdade": true,
+          "porque": "Corpo médio e tanino macio acompanham o molho sem atropelar."
+        },
+        {
+          "texto": "Vinho de costa fria sai doce por causa do mar",
+          "verdade": false,
+          "porque": "Mar frio guarda acidez e frescor; doçura é açúcar residual, outra conversa."
+        }
+      ]
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 2,
+      "calibrar": true,
+      "pergunta": "Mesa de frutos do mar no litoral: qual vizinho você chama?",
+      "opcoes": [
+        "Um branco fresco da costa fria do Chile",
+        "Um Tannat bem tânico",
+        "Um tinto encorpado de sol"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Frescor com maresia, peso com peso: harmonização de viajante experiente.",
+      "erroMsg": "Quase. O mar pede o branco fresco da costa fria; o tanino do Tannat brigaria com o peixe.",
+      "porque": "Peixes e frutos do mar pedem acidez e leveza, a especialidade dos vales costeiros frios chilenos."
+    },
+    {
+      "tipo": "duasverdades",
+      "dificuldade": 2,
+      "tema": "Vizinhos de taça",
+      "afirmacoes": [
+        "A corrente fria de Humboldt refresca vales costeiros do Chile",
+        "A Tannat chegou ao Uruguai com imigrantes bascos",
+        "A Carmenère é uma uva inventada em laboratório no Chile"
+      ],
+      "mentira": 2,
+      "porque": "A Carmenère é antiga de Bordeaux: sumiu da Europa no século 19 e reapareceu no Chile em 1994, escondida entre os Merlot."
+    },
+    {
+      "tipo": "ordenar",
+      "dificuldade": 3,
+      "calibrar": true,
+      "instrucao": "Organize do tanino mais discreto ao mais firme.",
+      "itens": [
+        "Tannat",
+        "Sauvignon Blanc",
+        "Carmenère",
+        "Cabernet Sauvignon"
+      ],
+      "ordemCorreta": [1, 2, 3, 0],
+      "porque": "O branco quase não tem tanino, a Carmenère é o meio macio do caminho, o Cabernet aperta mais e a Tannat mora no topo da régua."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 3,
+      "pergunta": "Prova final dos vizinhos: churrasco do lado uruguaio da fronteira. Qual taça segue a regra da gordura?",
+      "opcoes": [
+        "Tannat: tanino firme pra gordura amansar",
+        "Sauvignon Blanc levinho",
+        "Espumante doce"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. A parrilla e a Tannat são o caso mais famoso da regra na América do Sul.",
+      "erroMsg": "Quase. Carne gorda na brasa pede tanino à altura, e nenhuma uva tem mais tanino que a Tannat.",
+      "porque": "Gordura ama tanino: a carne amansa a Tannat e a Tannat limpa a boca, o par perfeito da parrilla."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Pra fechar a unidade: o que Brasil, Argentina, Chile e Uruguai provam juntos?",
+      "opcoes": [
+        "Que a América do Sul faz vinho pra mesa de todo dia, do espumante ao Tannat",
+        "Que vinho bom precisa de castelo e neve",
+        "Que só a Europa entende de uva"
+      ],
+      "correta": 0,
+      "okMsg": "Viagem completa. Serra, pampa, sertão, altitude e costa fria: tudo isso a poucas horas de você.",
+      "erroMsg": "Respira: a vizinhança inteira faz vinho de respeito, e quase sempre com preço de vizinho.",
+      "porque": "Cada paisagem da América do Sul entrega um estilo, e juntos eles cobrem a mesa inteira."
+    }
+  ],
+  "aplicacao": "Frutos do mar pedem a costa fria do Chile, churrasco pede a Tannat do Uruguai: dois vizinhos, duas respostas prontas pra sua próxima mesa.",
+  "recap": "O Chile guarda a Carmenère redescoberta e os brancos frescos da costa fria; o Uruguai transformou a Tannat, a uva mais tânica, na rainha da parrilla.",
+  "voceAgoraSabe": [
+    "Você conta a história da Carmenère, a uva que voltou do desaparecimento no Chile em 1994",
+    "Você harmoniza os vizinhos: costa fria com frutos do mar, Tannat com churrasco, Carmenère com massas de molho encorpado"
+  ],
+  "curiosidade": "A filoxera, um pulgão minúsculo, destruiu boa parte dos vinhedos da Europa no século 19. Protegido por deserto, cordilheira e oceano, o Chile atravessou a praga quase ileso, e guarda videiras antigas que a Europa perdeu.",
+  "teaser": "Trilha autoral completa. Daqui pra frente o jogo é polir: coroas, desafios do dia e a sua mesa esperam por você."
+}

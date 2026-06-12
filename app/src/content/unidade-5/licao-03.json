@@ -1,0 +1,164 @@
+{
+  "id": "u5-l3",
+  "unidade": "u5",
+  "ordem": 3,
+  "titulo": "Acidez corta e refresca",
+  "habilidade": "harmonizacao",
+  "hook": "Tem um motivo pro limão morar do lado do peixe frito. O vinho sabe fazer o mesmo papel, e hoje você aprende a escalá-lo.",
+  "fichaCanonica": [
+    "A acidez do vinho corta a gordura e limpa o paladar, no mesmo papel do limão espremido sobre a fritura ou o peixe.",
+    "Frituras e pratos gordurosos combinam com brancos de acidez alta e com espumantes: o frescor e as bolhas limpam a boca a cada gole.",
+    "O vinho precisa ter pelo menos a acidez do prato: diante de uma comida mais ácida que ele, o vinho parece mole e apagado.",
+    "Peixes, frutos do mar e saladas com molho cítrico tendem a pedir brancos frescos, como o Sauvignon Blanc.",
+    "Espumante brut com salgados e frituras é um par clássico, da festa brasileira ao balcão de petiscos."
+  ],
+  "exercicios": [
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "O peixe frito chega à mesa. Por que tanta gente espreme limão em cima?",
+      "opcoes": [
+        "O azedinho corta a gordura e refresca a boca",
+        "Pra deixar o peixe mais salgado",
+        "Costume antigo, sem função"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. O limão é o faxineiro da fritura.",
+      "erroMsg": "Quase. O limão corta a gordura e limpa o paladar. Guarde isso: o vinho sabe fazer esse papel.",
+      "porque": "A acidez limpa a gordura da boca, e no vinho ela faz exatamente o serviço do limão."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Qual vinho faz o papel do limão num prato gorduroso?",
+      "opcoes": [
+        "Um branco de acidez alta ou um espumante",
+        "Um tinto encorpado e doce",
+        "Qualquer vinho, desde que sem gás"
+      ],
+      "correta": 0,
+      "okMsg": "Exato. Frescor e bolha são a dupla da faxina.",
+      "erroMsg": "Quase. Quem corta gordura é acidez: branco fresco ou espumante, o limão em forma de taça.",
+      "porque": "Acidez alta e bolhas limpam a boca a cada gole, devolvendo o apetite pra próxima garfada."
+    },
+    {
+      "tipo": "swipe",
+      "dificuldade": 2,
+      "instrucao": "Refresca ou afunda? Deslize.",
+      "cartas": [
+        {
+          "texto": "Espumante brut com coxinha quente",
+          "verdade": true,
+          "porque": "Bolha e acidez cortam a fritura: par clássico de festa brasileira."
+        },
+        {
+          "texto": "Branco fresco com peixe frito",
+          "verdade": true,
+          "porque": "O vinho faz o papel do limão e o prato renasce a cada gole."
+        },
+        {
+          "texto": "Vinho mole, de acidez baixa, com salada de vinagrete",
+          "verdade": false,
+          "porque": "O prato é mais ácido que o vinho, e o vinho fica apagado na taça."
+        },
+        {
+          "texto": "Sauvignon Blanc com frutos do mar",
+          "verdade": true,
+          "porque": "Frescor com maresia: o branco de acidez alta é o par natural do mar."
+        },
+        {
+          "texto": "Fritura só combina com refrigerante",
+          "verdade": false,
+          "porque": "Espumante e brancos frescos limpam a gordura tão bem quanto, gole após gole."
+        }
+      ]
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 2,
+      "pergunta": "Molho de tomate, vinagrete, ceviche: o que essa turma ácida exige do vinho?",
+      "opcoes": [
+        "Que ele seja pelo menos tão ácido quanto o prato",
+        "Que ele seja doce pra compensar",
+        "Que ele seja servido quente"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Acidez se enfrenta com acidez.",
+      "erroMsg": "Quase. Comida mais ácida que o vinho deixa o vinho mole e apagado; ele precisa estar à altura.",
+      "porque": "Quando o prato supera a acidez do vinho, o vinho parece sem vida; os dois precisam estar no mesmo nível de frescor."
+    },
+    {
+      "tipo": "slider",
+      "dificuldade": 2,
+      "pergunta": "Na régua da acidez, onde precisa estar um vinho pra acompanhar ceviche?",
+      "labelMin": "acidez baixa",
+      "labelMax": "acidez alta",
+      "alvo": 85,
+      "tolerancia": 15,
+      "porque": "Ceviche é limão puro: o vinho precisa de acidez à altura pra não apagar."
+    },
+    {
+      "tipo": "duasverdades",
+      "dificuldade": 3,
+      "calibrar": true,
+      "tema": "Frescor na mesa",
+      "afirmacoes": [
+        "A acidez do vinho corta gordura como o limão na fritura",
+        "Espumante com salgados é um par clássico",
+        "Espumante serve só pra brinde, com comida ele não funciona"
+      ],
+      "mentira": 2,
+      "porque": "Bolha e acidez limpam a boca a cada gole: o espumante está entre os vinhos mais versáteis da mesa."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 3,
+      "calibrar": true,
+      "pergunta": "Jantar com fritura e um vinho de acidez baixa na taça. O que acontece?",
+      "opcoes": [
+        "A gordura forra a boca e o vinho não dá conta de limpar",
+        "A fritura fica mais crocante",
+        "O vinho ganha bolhas"
+      ],
+      "correta": 0,
+      "okMsg": "Diagnóstico preciso. Faltou limão nessa taça.",
+      "erroMsg": "Quase. Sem acidez, o vinho não corta a gordura: a boca fica forrada e pesada até o fim do prato.",
+      "porque": "É a acidez que varre a gordura; sem ela, cada garfada empilha peso na boca."
+    },
+    {
+      "tipo": "intruso",
+      "dificuldade": 2,
+      "pergunta": "Qual destes NÃO pede um vinho fresco e ácido?",
+      "opcoes": [
+        "Peixe frito",
+        "Ceviche",
+        "Bolo de chocolate",
+        "Pastel de queijo"
+      ],
+      "intruso": 2,
+      "regra": "Fritura e prato cítrico pedem frescor; sobremesa doce joga em outro campeonato, o da próxima lição."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Pra fechar: fritura na mesa, qual reforço você chama?",
+      "opcoes": [
+        "Espumante ou branco de acidez alta",
+        "Tinto pesado servido quente",
+        "Vinho doce de sobremesa"
+      ],
+      "correta": 0,
+      "okMsg": "Fechou. O limão da taça agora joga no seu time.",
+      "erroMsg": "Respira: fritura pede frescor, e frescor é acidez e bolha. Espumante ou branco vivo resolvem.",
+      "porque": "Acidez e bolhas cortam a gordura da fritura e refrescam a boca pra próxima mordida."
+    }
+  ],
+  "aplicacao": "Na próxima festa com salgadinhos, apresente um espumante brut à bandeja de coxinha: você vai entender na prática o que o limão sempre soube.",
+  "recap": "A acidez do vinho é o limão da taça: corta gordura, refresca a boca e precisa estar à altura dos pratos ácidos.",
+  "voceAgoraSabe": [
+    "Você escala branco fresco ou espumante pra qualquer fritura, como quem espreme limão",
+    "Você sabe que prato ácido exige vinho de acidez igual ou maior, senão o vinho apaga"
+  ],
+  "curiosidade": "Champanhe com batata frita é pedida famosa entre sommeliers mundo afora: a bolha e a acidez transformam o petisco mais simples em dupla de gala.",
+  "teaser": "Na próxima lição, a sobremesa entra na mesa: doce com doce, sal com doce, e um queijo azul com vinho do Porto."
+}

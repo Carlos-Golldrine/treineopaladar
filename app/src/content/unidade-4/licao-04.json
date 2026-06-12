@@ -1,0 +1,168 @@
+{
+  "id": "u4-l4",
+  "unidade": "u4",
+  "ordem": 4,
+  "titulo": "Onde comprar cada garrafa",
+  "habilidade": "rotulo",
+  "hook": "A mesma garrafa pode chegar ótima ou cansada na sua mesa, e a diferença é onde ela morou antes de você. Hoje você escolhe a casa certa pra cada compra.",
+  "fichaCanonica": [
+    "Calor é inimigo do vinho: temperaturas altas aceleram o envelhecimento e, em exposição prolongada, podem cozinhar o vinho, achatando aroma e sabor.",
+    "Luz forte, do sol ou de lâmpadas, degrada o vinho com o tempo; garrafas claras ou transparentes são as mais vulneráveis, e por isso tanta garrafa é de vidro escuro.",
+    "Garrafa com rolha natural guardada em pé por muito tempo tende a ressecar a rolha, o que deixa o ar entrar e estraga o vinho; deitada, a rolha fica úmida e vedando.",
+    "O ideal de guarda é lugar fresco, escuro e de temperatura estável; oscilações grandes de calor e frio desgastam o vinho.",
+    "Vinhos jovens de giro rápido sofrem pouco com algumas semanas em prateleira de loja; o risco cresce para garrafas que passam meses expostas a luz e calor."
+  ],
+  "exercicios": [
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Você deixaria um chocolate no carro num dia de sol?",
+      "opcoes": [
+        "Não, o calor estraga ele rapidinho",
+        "Sim, chocolate aguenta qualquer coisa",
+        "Tanto faz, calor não muda comida"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. E o vinho pensa exatamente igual ao chocolate.",
+      "erroMsg": "Quase. Calor derrete chocolate e cozinha vinho. A garrafa também sofre no carro quente.",
+      "porque": "Calor é o inimigo número um do vinho: acelera o envelhecimento e pode cozinhar a garrafa."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Por que tanta garrafa de vinho é de vidro escuro?",
+      "opcoes": [
+        "Pra proteger o vinho da luz",
+        "Porque vidro escuro é mais barato",
+        "Por moda, sem função nenhuma"
+      ],
+      "correta": 0,
+      "okMsg": "Exato. O vidro escuro é o óculos de sol da garrafa.",
+      "erroMsg": "Quase. Luz forte degrada o vinho com o tempo, e o vidro escuro é a proteção clássica.",
+      "porque": "A luz, do sol ou de lâmpada, estraga o vinho aos poucos, e o vidro escuro filtra boa parte dela."
+    },
+    {
+      "tipo": "swipe",
+      "dificuldade": 2,
+      "instrucao": "Essa garrafa sofreu antes de chegar em você? Deslize.",
+      "cartas": [
+        {
+          "texto": "Meses em pé numa vitrine, com rolha natural e lâmpada forte em cima",
+          "verdade": true,
+          "porque": "Trio de castigos: tempo demais, rolha ressecando em pé e luz batendo direto."
+        },
+        {
+          "texto": "Semanas deitada num depósito fresco e escuro",
+          "verdade": false,
+          "porque": "Essa garrafa morou bem: rolha úmida, sombra e frescor."
+        },
+        {
+          "texto": "Tardes inteiras pegando sol na vitrine da loja",
+          "verdade": true,
+          "porque": "Sol direto é luz e calor ao mesmo tempo, o pior dos mundos pra garrafa."
+        },
+        {
+          "texto": "Estoque com temperatura estável o ano inteiro",
+          "verdade": false,
+          "porque": "Temperatura estável é o que o vinho mais agradece numa guarda."
+        },
+        {
+          "texto": "Verão inteiro na prateleira mais alta, perto do telhado quente",
+          "verdade": true,
+          "porque": "Calor sobe: o alto da prateleira em loja quente é quase um forno lento."
+        }
+      ]
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 2,
+      "pergunta": "Onde o supermercado costuma ganhar a partida?",
+      "opcoes": [
+        "Em vinhos jovens de giro rápido, que ficam pouco tempo na prateleira",
+        "Em garrafas raras de longa guarda",
+        "Em nenhum caso, mercado não serve pra vinho"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Giro rápido protege a garrafa: ela chega, vende e vai embora.",
+      "erroMsg": "Quase. O mercado brilha no vinho jovem que vende rápido, antes que luz e calor cobrem pedágio.",
+      "porque": "Vinhos jovens de giro rápido sofrem pouco com algumas semanas de prateleira, e é isso que o mercado faz bem."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 2,
+      "pergunta": "E a loja especializada, quando vale a visita?",
+      "opcoes": [
+        "Quando você quer conselho, garrafa guardada com cuidado ou algo fora do comum",
+        "Só quando dinheiro não é problema",
+        "Nunca, é tudo igual ao mercado"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. Lá você compra a garrafa e a conversa que vem junto.",
+      "erroMsg": "Quase. A loja especializada existe pra três coisas: orientação, guarda bem feita e rótulos que o mercado não tem.",
+      "porque": "Curadoria, armazenagem cuidadosa e atendimento são o diferencial da loja especializada, e há opção honesta em várias faixas de preço."
+    },
+    {
+      "tipo": "duasverdades",
+      "dificuldade": 2,
+      "calibrar": true,
+      "tema": "Onde a garrafa mora antes de você",
+      "afirmacoes": [
+        "Luz forte degrada o vinho com o tempo",
+        "Rolha natural resseca se a garrafa passa muito tempo em pé",
+        "Vinho aguenta qualquer calor, afinal já passou pela fermentação"
+      ],
+      "mentira": 2,
+      "porque": "Calor é o inimigo número um: acelera o envelhecimento e, no exagero, cozinha o vinho."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 3,
+      "calibrar": true,
+      "pergunta": "Comprar vinho online em pleno verão: o que merece a sua atenção?",
+      "opcoes": [
+        "O tempo que a caixa vai passar no calor do transporte",
+        "A cor do site da loja",
+        "Nada, vinho lacrado é indestrutível"
+      ],
+      "correta": 0,
+      "okMsg": "Isso. A viagem da caixa também conta como guarda.",
+      "erroMsg": "Quase. Dias de caminhão quente fazem o mesmo estrago de uma prateleira quente. No verão, vale escolher envio rápido.",
+      "porque": "O transporte é uma guarda em movimento: calor prolongado na viagem cozinha o vinho igual loja quente."
+    },
+    {
+      "tipo": "intruso",
+      "dificuldade": 3,
+      "pergunta": "Qual destes lugares NÃO maltrata uma garrafa?",
+      "opcoes": [
+        "Vitrine pegando sol",
+        "Em cima da geladeira, perto do motor quente",
+        "Armário fresco, escuro e longe do fogão",
+        "Porta-malas num dia quente"
+      ],
+      "intruso": 2,
+      "regra": "Vinho quer sombra, frescor e sossego; sol, motor de geladeira e porta-malas no verão são fornos disfarçados."
+    },
+    {
+      "tipo": "mc",
+      "dificuldade": 1,
+      "pergunta": "Pra fechar: os três inimigos da garrafa são...",
+      "opcoes": [
+        "Calor, luz e oscilação de temperatura",
+        "Sombra, silêncio e frescor",
+        "Rolha, vidro e rótulo"
+      ],
+      "correta": 0,
+      "okMsg": "Fechou. Agora você olha pra prateleira da loja com outros olhos.",
+      "erroMsg": "Respira: calor, luz e sobe-e-desce de temperatura. Sombra e frescor são os amigos.",
+      "porque": "Calor, luz e oscilação de temperatura são os três desgastes clássicos de uma garrafa mal guardada."
+    }
+  ],
+  "aplicacao": "Antes de levar a garrafa, repare onde ela morava: longe da vitrine ensolarada e das prateleiras quentes do alto, qualquer canal de compra fica mais seguro.",
+  "recap": "Cada canal tem sua hora: mercado pro vinho jovem de giro rápido, loja especializada pra conselho e guarda, internet com atenção ao calor do caminho.",
+  "voceAgoraSabe": [
+    "Você conhece os três inimigos da garrafa: calor, luz e oscilação de temperatura",
+    "Você escolhe o canal pela compra: giro rápido no mercado, orientação e guarda na loja, envio rápido na internet em dia quente"
+  ],
+  "curiosidade": "O defeito do vinho castigado pela luz tem até nome francês: goût de lumière, o gosto de luz, descrito primeiro em champanhes que viviam sob lâmpadas de vitrine.",
+  "teaser": "Na próxima lição, o toque final de quem compra bem: a temperatura certa de servir, com a geladeira de aliada."
+}

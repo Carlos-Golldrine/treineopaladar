@@ -32,6 +32,8 @@ export interface ExercicioMC extends ExercicioBase {
   erroMsg: string;
   /** Explicacao de 1 frase exibida no reveal. */
   porque: string;
+  /** Path de rotulo real (ex.: "/rotulos/{id}.webp"), exibido acima da pergunta. */
+  imagem?: string;
 }
 
 export interface CartaSwipe {
@@ -77,6 +79,8 @@ export interface ExercicioIntruso extends ExercicioBase {
   intruso: number;
   /** A regra do grupo em 1 frase de gente. */
   regra: string;
+  /** Path de rotulo real (ex.: "/rotulos/{id}.webp"), exibido acima da pergunta. */
+  imagem?: string;
 }
 
 export interface ExercicioDuasVerdades extends ExercicioBase {
