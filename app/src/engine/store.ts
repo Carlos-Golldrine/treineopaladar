@@ -17,7 +17,7 @@ import type {
   ScorePaladar,
   Wallet,
 } from './types';
-import { HABILIDADES } from './types';
+import { HABILIDADES, OBJETIVOS } from './types';
 import {
   CRISTAIS_BOAS_VINDAS,
   CRISTAIS_META_DIARIA,
@@ -105,6 +105,16 @@ export function estadoInicial(agora: number): EstadoV1 {
 }
 
 /**
+ * Migra o objetivo persistido para o conjunto vigente de 6 valores.
+ * 'hobby' (conjunto original de 4) vira 'outros'; valor desconhecido
+ * volta a null (o app pergunta de novo, nunca quebra).
+ */
+function migrarObjetivo(bruto: unknown): Objetivo | null {
+  if (bruto === 'hobby') return 'outros';
+  return OBJETIVOS.includes(bruto as Objetivo) ? (bruto as Objetivo) : null;
+}
+
+/**
  * Migra qualquer dado bruto para o formato vigente.
  * Store vazio ou corrompido vira estado inicial (com boas-vindas).
  * Versao igual a vigente: campos faltantes ganham default (forward-compat).
@@ -143,7 +153,7 @@ export function migrar(bruto: unknown, agora: number): EstadoV1 {
       ? dado.microAulas.filter((m): m is string => typeof m === 'string')
       : [],
     ultimoDesafioXp: typeof dado.ultimoDesafioXp === 'string' ? dado.ultimoDesafioXp : null,
-    objetivo: (dado.objetivo as Objetivo | undefined) ?? null,
+    objetivo: migrarObjetivo(dado.objetivo),
     nivelDeclarado: (dado.nivelDeclarado as Nivel | undefined) ?? null,
     onboardingCompleto: dado.onboardingCompleto === true,
   };

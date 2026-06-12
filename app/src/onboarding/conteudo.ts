@@ -112,6 +112,51 @@ const j5Receber: ExercicioMC = {
   porque: 'Espumante refresca, abre o apetite e acompanha entradas salgadas com folga.',
 };
 
+const j5Presente: ExercicioMC = {
+  tipo: 'mc',
+  dificuldade: 2,
+  pergunta: 'Presente para um casal que adora receber visitas. Qual garrafa você leva?',
+  opcoes: [
+    'Um espumante seco, para abrirem bem gelado',
+    'O tinto mais pesado da loja, sem pensar',
+    'Tanto faz, garrafa é tudo igual',
+  ],
+  correta: 0,
+  okMsg: 'Presente entregue, anfitriões conquistados.',
+  erroMsg: 'Quase. Espumante gelado abre qualquer encontro e acompanha os salgados.',
+  porque: 'Espumante se serve bem gelado e acompanha entradas e salgados: presente que já chega pronto para a ocasião.',
+};
+
+const j5Trabalho: ExercicioMC = {
+  tipo: 'mc',
+  dificuldade: 2,
+  pergunta: 'Primeiro dia atendendo. O cliente pediu indicação: um tinto leve para o calor. Qual dica vai junto?',
+  opcoes: [
+    'Uns 20 minutos de geladeira antes de servir',
+    'Deixar a garrafa ao sol para abrir o aroma',
+    'Tinto nunca chega perto da geladeira',
+  ],
+  correta: 0,
+  okMsg: 'Dica de quem vive de vinho.',
+  erroMsg: 'Quase. Tinto leve agradece 20 minutos de geladeira, e o cliente agradece a dica.',
+  porque: 'Tintos leves ficam mais saborosos levemente refrescados. Dica simples que faz o cliente voltar.',
+};
+
+const j5Outros: ExercicioMC = {
+  tipo: 'mc',
+  dificuldade: 2,
+  pergunta: 'Uma garrafa diz seco no rótulo. O que esperar do primeiro gole?',
+  opcoes: [
+    'Um vinho com quase nada de açúcar',
+    'Um vinho que resseca a língua',
+    'Um vinho perto de vencer',
+  ],
+  correta: 0,
+  okMsg: 'Isso. Primeira palavra do rótulo decifrada.',
+  erroMsg: 'Boa tentativa. Seco fala do açúcar: quase nenhum sobrou no vinho.',
+  porque: 'Seco quer dizer pouco açúcar sobrando da fermentação. O nome assusta mais que o gole.',
+};
+
 const j7: ExercicioMC = {
   tipo: 'mc',
   dificuldade: 1,
@@ -132,7 +177,9 @@ export const j5PorObjetivo: Record<Objetivo, ExercicioMC> = {
   mercado: j5Mercado,
   restaurante: j5Restaurante,
   receber: j5Receber,
-  hobby: j5Mercado,
+  presente: j5Presente,
+  trabalho: j5Trabalho,
+  outros: j5Outros,
 };
 
 /* --------------------------- Licao do engine -------------------------- */
@@ -161,7 +208,7 @@ export const licaoFtue: Licao = {
   ],
   curiosidade:
     'A regra dos 20 minutos de geladeira vale ouro no verão: até um tinto encorpado fica mais elegante levemente refrescado.',
-  teaser: 'Na trilha, a primeira parada: por que o tinto seca a boca.',
+  teaser: 'Na trilha, a primeira parada: seco, meio seco e suave, sem mistério.',
 };
 
 /* --------------------- Cartas dos interstitials ---------------------- */
@@ -173,10 +220,14 @@ export interface CartaConteudo {
   pontos?: number;
 }
 
+/* J3: grid 2x3, rotulos curtos (1 toque, leitura de relance) */
 export const CARTAS_OBJETIVO: CartaConteudo[] = [
-  { id: 'mercado', rotulo: 'Escolher vinho no mercado' },
-  { id: 'restaurante', rotulo: 'Pedir vinho no restaurante' },
-  { id: 'receber', rotulo: 'Receber bem em casa' },
+  { id: 'mercado', rotulo: 'No mercado' },
+  { id: 'restaurante', rotulo: 'No restaurante' },
+  { id: 'receber', rotulo: 'Recebendo em casa' },
+  { id: 'presente', rotulo: 'Presentear' },
+  { id: 'trabalho', rotulo: 'Trabalho com vinho' },
+  { id: 'outros', rotulo: 'Outro motivo' },
 ];
 
 export const CARTAS_NIVEL: CartaConteudo[] = [
@@ -200,6 +251,8 @@ export const FALAS = {
     mercado: 'Boa. A prateleira vai virar terreno seu.',
     restaurante: 'Boa. A carta de vinhos vira aliada.',
     receber: 'Boa. Seus encontros vão ficar famosos.',
-    hobby: 'Boa. Curiosidade é o melhor começo.',
+    presente: 'Boa. Presente com história ninguém esquece.',
+    trabalho: 'Boa. Seu cliente vai notar a diferença.',
+    outros: 'Boa. Curiosidade é o melhor começo.',
   } as Record<Objetivo, string>,
 } as const;

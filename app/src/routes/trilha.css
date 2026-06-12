@@ -44,6 +44,24 @@
   color: var(--neutral-400);
 }
 
+/* Nota discreta do objetivo (so trabalho tem: urgencia com prazo real) */
+.trilha-nota {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: var(--space-2) var(--space-4) 0;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-control);
+  background: rgba(212, 165, 116, 0.14);
+  color: var(--wine-900);
+  font-size: var(--text-xs);
+  line-height: 1.4;
+}
+
+.trilha-nota .ic {
+  color: var(--gold-700);
+}
+
 /* ---------- Cartao de pratica livre ---------- */
 .pratica-card {
   display: flex;

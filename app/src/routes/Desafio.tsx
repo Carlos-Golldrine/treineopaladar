@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { obterStore } from '../engine';
 import type { ExercicioMC } from '../engine';
 import { ExMC } from '../licao/ExMC';
@@ -21,6 +22,21 @@ interface VinhoRevelado {
   uva: string;
   pais: string;
   faixaPreco: string;
+  /**
+   * Doçura do rótulo (seco / meio seco / suave), opcional: a fábrica
+   * inclui o subtipo onde o banco tem o dado. É a informação que o
+   * público diz não achar no rótulo (DD C6), por isso vira chip
+   * destacado quando existe. Aceita as duas grafias do pipeline.
+   */
+  subtipoDocura?: string;
+  subtipo_docura?: string;
+}
+
+/** Doçura exibível do vinho revelado (qualquer grafia do pipeline). */
+function docuraDoVinho(vinho: VinhoRevelado): string | null {
+  const bruto = vinho.subtipoDocura ?? vinho.subtipo_docura ?? '';
+  const limpo = bruto.trim().toLowerCase();
+  return limpo.length > 0 ? limpo : null;
 }
 
 interface DesafioDia {
@@ -131,6 +147,8 @@ const COMO_FUNCIONA: { icone: NomeIcone; text: string }[] = [
 
 export default function Desafio() {
   const dia = useMemo(() => diaSaoPaulo(Date.now()), []);
+  const [params] = useSearchParams();
+  const cena = params.get('cena');
   const [desafio, setDesafio] = useState<DesafioDia | null>(null);
   const [etapa, setEtapa] = useState<Etapa>({ t: 'carregando' });
 
@@ -140,6 +158,18 @@ export default function Desafio() {
     import('../content/pratica/desafios.json').then((mod) => {
       if (!vivo) return;
       const dado = mod.default as unknown as ArquivoDesafios;
+      /* Cena demo (screenshots e e2e): resultado com chip de docura,
+         sem gravar nada. Dado real continua vindo so do banco. */
+      if (cena === 'resultado') {
+        const base = dado.desafios[0];
+        setDesafio({ ...base, vinho: { ...base.vinho, subtipoDocura: 'seco' } });
+        setEtapa({
+          t: 'resultado',
+          tentativa: { data: dia, acertos: 3, grade: '■■□■' },
+          xpGanho: null,
+        });
+        return;
+      }
       const escolhido = dado.desafios[indiceDoDia(dia, dado.desafios.length)];
       setDesafio(escolhido);
       const tentativa = lerTentativa(dia);
@@ -148,7 +178,7 @@ export default function Desafio() {
     return () => {
       vivo = false;
     };
-  }, [dia]);
+  }, [dia, cena]);
 
   const concluir = (acertosArr: boolean[]) => {
     const grade = acertosArr.map((ok) => (ok ? '■' : '□')).join('');
@@ -398,6 +428,11 @@ function ResultadoHoje({
           </div>
           <div className="revelado-info">
             <h3 className="revelado-nome">{desafio.vinho.nome}</h3>
+            {docuraDoVinho(desafio.vinho) && (
+              <p className="chip-docura" aria-label={`Doçura: ${docuraDoVinho(desafio.vinho)}`}>
+                {docuraDoVinho(desafio.vinho)}
+              </p>
+            )}
             <dl className="revelado-fatos">
               <div className="revelado-fato">
                 <dt>Uva</dt>

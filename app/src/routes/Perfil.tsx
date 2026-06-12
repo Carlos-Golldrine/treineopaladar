@@ -2,8 +2,10 @@ import { useState } from 'react';
 import { Ic } from '../icones/Icones';
 import { LogoTchin } from '../icones/LogoTchin';
 import { definirSom, somLigado } from '../som/som';
-import { useProgresso, useWallet } from '../engine';
-import type { Habilidade } from '../engine';
+import { OBJETIVOS, obterStore, useProgresso, useWallet } from '../engine';
+import type { Habilidade, Objetivo } from '../engine';
+import { ICONE_OBJETIVO, ROTULO_OBJETIVO } from '../trilha/objetivo';
+import { Sheet } from '../components/Sheet';
 
 import './perfil.css';
 
@@ -24,13 +26,19 @@ function desdeQuando(criadoEm: number): string {
 
 export default function Perfil() {
   const [som, setSom] = useState(somLigado);
+  const [trocandoObjetivo, setTrocandoObjetivo] = useState(false);
   const { wallet, streakEfetivo } = useWallet();
-  const { scorePaladar } = useProgresso();
+  const { scorePaladar, objetivo } = useProgresso();
 
   const alternarSom = () => {
     const novo = !som;
     setSom(novo);
     definirSom(novo);
+  };
+
+  const trocarObjetivo = (novo: Objetivo) => {
+    obterStore().definirObjetivo(novo);
+    setTrocandoObjetivo(false);
   };
 
   const algumScore = DIMENSOES.some(({ chave }) => Math.round(scorePaladar[chave]) > 0);
@@ -126,7 +134,48 @@ export default function Perfil() {
             {som ? 'on' : 'off'}
           </span>
         </button>
+
+        {objetivo && (
+          <button
+            type="button"
+            className="ajuste-som tap app-chrome"
+            onClick={() => setTrocandoObjetivo(true)}
+            aria-label={`Treinando para: ${ROTULO_OBJETIVO[objetivo]}. Tocar para trocar`}
+          >
+            <span className="ajuste-icone">
+              <Ic nome={ICONE_OBJETIVO[objetivo]} size={22} />
+            </span>
+            <span className="ajuste-textos">
+              <span className="ajuste-titulo">Treinando para: {ROTULO_OBJETIVO[objetivo]}</span>
+              <span className="ajuste-sub">A ordem da trilha segue esse objetivo</span>
+            </span>
+            <span className="ajuste-estado">trocar</span>
+          </button>
+        )}
       </section>
+
+      {trocandoObjetivo && (
+        <Sheet titulo="Treinar para quê?" onFechar={() => setTrocandoObjetivo(false)}>
+          <p className="folha-texto">
+            A trilha reorganiza as unidades pelo seu objetivo. Nada se perde: só muda a ordem do
+            caminho.
+          </p>
+          <div className="objetivo-lista" role="group" aria-label="Objetivos">
+            {OBJETIVOS.map((o) => (
+              <button
+                key={o}
+                type="button"
+                className={`objetivo-opcao tap${o === objetivo ? ' objetivo-atual' : ''}`}
+                aria-pressed={o === objetivo}
+                onClick={() => trocarObjetivo(o)}
+              >
+                <Ic nome={ICONE_OBJETIVO[o]} size={20} />
+                <span>{ROTULO_OBJETIVO[o]}</span>
+              </button>
+            ))}
+          </div>
+        </Sheet>
+      )}
 
       <section className="save-cta">
         <button type="button" className="btn btn-outline tap">

@@ -23,17 +23,19 @@ interface Props {
   selecionada: string | null;
   /** Fala do mascote apos a escolha (max 8 palavras). */
   reacao: string | null;
+  /** Grid 2 colunas de cards compactos (J3 com 6 objetivos). */
+  emGrade?: boolean;
   onEscolher: (id: string) => void;
   /** Quando presente, mostra o botao Continuar apos a escolha (J3). */
   onContinuar?: () => void;
 }
 
-export function CartasEscolha({ pergunta, sub, cartas, selecionada, reacao, onEscolher, onContinuar }: Props) {
+export function CartasEscolha({ pergunta, sub, cartas, selecionada, reacao, emGrade, onEscolher, onContinuar }: Props) {
   return (
     <div className="ex">
       <h2 className="ex-pergunta">{pergunta}</h2>
       {sub && <p className="ex-dica">{sub}</p>}
-      <div className="ex-opcoes" role="group" aria-label="Opções">
+      <div className={`ex-opcoes${emGrade ? ' cartas-grade' : ''}`} role="group" aria-label="Opções">
         {cartas.map((carta, i) => (
           <button
             key={carta.id}

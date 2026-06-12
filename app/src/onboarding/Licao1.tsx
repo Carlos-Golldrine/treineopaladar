@@ -8,7 +8,7 @@ import { vibrar } from '../licao/tipos';
 import { ExMC } from '../licao/ExMC';
 import { PainelReveal } from '../licao/Feedback';
 import { Ic } from '../icones/Icones';
-import type { NomeIcone } from '../icones/Icones';
+import { ICONE_OBJETIVO } from '../trilha/objetivo';
 import { tocar } from '../som/som';
 import {
   CARTAS_NIVEL,
@@ -41,13 +41,10 @@ export default function LicaoUm() {
 
 /* --------------------------- Vista comum ----------------------------- */
 
-const ICONES_OBJETIVO: Record<string, NomeIcone> = {
-  mercado: 'cesta-mercado',
-  restaurante: 'restaurante',
-  receber: 'casa',
-};
-
-const cartasObjetivo: CartaUi[] = CARTAS_OBJETIVO.map((c) => ({ ...c, icone: ICONES_OBJETIVO[c.id] }));
+const cartasObjetivo: CartaUi[] = CARTAS_OBJETIVO.map((c) => ({
+  ...c,
+  icone: ICONE_OBJETIVO[c.id as Objetivo],
+}));
 const cartasNivel: CartaUi[] = CARTAS_NIVEL;
 
 /** Fala do mascote na faixa do FTUE, com a emocao certa para o momento. */
@@ -292,6 +289,7 @@ function LicaoUmReal() {
           cartas={cartasObjetivo}
           selecionada={objetivoSel}
           reacao={objetivoSel ? FALAS.objetivo[objetivoSel] : null}
+          emGrade
           onEscolher={escolherObjetivo}
           onContinuar={objetivoSel ? irParaProxima : undefined}
         />
@@ -345,6 +343,7 @@ function LicaoUmDemo({ cena }: { cena: string }) {
           cartas={cartasObjetivo}
           selecionada="mercado"
           reacao={FALAS.objetivo.mercado}
+          emGrade
           onEscolher={nada}
           onContinuar={nada}
         />

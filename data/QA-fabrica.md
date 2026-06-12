@@ -1,7 +1,7 @@
 # QA — Fabrica de questoes (deterministica, sem LLM)
 
 **Gerado por:** `scripts/fabrica_questoes.py` (seed 20260611, idempotente). Fonte: `data/vinhos_clean.csv` filtrada por `view_estrita=True` e `preco_valido!=False` + filtro defensivo de nao-vinhos.
-**Quando:** 2026-06-12 02:20 UTC · duracao 28.8s
+**Quando:** 2026-06-12 07:09 UTC · duracao 31.9s
 
 ## Totais
 
@@ -41,13 +41,36 @@
 |---|---|
 | rotulo | 162 |
 | harmonizacao | 78 |
-| acidez | 67 |
-| frutado | 60 |
-| tanino | 45 |
-| corpo | 35 |
+| acidez | 73 |
+| frutado | 61 |
+| tanino | 41 |
 | docura | 33 |
+| corpo | 32 |
 
-Bundle: 420 exercicios de vinhos com imagem baixada · 420 de vinhos do mercado BR.
+Bundle: 365 exercicios de vinhos com imagem baixada · 418 de vinhos do mercado BR.
+
+## Distribuicao de preco (correcao C3 da DD de publico)
+
+A faixa real de compra do publico e R$30-80; a mediana do banco (R$108) nao descreve o cenario-base. A curadoria pondera a selecao por faixa: 30-80 tem prioridade nas dificuldades 1-2 de todos os templates, 80-150 e neutra e acima de 150 vira conteudo aspiracional concentrado na dificuldade 3. Meta: 45% ou mais do bundle com vinhos de R$30-80.
+
+| faixa | antes (12/jun, pre-C3) | depois |
+|---|---|---|
+| abaixo de R$30 | 2 (0%) | 0 (0%) |
+| R$30-80 (gondola do publico) | 44 (9%) | 293 (61%) |
+| R$80-150 | 57 (12%) | 9 (2%) |
+| acima de R$150 (aspiracional) | 317 (66%) | 118 (25%) |
+| sem vinho ancorado (intruso-uva) | 60 (12%) | 60 (12%) |
+| vinho sem preco de referencia | 0 (0%) | 0 (0%) |
+
+### Depois, por dificuldade
+
+| dificuldade | <30 | 30-80 | 80-150 | >150 | sem vinho | sem preco |
+|---|---|---|---|---|---|---|
+| 1 | 0 | 147 | 0 | 15 | 24 | 0 |
+| 2 | 0 | 146 | 9 | 7 | 24 | 0 |
+| 3 | 0 | 0 | 0 | 96 | 12 | 0 |
+
+Desafios do Dia com vinho de R$30-150 (gondola BR): 40/40 (antes: 11/40). Por faixa: <30 0 · 30-80 21 · 80-150 19 · >150 0.
 
 ## Taxa de descarte por regra de validacao
 
@@ -85,18 +108,18 @@ Aproveitamento: 19497 aceitos / 37112 tentados (53%).
 ### de-onde-vem
 
 - (dif 3) O Sassicaia vem da Itália. De qual região? **Opcoes:** Piemonte / Puglia / Sicilia / Toscana **Resposta:** Toscana
-- (dif 3) O Bertani Velante Pinot Grigio IGT vem da Itália. De qual região? **Opcoes:** Soave / Puglia / Piemonte / Toscana **Resposta:** Soave
-- (dif 3) O Château Quinault L’Enclos vem da França. De qual região? **Opcoes:** Champagne / Bourgogne / Rhône / Bordeaux **Resposta:** Bordeaux
-- (dif 1) De qual país vem o Almadén Vintage Rosé? **Opcoes:** Itália / Portugal / Brasil / França **Resposta:** Brasil
-- (dif 2) De qual país vem o M. Molitor Brauneberger Mandelgraben Pinot Noir? **Opcoes:** Itália / Alemanha / Espanha / França **Resposta:** Alemanha
+- (dif 3) O Rainwater Medium Dry vem de Portugal. De qual região? **Opcoes:** Douro / Dão / Madeira / Alentejo **Resposta:** Madeira
+- (dif 3) O Arrogant Frog Syrah Viognier Croak Rotie 2022 vem da França. De qual região? **Opcoes:** Bordeaux / Pézenas, Languedoc / Rhône / Bourgogne **Resposta:** Pézenas, Languedoc
+- (dif 1) De qual país vem o Catena Dv Chardonnay 2020? **Opcoes:** Itália / Argentina / Portugal / França **Resposta:** Argentina
+- (dif 2) De qual país vem o Brut N.V? **Opcoes:** Argentina / Brasil / EUA / Chile **Resposta:** EUA
 
 ### harmoniza
 
-- (dif 2) Qual destes pratos costuma cair bem com o Kaufmann Rheingau Riesling Vdp Gutswein 2023? **Opcoes:** Churrasco / Carne vermelha grelhada / Massa ao sugo / Sushi **Resposta:** Sushi
+- (dif 2) Qual destes pratos costuma cair bem com o Blason del Valle Bonarda 2025? **Opcoes:** Ostras frescas / Churrasco / Sushi / Ceviche **Resposta:** Churrasco
 - (dif 3) Qual destes pratos costuma cair bem com o Château Pajzos Hárslevelu "H" Late Harvest? **Opcoes:** Ceviche / Sobremesa de frutas / Sushi / Ostras frescas **Resposta:** Sobremesa de frutas
-- (dif 3) Qual destes pratos costuma cair bem com o Graham's Blend N5? **Opcoes:** Sushi / Ceviche / Ostras frescas / Queijo gorgonzola **Resposta:** Queijo gorgonzola
-- (dif 1) Qual destes pratos costuma cair bem com o Marqués de Murrieta Dalmau? **Opcoes:** Ostras frescas / Sushi / Ceviche / Carne vermelha grelhada **Resposta:** Carne vermelha grelhada
-- (dif 1) Qual destes pratos costuma cair bem com o Santa Carolina Reservado Cabernet Sauvignon 1,5lt? **Opcoes:** Ceviche / Carne vermelha grelhada / Ostras frescas / Sushi **Resposta:** Carne vermelha grelhada
+- (dif 3) Qual destes pratos costuma cair bem com o Paul Mas Rivesaltes Ambre Hors d'Age? **Opcoes:** Ostras frescas / Ceviche / Queijo gorgonzola / Sushi **Resposta:** Queijo gorgonzola
+- (dif 1) Qual destes pratos costuma cair bem com o Santa Carolina Reservado Merlot? **Opcoes:** Ceviche / Sushi / Massa ao sugo / Ostras frescas **Resposta:** Massa ao sugo
+- (dif 1) Qual destes pratos costuma cair bem com o Drama Red Blend? **Opcoes:** Sushi / Ostras frescas / Ceviche / Carne vermelha grelhada **Resposta:** Carne vermelha grelhada
 
 ### intruso-uva
 
@@ -108,33 +131,33 @@ Aproveitamento: 19497 aceitos / 37112 tentados (53%).
 
 ### mais-encorpado
 
-- (dif 1) Qual destes costuma ser mais doce? **Opcoes:** Château Lafaurie-Peyraguey / A. Goichot Meursault "Les Narvaux" **Resposta:** Château Lafaurie-Peyraguey
-- (dif 1) Qual destes costuma ser mais doce? **Opcoes:** Château Climens / Montevertine Rosso 2022 **Resposta:** Château Climens
-- (dif 2) Qual destes costuma ser mais doce? **Opcoes:** Luigi Bosca Gewurztraminer Granos Nobles 2024 / Salton Virtude Chardonnay 2023 **Resposta:** Luigi Bosca Gewurztraminer Granos Nobles 2024
-- (dif 1) Qual destes costuma ser mais doce? **Opcoes:** Château Doisy-Védrines / Montagny 1 er cru "Les Coères" 2017 **Resposta:** Château Doisy-Védrines
-- (dif 1) Qual destes costuma ter o tanino mais firme, aquele que seca a boca? **Opcoes:** Machete California 2019 / Fortis **Resposta:** Machete California 2019
+- (dif 1) Qual destes costuma ser mais doce? **Opcoes:** Chile Raposa Andina Sauvignon Blanc / Château Doisy Védrines **Resposta:** Château Doisy Védrines
+- (dif 1) Qual destes costuma ser mais doce? **Opcoes:** B. P. de Rothschild Baronne Pauline / D.v. Catena Zapata Cabernet Malbec 2020 **Resposta:** B. P. de Rothschild Baronne Pauline
+- (dif 2) Qual destes costuma ser mais doce? **Opcoes:** Macaw Tropical / Nat Cool Niepoort **Resposta:** Macaw Tropical
+- (dif 1) Qual destes costuma ser mais doce? **Opcoes:** Arcadia Malbec / Andre Kientzler Alsace Gewurztraminer SGN 2000 **Resposta:** Andre Kientzler Alsace Gewurztraminer SGN 2000
+- (dif 1) Qual destes costuma ter o tanino mais firme, aquele que seca a boca? **Opcoes:** Bianchi Iv Generacion Gran Corte 2022 / Azul Ice Moscato Casa Motter **Resposta:** Bianchi Iv Generacion Gran Corte 2022
 
 ### qual-uva
 
-- (dif 2) O Michele Chiarlo Palás Barolo, da região de Piemonte, é feito principalmente de qual uva? **Opcoes:** Nebbiolo / Sangiovese / Aglianico / Tannat **Resposta:** Nebbiolo
-- (dif 2) O G. Bertrand Héritage Fitou "An 990", da região de Languedoc-Roussillon, é feito principalmente de qual uva? **Opcoes:** Castelão / Grenache / Negroamaro / Trincadeira **Resposta:** Grenache
-- (dif 2) O Morlet La Proportion Dorée White 2019, da região de Califórnia, é feito principalmente de qual uva? **Opcoes:** Sémillon / Malvasia / Gewurztraminer / Viognier **Resposta:** Sémillon
-- (dif 2) O Borsao Selección, da região de Campo de Borja, é feito principalmente de qual uva? **Opcoes:** Castelão / Negroamaro / Trincadeira / Grenache **Resposta:** Grenache
-- (dif 2) O Porto Burmester Ruby, da região de Douro, é feito principalmente de qual uva? **Opcoes:** Touriga Nacional / Corvina / Touriga Franca / Syrah **Resposta:** Touriga Nacional
+- (dif 2) O Donnafugata La Bella Sedàra DOC, da região de Sicilia, é feito principalmente de qual uva? **Opcoes:** Carménère / Trincadeira / Malbec / Nero d'Avola **Resposta:** Nero d'Avola
+- (dif 2) O Frisante Namorico, da região de Vinho de Portugal, é feito principalmente de qual uva? **Opcoes:** Carricante / Loureiro / Arinto / Doña Blanca **Resposta:** Arinto
+- (dif 2) O Veuve D'Argent Rosé Brut, da região de Bourgogne, é feito principalmente de qual uva? **Opcoes:** Barbera / Bobal / Gamay / Nerello Mascalese **Resposta:** Gamay
+- (dif 2) O Celler Del Roure Vermell, da região de Valencia, é feito principalmente de qual uva? **Opcoes:** Castelão / Negroamaro / Grenache / Trincadeira **Resposta:** Grenache
+- (dif 2) O Conde Vimioso Tâmara 2023, da região de Almeirim, Tejo, é feito principalmente de qual uva? **Opcoes:** Merlot / Cabernet Franc / Castelão / Grenache **Resposta:** Castelão
 
 ### rotulo
 
-- (dif 3) Este rótulo é de um vinho feito com qual uva? **Opcoes:** Antão Vaz / Chardonnay / Grenache Blanc / Grillo **Resposta:** Grenache Blanc · imagem: `/rotulos/ca04f082-e04b-4b7d-bb11-392afc1ce135.webp`
-- (dif 2) Olhe o rótulo com calma. Este vinho vem de qual país? **Opcoes:** Itália / Chile / Argentina / Brasil **Resposta:** Itália · imagem: `/rotulos/e5ffd901-05db-41b0-be04-379d7007e879.webp`
+- (dif 3) Este rótulo é de um vinho feito com qual uva? **Opcoes:** Barbera / Bobal / Pinot Noir / Nerello Mascalese **Resposta:** Bobal · imagem: `/rotulos/62e9ddd0-1813-466a-8920-4a11d2e76a84.webp`
+- (dif 2) Olhe o rótulo com calma. Este vinho vem de qual país? **Opcoes:** Portugal / Itália / Chile / França **Resposta:** Chile · imagem: `/rotulos/24204e0d-8c75-4b48-9424-2a03d09abf5a.webp`
 - (dif 3) Olhe o rótulo com calma. Este vinho vem de qual país? **Opcoes:** África do Sul / Chile / Argentina / Brasil **Resposta:** África do Sul · imagem: `/rotulos/f22a3aee-718f-4dc8-a32c-18bb4a0a474d.webp`
-- (dif 2) Olhe o rótulo com calma. Este vinho vem de qual país? **Opcoes:** França / Argentina / Brasil / Chile **Resposta:** França · imagem: `/rotulos/1283e218-15ac-4777-b5d2-52ded780e124.webp`
-- (dif 3) Este rótulo é de um vinho feito com qual uva? **Opcoes:** Marsanne / Antão Vaz / Grenache Blanc / Chardonnay **Resposta:** Antão Vaz · imagem: `/rotulos/416c0710-ca97-4ab9-9a6f-1fda2e8c7f53.webp`
+- (dif 2) Olhe o rótulo com calma. Este vinho vem de qual país? **Opcoes:** Chile / França / Argentina / Brasil **Resposta:** Argentina · imagem: `/rotulos/83b27e6f-b316-4cd8-affa-723ba3c2b913.webp`
+- (dif 3) Este rótulo é de um vinho feito com qual uva? **Opcoes:** Chenin Blanc / Macabeo / Riesling / Grillo **Resposta:** Chenin Blanc · imagem: `/rotulos/dd55e29f-2893-4721-9076-f948a94ed8c3.webp`
 
 ## Desafios do Dia (amostra)
 
-- **desafio-01** · Catena Zapata Malbec Argentino 2022 (Argentina, tinto) · imagem `/rotulos/d3555ff4-ca4a-4a01-98d6-25aac799da80.webp` · perguntas: Para abrir: este vinho é de qual tipo? | Procure a origem no rótulo. De qual país vem este vinho? | E a uva principal deste rótulo, qual é? | Para fechar: qual destes pratos costuma cair bem com este vinho?
-- **desafio-02** · Sassicaia (Itália, tinto) · imagem `/rotulos/5a789f44-152e-463d-a769-b4248fc0b724.webp` · perguntas: Para abrir: este vinho é de qual tipo? | Procure a origem no rótulo. De qual país vem este vinho? | E a uva principal deste rótulo, qual é? | Para fechar: qual destes pratos costuma cair bem com este vinho?
-- **desafio-03** · Miolo Sebrumo Cabernet Sauvignon 2020 (Brasil, tinto) · imagem `/rotulos/648c944b-a5b9-4be2-bcd2-fafa3ea7aa65.webp` · perguntas: Para abrir: este vinho é de qual tipo? | Procure a origem no rótulo. De qual país vem este vinho? | E a uva principal deste rótulo, qual é? | Para fechar: qual destes pratos costuma cair bem com este vinho?
+- **desafio-01** · Miolo Sebrumo Cabernet Sauvignon 2020 (Brasil, tinto) · imagem `/rotulos/648c944b-a5b9-4be2-bcd2-fafa3ea7aa65.webp` · perguntas: Para abrir: este vinho é de qual tipo? | Procure a origem no rótulo. De qual país vem este vinho? | E a uva principal deste rótulo, qual é? | Para fechar: qual destes pratos costuma cair bem com este vinho?
+- **desafio-02** · Vallontano Reserva Merlot 2018 (Brasil, tinto) · imagem `/rotulos/c769b4e6-33a6-4562-8ebe-02278decb8b5.webp` · perguntas: Para abrir: este vinho é de qual tipo? | Procure a origem no rótulo. De qual país vem este vinho? | E a uva principal deste rótulo, qual é? | Para fechar: qual destes pratos costuma cair bem com este vinho?
+- **desafio-03** · Santa Carolina Reservado Sauvignon Blanc (Chile, branco) · imagem `/rotulos/f9721482-33f3-4bf1-8cf9-e2553175541d.webp` · perguntas: Para abrir: este vinho é de qual tipo? | Procure a origem no rótulo. De qual país vem este vinho? | E a uva principal deste rótulo, qual é? | Para fechar: qual destes pratos costuma cair bem com este vinho?
 
 ## Imagens preparadas
 

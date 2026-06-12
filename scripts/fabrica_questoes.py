@@ -1258,12 +1258,16 @@ class Fabrica:
                 continue
             score = (bool(v["regiao"]) + bool(v["harm_texto"]) + (v["pop"] > 50)
                      + (v["uva"] in self.top8_uvas) + (v["pais"] in self.top8_paises))
-            candidatos.append((score, v))
-        candidatos.sort(key=lambda x: (-x[0], -x[1]["pop"], x[1]["id"]))
+            # correcao C3: o Desafio do Dia e o rotulo que a pessoa VE na
+            # gondola; vinhos de R$30-150 do mercado BR vem antes dos
+            # aspiracionais (imagem e metadados seguem obrigatorios acima)
+            gondola = 1 if 30 <= v["preco"] <= 150 else 0
+            candidatos.append((gondola, score, v))
+        candidatos.sort(key=lambda x: (-x[0], -x[1], -x[2]["pop"], x[2]["id"]))
         desafios = []
         por_produtor = Counter()
         por_pais = Counter()
-        for score, v in candidatos:
+        for gondola, score, v in candidatos:
             if len(desafios) >= n:
                 break
             if por_produtor[norm(v["produtor"])] >= 2 or por_pais[v["pais"]] >= 10:
@@ -1435,6 +1439,48 @@ class Fabrica:
 
 # ----------------------------------------------------------------- curadoria
 
+# Correcao C3 da DD de publico (dd-publico/DUE-DILIGENCE-PUBLICO.md): a faixa
+# real de compra do publico e R$30-80 de mercado; a mediana do banco (R$108)
+# nao descreve o cenario-base. Na curadoria, vinho com preco valido em 30-80
+# ganha prioridade nas dificuldades 1-2 de todos os templates; 80-150 e
+# neutro; acima de 150 vira minoritario e concentra na dificuldade 3
+# (conteudo aspiracional). Meta: >= 45% do bundle com vinhos de R$30-80.
+FAIXAS_C3 = ["<30", "30-80", "80-150", ">150"]
+PESO_GONDOLA = 6.0        # 30-80 nas dificuldades 1-2 (cenario-base de compra)
+PESO_ASPIRACIONAL = -4.0  # >150 nas dificuldades 1-2 (sai do cenario-base)
+PESO_DIF3_ALTO = 1.0      # >150 concentra na dificuldade 3
+META_GONDOLA = 0.45
+
+# baseline medido em 12/jun/2026, antes da correcao C3 (bundle de 480)
+BASELINE_C3_BUNDLE = {"<30": 2, "30-80": 44, "80-150": 57, ">150": 317,
+                      "sem_vinho": 60, "sem_preco": 0}
+BASELINE_C3_DESAFIOS_30_150 = 11  # de 40
+
+
+def faixa_c3(preco):
+    if preco is None:
+        return "sem_preco"
+    if preco < 30:
+        return "<30"
+    if preco <= 80:
+        return "30-80"
+    if preco <= 150:
+        return "80-150"
+    return ">150"
+
+
+def peso_preco(preco, dificuldade):
+    """peso de selecao por faixa de preco (correcao C3)."""
+    fx = faixa_c3(preco)
+    if dificuldade <= 2:
+        if fx == "30-80":
+            return PESO_GONDOLA
+        if fx == ">150":
+            return PESO_ASPIRACIONAL
+        return 0.0
+    return PESO_DIF3_ALTO if fx == ">150" else 0.0
+
+
 QUOTAS = {
     # template: (total, {dificuldade: cota})
     "qual-uva": (90, {1: 36, 2: 36, 3: 18}),
@@ -1462,12 +1508,14 @@ def curar_bundle(fab, desafio_ids):
             score += 4.0 * bool(v["img"])
             score += 2.0 * v["mercado_br"]
             score += min(v["pop"], 5000) / 5000.0
+            score += peso_preco(v["preco"], ex["dificuldade"])  # correcao C3
         if ex["template"] == "rotulo" and ex.get("vinhoId") in desafio_ids:
             score -= 10.0  # nao queima rotulo do desafio na pratica
         if ex["template"] == "mais-encorpado":
             vb = por_vinho.get(ex.get("vinhoIdB"))
             if vb:
                 score += 2.0 * vb["mercado_br"]
+                score += 0.5 * peso_preco(vb["preco"], ex["dificuldade"])
         return score
 
     selecionados = []
@@ -1578,6 +1626,53 @@ def escrever_qa(fab, bundle, desafios, dur):
     linhas.append("Bundle: {} exercicios de vinhos com imagem baixada · {} de vinhos do mercado BR.".format(com_img, br))
     linhas.append("")
 
+    linhas.append("## Distribuicao de preco (correcao C3 da DD de publico)")
+    linhas.append("")
+    linhas.append("A faixa real de compra do publico e R$30-80; a mediana do banco (R$108) "
+                  "nao descreve o cenario-base. A curadoria pondera a selecao por faixa: "
+                  "30-80 tem prioridade nas dificuldades 1-2 de todos os templates, 80-150 "
+                  "e neutra e acima de 150 vira conteudo aspiracional concentrado na "
+                  "dificuldade 3. Meta: 45% ou mais do bundle com vinhos de R$30-80.")
+    linhas.append("")
+    faixas = Counter()
+    por_dif_preco = defaultdict(Counter)
+    for e in bundle:
+        v = por_vinho.get(e.get("vinhoId"))
+        fx = faixa_c3(v["preco"]) if v else "sem_vinho"
+        faixas[fx] += 1
+        por_dif_preco[e["dificuldade"]][fx] += 1
+    rotulos_fx = {"<30": "abaixo de R$30", "30-80": "R$30-80 (gondola do publico)",
+                  "80-150": "R$80-150", ">150": "acima de R$150 (aspiracional)",
+                  "sem_vinho": "sem vinho ancorado (intruso-uva)",
+                  "sem_preco": "vinho sem preco de referencia"}
+    base_total = max(1, sum(BASELINE_C3_BUNDLE.values()))
+    linhas.append("| faixa | antes (12/jun, pre-C3) | depois |")
+    linhas.append("|---|---|---|")
+    for fx in FAIXAS_C3 + ["sem_vinho", "sem_preco"]:
+        antes = BASELINE_C3_BUNDLE.get(fx, 0)
+        depois = faixas.get(fx, 0)
+        linhas.append("| {} | {} ({:.0f}%) | {} ({:.0f}%) |".format(
+            rotulos_fx[fx], antes, 100.0 * antes / base_total,
+            depois, 100.0 * depois / max(1, len(bundle))))
+    linhas.append("")
+    linhas.append("### Depois, por dificuldade")
+    linhas.append("")
+    linhas.append("| dificuldade | <30 | 30-80 | 80-150 | >150 | sem vinho | sem preco |")
+    linhas.append("|---|---|---|---|---|---|---|")
+    for d in sorted(por_dif_preco):
+        c = por_dif_preco[d]
+        linhas.append("| {} | {} | {} | {} | {} | {} | {} |".format(
+            d, c["<30"], c["30-80"], c["80-150"], c[">150"],
+            c["sem_vinho"], c["sem_preco"]))
+    linhas.append("")
+    cd = Counter(faixa_c3(por_vinho[d["vinhoId"]]["preco"]) for d in desafios)
+    em_gondola = cd["30-80"] + cd["80-150"]
+    linhas.append("Desafios do Dia com vinho de R$30-150 (gondola BR): {}/{} "
+                  "(antes: {}/40). Por faixa: <30 {} · 30-80 {} · 80-150 {} · >150 {}.".format(
+                      em_gondola, len(desafios), BASELINE_C3_DESAFIOS_30_150,
+                      cd["<30"], cd["30-80"], cd["80-150"], cd[">150"]))
+    linhas.append("")
+
     linhas.append("## Taxa de descarte por regra de validacao")
     linhas.append("")
     linhas.append("| regra | descartes |")
@@ -1633,6 +1728,111 @@ def escrever_qa(fab, bundle, desafios, dur):
 
     with open(OUT_QA, "w", encoding="utf-8") as f:
         f.write("\n".join(linhas))
+
+
+# -------------------------------------------------------------------- self-check
+
+def self_check(fab, bundle, desafios):
+    """imprime a verificacao final: preco por faixa/dificuldade (correcao C3),
+    caps de curadoria, referencias de imagem e schema. Falha dura -> exit 1."""
+    por_vinho = {v["id"]: v for v in fab.vinhos}
+    colunas = FAIXAS_C3 + ["sem_vinho", "sem_preco"]
+    falhas = []
+    print("")
+    print("== SELF-CHECK ==")
+
+    # 1) distribuicao de preco do bundle, por faixa e por dificuldade
+    faixas = Counter()
+    por_dif = defaultdict(Counter)
+    for e in bundle:
+        v = por_vinho.get(e.get("vinhoId"))
+        fx = faixa_c3(v["preco"]) if v else "sem_vinho"
+        faixas[fx] += 1
+        por_dif[e["dificuldade"]][fx] += 1
+    print("Preco do bundle por faixa: " + " · ".join(
+        "{} {}".format(fx, faixas.get(fx, 0)) for fx in colunas))
+    for d in sorted(por_dif):
+        print("  dif {}: ".format(d) + " · ".join(
+            "{} {}".format(fx, por_dif[d].get(fx, 0)) for fx in colunas))
+    pct = faixas["30-80"] / float(max(1, len(bundle)))
+    if pct >= META_GONDOLA:
+        print("Meta C3 (>= {:.0f}% do bundle em R$30-80): OK com {:.1f}%".format(
+            100 * META_GONDOLA, 100 * pct))
+    else:
+        falhas.append("meta_c3: so {:.1f}% do bundle em R$30-80 (meta {:.0f}%)".format(
+            100 * pct, 100 * META_GONDOLA))
+    cd = Counter(faixa_c3(por_vinho[d["vinhoId"]]["preco"]) for d in desafios)
+    print("Desafios do Dia em R$30-150 (gondola BR): {}/{}".format(
+        cd["30-80"] + cd["80-150"], len(desafios)))
+
+    # 2) caps de curadoria (total por template, cota por dificuldade, habilidade)
+    por_t = defaultdict(Counter)
+    for e in bundle:
+        por_t[e["template"]][e["dificuldade"]] += 1
+    caps_ok = True
+    for tmpl, (total, por_d) in QUOTAS.items():
+        c = por_t[tmpl]
+        if sum(c.values()) > total:
+            caps_ok = False
+            falhas.append("cap_template: {} com {} exercicios (cap {})".format(
+                tmpl, sum(c.values()), total))
+        for d, cota in por_d.items():
+            if c[d] > cota:
+                caps_ok = False
+                falhas.append("cap_dificuldade: {} dif {} com {} (cota {})".format(
+                    tmpl, d, c[d], cota))
+    cap_hab = int(sum(t for t, _ in QUOTAS.values()) * CAP_HABILIDADE)
+    hab = Counter(e["habilidade"] for e in bundle)
+    for h, n in hab.items():
+        if n > cap_hab:
+            caps_ok = False
+            falhas.append("cap_habilidade: {} com {} (cap {})".format(h, n, cap_hab))
+    if caps_ok:
+        print("Caps de curadoria (template, dificuldade, habilidade <= {}): mantidos.".format(cap_hab))
+
+    # 3) referencias de imagem (bundle + desafios)
+    rot_dir = os.path.join(BASE, "app", "public", "rotulos")
+    refs = set()
+    for e in bundle:
+        if e.get("imagem"):
+            refs.add(e["imagem"].split("/")[-1].rsplit(".", 1)[0])
+    for d in desafios:
+        refs.add(d["imagem"].split("/")[-1].rsplit(".", 1)[0])
+    sem_origem = sorted(r for r in refs if not (por_vinho.get(r) or {}).get("img"))
+    pendentes = sorted(r for r in refs - set(sem_origem)
+                       if not os.path.exists(os.path.join(rot_dir, r + ".webp")))
+    if sem_origem:
+        falhas.append("imagem_quebrada: {} ids sem origem em data/imagens (ex.: {})".format(
+            len(sem_origem), ", ".join(sem_origem[:3])))
+    if pendentes:
+        print("Imagens referenciadas sem webp em app/public/rotulos: {} "
+              "(rodar scripts/preparar_rotulos.py e re-rodar a fabrica).".format(len(pendentes)))
+    else:
+        print("Referencias de imagem: {} ids, zero quebradas, todas com webp em app/public/rotulos.".format(len(refs)))
+
+    # 4) schema
+    erros_schema = 0
+    for e in bundle:
+        if fab.val._schema(e):
+            erros_schema += 1
+    n_perguntas = 0
+    for d in desafios:
+        for q in d["perguntas"]:
+            n_perguntas += 1
+            if fab.val._schema(q):
+                erros_schema += 1
+    if erros_schema:
+        falhas.append("schema: {} itens invalidos".format(erros_schema))
+    else:
+        print("Schema: ok ({} exercicios do bundle + {} perguntas de desafio).".format(
+            len(bundle), n_perguntas))
+
+    if falhas:
+        print("SELF-CHECK FALHOU:")
+        for item in falhas:
+            print("  - " + item)
+        sys.exit(1)
+    print("SELF-CHECK: tudo certo.")
 
 
 # -------------------------------------------------------------------- main
@@ -1695,6 +1895,7 @@ def main():
     print("Saidas escritas:")
     for p in (OUT_FULL, OUT_BUNDLE, OUT_DESAFIOS, OUT_QA):
         print("  -", os.path.relpath(p, BASE))
+    self_check(fab, bundle, desafios)
 
 
 if __name__ == "__main__":

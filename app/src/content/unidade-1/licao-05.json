@@ -4,7 +4,7 @@
   "ordem": 5,
   "titulo": "Os 4 juntos: leia o vinho inteiro",
   "habilidade": "corpo",
-  "hook": "Secura, água na boca, peso e açúcar: você já conhece os 4 sinais. Hoje eles tocam juntos, como uma banda.",
+  "hook": "Açúcar, secura, água na boca e peso: você já conhece os 4 sinais. Hoje eles tocam juntos, como uma banda.",
   "fichaCanonica": [
     "Doçura e acidez são gostos básicos; o tanino é uma sensação tátil de adstringência; o corpo é a percepção de peso e textura. Os quatro chegam ao cérebro por canais diferentes.",
     "Na prova técnica, o vinho é avaliado em sequência: a doçura na entrada, a acidez pela salivação, o tanino pela secura e o corpo pelo peso do conjunto.",
@@ -52,7 +52,12 @@
         "Corpo pelo peso do conjunto",
         "Acidez pela água na boca"
       ],
-      "ordemCorreta": [1, 3, 0, 2],
+      "ordemCorreta": [
+        1,
+        3,
+        0,
+        2
+      ],
       "porque": "Essa é a sequência da prova clássica: o açúcar fala primeiro e o peso fecha a conta."
     },
     {
@@ -179,5 +184,5 @@
     "Você sugere um perfil de vinho a partir do gosto de quem pediu"
   ],
   "curiosidade": "Provadores profissionais avaliam centenas de vinhos seguindo a mesma sequência que você treinou hoje: doçura, acidez, tanino e corpo. O método da sua mesa é o mesmo dos grandes salões.",
-  "teaser": "Na Unidade 2, as uvas tintas entram em cena: Malbec, Cabernet e Pinot Noir, cada uma com seu jeito de ocupar a taça."
+  "teaser": "Unidade fechada. A próxima parada da sua trilha já vai usar os 4 eixos a seu favor."
 }

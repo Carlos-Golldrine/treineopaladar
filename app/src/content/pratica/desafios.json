@@ -1,162 +1,10 @@
 {
- "geradoEm": "2026-06-12T02:20:50Z",
+ "geradoEm": "2026-06-12T07:09:02Z",
  "seed": 20260611,
  "total": 40,
  "desafios": [
   {
    "id": "desafio-01",
-   "vinhoId": "d3555ff4-ca4a-4a01-98d6-25aac799da80",
-   "imagem": "/rotulos/d3555ff4-ca4a-4a01-98d6-25aac799da80.webp",
-   "perguntas": [
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "rotulo",
-     "pergunta": "Para abrir: este vinho é de qual tipo?",
-     "opcoes": [
-      "Tinto",
-      "Branco",
-      "Espumante"
-     ],
-     "correta": 0,
-     "okMsg": "Exato. Primeira leitura do rótulo no bolso.",
-     "erroMsg": "Acontece. Este é um tinto. Agora você já sabe.",
-     "porque": "A ficha deste vinho marca o tipo tinto."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
-     "opcoes": [
-      "França",
-      "Chile",
-      "Brasil",
-      "Argentina"
-     ],
-     "correta": 3,
-     "okMsg": "É isso mesmo. Origem achada. O rótulo sempre conta.",
-     "erroMsg": "Quase. Este vem da Argentina. Fica para a próxima taça.",
-     "porque": "A ficha deste vinho marca Argentina como país de origem."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "E a uva principal deste rótulo, qual é?",
-     "opcoes": [
-      "Bordô",
-      "Malbec",
-      "Pinot Noir",
-      "Cinsault"
-     ],
-     "correta": 1,
-     "okMsg": "Isso. Uva certa. Seu olho de prateleira está ficando afiado.",
-     "erroMsg": "Acontece. Este é feito de Malbec. Esse detalhe vem com o treino.",
-     "porque": "A ficha deste vinho traz Malbec como uva principal."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "harmonizacao",
-     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
-     "opcoes": [
-      "Queijo curado tipo parmesão",
-      "Sushi",
-      "Ostras frescas",
-      "Ceviche"
-     ],
-     "correta": 0,
-     "okMsg": "Bonito. Mesa posta. Você leu o vinho inteiro.",
-     "erroMsg": "Sem drama. A ficha dele sugere queijo curado tipo parmesão. Agora você já sabe.",
-     "porque": "A ficha deste vinho aponta queijo curado tipo parmesão entre as companhias de mesa."
-    }
-   ],
-   "vinho": {
-    "nome": "Catena Zapata Malbec Argentino 2022",
-    "uva": "Malbec",
-    "pais": "Argentina",
-    "faixaPreco": "acima de R$ 300"
-   }
-  },
-  {
-   "id": "desafio-02",
-   "vinhoId": "5a789f44-152e-463d-a769-b4248fc0b724",
-   "imagem": "/rotulos/5a789f44-152e-463d-a769-b4248fc0b724.webp",
-   "perguntas": [
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "rotulo",
-     "pergunta": "Para abrir: este vinho é de qual tipo?",
-     "opcoes": [
-      "Espumante",
-      "Tinto",
-      "Branco"
-     ],
-     "correta": 1,
-     "okMsg": "Exato. Primeira leitura do rótulo no bolso.",
-     "erroMsg": "Tudo bem. Este é um tinto. Agora você já sabe.",
-     "porque": "A ficha deste vinho marca o tipo tinto."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
-     "opcoes": [
-      "Itália",
-      "Chile",
-      "Argentina",
-      "Brasil"
-     ],
-     "correta": 0,
-     "okMsg": "É isso mesmo. Origem achada. O rótulo sempre conta.",
-     "erroMsg": "Sem drama. Este vem da Itália. Agora você já sabe.",
-     "porque": "A ficha deste vinho marca Itália como país de origem."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "E a uva principal deste rótulo, qual é?",
-     "opcoes": [
-      "Cinsault",
-      "Pinot Noir",
-      "Bordô",
-      "Cabernet Sauvignon"
-     ],
-     "correta": 3,
-     "okMsg": "Exato. Uva certa. Seu olho de prateleira está ficando afiado.",
-     "erroMsg": "Quase. Este é feito de Cabernet Sauvignon. Anota essa para a próxima compra.",
-     "porque": "A ficha deste vinho traz Cabernet Sauvignon como uva principal."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "harmonizacao",
-     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
-     "opcoes": [
-      "Ceviche",
-      "Sushi",
-      "Ostras frescas",
-      "Queijo curado tipo parmesão"
-     ],
-     "correta": 3,
-     "okMsg": "Bonito. Mesa posta. Você leu o vinho inteiro.",
-     "erroMsg": "Acontece. A ficha dele sugere queijo curado tipo parmesão. Agora você já sabe.",
-     "porque": "A ficha deste vinho aponta queijo curado tipo parmesão entre as companhias de mesa."
-    }
-   ],
-   "vinho": {
-    "nome": "Sassicaia",
-    "uva": "Cabernet Sauvignon",
-    "pais": "Itália",
-    "faixaPreco": "acima de R$ 300"
-   }
-  },
-  {
-   "id": "desafio-03",
    "vinhoId": "648c944b-a5b9-4be2-bcd2-fafa3ea7aa65",
    "imagem": "/rotulos/648c944b-a5b9-4be2-bcd2-fafa3ea7aa65.webp",
    "perguntas": [
@@ -232,159 +80,7 @@
    }
   },
   {
-   "id": "desafio-04",
-   "vinhoId": "ea9f611b-e61f-4ff9-9388-124be9fe5964",
-   "imagem": "/rotulos/ea9f611b-e61f-4ff9-9388-124be9fe5964.webp",
-   "perguntas": [
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "rotulo",
-     "pergunta": "Para abrir: este vinho é de qual tipo?",
-     "opcoes": [
-      "Espumante",
-      "Branco",
-      "Tinto"
-     ],
-     "correta": 2,
-     "okMsg": "Isso. Primeira leitura do rótulo no bolso.",
-     "erroMsg": "Sem drama. Este é um tinto. Esse detalhe vem com o treino.",
-     "porque": "A ficha deste vinho marca o tipo tinto."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
-     "opcoes": [
-      "Austrália",
-      "Argentina",
-      "Brasil",
-      "Chile"
-     ],
-     "correta": 0,
-     "okMsg": "Na mosca. Origem achada. O rótulo sempre conta.",
-     "erroMsg": "Sem drama. Este vem da Austrália. Agora você já sabe.",
-     "porque": "A ficha deste vinho marca Austrália como país de origem."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "E a uva principal deste rótulo, qual é?",
-     "opcoes": [
-      "Syrah",
-      "Cinsault",
-      "Bordô",
-      "Pinot Noir"
-     ],
-     "correta": 0,
-     "okMsg": "Exato. Uva certa. Seu olho de prateleira está ficando afiado.",
-     "erroMsg": "Acontece. Este é feito de Syrah. Esse detalhe vem com o treino.",
-     "porque": "A ficha deste vinho traz Syrah como uva principal."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "harmonizacao",
-     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
-     "opcoes": [
-      "Churrasco",
-      "Ceviche",
-      "Ostras frescas",
-      "Sushi"
-     ],
-     "correta": 0,
-     "okMsg": "Exato. Mesa posta. Você leu o vinho inteiro.",
-     "erroMsg": "Sem drama. A ficha dele sugere churrasco. Agora você já sabe.",
-     "porque": "A ficha deste vinho aponta churrasco entre as companhias de mesa."
-    }
-   ],
-   "vinho": {
-    "nome": "Barossa Shiraz 2022",
-    "uva": "Syrah",
-    "pais": "Austrália",
-    "faixaPreco": "acima de R$ 300"
-   }
-  },
-  {
-   "id": "desafio-05",
-   "vinhoId": "4a7a0a36-57ce-4fd5-b896-4e37c5b38a22",
-   "imagem": "/rotulos/4a7a0a36-57ce-4fd5-b896-4e37c5b38a22.webp",
-   "perguntas": [
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "rotulo",
-     "pergunta": "Para abrir: este vinho é de qual tipo?",
-     "opcoes": [
-      "Tinto",
-      "Espumante",
-      "Branco"
-     ],
-     "correta": 0,
-     "okMsg": "Na mosca. Primeira leitura do rótulo no bolso.",
-     "erroMsg": "Quase. Este é um tinto. Fica para a próxima taça.",
-     "porque": "A ficha deste vinho marca o tipo tinto."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
-     "opcoes": [
-      "Brasil",
-      "Argentina",
-      "Espanha",
-      "Itália"
-     ],
-     "correta": 2,
-     "okMsg": "Isso. Origem achada. O rótulo sempre conta.",
-     "erroMsg": "Quase. Este vem da Espanha. Anota essa para a próxima compra.",
-     "porque": "A ficha deste vinho marca Espanha como país de origem."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "E a uva principal deste rótulo, qual é?",
-     "opcoes": [
-      "Cinsault",
-      "Bordô",
-      "Tempranillo",
-      "Pinot Noir"
-     ],
-     "correta": 2,
-     "okMsg": "Bonito. Uva certa. Seu olho de prateleira está ficando afiado.",
-     "erroMsg": "Acontece. Este é feito de Tempranillo. Fica para a próxima taça.",
-     "porque": "A ficha deste vinho traz Tempranillo como uva principal."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "harmonizacao",
-     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
-     "opcoes": [
-      "Ostras frescas",
-      "Ceviche",
-      "Sushi",
-      "Carne vermelha grelhada"
-     ],
-     "correta": 3,
-     "okMsg": "É isso mesmo. Mesa posta. Você leu o vinho inteiro.",
-     "erroMsg": "Acontece. A ficha dele sugere carne vermelha grelhada. Fica para a próxima taça.",
-     "porque": "A ficha deste vinho aponta carne vermelha grelhada entre as companhias de mesa."
-    }
-   ],
-   "vinho": {
-    "nome": "Vinho Tinto Espanhol Marqués de Tomares Cohiba Atmosphere Reserva",
-    "uva": "Tempranillo",
-    "pais": "Espanha",
-    "faixaPreco": "acima de R$ 300"
-   }
-  },
-  {
-   "id": "desafio-06",
+   "id": "desafio-02",
    "vinhoId": "c769b4e6-33a6-4562-8ebe-02278decb8b5",
    "imagem": "/rotulos/c769b4e6-33a6-4562-8ebe-02278decb8b5.webp",
    "perguntas": [
@@ -460,7 +156,7 @@
    }
   },
   {
-   "id": "desafio-07",
+   "id": "desafio-03",
    "vinhoId": "f9721482-33f3-4bf1-8cf9-e2553175541d",
    "imagem": "/rotulos/f9721482-33f3-4bf1-8cf9-e2553175541d.webp",
    "perguntas": [
@@ -536,7 +232,7 @@
    }
   },
   {
-   "id": "desafio-08",
+   "id": "desafio-04",
    "vinhoId": "c9589382-5772-4738-83d1-f496d4cff679",
    "imagem": "/rotulos/c9589382-5772-4738-83d1-f496d4cff679.webp",
    "perguntas": [
@@ -612,7 +308,7 @@
    }
   },
   {
-   "id": "desafio-09",
+   "id": "desafio-05",
    "vinhoId": "d20e8a79-13dd-4fa6-866f-0402b0e4a84a",
    "imagem": "/rotulos/d20e8a79-13dd-4fa6-866f-0402b0e4a84a.webp",
    "perguntas": [
@@ -688,7 +384,7 @@
    }
   },
   {
-   "id": "desafio-10",
+   "id": "desafio-06",
    "vinhoId": "64628b7a-d7f6-46ab-83e6-3b8750654dec",
    "imagem": "/rotulos/64628b7a-d7f6-46ab-83e6-3b8750654dec.webp",
    "perguntas": [
@@ -764,83 +460,7 @@
    }
   },
   {
-   "id": "desafio-11",
-   "vinhoId": "8828548f-ff11-4ee6-88ba-b6374ea03b59",
-   "imagem": "/rotulos/8828548f-ff11-4ee6-88ba-b6374ea03b59.webp",
-   "perguntas": [
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "rotulo",
-     "pergunta": "Para abrir: este vinho é de qual tipo?",
-     "opcoes": [
-      "Tinto",
-      "Branco",
-      "Espumante"
-     ],
-     "correta": 0,
-     "okMsg": "Na mosca. Primeira leitura do rótulo no bolso.",
-     "erroMsg": "Quase. Este é um tinto. Agora você já sabe.",
-     "porque": "A ficha deste vinho marca o tipo tinto."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
-     "opcoes": [
-      "Itália",
-      "Brasil",
-      "Chile",
-      "Argentina"
-     ],
-     "correta": 0,
-     "okMsg": "Na mosca. Origem achada. O rótulo sempre conta.",
-     "erroMsg": "Tudo bem. Este vem da Itália. Esse detalhe vem com o treino.",
-     "porque": "A ficha deste vinho marca Itália como país de origem."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "E a uva principal deste rótulo, qual é?",
-     "opcoes": [
-      "Trincadeira",
-      "Nero d'Avola",
-      "Grenache Noir",
-      "Negroamaro"
-     ],
-     "correta": 3,
-     "okMsg": "Isso. Uva certa. Seu olho de prateleira está ficando afiado.",
-     "erroMsg": "Quase. Este é feito de Negroamaro. Esse detalhe vem com o treino.",
-     "porque": "A ficha deste vinho traz Negroamaro como uva principal."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "harmonizacao",
-     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
-     "opcoes": [
-      "Carne vermelha grelhada",
-      "Ostras frescas",
-      "Sushi",
-      "Ceviche"
-     ],
-     "correta": 0,
-     "okMsg": "Isso. Mesa posta. Você leu o vinho inteiro.",
-     "erroMsg": "Sem drama. A ficha dele sugere carne vermelha grelhada. Esse detalhe vem com o treino.",
-     "porque": "A ficha deste vinho aponta carne vermelha grelhada entre as companhias de mesa."
-    }
-   ],
-   "vinho": {
-    "nome": "F Negroamaro 2021",
-    "uva": "Negroamaro",
-    "pais": "Itália",
-    "faixaPreco": "acima de R$ 300"
-   }
-  },
-  {
-   "id": "desafio-12",
+   "id": "desafio-07",
    "vinhoId": "06579912-d33b-4beb-81d6-3942214fa7b1",
    "imagem": "/rotulos/06579912-d33b-4beb-81d6-3942214fa7b1.webp",
    "perguntas": [
@@ -916,159 +536,7 @@
    }
   },
   {
-   "id": "desafio-13",
-   "vinhoId": "6b926188-d828-4d2d-90a3-7a318363afaf",
-   "imagem": "/rotulos/6b926188-d828-4d2d-90a3-7a318363afaf.webp",
-   "perguntas": [
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "rotulo",
-     "pergunta": "Para abrir: este vinho é de qual tipo?",
-     "opcoes": [
-      "Branco",
-      "Espumante",
-      "Tinto"
-     ],
-     "correta": 2,
-     "okMsg": "É isso mesmo. Primeira leitura do rótulo no bolso.",
-     "erroMsg": "Acontece. Este é um tinto. Agora você já sabe.",
-     "porque": "A ficha deste vinho marca o tipo tinto."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
-     "opcoes": [
-      "Chile",
-      "Argentina",
-      "Portugal",
-      "Brasil"
-     ],
-     "correta": 2,
-     "okMsg": "É isso mesmo. Origem achada. O rótulo sempre conta.",
-     "erroMsg": "Tudo bem. Este vem de Portugal. Agora você já sabe.",
-     "porque": "A ficha deste vinho marca Portugal como país de origem."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "E a uva principal deste rótulo, qual é?",
-     "opcoes": [
-      "Corvina Veronese",
-      "Cabernet Sauvignon",
-      "Touriga Nacional",
-      "Corvina"
-     ],
-     "correta": 2,
-     "okMsg": "É isso mesmo. Uva certa. Seu olho de prateleira está ficando afiado.",
-     "erroMsg": "Sem drama. Este é feito de Touriga Nacional. Agora você já sabe.",
-     "porque": "A ficha deste vinho traz Touriga Nacional como uva principal."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "rotulo",
-     "pergunta": "Para fechar: na gôndola, este vinho costuma ficar em qual faixa de preço?",
-     "opcoes": [
-      "Entre R$ 40 e R$ 90",
-      "Entre R$ 90 e R$ 200",
-      "Até R$ 40",
-      "Acima de R$ 500"
-     ],
-     "correta": 3,
-     "okMsg": "Na mosca. Olho de preço calibrado vale ouro no mercado.",
-     "erroMsg": "Quase. Ele costuma aparecer na faixa acima de r$ 500. Anota essa para a próxima compra.",
-     "porque": "O preço de referência deste vinho no nosso banco fica na faixa acima de r$ 500."
-    }
-   ],
-   "vinho": {
-    "nome": "José Maria da Fonseca Tinto Hexagon 2015",
-    "uva": "Touriga Nacional",
-    "pais": "Portugal",
-    "faixaPreco": "acima de R$ 300"
-   }
-  },
-  {
-   "id": "desafio-14",
-   "vinhoId": "62f01626-6cc0-4cbc-a538-6be7226402a3",
-   "imagem": "/rotulos/62f01626-6cc0-4cbc-a538-6be7226402a3.webp",
-   "perguntas": [
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "rotulo",
-     "pergunta": "Para abrir: este vinho é de qual tipo?",
-     "opcoes": [
-      "Tinto",
-      "Branco",
-      "Espumante"
-     ],
-     "correta": 0,
-     "okMsg": "Exato. Primeira leitura do rótulo no bolso.",
-     "erroMsg": "Acontece. Este é um tinto. Fica para a próxima taça.",
-     "porque": "A ficha deste vinho marca o tipo tinto."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
-     "opcoes": [
-      "Brasil",
-      "Argentina",
-      "Chile",
-      "Itália"
-     ],
-     "correta": 3,
-     "okMsg": "Exato. Origem achada. O rótulo sempre conta.",
-     "erroMsg": "Tudo bem. Este vem da Itália. Fica para a próxima taça.",
-     "porque": "A ficha deste vinho marca Itália como país de origem."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "E a uva principal deste rótulo, qual é?",
-     "opcoes": [
-      "Montepulciano",
-      "Egiodola",
-      "Marselan",
-      "Malbec"
-     ],
-     "correta": 0,
-     "okMsg": "É isso mesmo. Uva certa. Seu olho de prateleira está ficando afiado.",
-     "erroMsg": "Sem drama. Este é feito de Montepulciano. Agora você já sabe.",
-     "porque": "A ficha deste vinho traz Montepulciano como uva principal."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "harmonizacao",
-     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
-     "opcoes": [
-      "Ceviche",
-      "Sushi",
-      "Queijo curado tipo parmesão",
-      "Ostras frescas"
-     ],
-     "correta": 2,
-     "okMsg": "Na mosca. Mesa posta. Você leu o vinho inteiro.",
-     "erroMsg": "Quase. A ficha dele sugere queijo curado tipo parmesão. Fica para a próxima taça.",
-     "porque": "A ficha deste vinho aponta queijo curado tipo parmesão entre as companhias de mesa."
-    }
-   ],
-   "vinho": {
-    "nome": "Podere Frontino Montepulciano d’Abruzzo Riserva 2019",
-    "uva": "Montepulciano",
-    "pais": "Itália",
-    "faixaPreco": "acima de R$ 300"
-   }
-  },
-  {
-   "id": "desafio-15",
+   "id": "desafio-08",
    "vinhoId": "af6617f7-bd5d-478f-a9c2-c70a91bc81f9",
    "imagem": "/rotulos/af6617f7-bd5d-478f-a9c2-c70a91bc81f9.webp",
    "perguntas": [
@@ -1144,83 +612,7 @@
    }
   },
   {
-   "id": "desafio-16",
-   "vinhoId": "0dae9f31-c086-4e6c-924c-ff75a58a82b0",
-   "imagem": "/rotulos/0dae9f31-c086-4e6c-924c-ff75a58a82b0.webp",
-   "perguntas": [
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "rotulo",
-     "pergunta": "Para abrir: este vinho é de qual tipo?",
-     "opcoes": [
-      "Tinto",
-      "Espumante",
-      "Branco"
-     ],
-     "correta": 0,
-     "okMsg": "Na mosca. Primeira leitura do rótulo no bolso.",
-     "erroMsg": "Tudo bem. Este é um tinto. Fica para a próxima taça.",
-     "porque": "A ficha deste vinho marca o tipo tinto."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
-     "opcoes": [
-      "França",
-      "Argentina",
-      "Brasil",
-      "Chile"
-     ],
-     "correta": 1,
-     "okMsg": "Bonito. Origem achada. O rótulo sempre conta.",
-     "erroMsg": "Sem drama. Este vem da Argentina. Agora você já sabe.",
-     "porque": "A ficha deste vinho marca Argentina como país de origem."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "E a uva principal deste rótulo, qual é?",
-     "opcoes": [
-      "Bordô",
-      "Malbec",
-      "Pinot Noir",
-      "Cinsault"
-     ],
-     "correta": 1,
-     "okMsg": "Isso. Uva certa. Seu olho de prateleira está ficando afiado.",
-     "erroMsg": "Sem drama. Este é feito de Malbec. Anota essa para a próxima compra.",
-     "porque": "A ficha deste vinho traz Malbec como uva principal."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "harmonizacao",
-     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
-     "opcoes": [
-      "Ceviche",
-      "Queijo curado tipo parmesão",
-      "Ostras frescas",
-      "Sushi"
-     ],
-     "correta": 1,
-     "okMsg": "Exato. Mesa posta. Você leu o vinho inteiro.",
-     "erroMsg": "Acontece. A ficha dele sugere queijo curado tipo parmesão. Agora você já sabe.",
-     "porque": "A ficha deste vinho aponta queijo curado tipo parmesão entre as companhias de mesa."
-    }
-   ],
-   "vinho": {
-    "nome": "Luigi Bosca Malbec Edición Limitada De Sangre 2022",
-    "uva": "Malbec",
-    "pais": "Argentina",
-    "faixaPreco": "R$ 150 a 300"
-   }
-  },
-  {
-   "id": "desafio-17",
+   "id": "desafio-09",
    "vinhoId": "040a6232-d8cc-4f09-8c1f-fb424524fa20",
    "imagem": "/rotulos/040a6232-d8cc-4f09-8c1f-fb424524fa20.webp",
    "perguntas": [
@@ -1296,1148 +688,7 @@
    }
   },
   {
-   "id": "desafio-18",
-   "vinhoId": "edd0d613-76f9-45e0-9bff-6b71deff088c",
-   "imagem": "/rotulos/edd0d613-76f9-45e0-9bff-6b71deff088c.webp",
-   "perguntas": [
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "rotulo",
-     "pergunta": "Para abrir: este vinho é de qual tipo?",
-     "opcoes": [
-      "Branco",
-      "Tinto",
-      "Espumante",
-      "Rosé"
-     ],
-     "correta": 3,
-     "okMsg": "Bonito. Primeira leitura do rótulo no bolso.",
-     "erroMsg": "Acontece. Este é um rosé. Esse detalhe vem com o treino.",
-     "porque": "A ficha deste vinho marca o tipo rosé."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
-     "opcoes": [
-      "Argentina",
-      "Austrália",
-      "Brasil",
-      "Chile"
-     ],
-     "correta": 1,
-     "okMsg": "Isso. Origem achada. O rótulo sempre conta.",
-     "erroMsg": "Acontece. Este vem da Austrália. Anota essa para a próxima compra.",
-     "porque": "A ficha deste vinho marca Austrália como país de origem."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "E a uva principal deste rótulo, qual é?",
-     "opcoes": [
-      "Pinot Noir",
-      "Cinsault",
-      "Syrah",
-      "Bordô"
-     ],
-     "correta": 2,
-     "okMsg": "É isso mesmo. Uva certa. Seu olho de prateleira está ficando afiado.",
-     "erroMsg": "Acontece. Este é feito de Syrah. Fica para a próxima taça.",
-     "porque": "A ficha deste vinho traz Syrah como uva principal."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "rotulo",
-     "pergunta": "Para fechar: na gôndola, este vinho costuma ficar em qual faixa de preço?",
-     "opcoes": [
-      "Entre R$ 40 e R$ 90",
-      "Entre R$ 200 e R$ 500",
-      "Entre R$ 90 e R$ 200",
-      "Até R$ 40"
-     ],
-     "correta": 1,
-     "okMsg": "Na mosca. Olho de preço calibrado vale ouro no mercado.",
-     "erroMsg": "Sem drama. Ele costuma aparecer na faixa entre r$ 200 e r$ 500. Anota essa para a próxima compra.",
-     "porque": "O preço de referência deste vinho no nosso banco fica na faixa entre r$ 200 e r$ 500."
-    }
-   ],
-   "vinho": {
-    "nome": "Vasse Felix Classic Dry Rosé 2023",
-    "uva": "Syrah",
-    "pais": "Austrália",
-    "faixaPreco": "acima de R$ 300"
-   }
-  },
-  {
-   "id": "desafio-19",
-   "vinhoId": "02885688-c583-4194-b7d4-27441c8de07d",
-   "imagem": "/rotulos/02885688-c583-4194-b7d4-27441c8de07d.webp",
-   "perguntas": [
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "rotulo",
-     "pergunta": "Para abrir: este vinho é de qual tipo?",
-     "opcoes": [
-      "Tinto",
-      "Branco",
-      "Espumante"
-     ],
-     "correta": 0,
-     "okMsg": "Isso. Primeira leitura do rótulo no bolso.",
-     "erroMsg": "Tudo bem. Este é um tinto. Agora você já sabe.",
-     "porque": "A ficha deste vinho marca o tipo tinto."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
-     "opcoes": [
-      "Chile",
-      "França",
-      "Argentina",
-      "Brasil"
-     ],
-     "correta": 2,
-     "okMsg": "Na mosca. Origem achada. O rótulo sempre conta.",
-     "erroMsg": "Sem drama. Este vem da Argentina. Anota essa para a próxima compra.",
-     "porque": "A ficha deste vinho marca Argentina como país de origem."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "E a uva principal deste rótulo, qual é?",
-     "opcoes": [
-      "Cinsault",
-      "Malbec",
-      "Bordô",
-      "Pinot Noir"
-     ],
-     "correta": 1,
-     "okMsg": "Exato. Uva certa. Seu olho de prateleira está ficando afiado.",
-     "erroMsg": "Quase. Este é feito de Malbec. Fica para a próxima taça.",
-     "porque": "A ficha deste vinho traz Malbec como uva principal."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "harmonizacao",
-     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
-     "opcoes": [
-      "Ceviche",
-      "Sushi",
-      "Ostras frescas",
-      "Queijo curado tipo parmesão"
-     ],
-     "correta": 3,
-     "okMsg": "É isso mesmo. Mesa posta. Você leu o vinho inteiro.",
-     "erroMsg": "Acontece. A ficha dele sugere queijo curado tipo parmesão. Anota essa para a próxima compra.",
-     "porque": "A ficha deste vinho aponta queijo curado tipo parmesão entre as companhias de mesa."
-    }
-   ],
-   "vinho": {
-    "nome": "Tikal Amorío Malbec 2022",
-    "uva": "Malbec",
-    "pais": "Argentina",
-    "faixaPreco": "acima de R$ 300"
-   }
-  },
-  {
-   "id": "desafio-20",
-   "vinhoId": "0011c092-3e7b-48ab-8699-dd982ba7035a",
-   "imagem": "/rotulos/0011c092-3e7b-48ab-8699-dd982ba7035a.webp",
-   "perguntas": [
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "rotulo",
-     "pergunta": "Para abrir: este vinho é de qual tipo?",
-     "opcoes": [
-      "Tinto",
-      "Branco",
-      "Espumante"
-     ],
-     "correta": 0,
-     "okMsg": "Isso. Primeira leitura do rótulo no bolso.",
-     "erroMsg": "Sem drama. Este é um tinto. Agora você já sabe.",
-     "porque": "A ficha deste vinho marca o tipo tinto."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
-     "opcoes": [
-      "Espanha",
-      "Itália",
-      "Argentina",
-      "Brasil"
-     ],
-     "correta": 0,
-     "okMsg": "Bonito. Origem achada. O rótulo sempre conta.",
-     "erroMsg": "Sem drama. Este vem da Espanha. Agora você já sabe.",
-     "porque": "A ficha deste vinho marca Espanha como país de origem."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "E a uva principal deste rótulo, qual é?",
-     "opcoes": [
-      "Tempranillo",
-      "Pinot Noir",
-      "Cinsault",
-      "Bordô"
-     ],
-     "correta": 0,
-     "okMsg": "Na mosca. Uva certa. Seu olho de prateleira está ficando afiado.",
-     "erroMsg": "Acontece. Este é feito de Tempranillo. Anota essa para a próxima compra.",
-     "porque": "A ficha deste vinho traz Tempranillo como uva principal."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "harmonizacao",
-     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
-     "opcoes": [
-      "Ostras frescas",
-      "Ceviche",
-      "Sushi",
-      "Carne vermelha grelhada"
-     ],
-     "correta": 3,
-     "okMsg": "Na mosca. Mesa posta. Você leu o vinho inteiro.",
-     "erroMsg": "Tudo bem. A ficha dele sugere carne vermelha grelhada. Fica para a próxima taça.",
-     "porque": "A ficha deste vinho aponta carne vermelha grelhada entre as companhias de mesa."
-    }
-   ],
-   "vinho": {
-    "nome": "Garmón Tinto",
-    "uva": "Tempranillo",
-    "pais": "Espanha",
-    "faixaPreco": "acima de R$ 300"
-   }
-  },
-  {
-   "id": "desafio-21",
-   "vinhoId": "00744e10-6a22-41c2-bcfe-dda499341cef",
-   "imagem": "/rotulos/00744e10-6a22-41c2-bcfe-dda499341cef.webp",
-   "perguntas": [
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "rotulo",
-     "pergunta": "Para abrir: este vinho é de qual tipo?",
-     "opcoes": [
-      "Tinto",
-      "Espumante",
-      "Branco"
-     ],
-     "correta": 0,
-     "okMsg": "Na mosca. Primeira leitura do rótulo no bolso.",
-     "erroMsg": "Acontece. Este é um tinto. Fica para a próxima taça.",
-     "porque": "A ficha deste vinho marca o tipo tinto."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
-     "opcoes": [
-      "Brasil",
-      "Austrália",
-      "Argentina",
-      "Chile"
-     ],
-     "correta": 1,
-     "okMsg": "É isso mesmo. Origem achada. O rótulo sempre conta.",
-     "erroMsg": "Acontece. Este vem da Austrália. Esse detalhe vem com o treino.",
-     "porque": "A ficha deste vinho marca Austrália como país de origem."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "E a uva principal deste rótulo, qual é?",
-     "opcoes": [
-      "Pinot Noir",
-      "Syrah",
-      "Bordô",
-      "Cinsault"
-     ],
-     "correta": 1,
-     "okMsg": "Na mosca. Uva certa. Seu olho de prateleira está ficando afiado.",
-     "erroMsg": "Quase. Este é feito de Syrah. Anota essa para a próxima compra.",
-     "porque": "A ficha deste vinho traz Syrah como uva principal."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "harmonizacao",
-     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
-     "opcoes": [
-      "Sushi",
-      "Churrasco",
-      "Ceviche",
-      "Ostras frescas"
-     ],
-     "correta": 1,
-     "okMsg": "É isso mesmo. Mesa posta. Você leu o vinho inteiro.",
-     "erroMsg": "Quase. A ficha dele sugere churrasco. Agora você já sabe.",
-     "porque": "A ficha deste vinho aponta churrasco entre as companhias de mesa."
-    }
-   ],
-   "vinho": {
-    "nome": "Two Hands Bella's Garden Barossa Valley Shiraz",
-    "uva": "Syrah",
-    "pais": "Austrália",
-    "faixaPreco": "acima de R$ 300"
-   }
-  },
-  {
-   "id": "desafio-22",
-   "vinhoId": "009823e5-7ead-4259-90b7-e2e2c95b1594",
-   "imagem": "/rotulos/009823e5-7ead-4259-90b7-e2e2c95b1594.webp",
-   "perguntas": [
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "rotulo",
-     "pergunta": "Para abrir: este vinho é de qual tipo?",
-     "opcoes": [
-      "Tinto",
-      "Espumante",
-      "Branco"
-     ],
-     "correta": 2,
-     "okMsg": "Exato. Primeira leitura do rótulo no bolso.",
-     "erroMsg": "Acontece. Este é um branco. Esse detalhe vem com o treino.",
-     "porque": "A ficha deste vinho marca o tipo branco."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
-     "opcoes": [
-      "Chile",
-      "Brasil",
-      "Argentina",
-      "França"
-     ],
-     "correta": 3,
-     "okMsg": "Bonito. Origem achada. O rótulo sempre conta.",
-     "erroMsg": "Sem drama. Este vem da França. Esse detalhe vem com o treino.",
-     "porque": "A ficha deste vinho marca França como país de origem."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "E a uva principal deste rótulo, qual é?",
-     "opcoes": [
-      "Chardonnay",
-      "Viognier",
-      "Sauvignon Blanc",
-      "Sémillon"
-     ],
-     "correta": 0,
-     "okMsg": "Exato. Uva certa. Seu olho de prateleira está ficando afiado.",
-     "erroMsg": "Sem drama. Este é feito de Chardonnay. Esse detalhe vem com o treino.",
-     "porque": "A ficha deste vinho traz Chardonnay como uva principal."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "harmonizacao",
-     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
-     "opcoes": [
-      "Carne vermelha grelhada",
-      "Massa ao sugo",
-      "Frango assado",
-      "Churrasco"
-     ],
-     "correta": 2,
-     "okMsg": "Isso. Mesa posta. Você leu o vinho inteiro.",
-     "erroMsg": "Tudo bem. A ficha dele sugere frango assado. Esse detalhe vem com o treino.",
-     "porque": "A ficha deste vinho aponta frango assado entre as companhias de mesa."
-    }
-   ],
-   "vinho": {
-    "nome": "Domaine Bonnardot Molland",
-    "uva": "Chardonnay",
-    "pais": "França",
-    "faixaPreco": "acima de R$ 300"
-   }
-  },
-  {
-   "id": "desafio-23",
-   "vinhoId": "00eefba5-ae0a-41ab-be0d-e339877f9d1c",
-   "imagem": "/rotulos/00eefba5-ae0a-41ab-be0d-e339877f9d1c.webp",
-   "perguntas": [
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "rotulo",
-     "pergunta": "Para abrir: este vinho é de qual tipo?",
-     "opcoes": [
-      "Tinto",
-      "Espumante",
-      "Branco"
-     ],
-     "correta": 0,
-     "okMsg": "Exato. Primeira leitura do rótulo no bolso.",
-     "erroMsg": "Acontece. Este é um tinto. Esse detalhe vem com o treino.",
-     "porque": "A ficha deste vinho marca o tipo tinto."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
-     "opcoes": [
-      "Argentina",
-      "França",
-      "Chile",
-      "Brasil"
-     ],
-     "correta": 1,
-     "okMsg": "É isso mesmo. Origem achada. O rótulo sempre conta.",
-     "erroMsg": "Acontece. Este vem da França. Anota essa para a próxima compra.",
-     "porque": "A ficha deste vinho marca França como país de origem."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "E a uva principal deste rótulo, qual é?",
-     "opcoes": [
-      "Pinot Noir",
-      "Cinsault",
-      "Merlot",
-      "Bordô"
-     ],
-     "correta": 2,
-     "okMsg": "Bonito. Uva certa. Seu olho de prateleira está ficando afiado.",
-     "erroMsg": "Sem drama. Este é feito de Merlot. Esse detalhe vem com o treino.",
-     "porque": "A ficha deste vinho traz Merlot como uva principal."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "harmonizacao",
-     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
-     "opcoes": [
-      "Carne vermelha grelhada",
-      "Ostras frescas",
-      "Ceviche",
-      "Sushi"
-     ],
-     "correta": 0,
-     "okMsg": "Bonito. Mesa posta. Você leu o vinho inteiro.",
-     "erroMsg": "Sem drama. A ficha dele sugere carne vermelha grelhada. Anota essa para a próxima compra.",
-     "porque": "A ficha deste vinho aponta carne vermelha grelhada entre as companhias de mesa."
-    }
-   ],
-   "vinho": {
-    "nome": "LA DEMOISELLE DE SOCIANDO MALLET",
-    "uva": "Merlot",
-    "pais": "França",
-    "faixaPreco": "acima de R$ 300"
-   }
-  },
-  {
-   "id": "desafio-24",
-   "vinhoId": "00f0d3be-2887-4143-bcd7-0e8a6ec74b95",
-   "imagem": "/rotulos/00f0d3be-2887-4143-bcd7-0e8a6ec74b95.webp",
-   "perguntas": [
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "rotulo",
-     "pergunta": "Para abrir: este vinho é de qual tipo?",
-     "opcoes": [
-      "Branco",
-      "Tinto",
-      "Espumante"
-     ],
-     "correta": 1,
-     "okMsg": "É isso mesmo. Primeira leitura do rótulo no bolso.",
-     "erroMsg": "Tudo bem. Este é um tinto. Agora você já sabe.",
-     "porque": "A ficha deste vinho marca o tipo tinto."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
-     "opcoes": [
-      "Brasil",
-      "França",
-      "Chile",
-      "Argentina"
-     ],
-     "correta": 1,
-     "okMsg": "Exato. Origem achada. O rótulo sempre conta.",
-     "erroMsg": "Tudo bem. Este vem da França. Agora você já sabe.",
-     "porque": "A ficha deste vinho marca França como país de origem."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "E a uva principal deste rótulo, qual é?",
-     "opcoes": [
-      "Malbec",
-      "Tannat",
-      "Nebbiolo",
-      "Pinot Noir"
-     ],
-     "correta": 3,
-     "okMsg": "Bonito. Uva certa. Seu olho de prateleira está ficando afiado.",
-     "erroMsg": "Tudo bem. Este é feito de Pinot Noir. Anota essa para a próxima compra.",
-     "porque": "A ficha deste vinho traz Pinot Noir como uva principal."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "rotulo",
-     "pergunta": "Para fechar: na gôndola, este vinho costuma ficar em qual faixa de preço?",
-     "opcoes": [
-      "Até R$ 40",
-      "Entre R$ 90 e R$ 200",
-      "Entre R$ 40 e R$ 90",
-      "Acima de R$ 500"
-     ],
-     "correta": 3,
-     "okMsg": "Na mosca. Olho de preço calibrado vale ouro no mercado.",
-     "erroMsg": "Sem drama. Ele costuma aparecer na faixa acima de r$ 500. Agora você já sabe.",
-     "porque": "O preço de referência deste vinho no nosso banco fica na faixa acima de r$ 500."
-    }
-   ],
-   "vinho": {
-    "nome": "D. Laurent P&F Pommard 1er Cru \"La Refène\"",
-    "uva": "Pinot Noir",
-    "pais": "França",
-    "faixaPreco": "acima de R$ 300"
-   }
-  },
-  {
-   "id": "desafio-25",
-   "vinhoId": "012f49b2-d896-49ec-854b-cd11baf8ff58",
-   "imagem": "/rotulos/012f49b2-d896-49ec-854b-cd11baf8ff58.webp",
-   "perguntas": [
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "rotulo",
-     "pergunta": "Para abrir: este vinho é de qual tipo?",
-     "opcoes": [
-      "Espumante",
-      "Tinto",
-      "Branco"
-     ],
-     "correta": 1,
-     "okMsg": "Exato. Primeira leitura do rótulo no bolso.",
-     "erroMsg": "Acontece. Este é um tinto. Anota essa para a próxima compra.",
-     "porque": "A ficha deste vinho marca o tipo tinto."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
-     "opcoes": [
-      "Chile",
-      "Brasil",
-      "Argentina",
-      "França"
-     ],
-     "correta": 2,
-     "okMsg": "Exato. Origem achada. O rótulo sempre conta.",
-     "erroMsg": "Acontece. Este vem da Argentina. Fica para a próxima taça.",
-     "porque": "A ficha deste vinho marca Argentina como país de origem."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "E a uva principal deste rótulo, qual é?",
-     "opcoes": [
-      "Tannat",
-      "Nebbiolo",
-      "Malbec",
-      "Pinot Noir"
-     ],
-     "correta": 3,
-     "okMsg": "Na mosca. Uva certa. Seu olho de prateleira está ficando afiado.",
-     "erroMsg": "Quase. Este é feito de Pinot Noir. Fica para a próxima taça.",
-     "porque": "A ficha deste vinho traz Pinot Noir como uva principal."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "rotulo",
-     "pergunta": "Para fechar: na gôndola, este vinho costuma ficar em qual faixa de preço?",
-     "opcoes": [
-      "Entre R$ 40 e R$ 90",
-      "Entre R$ 200 e R$ 500",
-      "Até R$ 40",
-      "Entre R$ 90 e R$ 200"
-     ],
-     "correta": 1,
-     "okMsg": "Isso. Olho de preço calibrado vale ouro no mercado.",
-     "erroMsg": "Sem drama. Ele costuma aparecer na faixa entre r$ 200 e r$ 500. Anota essa para a próxima compra.",
-     "porque": "O preço de referência deste vinho no nosso banco fica na faixa entre r$ 200 e r$ 500."
-    }
-   ],
-   "vinho": {
-    "nome": "Otronia 45 Rugientes Pinot Noir",
-    "uva": "Pinot Noir",
-    "pais": "Argentina",
-    "faixaPreco": "R$ 150 a 300"
-   }
-  },
-  {
-   "id": "desafio-26",
-   "vinhoId": "0135cf56-d471-42c7-8da6-b2672fa7f00c",
-   "imagem": "/rotulos/0135cf56-d471-42c7-8da6-b2672fa7f00c.webp",
-   "perguntas": [
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "rotulo",
-     "pergunta": "Para abrir: este vinho é de qual tipo?",
-     "opcoes": [
-      "Espumante",
-      "Branco",
-      "Tinto"
-     ],
-     "correta": 2,
-     "okMsg": "Exato. Primeira leitura do rótulo no bolso.",
-     "erroMsg": "Acontece. Este é um tinto. Esse detalhe vem com o treino.",
-     "porque": "A ficha deste vinho marca o tipo tinto."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
-     "opcoes": [
-      "Brasil",
-      "França",
-      "Chile",
-      "Argentina"
-     ],
-     "correta": 2,
-     "okMsg": "Na mosca. Origem achada. O rótulo sempre conta.",
-     "erroMsg": "Acontece. Este vem do Chile. Fica para a próxima taça.",
-     "porque": "A ficha deste vinho marca Chile como país de origem."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "E a uva principal deste rótulo, qual é?",
-     "opcoes": [
-      "Cinsault",
-      "Cabernet Sauvignon",
-      "Pinot Noir",
-      "Bordô"
-     ],
-     "correta": 1,
-     "okMsg": "Na mosca. Uva certa. Seu olho de prateleira está ficando afiado.",
-     "erroMsg": "Quase. Este é feito de Cabernet Sauvignon. Anota essa para a próxima compra.",
-     "porque": "A ficha deste vinho traz Cabernet Sauvignon como uva principal."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "harmonizacao",
-     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
-     "opcoes": [
-      "Carne vermelha grelhada",
-      "Ceviche",
-      "Sushi",
-      "Ostras frescas"
-     ],
-     "correta": 0,
-     "okMsg": "É isso mesmo. Mesa posta. Você leu o vinho inteiro.",
-     "erroMsg": "Quase. A ficha dele sugere carne vermelha grelhada. Esse detalhe vem com o treino.",
-     "porque": "A ficha deste vinho aponta carne vermelha grelhada entre as companhias de mesa."
-    }
-   ],
-   "vinho": {
-    "nome": "El Principal Memorias 2020 Magnum",
-    "uva": "Cabernet Sauvignon",
-    "pais": "Chile",
-    "faixaPreco": "acima de R$ 300"
-   }
-  },
-  {
-   "id": "desafio-27",
-   "vinhoId": "01454aa5-f348-4c2a-a353-6324ff6bf6d5",
-   "imagem": "/rotulos/01454aa5-f348-4c2a-a353-6324ff6bf6d5.webp",
-   "perguntas": [
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "rotulo",
-     "pergunta": "Para abrir: este vinho é de qual tipo?",
-     "opcoes": [
-      "Branco",
-      "Espumante",
-      "Tinto"
-     ],
-     "correta": 2,
-     "okMsg": "Bonito. Primeira leitura do rótulo no bolso.",
-     "erroMsg": "Quase. Este é um tinto. Esse detalhe vem com o treino.",
-     "porque": "A ficha deste vinho marca o tipo tinto."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
-     "opcoes": [
-      "Brasil",
-      "Chile",
-      "França",
-      "Argentina"
-     ],
-     "correta": 2,
-     "okMsg": "Bonito. Origem achada. O rótulo sempre conta.",
-     "erroMsg": "Acontece. Este vem da França. Anota essa para a próxima compra.",
-     "porque": "A ficha deste vinho marca França como país de origem."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "E a uva principal deste rótulo, qual é?",
-     "opcoes": [
-      "Cinsault",
-      "Syrah",
-      "Bordô",
-      "Pinot Noir"
-     ],
-     "correta": 1,
-     "okMsg": "Na mosca. Uva certa. Seu olho de prateleira está ficando afiado.",
-     "erroMsg": "Acontece. Este é feito de Syrah. Anota essa para a próxima compra.",
-     "porque": "A ficha deste vinho traz Syrah como uva principal."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "harmonizacao",
-     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
-     "opcoes": [
-      "Sushi",
-      "Ceviche",
-      "Churrasco",
-      "Ostras frescas"
-     ],
-     "correta": 2,
-     "okMsg": "Na mosca. Mesa posta. Você leu o vinho inteiro.",
-     "erroMsg": "Sem drama. A ficha dele sugere churrasco. Anota essa para a próxima compra.",
-     "porque": "A ficha deste vinho aponta churrasco entre as companhias de mesa."
-    }
-   ],
-   "vinho": {
-    "nome": "Mazet de Nizas Rouge Syrah - Cabernet Sauvignon",
-    "uva": "Syrah",
-    "pais": "França",
-    "faixaPreco": "R$ 150 a 300"
-   }
-  },
-  {
-   "id": "desafio-28",
-   "vinhoId": "018a9d64-6610-45bc-959e-f37723705415",
-   "imagem": "/rotulos/018a9d64-6610-45bc-959e-f37723705415.webp",
-   "perguntas": [
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "rotulo",
-     "pergunta": "Para abrir: este vinho é de qual tipo?",
-     "opcoes": [
-      "Espumante",
-      "Branco",
-      "Tinto"
-     ],
-     "correta": 0,
-     "okMsg": "Exato. Primeira leitura do rótulo no bolso.",
-     "erroMsg": "Tudo bem. Este é um espumante. Agora você já sabe.",
-     "porque": "A ficha deste vinho marca o tipo espumante."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
-     "opcoes": [
-      "França",
-      "Argentina",
-      "Chile",
-      "Brasil"
-     ],
-     "correta": 0,
-     "okMsg": "Isso. Origem achada. O rótulo sempre conta.",
-     "erroMsg": "Tudo bem. Este vem da França. Fica para a próxima taça.",
-     "porque": "A ficha deste vinho marca França como país de origem."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "E a uva principal deste rótulo, qual é?",
-     "opcoes": [
-      "Tannat",
-      "Nebbiolo",
-      "Pinot Noir",
-      "Malbec"
-     ],
-     "correta": 2,
-     "okMsg": "É isso mesmo. Uva certa. Seu olho de prateleira está ficando afiado.",
-     "erroMsg": "Sem drama. Este é feito de Pinot Noir. Fica para a próxima taça.",
-     "porque": "A ficha deste vinho traz Pinot Noir como uva principal."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "harmonizacao",
-     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
-     "opcoes": [
-      "Carne vermelha grelhada",
-      "Churrasco",
-      "Massa ao sugo",
-      "Frutos do mar"
-     ],
-     "correta": 3,
-     "okMsg": "Na mosca. Mesa posta. Você leu o vinho inteiro.",
-     "erroMsg": "Acontece. A ficha dele sugere frutos do mar. Anota essa para a próxima compra.",
-     "porque": "A ficha deste vinho aponta frutos do mar entre as companhias de mesa."
-    }
-   ],
-   "vinho": {
-    "nome": "Champagne Bollinger La Grande Année Rosé 2014",
-    "uva": "Pinot Noir",
-    "pais": "França",
-    "faixaPreco": "acima de R$ 300"
-   }
-  },
-  {
-   "id": "desafio-29",
-   "vinhoId": "025e7e37-d9ab-4d74-b0db-718c1d7a9a31",
-   "imagem": "/rotulos/025e7e37-d9ab-4d74-b0db-718c1d7a9a31.webp",
-   "perguntas": [
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "rotulo",
-     "pergunta": "Para abrir: este vinho é de qual tipo?",
-     "opcoes": [
-      "Tinto",
-      "Branco",
-      "Espumante"
-     ],
-     "correta": 2,
-     "okMsg": "É isso mesmo. Primeira leitura do rótulo no bolso.",
-     "erroMsg": "Tudo bem. Este é um espumante. Fica para a próxima taça.",
-     "porque": "A ficha deste vinho marca o tipo espumante."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
-     "opcoes": [
-      "Itália",
-      "Argentina",
-      "Brasil",
-      "Chile"
-     ],
-     "correta": 0,
-     "okMsg": "É isso mesmo. Origem achada. O rótulo sempre conta.",
-     "erroMsg": "Sem drama. Este vem da Itália. Anota essa para a próxima compra.",
-     "porque": "A ficha deste vinho marca Itália como país de origem."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "E a uva principal deste rótulo, qual é?",
-     "opcoes": [
-      "Malbec",
-      "Nebbiolo",
-      "Pinot Noir",
-      "Tannat"
-     ],
-     "correta": 2,
-     "okMsg": "Exato. Uva certa. Seu olho de prateleira está ficando afiado.",
-     "erroMsg": "Sem drama. Este é feito de Pinot Noir. Anota essa para a próxima compra.",
-     "porque": "A ficha deste vinho traz Pinot Noir como uva principal."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "harmonizacao",
-     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
-     "opcoes": [
-      "Ostras frescas",
-      "Churrasco",
-      "Carne vermelha grelhada",
-      "Massa ao sugo"
-     ],
-     "correta": 0,
-     "okMsg": "É isso mesmo. Mesa posta. Você leu o vinho inteiro.",
-     "erroMsg": "Tudo bem. A ficha dele sugere ostras frescas. Fica para a próxima taça.",
-     "porque": "A ficha deste vinho aponta ostras frescas entre as companhias de mesa."
-    }
-   ],
-   "vinho": {
-    "nome": "Franciacorta Cuvée Prestige Rosé Edizione 47",
-    "uva": "Pinot Noir",
-    "pais": "Itália",
-    "faixaPreco": "acima de R$ 300"
-   }
-  },
-  {
-   "id": "desafio-30",
-   "vinhoId": "02895dca-9d9d-4edf-85b1-2bddd093db33",
-   "imagem": "/rotulos/02895dca-9d9d-4edf-85b1-2bddd093db33.webp",
-   "perguntas": [
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "rotulo",
-     "pergunta": "Para abrir: este vinho é de qual tipo?",
-     "opcoes": [
-      "Branco",
-      "Tinto",
-      "Espumante"
-     ],
-     "correta": 1,
-     "okMsg": "É isso mesmo. Primeira leitura do rótulo no bolso.",
-     "erroMsg": "Tudo bem. Este é um tinto. Anota essa para a próxima compra.",
-     "porque": "A ficha deste vinho marca o tipo tinto."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
-     "opcoes": [
-      "Brasil",
-      "Chile",
-      "França",
-      "Argentina"
-     ],
-     "correta": 1,
-     "okMsg": "Na mosca. Origem achada. O rótulo sempre conta.",
-     "erroMsg": "Acontece. Este vem do Chile. Esse detalhe vem com o treino.",
-     "porque": "A ficha deste vinho marca Chile como país de origem."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "E a uva principal deste rótulo, qual é?",
-     "opcoes": [
-      "Tannat",
-      "Malbec",
-      "Nebbiolo",
-      "Pinot Noir"
-     ],
-     "correta": 3,
-     "okMsg": "É isso mesmo. Uva certa. Seu olho de prateleira está ficando afiado.",
-     "erroMsg": "Tudo bem. Este é feito de Pinot Noir. Anota essa para a próxima compra.",
-     "porque": "A ficha deste vinho traz Pinot Noir como uva principal."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "rotulo",
-     "pergunta": "Para fechar: na gôndola, este vinho costuma ficar em qual faixa de preço?",
-     "opcoes": [
-      "Entre R$ 90 e R$ 200",
-      "Até R$ 40",
-      "Entre R$ 200 e R$ 500",
-      "Entre R$ 40 e R$ 90"
-     ],
-     "correta": 2,
-     "okMsg": "Isso. Olho de preço calibrado vale ouro no mercado.",
-     "erroMsg": "Sem drama. Ele costuma aparecer na faixa entre r$ 200 e r$ 500. Esse detalhe vem com o treino.",
-     "porque": "O preço de referência deste vinho no nosso banco fica na faixa entre r$ 200 e r$ 500."
-    }
-   ],
-   "vinho": {
-    "nome": "Villard Le Pinot Noir Grand Vin 2024",
-    "uva": "Pinot Noir",
-    "pais": "Chile",
-    "faixaPreco": "acima de R$ 300"
-   }
-  },
-  {
-   "id": "desafio-31",
-   "vinhoId": "0299dfa8-3d2f-47e2-bb9f-20ce4e252877",
-   "imagem": "/rotulos/0299dfa8-3d2f-47e2-bb9f-20ce4e252877.webp",
-   "perguntas": [
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "rotulo",
-     "pergunta": "Para abrir: este vinho é de qual tipo?",
-     "opcoes": [
-      "Branco",
-      "Espumante",
-      "Tinto"
-     ],
-     "correta": 2,
-     "okMsg": "Isso. Primeira leitura do rótulo no bolso.",
-     "erroMsg": "Quase. Este é um tinto. Esse detalhe vem com o treino.",
-     "porque": "A ficha deste vinho marca o tipo tinto."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
-     "opcoes": [
-      "França",
-      "Chile",
-      "Argentina",
-      "Brasil"
-     ],
-     "correta": 0,
-     "okMsg": "Bonito. Origem achada. O rótulo sempre conta.",
-     "erroMsg": "Acontece. Este vem da França. Anota essa para a próxima compra.",
-     "porque": "A ficha deste vinho marca França como país de origem."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "E a uva principal deste rótulo, qual é?",
-     "opcoes": [
-      "Pinot Noir",
-      "Nebbiolo",
-      "Malbec",
-      "Tannat"
-     ],
-     "correta": 0,
-     "okMsg": "Isso. Uva certa. Seu olho de prateleira está ficando afiado.",
-     "erroMsg": "Acontece. Este é feito de Pinot Noir. Fica para a próxima taça.",
-     "porque": "A ficha deste vinho traz Pinot Noir como uva principal."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "rotulo",
-     "pergunta": "Para fechar: na gôndola, este vinho costuma ficar em qual faixa de preço?",
-     "opcoes": [
-      "Entre R$ 40 e R$ 90",
-      "Entre R$ 90 e R$ 200",
-      "Até R$ 40",
-      "Acima de R$ 500"
-     ],
-     "correta": 3,
-     "okMsg": "É isso mesmo. Olho de preço calibrado vale ouro no mercado.",
-     "erroMsg": "Tudo bem. Ele costuma aparecer na faixa acima de r$ 500. Fica para a próxima taça.",
-     "porque": "O preço de referência deste vinho no nosso banco fica na faixa acima de r$ 500."
-    }
-   ],
-   "vinho": {
-    "nome": "Dom. Bonnardot Santenay",
-    "uva": "Pinot Noir",
-    "pais": "França",
-    "faixaPreco": "acima de R$ 300"
-   }
-  },
-  {
-   "id": "desafio-32",
-   "vinhoId": "03446c87-8362-4e80-948b-f5cf6b825496",
-   "imagem": "/rotulos/03446c87-8362-4e80-948b-f5cf6b825496.webp",
-   "perguntas": [
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "rotulo",
-     "pergunta": "Para abrir: este vinho é de qual tipo?",
-     "opcoes": [
-      "Espumante",
-      "Branco",
-      "Tinto"
-     ],
-     "correta": 0,
-     "okMsg": "É isso mesmo. Primeira leitura do rótulo no bolso.",
-     "erroMsg": "Quase. Este é um espumante. Esse detalhe vem com o treino.",
-     "porque": "A ficha deste vinho marca o tipo espumante."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
-     "opcoes": [
-      "Brasil",
-      "França",
-      "Argentina",
-      "Chile"
-     ],
-     "correta": 1,
-     "okMsg": "Bonito. Origem achada. O rótulo sempre conta.",
-     "erroMsg": "Sem drama. Este vem da França. Esse detalhe vem com o treino.",
-     "porque": "A ficha deste vinho marca França como país de origem."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "E a uva principal deste rótulo, qual é?",
-     "opcoes": [
-      "Malbec",
-      "Pinot Noir",
-      "Nebbiolo",
-      "Tannat"
-     ],
-     "correta": 1,
-     "okMsg": "Na mosca. Uva certa. Seu olho de prateleira está ficando afiado.",
-     "erroMsg": "Quase. Este é feito de Pinot Noir. Anota essa para a próxima compra.",
-     "porque": "A ficha deste vinho traz Pinot Noir como uva principal."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "harmonizacao",
-     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
-     "opcoes": [
-      "Ostras frescas",
-      "Churrasco",
-      "Massa ao sugo",
-      "Carne vermelha grelhada"
-     ],
-     "correta": 0,
-     "okMsg": "Bonito. Mesa posta. Você leu o vinho inteiro.",
-     "erroMsg": "Acontece. A ficha dele sugere ostras frescas. Fica para a próxima taça.",
-     "porque": "A ficha deste vinho aponta ostras frescas entre as companhias de mesa."
-    }
-   ],
-   "vinho": {
-    "nome": "Champagne Bollinger Rosé Brut",
-    "uva": "Pinot Noir",
-    "pais": "França",
-    "faixaPreco": "acima de R$ 300"
-   }
-  },
-  {
-   "id": "desafio-33",
+   "id": "desafio-10",
    "vinhoId": "035f5c28-30dc-4004-9e73-3b14f9dfb449",
    "imagem": "/rotulos/035f5c28-30dc-4004-9e73-3b14f9dfb449.webp",
    "perguntas": [
@@ -2513,235 +764,7 @@
    }
   },
   {
-   "id": "desafio-34",
-   "vinhoId": "03cc3f5f-2db0-4fa2-b069-14967b968cb2",
-   "imagem": "/rotulos/03cc3f5f-2db0-4fa2-b069-14967b968cb2.webp",
-   "perguntas": [
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "rotulo",
-     "pergunta": "Para abrir: este vinho é de qual tipo?",
-     "opcoes": [
-      "Espumante",
-      "Branco",
-      "Tinto"
-     ],
-     "correta": 1,
-     "okMsg": "Bonito. Primeira leitura do rótulo no bolso.",
-     "erroMsg": "Acontece. Este é um branco. Fica para a próxima taça.",
-     "porque": "A ficha deste vinho marca o tipo branco."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
-     "opcoes": [
-      "França",
-      "Argentina",
-      "Brasil",
-      "Chile"
-     ],
-     "correta": 3,
-     "okMsg": "Bonito. Origem achada. O rótulo sempre conta.",
-     "erroMsg": "Quase. Este vem do Chile. Agora você já sabe.",
-     "porque": "A ficha deste vinho marca Chile como país de origem."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "E a uva principal deste rótulo, qual é?",
-     "opcoes": [
-      "Viognier",
-      "Chardonnay",
-      "Sémillon",
-      "Sauvignon Blanc"
-     ],
-     "correta": 1,
-     "okMsg": "Na mosca. Uva certa. Seu olho de prateleira está ficando afiado.",
-     "erroMsg": "Quase. Este é feito de Chardonnay. Anota essa para a próxima compra.",
-     "porque": "A ficha deste vinho traz Chardonnay como uva principal."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "harmonizacao",
-     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
-     "opcoes": [
-      "Frutos do mar",
-      "Massa ao sugo",
-      "Carne vermelha grelhada",
-      "Churrasco"
-     ],
-     "correta": 0,
-     "okMsg": "É isso mesmo. Mesa posta. Você leu o vinho inteiro.",
-     "erroMsg": "Tudo bem. A ficha dele sugere frutos do mar. Esse detalhe vem com o treino.",
-     "porque": "A ficha deste vinho aponta frutos do mar entre as companhias de mesa."
-    }
-   ],
-   "vinho": {
-    "nome": "Terranoble Chardonnay Algarrobo 2024",
-    "uva": "Chardonnay",
-    "pais": "Chile",
-    "faixaPreco": "R$ 150 a 300"
-   }
-  },
-  {
-   "id": "desafio-35",
-   "vinhoId": "03e44af7-73ce-442c-858c-0ed875c796ed",
-   "imagem": "/rotulos/03e44af7-73ce-442c-858c-0ed875c796ed.webp",
-   "perguntas": [
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "rotulo",
-     "pergunta": "Para abrir: este vinho é de qual tipo?",
-     "opcoes": [
-      "Espumante",
-      "Tinto",
-      "Branco"
-     ],
-     "correta": 1,
-     "okMsg": "Bonito. Primeira leitura do rótulo no bolso.",
-     "erroMsg": "Sem drama. Este é um tinto. Anota essa para a próxima compra.",
-     "porque": "A ficha deste vinho marca o tipo tinto."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
-     "opcoes": [
-      "Argentina",
-      "Chile",
-      "França",
-      "Brasil"
-     ],
-     "correta": 2,
-     "okMsg": "Bonito. Origem achada. O rótulo sempre conta.",
-     "erroMsg": "Sem drama. Este vem da França. Anota essa para a próxima compra.",
-     "porque": "A ficha deste vinho marca França como país de origem."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "E a uva principal deste rótulo, qual é?",
-     "opcoes": [
-      "Tannat",
-      "Pinot Noir",
-      "Malbec",
-      "Nebbiolo"
-     ],
-     "correta": 1,
-     "okMsg": "Exato. Uva certa. Seu olho de prateleira está ficando afiado.",
-     "erroMsg": "Acontece. Este é feito de Pinot Noir. Fica para a próxima taça.",
-     "porque": "A ficha deste vinho traz Pinot Noir como uva principal."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "rotulo",
-     "pergunta": "Para fechar: na gôndola, este vinho costuma ficar em qual faixa de preço?",
-     "opcoes": [
-      "Até R$ 40",
-      "Acima de R$ 500",
-      "Entre R$ 90 e R$ 200",
-      "Entre R$ 40 e R$ 90"
-     ],
-     "correta": 1,
-     "okMsg": "É isso mesmo. Olho de preço calibrado vale ouro no mercado.",
-     "erroMsg": "Quase. Ele costuma aparecer na faixa acima de r$ 500. Anota essa para a próxima compra.",
-     "porque": "O preço de referência deste vinho no nosso banco fica na faixa acima de r$ 500."
-    }
-   ],
-   "vinho": {
-    "nome": "Philippe Pacalet Pommard 1er Cru \"Les Charmots\"",
-    "uva": "Pinot Noir",
-    "pais": "França",
-    "faixaPreco": "acima de R$ 300"
-   }
-  },
-  {
-   "id": "desafio-36",
-   "vinhoId": "03e4da04-1e4b-41c3-aa36-0a54ae171f0d",
-   "imagem": "/rotulos/03e4da04-1e4b-41c3-aa36-0a54ae171f0d.webp",
-   "perguntas": [
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "rotulo",
-     "pergunta": "Para abrir: este vinho é de qual tipo?",
-     "opcoes": [
-      "Espumante",
-      "Branco",
-      "Tinto"
-     ],
-     "correta": 2,
-     "okMsg": "Na mosca. Primeira leitura do rótulo no bolso.",
-     "erroMsg": "Acontece. Este é um tinto. Anota essa para a próxima compra.",
-     "porque": "A ficha deste vinho marca o tipo tinto."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
-     "opcoes": [
-      "França",
-      "Argentina",
-      "Chile",
-      "Brasil"
-     ],
-     "correta": 0,
-     "okMsg": "Bonito. Origem achada. O rótulo sempre conta.",
-     "erroMsg": "Sem drama. Este vem da França. Fica para a próxima taça.",
-     "porque": "A ficha deste vinho marca França como país de origem."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "E a uva principal deste rótulo, qual é?",
-     "opcoes": [
-      "Syrah",
-      "Bordô",
-      "Cinsault",
-      "Pinot Noir"
-     ],
-     "correta": 0,
-     "okMsg": "Bonito. Uva certa. Seu olho de prateleira está ficando afiado.",
-     "erroMsg": "Acontece. Este é feito de Syrah. Anota essa para a próxima compra.",
-     "porque": "A ficha deste vinho traz Syrah como uva principal."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "harmonizacao",
-     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
-     "opcoes": [
-      "Churrasco",
-      "Ostras frescas",
-      "Ceviche",
-      "Sushi"
-     ],
-     "correta": 0,
-     "okMsg": "Na mosca. Mesa posta. Você leu o vinho inteiro.",
-     "erroMsg": "Acontece. A ficha dele sugere churrasco. Fica para a próxima taça.",
-     "porque": "A ficha deste vinho aponta churrasco entre as companhias de mesa."
-    }
-   ],
-   "vinho": {
-    "nome": "Paul Mas Terrasses du Larzac Grand Vin 2023",
-    "uva": "Syrah",
-    "pais": "França",
-    "faixaPreco": "acima de R$ 300"
-   }
-  },
-  {
-   "id": "desafio-37",
+   "id": "desafio-11",
    "vinhoId": "03efabf7-51fe-4224-abb2-4facf8708995",
    "imagem": "/rotulos/03efabf7-51fe-4224-abb2-4facf8708995.webp",
    "perguntas": [
@@ -2817,9 +840,9 @@
    }
   },
   {
-   "id": "desafio-38",
-   "vinhoId": "04783385-fb6a-4238-8f10-0d1b0ae0655d",
-   "imagem": "/rotulos/04783385-fb6a-4238-8f10-0d1b0ae0655d.webp",
+   "id": "desafio-12",
+   "vinhoId": "0556a882-a4b8-4224-a684-bc0404af1995",
+   "imagem": "/rotulos/0556a882-a4b8-4224-a684-bc0404af1995.webp",
    "perguntas": [
     {
      "tipo": "mc",
@@ -2832,83 +855,7 @@
       "Tinto"
      ],
      "correta": 2,
-     "okMsg": "Isso. Primeira leitura do rótulo no bolso.",
-     "erroMsg": "Tudo bem. Este é um tinto. Agora você já sabe.",
-     "porque": "A ficha deste vinho marca o tipo tinto."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
-     "opcoes": [
-      "Brasil",
-      "Chile",
-      "Argentina",
-      "França"
-     ],
-     "correta": 3,
-     "okMsg": "Bonito. Origem achada. O rótulo sempre conta.",
-     "erroMsg": "Tudo bem. Este vem da França. Agora você já sabe.",
-     "porque": "A ficha deste vinho marca França como país de origem."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 2,
-     "habilidade": "rotulo",
-     "pergunta": "E a uva principal deste rótulo, qual é?",
-     "opcoes": [
-      "Cabernet Sauvignon",
-      "Cinsault",
-      "Pinot Noir",
-      "Bordô"
-     ],
-     "correta": 0,
-     "okMsg": "Bonito. Uva certa. Seu olho de prateleira está ficando afiado.",
-     "erroMsg": "Tudo bem. Este é feito de Cabernet Sauvignon. Esse detalhe vem com o treino.",
-     "porque": "A ficha deste vinho traz Cabernet Sauvignon como uva principal."
-    },
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "harmonizacao",
-     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
-     "opcoes": [
-      "Sushi",
-      "Ceviche",
-      "Ostras frescas",
-      "Carne vermelha grelhada"
-     ],
-     "correta": 3,
-     "okMsg": "Bonito. Mesa posta. Você leu o vinho inteiro.",
-     "erroMsg": "Sem drama. A ficha dele sugere carne vermelha grelhada. Fica para a próxima taça.",
-     "porque": "A ficha deste vinho aponta carne vermelha grelhada entre as companhias de mesa."
-    }
-   ],
-   "vinho": {
-    "nome": "Château Lafite Rothschild",
-    "uva": "Cabernet Sauvignon",
-    "pais": "França",
-    "faixaPreco": "acima de R$ 300"
-   }
-  },
-  {
-   "id": "desafio-39",
-   "vinhoId": "050e149e-0124-4ab9-9573-90471e38f7e5",
-   "imagem": "/rotulos/050e149e-0124-4ab9-9573-90471e38f7e5.webp",
-   "perguntas": [
-    {
-     "tipo": "mc",
-     "dificuldade": 1,
-     "habilidade": "rotulo",
-     "pergunta": "Para abrir: este vinho é de qual tipo?",
-     "opcoes": [
-      "Espumante",
-      "Tinto",
-      "Branco"
-     ],
-     "correta": 1,
-     "okMsg": "Isso. Primeira leitura do rótulo no bolso.",
+     "okMsg": "Exato. Primeira leitura do rótulo no bolso.",
      "erroMsg": "Acontece. Este é um tinto. Esse detalhe vem com o treino.",
      "porque": "A ficha deste vinho marca o tipo tinto."
     },
@@ -2918,15 +865,15 @@
      "habilidade": "rotulo",
      "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
      "opcoes": [
-      "Portugal",
-      "Brasil",
-      "Itália",
-      "Argentina"
+      "França",
+      "Argentina",
+      "Chile",
+      "Brasil"
      ],
-     "correta": 0,
-     "okMsg": "Bonito. Origem achada. O rótulo sempre conta.",
-     "erroMsg": "Sem drama. Este vem de Portugal. Esse detalhe vem com o treino.",
-     "porque": "A ficha deste vinho marca Portugal como país de origem."
+     "correta": 1,
+     "okMsg": "É isso mesmo. Origem achada. O rótulo sempre conta.",
+     "erroMsg": "Acontece. Este vem da Argentina. Anota essa para a próxima compra.",
+     "porque": "A ficha deste vinho marca Argentina como país de origem."
     },
     {
      "tipo": "mc",
@@ -2934,14 +881,90 @@
      "habilidade": "rotulo",
      "pergunta": "E a uva principal deste rótulo, qual é?",
      "opcoes": [
+      "Bordô",
       "Pinot Noir",
-      "Cinsault",
-      "Tempranillo",
-      "Bordô"
+      "Malbec",
+      "Cinsault"
      ],
      "correta": 2,
-     "okMsg": "Exato. Uva certa. Seu olho de prateleira está ficando afiado.",
-     "erroMsg": "Acontece. Este é feito de Tempranillo. Anota essa para a próxima compra.",
+     "okMsg": "É isso mesmo. Uva certa. Seu olho de prateleira está ficando afiado.",
+     "erroMsg": "Quase. Este é feito de Malbec. Anota essa para a próxima compra.",
+     "porque": "A ficha deste vinho traz Malbec como uva principal."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "harmonizacao",
+     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
+     "opcoes": [
+      "Ceviche",
+      "Carne vermelha grelhada",
+      "Ostras frescas",
+      "Sushi"
+     ],
+     "correta": 1,
+     "okMsg": "Bonito. Mesa posta. Você leu o vinho inteiro.",
+     "erroMsg": "Acontece. A ficha dele sugere carne vermelha grelhada. Anota essa para a próxima compra.",
+     "porque": "A ficha deste vinho aponta carne vermelha grelhada entre as companhias de mesa."
+    }
+   ],
+   "vinho": {
+    "nome": "Clos de Los Siete By Michel Rolland 2021",
+    "uva": "Malbec",
+    "pais": "Argentina",
+    "faixaPreco": "R$ 80 a 150"
+   }
+  },
+  {
+   "id": "desafio-13",
+   "vinhoId": "0594763b-7f28-4559-8656-9ec4df1b7f06",
+   "imagem": "/rotulos/0594763b-7f28-4559-8656-9ec4df1b7f06.webp",
+   "perguntas": [
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "rotulo",
+     "pergunta": "Para abrir: este vinho é de qual tipo?",
+     "opcoes": [
+      "Branco",
+      "Tinto",
+      "Espumante"
+     ],
+     "correta": 1,
+     "okMsg": "Exato. Primeira leitura do rótulo no bolso.",
+     "erroMsg": "Tudo bem. Este é um tinto. Agora você já sabe.",
+     "porque": "A ficha deste vinho marca o tipo tinto."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
+     "opcoes": [
+      "Argentina",
+      "Itália",
+      "Espanha",
+      "Brasil"
+     ],
+     "correta": 2,
+     "okMsg": "É isso mesmo. Origem achada. O rótulo sempre conta.",
+     "erroMsg": "Acontece. Este vem da Espanha. Fica para a próxima taça.",
+     "porque": "A ficha deste vinho marca Espanha como país de origem."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "E a uva principal deste rótulo, qual é?",
+     "opcoes": [
+      "Tempranillo",
+      "Bordô",
+      "Pinot Noir",
+      "Cinsault"
+     ],
+     "correta": 0,
+     "okMsg": "É isso mesmo. Uva certa. Seu olho de prateleira está ficando afiado.",
+     "erroMsg": "Tudo bem. Este é feito de Tempranillo. Anota essa para a próxima compra.",
      "porque": "A ficha deste vinho traz Tempranillo como uva principal."
     },
     {
@@ -2950,28 +973,28 @@
      "habilidade": "harmonizacao",
      "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
      "opcoes": [
-      "Ostras frescas",
+      "Carne vermelha grelhada",
       "Ceviche",
-      "Sushi",
-      "Queijo curado tipo parmesão"
+      "Ostras frescas",
+      "Sushi"
      ],
-     "correta": 3,
-     "okMsg": "É isso mesmo. Mesa posta. Você leu o vinho inteiro.",
-     "erroMsg": "Tudo bem. A ficha dele sugere queijo curado tipo parmesão. Fica para a próxima taça.",
-     "porque": "A ficha deste vinho aponta queijo curado tipo parmesão entre as companhias de mesa."
+     "correta": 0,
+     "okMsg": "Isso. Mesa posta. Você leu o vinho inteiro.",
+     "erroMsg": "Acontece. A ficha dele sugere carne vermelha grelhada. Anota essa para a próxima compra.",
+     "porque": "A ficha deste vinho aponta carne vermelha grelhada entre as companhias de mesa."
     }
    ],
    "vinho": {
-    "nome": "Vinho Tinto Português João Portugal Ramos Quinta da Vicosa Alentejo",
-    "uva": "Aragonez (Tempranillo)",
-    "pais": "Portugal",
-    "faixaPreco": "acima de R$ 300"
+    "nome": "Viñapeña Tempranillo",
+    "uva": "Tempranillo",
+    "pais": "Espanha",
+    "faixaPreco": "R$ 40 a 80"
    }
   },
   {
-   "id": "desafio-40",
-   "vinhoId": "05486f19-45e1-49eb-8d71-1a043119249e",
-   "imagem": "/rotulos/05486f19-45e1-49eb-8d71-1a043119249e.webp",
+   "id": "desafio-14",
+   "vinhoId": "06a630c3-2670-4adf-9287-67d32ee244ea",
+   "imagem": "/rotulos/06a630c3-2670-4adf-9287-67d32ee244ea.webp",
    "perguntas": [
     {
      "tipo": "mc",
@@ -2984,8 +1007,8 @@
       "Espumante"
      ],
      "correta": 0,
-     "okMsg": "Isso. Primeira leitura do rótulo no bolso.",
-     "erroMsg": "Acontece. Este é um tinto. Agora você já sabe.",
+     "okMsg": "Na mosca. Primeira leitura do rótulo no bolso.",
+     "erroMsg": "Sem drama. Este é um tinto. Fica para a próxima taça.",
      "porque": "A ficha deste vinho marca o tipo tinto."
     },
     {
@@ -2996,13 +1019,1915 @@
      "opcoes": [
       "Chile",
       "Brasil",
-      "Itália",
+      "Argentina",
+      "França"
+     ],
+     "correta": 2,
+     "okMsg": "É isso mesmo. Origem achada. O rótulo sempre conta.",
+     "erroMsg": "Tudo bem. Este vem da Argentina. Esse detalhe vem com o treino.",
+     "porque": "A ficha deste vinho marca Argentina como país de origem."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "E a uva principal deste rótulo, qual é?",
+     "opcoes": [
+      "Malbec",
+      "Bordô",
+      "Pinot Noir",
+      "Cinsault"
+     ],
+     "correta": 0,
+     "okMsg": "Na mosca. Uva certa. Seu olho de prateleira está ficando afiado.",
+     "erroMsg": "Acontece. Este é feito de Malbec. Anota essa para a próxima compra.",
+     "porque": "A ficha deste vinho traz Malbec como uva principal."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "harmonizacao",
+     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
+     "opcoes": [
+      "Carne vermelha grelhada",
+      "Ostras frescas",
+      "Ceviche",
+      "Sushi"
+     ],
+     "correta": 0,
+     "okMsg": "Bonito. Mesa posta. Você leu o vinho inteiro.",
+     "erroMsg": "Tudo bem. A ficha dele sugere carne vermelha grelhada. Esse detalhe vem com o treino.",
+     "porque": "A ficha deste vinho aponta carne vermelha grelhada entre as companhias de mesa."
+    }
+   ],
+   "vinho": {
+    "nome": "Partridge Bold Blend 2025",
+    "uva": "Malbec",
+    "pais": "Argentina",
+    "faixaPreco": "R$ 40 a 80"
+   }
+  },
+  {
+   "id": "desafio-15",
+   "vinhoId": "07d0d5c4-13bd-4b84-83e7-bc490f1d051c",
+   "imagem": "/rotulos/07d0d5c4-13bd-4b84-83e7-bc490f1d051c.webp",
+   "perguntas": [
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "rotulo",
+     "pergunta": "Para abrir: este vinho é de qual tipo?",
+     "opcoes": [
+      "Rosé",
+      "Branco",
+      "Tinto",
+      "Espumante"
+     ],
+     "correta": 0,
+     "okMsg": "Isso. Primeira leitura do rótulo no bolso.",
+     "erroMsg": "Quase. Este é um rosé. Agora você já sabe.",
+     "porque": "A ficha deste vinho marca o tipo rosé."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
+     "opcoes": [
+      "Chile",
+      "Brasil",
+      "França",
       "Argentina"
+     ],
+     "correta": 3,
+     "okMsg": "Exato. Origem achada. O rótulo sempre conta.",
+     "erroMsg": "Quase. Este vem da Argentina. Esse detalhe vem com o treino.",
+     "porque": "A ficha deste vinho marca Argentina como país de origem."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "E a uva principal deste rótulo, qual é?",
+     "opcoes": [
+      "Cinsault",
+      "Malbec",
+      "Pinot Noir",
+      "Bordô"
+     ],
+     "correta": 1,
+     "okMsg": "Exato. Uva certa. Seu olho de prateleira está ficando afiado.",
+     "erroMsg": "Acontece. Este é feito de Malbec. Agora você já sabe.",
+     "porque": "A ficha deste vinho traz Malbec como uva principal."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "rotulo",
+     "pergunta": "Para fechar: na gôndola, este vinho costuma ficar em qual faixa de preço?",
+     "opcoes": [
+      "Entre R$ 90 e R$ 200",
+      "Entre R$ 200 e R$ 500",
+      "Até R$ 40",
+      "Entre R$ 40 e R$ 90"
+     ],
+     "correta": 3,
+     "okMsg": "Exato. Olho de preço calibrado vale ouro no mercado.",
+     "erroMsg": "Tudo bem. Ele costuma aparecer na faixa entre r$ 40 e r$ 90. Anota essa para a próxima compra.",
+     "porque": "O preço de referência deste vinho no nosso banco fica na faixa entre r$ 40 e r$ 90."
+    }
+   ],
+   "vinho": {
+    "nome": "Portillo Valle de Uco Malbec Rosé 2024",
+    "uva": "Malbec",
+    "pais": "Argentina",
+    "faixaPreco": "R$ 40 a 80"
+   }
+  },
+  {
+   "id": "desafio-16",
+   "vinhoId": "081d7ae1-138e-4c6f-9fa7-884fec70e389",
+   "imagem": "/rotulos/081d7ae1-138e-4c6f-9fa7-884fec70e389.webp",
+   "perguntas": [
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "rotulo",
+     "pergunta": "Para abrir: este vinho é de qual tipo?",
+     "opcoes": [
+      "Espumante",
+      "Branco",
+      "Tinto"
+     ],
+     "correta": 2,
+     "okMsg": "Exato. Primeira leitura do rótulo no bolso.",
+     "erroMsg": "Acontece. Este é um tinto. Anota essa para a próxima compra.",
+     "porque": "A ficha deste vinho marca o tipo tinto."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
+     "opcoes": [
+      "Brasil",
+      "Argentina",
+      "França",
+      "Chile"
+     ],
+     "correta": 1,
+     "okMsg": "É isso mesmo. Origem achada. O rótulo sempre conta.",
+     "erroMsg": "Sem drama. Este vem da Argentina. Esse detalhe vem com o treino.",
+     "porque": "A ficha deste vinho marca Argentina como país de origem."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "E a uva principal deste rótulo, qual é?",
+     "opcoes": [
+      "Pinot Noir",
+      "Malbec",
+      "Cinsault",
+      "Bordô"
+     ],
+     "correta": 1,
+     "okMsg": "Isso. Uva certa. Seu olho de prateleira está ficando afiado.",
+     "erroMsg": "Sem drama. Este é feito de Malbec. Anota essa para a próxima compra.",
+     "porque": "A ficha deste vinho traz Malbec como uva principal."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "harmonizacao",
+     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
+     "opcoes": [
+      "Queijo curado tipo parmesão",
+      "Sushi",
+      "Ostras frescas",
+      "Ceviche"
+     ],
+     "correta": 0,
+     "okMsg": "Exato. Mesa posta. Você leu o vinho inteiro.",
+     "erroMsg": "Tudo bem. A ficha dele sugere queijo curado tipo parmesão. Esse detalhe vem com o treino.",
+     "porque": "A ficha deste vinho aponta queijo curado tipo parmesão entre as companhias de mesa."
+    }
+   ],
+   "vinho": {
+    "nome": "La Posta Red Blend 2024",
+    "uva": "Malbec",
+    "pais": "Argentina",
+    "faixaPreco": "R$ 80 a 150"
+   }
+  },
+  {
+   "id": "desafio-17",
+   "vinhoId": "083c6960-6114-4a98-9925-54106e99869d",
+   "imagem": "/rotulos/083c6960-6114-4a98-9925-54106e99869d.webp",
+   "perguntas": [
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "rotulo",
+     "pergunta": "Para abrir: este vinho é de qual tipo?",
+     "opcoes": [
+      "Tinto",
+      "Branco",
+      "Espumante"
+     ],
+     "correta": 2,
+     "okMsg": "Isso. Primeira leitura do rótulo no bolso.",
+     "erroMsg": "Sem drama. Este é um espumante. Agora você já sabe.",
+     "porque": "A ficha deste vinho marca o tipo espumante."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
+     "opcoes": [
+      "Brasil",
+      "Argentina",
+      "Chile",
+      "França"
+     ],
+     "correta": 2,
+     "okMsg": "Na mosca. Origem achada. O rótulo sempre conta.",
+     "erroMsg": "Sem drama. Este vem do Chile. Fica para a próxima taça.",
+     "porque": "A ficha deste vinho marca Chile como país de origem."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "E a uva principal deste rótulo, qual é?",
+     "opcoes": [
+      "Nebbiolo",
+      "Tannat",
+      "Pinot Noir",
+      "Malbec"
+     ],
+     "correta": 2,
+     "okMsg": "Na mosca. Uva certa. Seu olho de prateleira está ficando afiado.",
+     "erroMsg": "Tudo bem. Este é feito de Pinot Noir. Agora você já sabe.",
+     "porque": "A ficha deste vinho traz Pinot Noir como uva principal."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "harmonizacao",
+     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
+     "opcoes": [
+      "Massa ao sugo",
+      "Ostras frescas",
+      "Carne vermelha grelhada",
+      "Churrasco"
+     ],
+     "correta": 1,
+     "okMsg": "Bonito. Mesa posta. Você leu o vinho inteiro.",
+     "erroMsg": "Tudo bem. A ficha dele sugere ostras frescas. Agora você já sabe.",
+     "porque": "A ficha deste vinho aponta ostras frescas entre as companhias de mesa."
+    }
+   ],
+   "vinho": {
+    "nome": "Espumante Dancing Flame Brut Rosé",
+    "uva": "Pinot Noir",
+    "pais": "Chile",
+    "faixaPreco": "R$ 40 a 80"
+   }
+  },
+  {
+   "id": "desafio-18",
+   "vinhoId": "08625e1f-4f6e-47e2-9d8c-a61ed2483f4b",
+   "imagem": "/rotulos/08625e1f-4f6e-47e2-9d8c-a61ed2483f4b.webp",
+   "perguntas": [
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "rotulo",
+     "pergunta": "Para abrir: este vinho é de qual tipo?",
+     "opcoes": [
+      "Espumante",
+      "Branco",
+      "Tinto"
+     ],
+     "correta": 2,
+     "okMsg": "Na mosca. Primeira leitura do rótulo no bolso.",
+     "erroMsg": "Sem drama. Este é um tinto. Anota essa para a próxima compra.",
+     "porque": "A ficha deste vinho marca o tipo tinto."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
+     "opcoes": [
+      "Brasil",
+      "França",
+      "Argentina",
+      "Chile"
+     ],
+     "correta": 0,
+     "okMsg": "Exato. Origem achada. O rótulo sempre conta.",
+     "erroMsg": "Acontece. Este vem do Brasil. Agora você já sabe.",
+     "porque": "A ficha deste vinho marca Brasil como país de origem."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "E a uva principal deste rótulo, qual é?",
+     "opcoes": [
+      "Cinsault",
+      "Cabernet Sauvignon",
+      "Bordô",
+      "Pinot Noir"
+     ],
+     "correta": 1,
+     "okMsg": "Exato. Uva certa. Seu olho de prateleira está ficando afiado.",
+     "erroMsg": "Acontece. Este é feito de Cabernet Sauvignon. Esse detalhe vem com o treino.",
+     "porque": "A ficha deste vinho traz Cabernet Sauvignon como uva principal."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "harmonizacao",
+     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
+     "opcoes": [
+      "Carne vermelha grelhada",
+      "Ceviche",
+      "Ostras frescas",
+      "Sushi"
+     ],
+     "correta": 0,
+     "okMsg": "Na mosca. Mesa posta. Você leu o vinho inteiro.",
+     "erroMsg": "Quase. A ficha dele sugere carne vermelha grelhada. Agora você já sabe.",
+     "porque": "A ficha deste vinho aponta carne vermelha grelhada entre as companhias de mesa."
+    }
+   ],
+   "vinho": {
+    "nome": "Hermann Cabernet Sauvignon Bossa 2022",
+    "uva": "Cabernet Sauvignon",
+    "pais": "Brasil",
+    "faixaPreco": "R$ 80 a 150"
+   }
+  },
+  {
+   "id": "desafio-19",
+   "vinhoId": "0942dc1e-dcd9-4dee-8bae-db78a4e3a456",
+   "imagem": "/rotulos/0942dc1e-dcd9-4dee-8bae-db78a4e3a456.webp",
+   "perguntas": [
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "rotulo",
+     "pergunta": "Para abrir: este vinho é de qual tipo?",
+     "opcoes": [
+      "Espumante",
+      "Branco",
+      "Tinto"
+     ],
+     "correta": 2,
+     "okMsg": "Bonito. Primeira leitura do rótulo no bolso.",
+     "erroMsg": "Acontece. Este é um tinto. Anota essa para a próxima compra.",
+     "porque": "A ficha deste vinho marca o tipo tinto."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
+     "opcoes": [
+      "Brasil",
+      "França",
+      "Chile",
+      "Argentina"
+     ],
+     "correta": 1,
+     "okMsg": "É isso mesmo. Origem achada. O rótulo sempre conta.",
+     "erroMsg": "Quase. Este vem da França. Esse detalhe vem com o treino.",
+     "porque": "A ficha deste vinho marca França como país de origem."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "E a uva principal deste rótulo, qual é?",
+     "opcoes": [
+      "Pinot Noir",
+      "Cabernet Sauvignon",
+      "Bordô",
+      "Cinsault"
+     ],
+     "correta": 1,
+     "okMsg": "Na mosca. Uva certa. Seu olho de prateleira está ficando afiado.",
+     "erroMsg": "Quase. Este é feito de Cabernet Sauvignon. Agora você já sabe.",
+     "porque": "A ficha deste vinho traz Cabernet Sauvignon como uva principal."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "harmonizacao",
+     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
+     "opcoes": [
+      "Ostras frescas",
+      "Sushi",
+      "Queijo curado tipo parmesão",
+      "Ceviche"
+     ],
+     "correta": 2,
+     "okMsg": "Bonito. Mesa posta. Você leu o vinho inteiro.",
+     "erroMsg": "Tudo bem. A ficha dele sugere queijo curado tipo parmesão. Fica para a próxima taça.",
+     "porque": "A ficha deste vinho aponta queijo curado tipo parmesão entre as companhias de mesa."
+    }
+   ],
+   "vinho": {
+    "nome": "Comte Desclos Bordeaux AOP",
+    "uva": "Cabernet Sauvignon",
+    "pais": "França",
+    "faixaPreco": "R$ 80 a 150"
+   }
+  },
+  {
+   "id": "desafio-20",
+   "vinhoId": "0986e69d-6ac1-4444-82d9-98d507ce64a1",
+   "imagem": "/rotulos/0986e69d-6ac1-4444-82d9-98d507ce64a1.webp",
+   "perguntas": [
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "rotulo",
+     "pergunta": "Para abrir: este vinho é de qual tipo?",
+     "opcoes": [
+      "Tinto",
+      "Branco",
+      "Espumante"
+     ],
+     "correta": 0,
+     "okMsg": "Bonito. Primeira leitura do rótulo no bolso.",
+     "erroMsg": "Sem drama. Este é um tinto. Esse detalhe vem com o treino.",
+     "porque": "A ficha deste vinho marca o tipo tinto."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
+     "opcoes": [
+      "Argentina",
+      "Chile",
+      "Brasil",
+      "França"
+     ],
+     "correta": 0,
+     "okMsg": "Bonito. Origem achada. O rótulo sempre conta.",
+     "erroMsg": "Sem drama. Este vem da Argentina. Agora você já sabe.",
+     "porque": "A ficha deste vinho marca Argentina como país de origem."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "E a uva principal deste rótulo, qual é?",
+     "opcoes": [
+      "Cinsault",
+      "Bordô",
+      "Pinot Noir",
+      "Malbec"
+     ],
+     "correta": 3,
+     "okMsg": "É isso mesmo. Uva certa. Seu olho de prateleira está ficando afiado.",
+     "erroMsg": "Acontece. Este é feito de Malbec. Esse detalhe vem com o treino.",
+     "porque": "A ficha deste vinho traz Malbec como uva principal."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "harmonizacao",
+     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
+     "opcoes": [
+      "Queijo curado tipo parmesão",
+      "Sushi",
+      "Ostras frescas",
+      "Ceviche"
+     ],
+     "correta": 0,
+     "okMsg": "Exato. Mesa posta. Você leu o vinho inteiro.",
+     "erroMsg": "Sem drama. A ficha dele sugere queijo curado tipo parmesão. Esse detalhe vem com o treino.",
+     "porque": "A ficha deste vinho aponta queijo curado tipo parmesão entre as companhias de mesa."
+    }
+   ],
+   "vinho": {
+    "nome": "Viña de Los Andes Malbec",
+    "uva": "Malbec",
+    "pais": "Argentina",
+    "faixaPreco": "R$ 40 a 80"
+   }
+  },
+  {
+   "id": "desafio-21",
+   "vinhoId": "0a6a8d5d-b9d6-42b4-8769-545cb239c216",
+   "imagem": "/rotulos/0a6a8d5d-b9d6-42b4-8769-545cb239c216.webp",
+   "perguntas": [
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "rotulo",
+     "pergunta": "Para abrir: este vinho é de qual tipo?",
+     "opcoes": [
+      "Espumante",
+      "Branco",
+      "Tinto"
+     ],
+     "correta": 2,
+     "okMsg": "Exato. Primeira leitura do rótulo no bolso.",
+     "erroMsg": "Sem drama. Este é um tinto. Anota essa para a próxima compra.",
+     "porque": "A ficha deste vinho marca o tipo tinto."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
+     "opcoes": [
+      "Argentina",
+      "Itália",
+      "Portugal",
+      "Brasil"
+     ],
+     "correta": 2,
+     "okMsg": "Isso. Origem achada. O rótulo sempre conta.",
+     "erroMsg": "Tudo bem. Este vem de Portugal. Esse detalhe vem com o treino.",
+     "porque": "A ficha deste vinho marca Portugal como país de origem."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "E a uva principal deste rótulo, qual é?",
+     "opcoes": [
+      "Pinot Noir",
+      "Cinsault",
+      "Bordô",
+      "Tempranillo"
+     ],
+     "correta": 3,
+     "okMsg": "Isso. Uva certa. Seu olho de prateleira está ficando afiado.",
+     "erroMsg": "Tudo bem. Este é feito de Tempranillo. Fica para a próxima taça.",
+     "porque": "A ficha deste vinho traz Tempranillo como uva principal."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "harmonizacao",
+     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
+     "opcoes": [
+      "Sushi",
+      "Carne vermelha grelhada",
+      "Ceviche",
+      "Ostras frescas"
+     ],
+     "correta": 1,
+     "okMsg": "Bonito. Mesa posta. Você leu o vinho inteiro.",
+     "erroMsg": "Sem drama. A ficha dele sugere carne vermelha grelhada. Esse detalhe vem com o treino.",
+     "porque": "A ficha deste vinho aponta carne vermelha grelhada entre as companhias de mesa."
+    }
+   ],
+   "vinho": {
+    "nome": "Vinho Tinto Português João Portugal Ramos Loios Alentejo",
+    "uva": "Aragonez (Tempranillo)",
+    "pais": "Portugal",
+    "faixaPreco": "R$ 40 a 80"
+   }
+  },
+  {
+   "id": "desafio-22",
+   "vinhoId": "0abdc7cd-73ff-4844-ac90-c45580b0e840",
+   "imagem": "/rotulos/0abdc7cd-73ff-4844-ac90-c45580b0e840.webp",
+   "perguntas": [
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "rotulo",
+     "pergunta": "Para abrir: este vinho é de qual tipo?",
+     "opcoes": [
+      "Tinto",
+      "Espumante",
+      "Branco"
+     ],
+     "correta": 0,
+     "okMsg": "Bonito. Primeira leitura do rótulo no bolso.",
+     "erroMsg": "Sem drama. Este é um tinto. Fica para a próxima taça.",
+     "porque": "A ficha deste vinho marca o tipo tinto."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
+     "opcoes": [
+      "Itália",
+      "Espanha",
+      "Brasil",
+      "Argentina"
+     ],
+     "correta": 1,
+     "okMsg": "É isso mesmo. Origem achada. O rótulo sempre conta.",
+     "erroMsg": "Quase. Este vem da Espanha. Esse detalhe vem com o treino.",
+     "porque": "A ficha deste vinho marca Espanha como país de origem."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "E a uva principal deste rótulo, qual é?",
+     "opcoes": [
+      "Pinot Noir",
+      "Tempranillo",
+      "Bordô",
+      "Cinsault"
+     ],
+     "correta": 1,
+     "okMsg": "Bonito. Uva certa. Seu olho de prateleira está ficando afiado.",
+     "erroMsg": "Quase. Este é feito de Tempranillo. Agora você já sabe.",
+     "porque": "A ficha deste vinho traz Tempranillo como uva principal."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "harmonizacao",
+     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
+     "opcoes": [
+      "Ceviche",
+      "Ostras frescas",
+      "Sushi",
+      "Carne vermelha grelhada"
+     ],
+     "correta": 3,
+     "okMsg": "Exato. Mesa posta. Você leu o vinho inteiro.",
+     "erroMsg": "Acontece. A ficha dele sugere carne vermelha grelhada. Agora você já sabe.",
+     "porque": "A ficha deste vinho aponta carne vermelha grelhada entre as companhias de mesa."
+    }
+   ],
+   "vinho": {
+    "nome": "Vinho Tinto Espanhol Pata Negra Tempranillo Cabernet Sauvignon DOC",
+    "uva": "Tempranillo",
+    "pais": "Espanha",
+    "faixaPreco": "R$ 40 a 80"
+   }
+  },
+  {
+   "id": "desafio-23",
+   "vinhoId": "0ba1b76c-f0b7-4e1f-ae6e-2c998738b6b3",
+   "imagem": "/rotulos/0ba1b76c-f0b7-4e1f-ae6e-2c998738b6b3.webp",
+   "perguntas": [
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "rotulo",
+     "pergunta": "Para abrir: este vinho é de qual tipo?",
+     "opcoes": [
+      "Espumante",
+      "Branco",
+      "Tinto"
+     ],
+     "correta": 2,
+     "okMsg": "Bonito. Primeira leitura do rótulo no bolso.",
+     "erroMsg": "Sem drama. Este é um tinto. Agora você já sabe.",
+     "porque": "A ficha deste vinho marca o tipo tinto."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
+     "opcoes": [
+      "Itália",
+      "Argentina",
+      "Brasil",
+      "Portugal"
+     ],
+     "correta": 3,
+     "okMsg": "Bonito. Origem achada. O rótulo sempre conta.",
+     "erroMsg": "Tudo bem. Este vem de Portugal. Anota essa para a próxima compra.",
+     "porque": "A ficha deste vinho marca Portugal como país de origem."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "E a uva principal deste rótulo, qual é?",
+     "opcoes": [
+      "Bordô",
+      "Tempranillo",
+      "Cinsault",
+      "Pinot Noir"
+     ],
+     "correta": 1,
+     "okMsg": "É isso mesmo. Uva certa. Seu olho de prateleira está ficando afiado.",
+     "erroMsg": "Acontece. Este é feito de Tempranillo. Anota essa para a próxima compra.",
+     "porque": "A ficha deste vinho traz Tempranillo como uva principal."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "harmonizacao",
+     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
+     "opcoes": [
+      "Ostras frescas",
+      "Ceviche",
+      "Carne vermelha grelhada",
+      "Sushi"
+     ],
+     "correta": 2,
+     "okMsg": "Bonito. Mesa posta. Você leu o vinho inteiro.",
+     "erroMsg": "Tudo bem. A ficha dele sugere carne vermelha grelhada. Fica para a próxima taça.",
+     "porque": "A ficha deste vinho aponta carne vermelha grelhada entre as companhias de mesa."
+    }
+   ],
+   "vinho": {
+    "nome": "Alfacinha Regional Lisboa Tinto 2023",
+    "uva": "Tempranillo",
+    "pais": "Portugal",
+    "faixaPreco": "R$ 40 a 80"
+   }
+  },
+  {
+   "id": "desafio-24",
+   "vinhoId": "0d6a4f4d-7272-47e6-90dd-1e4aa970d361",
+   "imagem": "/rotulos/0d6a4f4d-7272-47e6-90dd-1e4aa970d361.webp",
+   "perguntas": [
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "rotulo",
+     "pergunta": "Para abrir: este vinho é de qual tipo?",
+     "opcoes": [
+      "Tinto",
+      "Espumante",
+      "Branco"
+     ],
+     "correta": 2,
+     "okMsg": "Isso. Primeira leitura do rótulo no bolso.",
+     "erroMsg": "Quase. Este é um branco. Esse detalhe vem com o treino.",
+     "porque": "A ficha deste vinho marca o tipo branco."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
+     "opcoes": [
+      "Argentina",
+      "França",
+      "Brasil",
+      "Chile"
+     ],
+     "correta": 3,
+     "okMsg": "Exato. Origem achada. O rótulo sempre conta.",
+     "erroMsg": "Sem drama. Este vem do Chile. Anota essa para a próxima compra.",
+     "porque": "A ficha deste vinho marca Chile como país de origem."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "E a uva principal deste rótulo, qual é?",
+     "opcoes": [
+      "Viognier",
+      "Chardonnay",
+      "Sémillon",
+      "Sauvignon Blanc"
+     ],
+     "correta": 1,
+     "okMsg": "É isso mesmo. Uva certa. Seu olho de prateleira está ficando afiado.",
+     "erroMsg": "Sem drama. Este é feito de Chardonnay. Anota essa para a próxima compra.",
+     "porque": "A ficha deste vinho traz Chardonnay como uva principal."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "harmonizacao",
+     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
+     "opcoes": [
+      "Frutos do mar",
+      "Carne vermelha grelhada",
+      "Massa ao sugo",
+      "Churrasco"
+     ],
+     "correta": 0,
+     "okMsg": "Na mosca. Mesa posta. Você leu o vinho inteiro.",
+     "erroMsg": "Acontece. A ficha dele sugere frutos do mar. Fica para a próxima taça.",
+     "porque": "A ficha deste vinho aponta frutos do mar entre as companhias de mesa."
+    }
+   ],
+   "vinho": {
+    "nome": "Terranoble Chardonnay Estate Reserve 2025",
+    "uva": "Chardonnay",
+    "pais": "Chile",
+    "faixaPreco": "R$ 80 a 150"
+   }
+  },
+  {
+   "id": "desafio-25",
+   "vinhoId": "0dbfa75d-86a9-4321-abd7-a7a45850da7b",
+   "imagem": "/rotulos/0dbfa75d-86a9-4321-abd7-a7a45850da7b.webp",
+   "perguntas": [
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "rotulo",
+     "pergunta": "Para abrir: este vinho é de qual tipo?",
+     "opcoes": [
+      "Branco",
+      "Espumante",
+      "Tinto"
+     ],
+     "correta": 1,
+     "okMsg": "Bonito. Primeira leitura do rótulo no bolso.",
+     "erroMsg": "Sem drama. Este é um espumante. Esse detalhe vem com o treino.",
+     "porque": "A ficha deste vinho marca o tipo espumante."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
+     "opcoes": [
+      "Brasil",
+      "Argentina",
+      "Chile",
+      "França"
+     ],
+     "correta": 1,
+     "okMsg": "Exato. Origem achada. O rótulo sempre conta.",
+     "erroMsg": "Quase. Este vem da Argentina. Esse detalhe vem com o treino.",
+     "porque": "A ficha deste vinho marca Argentina como país de origem."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "E a uva principal deste rótulo, qual é?",
+     "opcoes": [
+      "Malbec",
+      "Pinot Noir",
+      "Tannat",
+      "Nebbiolo"
+     ],
+     "correta": 1,
+     "okMsg": "Bonito. Uva certa. Seu olho de prateleira está ficando afiado.",
+     "erroMsg": "Sem drama. Este é feito de Pinot Noir. Anota essa para a próxima compra.",
+     "porque": "A ficha deste vinho traz Pinot Noir como uva principal."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "harmonizacao",
+     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
+     "opcoes": [
+      "Ostras frescas",
+      "Massa ao sugo",
+      "Carne vermelha grelhada",
+      "Churrasco"
+     ],
+     "correta": 0,
+     "okMsg": "É isso mesmo. Mesa posta. Você leu o vinho inteiro.",
+     "erroMsg": "Tudo bem. A ficha dele sugere ostras frescas. Fica para a próxima taça.",
+     "porque": "A ficha deste vinho aponta ostras frescas entre as companhias de mesa."
+    }
+   ],
+   "vinho": {
+    "nome": "Espumante Partridge Stars Rosé Brut",
+    "uva": "Pinot Noir",
+    "pais": "Argentina",
+    "faixaPreco": "R$ 40 a 80"
+   }
+  },
+  {
+   "id": "desafio-26",
+   "vinhoId": "0e7d8bd4-080a-4663-8489-13bb87290951",
+   "imagem": "/rotulos/0e7d8bd4-080a-4663-8489-13bb87290951.webp",
+   "perguntas": [
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "rotulo",
+     "pergunta": "Para abrir: este vinho é de qual tipo?",
+     "opcoes": [
+      "Branco",
+      "Espumante",
+      "Tinto"
+     ],
+     "correta": 2,
+     "okMsg": "Exato. Primeira leitura do rótulo no bolso.",
+     "erroMsg": "Tudo bem. Este é um tinto. Agora você já sabe.",
+     "porque": "A ficha deste vinho marca o tipo tinto."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
+     "opcoes": [
+      "França",
+      "Brasil",
+      "Argentina",
+      "Chile"
+     ],
+     "correta": 3,
+     "okMsg": "Exato. Origem achada. O rótulo sempre conta.",
+     "erroMsg": "Tudo bem. Este vem do Chile. Anota essa para a próxima compra.",
+     "porque": "A ficha deste vinho marca Chile como país de origem."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "E a uva principal deste rótulo, qual é?",
+     "opcoes": [
+      "Cinsault",
+      "Cabernet Sauvignon",
+      "Pinot Noir",
+      "Bordô"
+     ],
+     "correta": 1,
+     "okMsg": "Exato. Uva certa. Seu olho de prateleira está ficando afiado.",
+     "erroMsg": "Acontece. Este é feito de Cabernet Sauvignon. Esse detalhe vem com o treino.",
+     "porque": "A ficha deste vinho traz Cabernet Sauvignon como uva principal."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "harmonizacao",
+     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
+     "opcoes": [
+      "Sushi",
+      "Ostras frescas",
+      "Carne vermelha grelhada",
+      "Ceviche"
+     ],
+     "correta": 2,
+     "okMsg": "Exato. Mesa posta. Você leu o vinho inteiro.",
+     "erroMsg": "Quase. A ficha dele sugere carne vermelha grelhada. Esse detalhe vem com o treino.",
+     "porque": "A ficha deste vinho aponta carne vermelha grelhada entre as companhias de mesa."
+    }
+   ],
+   "vinho": {
+    "nome": "Metropolitano D.O. Valle Central Red Blend 2024",
+    "uva": "Cabernet Sauvignon",
+    "pais": "Chile",
+    "faixaPreco": "ate R$ 40"
+   }
+  },
+  {
+   "id": "desafio-27",
+   "vinhoId": "0e803dc0-d58d-4f40-a352-eb145adbe308",
+   "imagem": "/rotulos/0e803dc0-d58d-4f40-a352-eb145adbe308.webp",
+   "perguntas": [
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "rotulo",
+     "pergunta": "Para abrir: este vinho é de qual tipo?",
+     "opcoes": [
+      "Tinto",
+      "Espumante",
+      "Rosé",
+      "Branco"
+     ],
+     "correta": 2,
+     "okMsg": "Bonito. Primeira leitura do rótulo no bolso.",
+     "erroMsg": "Acontece. Este é um rosé. Anota essa para a próxima compra.",
+     "porque": "A ficha deste vinho marca o tipo rosé."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
+     "opcoes": [
+      "Chile",
+      "Argentina",
+      "França",
+      "Brasil"
+     ],
+     "correta": 1,
+     "okMsg": "Bonito. Origem achada. O rótulo sempre conta.",
+     "erroMsg": "Quase. Este vem da Argentina. Agora você já sabe.",
+     "porque": "A ficha deste vinho marca Argentina como país de origem."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "E a uva principal deste rótulo, qual é?",
+     "opcoes": [
+      "Pinot Noir",
+      "Cinsault",
+      "Malbec",
+      "Bordô"
+     ],
+     "correta": 2,
+     "okMsg": "Bonito. Uva certa. Seu olho de prateleira está ficando afiado.",
+     "erroMsg": "Tudo bem. Este é feito de Malbec. Fica para a próxima taça.",
+     "porque": "A ficha deste vinho traz Malbec como uva principal."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "rotulo",
+     "pergunta": "Para fechar: na gôndola, este vinho costuma ficar em qual faixa de preço?",
+     "opcoes": [
+      "Entre R$ 90 e R$ 200",
+      "Entre R$ 200 e R$ 500",
+      "Entre R$ 40 e R$ 90",
+      "Até R$ 40"
+     ],
+     "correta": 0,
+     "okMsg": "Na mosca. Olho de preço calibrado vale ouro no mercado.",
+     "erroMsg": "Tudo bem. Ele costuma aparecer na faixa entre r$ 90 e r$ 200. Anota essa para a próxima compra.",
+     "porque": "O preço de referência deste vinho no nosso banco fica na faixa entre r$ 90 e r$ 200."
+    }
+   ],
+   "vinho": {
+    "nome": "Escorihuela Familia Gascón Malbec Rosé",
+    "uva": "Malbec",
+    "pais": "Argentina",
+    "faixaPreco": "R$ 80 a 150"
+   }
+  },
+  {
+   "id": "desafio-28",
+   "vinhoId": "0eb2cc3e-1a32-4602-89e7-1d7911070df7",
+   "imagem": "/rotulos/0eb2cc3e-1a32-4602-89e7-1d7911070df7.webp",
+   "perguntas": [
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "rotulo",
+     "pergunta": "Para abrir: este vinho é de qual tipo?",
+     "opcoes": [
+      "Espumante",
+      "Tinto",
+      "Branco"
+     ],
+     "correta": 1,
+     "okMsg": "Bonito. Primeira leitura do rótulo no bolso.",
+     "erroMsg": "Acontece. Este é um tinto. Fica para a próxima taça.",
+     "porque": "A ficha deste vinho marca o tipo tinto."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
+     "opcoes": [
+      "Chile",
+      "Brasil",
+      "Argentina",
+      "França"
+     ],
+     "correta": 0,
+     "okMsg": "Na mosca. Origem achada. O rótulo sempre conta.",
+     "erroMsg": "Tudo bem. Este vem do Chile. Fica para a próxima taça.",
+     "porque": "A ficha deste vinho marca Chile como país de origem."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "E a uva principal deste rótulo, qual é?",
+     "opcoes": [
+      "Bordô",
+      "Merlot",
+      "Pinot Noir",
+      "Cinsault"
+     ],
+     "correta": 1,
+     "okMsg": "Bonito. Uva certa. Seu olho de prateleira está ficando afiado.",
+     "erroMsg": "Sem drama. Este é feito de Merlot. Agora você já sabe.",
+     "porque": "A ficha deste vinho traz Merlot como uva principal."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "rotulo",
+     "pergunta": "Para fechar: na gôndola, este vinho costuma ficar em qual faixa de preço?",
+     "opcoes": [
+      "Entre R$ 200 e R$ 500",
+      "Entre R$ 90 e R$ 200",
+      "Entre R$ 40 e R$ 90",
+      "Até R$ 40"
+     ],
+     "correta": 1,
+     "okMsg": "Isso. Olho de preço calibrado vale ouro no mercado.",
+     "erroMsg": "Sem drama. Ele costuma aparecer na faixa entre r$ 90 e r$ 200. Anota essa para a próxima compra.",
+     "porque": "O preço de referência deste vinho no nosso banco fica na faixa entre r$ 90 e r$ 200."
+    }
+   ],
+   "vinho": {
+    "nome": "Valdivieso Merlot",
+    "uva": "Merlot",
+    "pais": "Chile",
+    "faixaPreco": "R$ 80 a 150"
+   }
+  },
+  {
+   "id": "desafio-29",
+   "vinhoId": "115e6fb5-5660-4153-883b-2aada62d9637",
+   "imagem": "/rotulos/115e6fb5-5660-4153-883b-2aada62d9637.webp",
+   "perguntas": [
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "rotulo",
+     "pergunta": "Para abrir: este vinho é de qual tipo?",
+     "opcoes": [
+      "Tinto",
+      "Branco",
+      "Espumante"
+     ],
+     "correta": 1,
+     "okMsg": "Bonito. Primeira leitura do rótulo no bolso.",
+     "erroMsg": "Quase. Este é um branco. Esse detalhe vem com o treino.",
+     "porque": "A ficha deste vinho marca o tipo branco."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
+     "opcoes": [
+      "Argentina",
+      "França",
+      "Chile",
+      "Brasil"
+     ],
+     "correta": 0,
+     "okMsg": "Bonito. Origem achada. O rótulo sempre conta.",
+     "erroMsg": "Sem drama. Este vem da Argentina. Esse detalhe vem com o treino.",
+     "porque": "A ficha deste vinho marca Argentina como país de origem."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "E a uva principal deste rótulo, qual é?",
+     "opcoes": [
+      "Chardonnay",
+      "Sémillon",
+      "Viognier",
+      "Riesling"
+     ],
+     "correta": 0,
+     "okMsg": "Bonito. Uva certa. Seu olho de prateleira está ficando afiado.",
+     "erroMsg": "Sem drama. Este é feito de Chardonnay. Agora você já sabe.",
+     "porque": "A ficha deste vinho traz Chardonnay como uva principal."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "harmonizacao",
+     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
+     "opcoes": [
+      "Carne vermelha grelhada",
+      "Massa ao sugo",
+      "Frutos do mar",
+      "Churrasco"
+     ],
+     "correta": 2,
+     "okMsg": "Isso. Mesa posta. Você leu o vinho inteiro.",
+     "erroMsg": "Acontece. A ficha dele sugere frutos do mar. Fica para a próxima taça.",
+     "porque": "A ficha deste vinho aponta frutos do mar entre as companhias de mesa."
+    }
+   ],
+   "vinho": {
+    "nome": "Sophenia 2 Para El Tango Blanco",
+    "uva": "Chardonnay",
+    "pais": "Argentina",
+    "faixaPreco": "R$ 80 a 150"
+   }
+  },
+  {
+   "id": "desafio-30",
+   "vinhoId": "12f546af-8e4b-44c1-be79-652f508e1400",
+   "imagem": "/rotulos/12f546af-8e4b-44c1-be79-652f508e1400.webp",
+   "perguntas": [
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "rotulo",
+     "pergunta": "Para abrir: este vinho é de qual tipo?",
+     "opcoes": [
+      "Espumante",
+      "Branco",
+      "Tinto"
+     ],
+     "correta": 2,
+     "okMsg": "Exato. Primeira leitura do rótulo no bolso.",
+     "erroMsg": "Sem drama. Este é um tinto. Esse detalhe vem com o treino.",
+     "porque": "A ficha deste vinho marca o tipo tinto."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
+     "opcoes": [
+      "França",
+      "Chile",
+      "Argentina",
+      "Brasil"
      ],
      "correta": 2,
      "okMsg": "Exato. Origem achada. O rótulo sempre conta.",
-     "erroMsg": "Acontece. Este vem da Itália. Agora você já sabe.",
+     "erroMsg": "Sem drama. Este vem da Argentina. Anota essa para a próxima compra.",
+     "porque": "A ficha deste vinho marca Argentina como país de origem."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "E a uva principal deste rótulo, qual é?",
+     "opcoes": [
+      "Malbec",
+      "Bordô",
+      "Pinot Noir",
+      "Cinsault"
+     ],
+     "correta": 0,
+     "okMsg": "Isso. Uva certa. Seu olho de prateleira está ficando afiado.",
+     "erroMsg": "Quase. Este é feito de Malbec. Agora você já sabe.",
+     "porque": "A ficha deste vinho traz Malbec como uva principal."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "harmonizacao",
+     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
+     "opcoes": [
+      "Sushi",
+      "Ostras frescas",
+      "Churrasco",
+      "Ceviche"
+     ],
+     "correta": 2,
+     "okMsg": "Bonito. Mesa posta. Você leu o vinho inteiro.",
+     "erroMsg": "Acontece. A ficha dele sugere churrasco. Anota essa para a próxima compra.",
+     "porque": "A ficha deste vinho aponta churrasco entre as companhias de mesa."
+    }
+   ],
+   "vinho": {
+    "nome": "Publico Malbec Mendoza 2024",
+    "uva": "Malbec",
+    "pais": "Argentina",
+    "faixaPreco": "R$ 40 a 80"
+   }
+  },
+  {
+   "id": "desafio-31",
+   "vinhoId": "13963ea1-b58e-469e-9033-651f0890e08e",
+   "imagem": "/rotulos/13963ea1-b58e-469e-9033-651f0890e08e.webp",
+   "perguntas": [
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "rotulo",
+     "pergunta": "Para abrir: este vinho é de qual tipo?",
+     "opcoes": [
+      "Tinto",
+      "Branco",
+      "Espumante"
+     ],
+     "correta": 0,
+     "okMsg": "Bonito. Primeira leitura do rótulo no bolso.",
+     "erroMsg": "Sem drama. Este é um tinto. Agora você já sabe.",
+     "porque": "A ficha deste vinho marca o tipo tinto."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
+     "opcoes": [
+      "Chile",
+      "Argentina",
+      "França",
+      "Brasil"
+     ],
+     "correta": 2,
+     "okMsg": "É isso mesmo. Origem achada. O rótulo sempre conta.",
+     "erroMsg": "Quase. Este vem da França. Agora você já sabe.",
+     "porque": "A ficha deste vinho marca França como país de origem."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "E a uva principal deste rótulo, qual é?",
+     "opcoes": [
+      "Cinsault",
+      "Bordô",
+      "Pinot Noir",
+      "Syrah"
+     ],
+     "correta": 3,
+     "okMsg": "Isso. Uva certa. Seu olho de prateleira está ficando afiado.",
+     "erroMsg": "Quase. Este é feito de Syrah. Esse detalhe vem com o treino.",
+     "porque": "A ficha deste vinho traz Syrah como uva principal."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "harmonizacao",
+     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
+     "opcoes": [
+      "Ostras frescas",
+      "Churrasco",
+      "Sushi",
+      "Ceviche"
+     ],
+     "correta": 1,
+     "okMsg": "É isso mesmo. Mesa posta. Você leu o vinho inteiro.",
+     "erroMsg": "Acontece. A ficha dele sugere churrasco. Agora você já sabe.",
+     "porque": "A ficha deste vinho aponta churrasco entre as companhias de mesa."
+    }
+   ],
+   "vinho": {
+    "nome": "Granbeau Grande Réserve Syrah",
+    "uva": "Syrah",
+    "pais": "França",
+    "faixaPreco": "R$ 80 a 150"
+   }
+  },
+  {
+   "id": "desafio-32",
+   "vinhoId": "1738c829-82af-4c98-95d4-e85572dd4934",
+   "imagem": "/rotulos/1738c829-82af-4c98-95d4-e85572dd4934.webp",
+   "perguntas": [
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "rotulo",
+     "pergunta": "Para abrir: este vinho é de qual tipo?",
+     "opcoes": [
+      "Espumante",
+      "Tinto",
+      "Branco"
+     ],
+     "correta": 1,
+     "okMsg": "Na mosca. Primeira leitura do rótulo no bolso.",
+     "erroMsg": "Acontece. Este é um tinto. Fica para a próxima taça.",
+     "porque": "A ficha deste vinho marca o tipo tinto."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
+     "opcoes": [
+      "Argentina",
+      "Espanha",
+      "Itália",
+      "Brasil"
+     ],
+     "correta": 1,
+     "okMsg": "Bonito. Origem achada. O rótulo sempre conta.",
+     "erroMsg": "Tudo bem. Este vem da Espanha. Fica para a próxima taça.",
+     "porque": "A ficha deste vinho marca Espanha como país de origem."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "E a uva principal deste rótulo, qual é?",
+     "opcoes": [
+      "Pinot Noir",
+      "Bordô",
+      "Cinsault",
+      "Tempranillo"
+     ],
+     "correta": 3,
+     "okMsg": "Na mosca. Uva certa. Seu olho de prateleira está ficando afiado.",
+     "erroMsg": "Quase. Este é feito de Tempranillo. Esse detalhe vem com o treino.",
+     "porque": "A ficha deste vinho traz Tempranillo como uva principal."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "harmonizacao",
+     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
+     "opcoes": [
+      "Ostras frescas",
+      "Carne vermelha grelhada",
+      "Ceviche",
+      "Sushi"
+     ],
+     "correta": 1,
+     "okMsg": "Exato. Mesa posta. Você leu o vinho inteiro.",
+     "erroMsg": "Sem drama. A ficha dele sugere carne vermelha grelhada. Fica para a próxima taça.",
+     "porque": "A ficha deste vinho aponta carne vermelha grelhada entre as companhias de mesa."
+    }
+   ],
+   "vinho": {
+    "nome": "Convento Oreja Roble D.O. Ribera del Duero 2024",
+    "uva": "Tempranillo",
+    "pais": "Espanha",
+    "faixaPreco": "R$ 80 a 150"
+   }
+  },
+  {
+   "id": "desafio-33",
+   "vinhoId": "17bfa6b4-7cda-45c8-8a4e-52f1d5bfde04",
+   "imagem": "/rotulos/17bfa6b4-7cda-45c8-8a4e-52f1d5bfde04.webp",
+   "perguntas": [
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "rotulo",
+     "pergunta": "Para abrir: este vinho é de qual tipo?",
+     "opcoes": [
+      "Espumante",
+      "Tinto",
+      "Branco"
+     ],
+     "correta": 2,
+     "okMsg": "Bonito. Primeira leitura do rótulo no bolso.",
+     "erroMsg": "Tudo bem. Este é um branco. Esse detalhe vem com o treino.",
+     "porque": "A ficha deste vinho marca o tipo branco."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
+     "opcoes": [
+      "França",
+      "Argentina",
+      "Brasil",
+      "Chile"
+     ],
+     "correta": 3,
+     "okMsg": "É isso mesmo. Origem achada. O rótulo sempre conta.",
+     "erroMsg": "Sem drama. Este vem do Chile. Agora você já sabe.",
+     "porque": "A ficha deste vinho marca Chile como país de origem."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "E a uva principal deste rótulo, qual é?",
+     "opcoes": [
+      "Antão Vaz",
+      "Sémillon",
+      "Sauvignon Blanc",
+      "Viognier"
+     ],
+     "correta": 2,
+     "okMsg": "Exato. Uva certa. Seu olho de prateleira está ficando afiado.",
+     "erroMsg": "Acontece. Este é feito de Sauvignon Blanc. Fica para a próxima taça.",
+     "porque": "A ficha deste vinho traz Sauvignon Blanc como uva principal."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "harmonizacao",
+     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
+     "opcoes": [
+      "Salada de folhas frescas",
+      "Churrasco",
+      "Massa ao sugo",
+      "Carne vermelha grelhada"
+     ],
+     "correta": 0,
+     "okMsg": "Isso. Mesa posta. Você leu o vinho inteiro.",
+     "erroMsg": "Tudo bem. A ficha dele sugere salada de folhas frescas. Fica para a próxima taça.",
+     "porque": "A ficha deste vinho aponta salada de folhas frescas entre as companhias de mesa."
+    }
+   ],
+   "vinho": {
+    "nome": "Terranoble Sauvignon Blanc Civis 2025",
+    "uva": "Sauvignon Blanc",
+    "pais": "Chile",
+    "faixaPreco": "R$ 80 a 150"
+   }
+  },
+  {
+   "id": "desafio-34",
+   "vinhoId": "17c68950-6be9-4ee0-b990-d42f963cc4d1",
+   "imagem": "/rotulos/17c68950-6be9-4ee0-b990-d42f963cc4d1.webp",
+   "perguntas": [
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "rotulo",
+     "pergunta": "Para abrir: este vinho é de qual tipo?",
+     "opcoes": [
+      "Tinto",
+      "Espumante",
+      "Branco"
+     ],
+     "correta": 0,
+     "okMsg": "Bonito. Primeira leitura do rótulo no bolso.",
+     "erroMsg": "Sem drama. Este é um tinto. Agora você já sabe.",
+     "porque": "A ficha deste vinho marca o tipo tinto."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
+     "opcoes": [
+      "Chile",
+      "Brasil",
+      "França",
+      "Argentina"
+     ],
+     "correta": 0,
+     "okMsg": "É isso mesmo. Origem achada. O rótulo sempre conta.",
+     "erroMsg": "Quase. Este vem do Chile. Esse detalhe vem com o treino.",
+     "porque": "A ficha deste vinho marca Chile como país de origem."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "E a uva principal deste rótulo, qual é?",
+     "opcoes": [
+      "Cinsault",
+      "Merlot",
+      "Pinot Noir",
+      "Bordô"
+     ],
+     "correta": 1,
+     "okMsg": "Isso. Uva certa. Seu olho de prateleira está ficando afiado.",
+     "erroMsg": "Tudo bem. Este é feito de Merlot. Agora você já sabe.",
+     "porque": "A ficha deste vinho traz Merlot como uva principal."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "rotulo",
+     "pergunta": "Para fechar: na gôndola, este vinho costuma ficar em qual faixa de preço?",
+     "opcoes": [
+      "Entre R$ 90 e R$ 200",
+      "Entre R$ 40 e R$ 90",
+      "Até R$ 40",
+      "Entre R$ 200 e R$ 500"
+     ],
+     "correta": 1,
+     "okMsg": "Bonito. Olho de preço calibrado vale ouro no mercado.",
+     "erroMsg": "Sem drama. Ele costuma aparecer na faixa entre r$ 40 e r$ 90. Fica para a próxima taça.",
+     "porque": "O preço de referência deste vinho no nosso banco fica na faixa entre r$ 40 e r$ 90."
+    }
+   ],
+   "vinho": {
+    "nome": "Trampolim Merlot -",
+    "uva": "Merlot",
+    "pais": "Chile",
+    "faixaPreco": "R$ 40 a 80"
+   }
+  },
+  {
+   "id": "desafio-35",
+   "vinhoId": "199513d4-fd14-491b-8cba-fa06308fad7f",
+   "imagem": "/rotulos/199513d4-fd14-491b-8cba-fa06308fad7f.webp",
+   "perguntas": [
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "rotulo",
+     "pergunta": "Para abrir: este vinho é de qual tipo?",
+     "opcoes": [
+      "Tinto",
+      "Branco",
+      "Espumante"
+     ],
+     "correta": 2,
+     "okMsg": "Na mosca. Primeira leitura do rótulo no bolso.",
+     "erroMsg": "Acontece. Este é um espumante. Esse detalhe vem com o treino.",
+     "porque": "A ficha deste vinho marca o tipo espumante."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
+     "opcoes": [
+      "Brasil",
+      "Argentina",
+      "França",
+      "Chile"
+     ],
+     "correta": 0,
+     "okMsg": "É isso mesmo. Origem achada. O rótulo sempre conta.",
+     "erroMsg": "Quase. Este vem do Brasil. Anota essa para a próxima compra.",
+     "porque": "A ficha deste vinho marca Brasil como país de origem."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "E a uva principal deste rótulo, qual é?",
+     "opcoes": [
+      "Viognier",
+      "Chardonnay",
+      "Sauvignon Blanc",
+      "Sémillon"
+     ],
+     "correta": 1,
+     "okMsg": "Exato. Uva certa. Seu olho de prateleira está ficando afiado.",
+     "erroMsg": "Sem drama. Este é feito de Chardonnay. Esse detalhe vem com o treino.",
+     "porque": "A ficha deste vinho traz Chardonnay como uva principal."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "harmonizacao",
+     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
+     "opcoes": [
+      "Carne vermelha grelhada",
+      "Massa ao sugo",
+      "Churrasco",
+      "Sushi"
+     ],
+     "correta": 3,
+     "okMsg": "Bonito. Mesa posta. Você leu o vinho inteiro.",
+     "erroMsg": "Quase. A ficha dele sugere sushi. Esse detalhe vem com o treino.",
+     "porque": "A ficha deste vinho aponta sushi entre as companhias de mesa."
+    }
+   ],
+   "vinho": {
+    "nome": "Espumante Garibaldi Chardonnay Brut",
+    "uva": "Chardonnay",
+    "pais": "Brasil",
+    "faixaPreco": "R$ 40 a 80"
+   }
+  },
+  {
+   "id": "desafio-36",
+   "vinhoId": "1a549e34-8d95-4455-a561-8a0e40a2d4e6",
+   "imagem": "/rotulos/1a549e34-8d95-4455-a561-8a0e40a2d4e6.webp",
+   "perguntas": [
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "rotulo",
+     "pergunta": "Para abrir: este vinho é de qual tipo?",
+     "opcoes": [
+      "Tinto",
+      "Branco",
+      "Espumante"
+     ],
+     "correta": 0,
+     "okMsg": "Exato. Primeira leitura do rótulo no bolso.",
+     "erroMsg": "Sem drama. Este é um tinto. Anota essa para a próxima compra.",
+     "porque": "A ficha deste vinho marca o tipo tinto."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
+     "opcoes": [
+      "Itália",
+      "Argentina",
+      "Brasil",
+      "Portugal"
+     ],
+     "correta": 3,
+     "okMsg": "Isso. Origem achada. O rótulo sempre conta.",
+     "erroMsg": "Tudo bem. Este vem de Portugal. Anota essa para a próxima compra.",
+     "porque": "A ficha deste vinho marca Portugal como país de origem."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "E a uva principal deste rótulo, qual é?",
+     "opcoes": [
+      "Tempranillo",
+      "Cinsault",
+      "Bordô",
+      "Pinot Noir"
+     ],
+     "correta": 0,
+     "okMsg": "Isso. Uva certa. Seu olho de prateleira está ficando afiado.",
+     "erroMsg": "Acontece. Este é feito de Tempranillo. Agora você já sabe.",
+     "porque": "A ficha deste vinho traz Tempranillo como uva principal."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "harmonizacao",
+     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
+     "opcoes": [
+      "Sushi",
+      "Massa ao sugo",
+      "Ceviche",
+      "Ostras frescas"
+     ],
+     "correta": 1,
+     "okMsg": "Isso. Mesa posta. Você leu o vinho inteiro.",
+     "erroMsg": "Sem drama. A ficha dele sugere massa ao sugo. Agora você já sabe.",
+     "porque": "A ficha deste vinho aponta massa ao sugo entre as companhias de mesa."
+    }
+   ],
+   "vinho": {
+    "nome": "Burmester D.O.C. Douro Tinto 2022",
+    "uva": "Tempranillo",
+    "pais": "Portugal",
+    "faixaPreco": "R$ 80 a 150"
+   }
+  },
+  {
+   "id": "desafio-37",
+   "vinhoId": "1c04ab7a-c689-4942-9ab9-57d7e8d63e81",
+   "imagem": "/rotulos/1c04ab7a-c689-4942-9ab9-57d7e8d63e81.webp",
+   "perguntas": [
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "rotulo",
+     "pergunta": "Para abrir: este vinho é de qual tipo?",
+     "opcoes": [
+      "Branco",
+      "Espumante",
+      "Tinto"
+     ],
+     "correta": 2,
+     "okMsg": "Exato. Primeira leitura do rótulo no bolso.",
+     "erroMsg": "Quase. Este é um tinto. Esse detalhe vem com o treino.",
+     "porque": "A ficha deste vinho marca o tipo tinto."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
+     "opcoes": [
+      "Argentina",
+      "Brasil",
+      "França",
+      "Chile"
+     ],
+     "correta": 1,
+     "okMsg": "Bonito. Origem achada. O rótulo sempre conta.",
+     "erroMsg": "Acontece. Este vem do Brasil. Agora você já sabe.",
+     "porque": "A ficha deste vinho marca Brasil como país de origem."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "E a uva principal deste rótulo, qual é?",
+     "opcoes": [
+      "Bordô",
+      "Merlot",
+      "Cinsault",
+      "Pinot Noir"
+     ],
+     "correta": 1,
+     "okMsg": "Na mosca. Uva certa. Seu olho de prateleira está ficando afiado.",
+     "erroMsg": "Sem drama. Este é feito de Merlot. Fica para a próxima taça.",
+     "porque": "A ficha deste vinho traz Merlot como uva principal."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "harmonizacao",
+     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
+     "opcoes": [
+      "Sushi",
+      "Ceviche",
+      "Ostras frescas",
+      "Massa ao sugo"
+     ],
+     "correta": 3,
+     "okMsg": "Bonito. Mesa posta. Você leu o vinho inteiro.",
+     "erroMsg": "Tudo bem. A ficha dele sugere massa ao sugo. Agora você já sabe.",
+     "porque": "A ficha deste vinho aponta massa ao sugo entre as companhias de mesa."
+    }
+   ],
+   "vinho": {
+    "nome": "Arbo Reservado Merlot",
+    "uva": "Merlot",
+    "pais": "Brasil",
+    "faixaPreco": "R$ 40 a 80"
+   }
+  },
+  {
+   "id": "desafio-38",
+   "vinhoId": "1d5e0f51-4ac7-4852-a02e-f9c49327399c",
+   "imagem": "/rotulos/1d5e0f51-4ac7-4852-a02e-f9c49327399c.webp",
+   "perguntas": [
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "rotulo",
+     "pergunta": "Para abrir: este vinho é de qual tipo?",
+     "opcoes": [
+      "Branco",
+      "Espumante",
+      "Tinto"
+     ],
+     "correta": 1,
+     "okMsg": "Bonito. Primeira leitura do rótulo no bolso.",
+     "erroMsg": "Tudo bem. Este é um espumante. Esse detalhe vem com o treino.",
+     "porque": "A ficha deste vinho marca o tipo espumante."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
+     "opcoes": [
+      "Brasil",
+      "Itália",
+      "Chile",
+      "Argentina"
+     ],
+     "correta": 1,
+     "okMsg": "Exato. Origem achada. O rótulo sempre conta.",
+     "erroMsg": "Tudo bem. Este vem da Itália. Fica para a próxima taça.",
      "porque": "A ficha deste vinho marca Itália como país de origem."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "E a uva principal deste rótulo, qual é?",
+     "opcoes": [
+      "Sauvignon Blanc",
+      "Viognier",
+      "Sémillon",
+      "Chardonnay"
+     ],
+     "correta": 3,
+     "okMsg": "É isso mesmo. Uva certa. Seu olho de prateleira está ficando afiado.",
+     "erroMsg": "Acontece. Este é feito de Chardonnay. Anota essa para a próxima compra.",
+     "porque": "A ficha deste vinho traz Chardonnay como uva principal."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "harmonizacao",
+     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
+     "opcoes": [
+      "Churrasco",
+      "Ostras frescas",
+      "Massa ao sugo",
+      "Carne vermelha grelhada"
+     ],
+     "correta": 1,
+     "okMsg": "Isso. Mesa posta. Você leu o vinho inteiro.",
+     "erroMsg": "Quase. A ficha dele sugere ostras frescas. Agora você já sabe.",
+     "porque": "A ficha deste vinho aponta ostras frescas entre as companhias de mesa."
+    }
+   ],
+   "vinho": {
+    "nome": "Corvée Metodo Classico Trento DOC Brut",
+    "uva": "Chardonnay",
+    "pais": "Itália",
+    "faixaPreco": "R$ 80 a 150"
+   }
+  },
+  {
+   "id": "desafio-39",
+   "vinhoId": "236e5e16-79a2-4a8f-8a39-27ede4c39d63",
+   "imagem": "/rotulos/236e5e16-79a2-4a8f-8a39-27ede4c39d63.webp",
+   "perguntas": [
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "rotulo",
+     "pergunta": "Para abrir: este vinho é de qual tipo?",
+     "opcoes": [
+      "Tinto",
+      "Branco",
+      "Espumante"
+     ],
+     "correta": 0,
+     "okMsg": "É isso mesmo. Primeira leitura do rótulo no bolso.",
+     "erroMsg": "Quase. Este é um tinto. Esse detalhe vem com o treino.",
+     "porque": "A ficha deste vinho marca o tipo tinto."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
+     "opcoes": [
+      "Itália",
+      "Portugal",
+      "Argentina",
+      "Brasil"
+     ],
+     "correta": 1,
+     "okMsg": "É isso mesmo. Origem achada. O rótulo sempre conta.",
+     "erroMsg": "Quase. Este vem de Portugal. Fica para a próxima taça.",
+     "porque": "A ficha deste vinho marca Portugal como país de origem."
     },
     {
      "tipo": "mc",
@@ -3012,13 +2937,13 @@
      "opcoes": [
       "Cinsault",
       "Pinot Noir",
-      "Bordô",
-      "Cabernet Sauvignon"
+      "Tempranillo",
+      "Bordô"
      ],
-     "correta": 3,
-     "okMsg": "Exato. Uva certa. Seu olho de prateleira está ficando afiado.",
-     "erroMsg": "Tudo bem. Este é feito de Cabernet Sauvignon. Fica para a próxima taça.",
-     "porque": "A ficha deste vinho traz Cabernet Sauvignon como uva principal."
+     "correta": 2,
+     "okMsg": "Na mosca. Uva certa. Seu olho de prateleira está ficando afiado.",
+     "erroMsg": "Sem drama. Este é feito de Tempranillo. Agora você já sabe.",
+     "porque": "A ficha deste vinho traz Tempranillo como uva principal."
     },
     {
      "tipo": "mc",
@@ -3026,22 +2951,98 @@
      "habilidade": "harmonizacao",
      "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
      "opcoes": [
+      "Sushi",
       "Queijo curado tipo parmesão",
       "Ostras frescas",
-      "Sushi",
       "Ceviche"
      ],
-     "correta": 0,
-     "okMsg": "Na mosca. Mesa posta. Você leu o vinho inteiro.",
-     "erroMsg": "Tudo bem. A ficha dele sugere queijo curado tipo parmesão. Anota essa para a próxima compra.",
+     "correta": 1,
+     "okMsg": "É isso mesmo. Mesa posta. Você leu o vinho inteiro.",
+     "erroMsg": "Acontece. A ficha dele sugere queijo curado tipo parmesão. Esse detalhe vem com o treino.",
      "porque": "A ficha deste vinho aponta queijo curado tipo parmesão entre as companhias de mesa."
     }
    ],
    "vinho": {
-    "nome": "Ornellaia Bolgheri Superiore DOC",
-    "uva": "Cabernet Sauvignon",
-    "pais": "Itália",
-    "faixaPreco": "acima de R$ 300"
+    "nome": "Similar Tinto",
+    "uva": "Tempranillo",
+    "pais": "Portugal",
+    "faixaPreco": "ate R$ 40"
+   }
+  },
+  {
+   "id": "desafio-40",
+   "vinhoId": "24855e8f-7508-4ff3-8173-7ddf6e63e6bc",
+   "imagem": "/rotulos/24855e8f-7508-4ff3-8173-7ddf6e63e6bc.webp",
+   "perguntas": [
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "rotulo",
+     "pergunta": "Para abrir: este vinho é de qual tipo?",
+     "opcoes": [
+      "Branco",
+      "Tinto",
+      "Espumante"
+     ],
+     "correta": 2,
+     "okMsg": "Isso. Primeira leitura do rótulo no bolso.",
+     "erroMsg": "Quase. Este é um espumante. Agora você já sabe.",
+     "porque": "A ficha deste vinho marca o tipo espumante."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "Procure a origem no rótulo. De qual país vem este vinho?",
+     "opcoes": [
+      "França",
+      "Brasil",
+      "Chile",
+      "Argentina"
+     ],
+     "correta": 1,
+     "okMsg": "Bonito. Origem achada. O rótulo sempre conta.",
+     "erroMsg": "Tudo bem. Este vem do Brasil. Anota essa para a próxima compra.",
+     "porque": "A ficha deste vinho marca Brasil como país de origem."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 2,
+     "habilidade": "rotulo",
+     "pergunta": "E a uva principal deste rótulo, qual é?",
+     "opcoes": [
+      "Viognier",
+      "Sauvignon Blanc",
+      "Chardonnay",
+      "Sémillon"
+     ],
+     "correta": 2,
+     "okMsg": "Exato. Uva certa. Seu olho de prateleira está ficando afiado.",
+     "erroMsg": "Sem drama. Este é feito de Chardonnay. Fica para a próxima taça.",
+     "porque": "A ficha deste vinho traz Chardonnay como uva principal."
+    },
+    {
+     "tipo": "mc",
+     "dificuldade": 1,
+     "habilidade": "harmonizacao",
+     "pergunta": "Para fechar: qual destes pratos costuma cair bem com este vinho?",
+     "opcoes": [
+      "Carne vermelha grelhada",
+      "Sushi",
+      "Churrasco",
+      "Massa ao sugo"
+     ],
+     "correta": 1,
+     "okMsg": "É isso mesmo. Mesa posta. Você leu o vinho inteiro.",
+     "erroMsg": "Sem drama. A ficha dele sugere sushi. Esse detalhe vem com o treino.",
+     "porque": "A ficha deste vinho aponta sushi entre as companhias de mesa."
+    }
+   ],
+   "vinho": {
+    "nome": "Espumante Basco Loco Branco Brut",
+    "uva": "Chardonnay",
+    "pais": "Brasil",
+    "faixaPreco": "R$ 80 a 150"
    }
   }
  ]

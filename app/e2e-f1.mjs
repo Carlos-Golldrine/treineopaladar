@@ -2,7 +2,7 @@
 // Uso: npm run build && node e2e-f1.mjs
 // Screenshots em _shots/e2e/. Sai com codigo 1 se algum passo falhar.
 import { createRequire } from 'module';
-import { mkdirSync } from 'fs';
+import { mkdirSync, readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import path from 'path';
 import { preview } from 'vite';
@@ -13,6 +13,26 @@ const { chromium } = require('C:/Users/camargo/tchin-tchin-app/node_modules/play
 const root = path.dirname(fileURLToPath(import.meta.url));
 const dir = path.join(root, '_shots', 'e2e');
 mkdirSync(dir, { recursive: true });
+
+/* Dados canonicos do Desafio do Dia (mesma logica da rota) */
+const DESAFIOS = JSON.parse(
+  readFileSync(path.join(root, 'src', 'content', 'pratica', 'desafios.json'), 'utf8'),
+);
+function diaSaoPaulo(agora) {
+  return new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'America/Sao_Paulo',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).format(agora);
+}
+function indiceDoDia(dia, total) {
+  const [ano, mes, diaN] = dia.split('-').map(Number);
+  const dias = Math.floor(Date.UTC(ano, mes - 1, diaN) / 86400000);
+  return ((dias % total) + total) % total;
+}
+const DIA = diaSaoPaulo(Date.now());
+const DESAFIO_HOJE = DESAFIOS.desafios[indiceDoDia(DIA, DESAFIOS.desafios.length)];
 
 const PORT = 4316;
 const server = await preview({ root, preview: { port: PORT, strictPort: true } });
@@ -108,6 +128,26 @@ async function setSlider(valor) {
   }, valor);
 }
 
+/** Ordena o exercicio "ordenar" via fallback de toques (toca 2, troca). */
+async function ordenarPara(desejada) {
+  const lerOrdem = () =>
+    page.$$eval('.ordenar .ordenar-texto', (els) => els.map((e) => e.textContent.trim()));
+  for (let i = 0; i < desejada.length; i++) {
+    const atual = await lerOrdem();
+    if (atual[i] === desejada[i]) continue;
+    const j = atual.indexOf(desejada[i]);
+    assert(j > i, `item "${desejada[i]}" nao encontrado abaixo da posicao ${i}`);
+    await page.locator('.ordenar .ordenar-linha').nth(i).click();
+    await page.locator('.ordenar .ordenar-linha').nth(j).click();
+    await page.waitForTimeout(180);
+  }
+  const final = await lerOrdem();
+  assert(
+    JSON.stringify(final) === JSON.stringify(desejada),
+    `ordem final ${JSON.stringify(final)}`,
+  );
+}
+
 async function medirAlvos(rotulo) {
   const dados = await page.evaluate(() => {
     const out = [];
@@ -162,9 +202,11 @@ try {
     await continuar();
   });
 
-  await step('(c) J3 objetivo (intersticial) e payoff', async () => {
+  await step('(c) J3 objetivo: grid de 6 cards, escolha No mercado, payoff', async () => {
     await esperarPergunta('Onde você mais quer mandar bem?');
-    await page.locator('.player-meio .carta-grande').first().click();
+    const cartas = await page.locator('.player-meio .carta-grande').count();
+    assert(cartas === 6, `J3 deveria ter 6 cards de objetivo, tem ${cartas}`);
+    await page.locator('.player-meio .carta-grande', { hasText: 'No mercado' }).click();
     await page.getByRole('button', { name: 'Continuar' }).waitFor({ timeout: 4000 });
     await shot('j3-objetivo');
     await page.getByRole('button', { name: 'Continuar' }).click();
@@ -259,7 +301,7 @@ try {
     assert(trilhaPosFtue[1].classe.includes('locked'), `no 2 deveria estar bloqueado: ${trilhaPosFtue[1].classe}`);
   });
 
-  await step('(h) abrir a licao 2 do dia (no 1 da trilha, u1-l1)', async () => {
+  await step('(h) abrir a licao 2 do dia (no 1 da trilha, u1-l4: docura abre a unidade)', async () => {
     await page.locator('.trail-item').first().locator('button.node-taca').click();
     /* F2.5: a 1a visita da unidade abre com a micro-aula (sempre pulavel) */
     await page.waitForSelector('.microaula', { timeout: 8000 });
@@ -267,11 +309,12 @@ try {
     assert(tituloAula.includes('Fundamentos'), `micro-aula de outra unidade: "${tituloAula}"`);
     await shot('microaula-u1');
     await page.getByRole('button', { name: 'Pular' }).click();
-    await esperarPergunta('chá preto que ficou tempo demais');
-    assert(new URL(page.url()).pathname === '/licao/u1-l1', `URL e ${page.url()}`);
+    await esperarPergunta('Café sem açúcar');
+    /* C6: a primeira licao da trilha e a de docura */
+    assert(new URL(page.url()).pathname === '/licao/u1-l4', `URL e ${page.url()}`);
   });
 
-  const PERG_EX0 = 'chá preto que ficou tempo demais';
+  const PERG_EX0 = 'Café sem açúcar';
 
   await step('(h) erro proposital 1 no ex0 (grace, sem perder vida)', async () => {
     await responderMC(1, false);
@@ -281,16 +324,16 @@ try {
   });
 
   await step('(h) ex1 MC correta', async () => {
-    await esperarPergunta('Essa mesma secura aparece');
+    await esperarPergunta('De onde vem a doçura');
     await responderMC(0, true);
     await continuar();
   });
 
   await step('(h) ex2 swipe (deck de 5 cartas)', async () => {
-    await esperarPergunta('Tem tanino aqui ou não tem?');
+    await esperarPergunta('Verdade ou mito?');
     await medirAlvos('ex-swipe');
     await shot('ex-swipe');
-    const seq = [true, false, true, true, false];
+    const seq = [true, false, true, false, true];
     for (const v of seq) {
       const btn = page.locator(v ? '.btn-deck-sim' : '.btn-deck-nao');
       await btn.click();
@@ -301,14 +344,14 @@ try {
   });
 
   await step('(h) ex3 MC correta', async () => {
-    await esperarPergunta('Onde o tanino dá as caras');
+    await esperarPergunta('No rótulo brasileiro');
     await responderMC(0, true);
     await continuar();
   });
 
   await step('(h) ex4 slider no alvo', async () => {
-    await esperarPergunta('Na régua do tanino');
-    await setSlider(85);
+    await esperarPergunta('Na régua do açúcar');
+    await setSlider(5);
     await medirAlvos('ex-slider');
     await shot('ex-slider');
     await page.getByRole('button', { name: 'Cravar palpite' }).click();
@@ -316,7 +359,17 @@ try {
     await continuar();
   });
 
-  await step('(h) ex5 duas verdades + calibracao', async () => {
+  await step('(h) ex5 ordenar do mais seco ao mais doce (C6, na 1a licao)', async () => {
+    await esperarPergunta('Organize a prateleira do mais seco ao mais doce');
+    await ordenarPara(['Seco', 'Meio seco', 'Suave', 'Colheita tardia bem doce']);
+    await medirAlvos('ex-ordenar-docura');
+    await shot('ex-ordenar-docura');
+    await page.getByRole('button', { name: 'Conferir' }).click();
+    await page.waitForSelector('.painel-reveal.painel-ok', { timeout: 6000 });
+    await continuar();
+  });
+
+  await step('(h) ex6 duas verdades + calibracao', async () => {
     await page.locator('.ex-eyebrow', { hasText: 'Duas verdades' }).waitFor({ timeout: 6000 });
     await opcao(2).click();
     await conferir();
@@ -326,23 +379,22 @@ try {
     await continuar();
   });
 
-  await step('(h) ex6 MC desafio correta', async () => {
-    await esperarPergunta('Por que o tinto seca a boca');
+  await step('(h) ex7 MC desafio correta', async () => {
+    await esperarPergunta('Dois vinhos com o mesmo açúcar');
     await responderMC(0, true);
     await continuar();
   });
 
-  await step('(h) ex7 intruso + calibracao', async () => {
-    await esperarPergunta('NÃO costuma deixar a boca seca');
-    await shot('ex-intruso');
-    await opcao(2).click();
+  await step('(h) ex8 MC + calibracao', async () => {
+    await esperarPergunta('Você cheira um vinho');
+    await opcao(0).click();
     await conferir();
     await calibrar();
     await page.waitForSelector('.painel-reveal.painel-ok', { timeout: 6000 });
     await continuar();
   });
 
-  await step('(h) ex8 MC correta', async () => {
+  await step('(h) ex9 MC correta (suave sem vergonha)', async () => {
     await esperarPergunta('Para fechar');
     await responderMC(0, true);
     await continuar();
@@ -432,6 +484,64 @@ try {
     const hudStreak = await page.locator('.hud-streak .hud-value').innerText();
     assert(hudStreak.trim() === '1', `HUD streak = ${hudStreak}`);
     await shot('trilha-apos-reload');
+  });
+
+  await step('(k) trilha na ordem do objetivo mercado: Comprar sem errar e a 2a unidade', async () => {
+    const ordem = await page.evaluate(() => ({
+      abertas: [...document.querySelectorAll('.unit-card .unit-title')].map((el) =>
+        el.textContent.trim(),
+      ),
+      bloqueadas: [...document.querySelectorAll('.unit-locked .unit-locked-titulo')].map((el) =>
+        el.textContent.trim(),
+      ),
+    }));
+    assert(ordem.abertas[0] === 'Fundamentos do Paladar', `1a unidade: "${ordem.abertas[0]}"`);
+    /* mapa do objetivo mercado: U1-U4-U2-U3-U5-U6 (compra cedo) */
+    const esperada = [
+      'Comprar sem errar',
+      'Uvas tintas que abrem portas',
+      'Brancos, rosés e bolhas',
+      'Harmonização sem fórmula mágica',
+      'Brasil e vizinhos',
+    ];
+    assert(
+      JSON.stringify(ordem.bloqueadas) === JSON.stringify(esperada),
+      `ordem para mercado deveria ser ${JSON.stringify(esperada)}, veio ${JSON.stringify(ordem.bloqueadas)}`,
+    );
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    await page.waitForTimeout(300);
+    await shot('trilha-reordenada-mercado');
+    await page.evaluate(() => window.scrollTo(0, 0));
+  });
+
+  await step('(l) chip de docura na ficha do vinho revelado (Desafio)', async () => {
+    /* cena demo: payload com subtipo presente, chip obrigatorio */
+    await page.goto(`${base}/desafio?cena=resultado`, { waitUntil: 'load' });
+    await page.waitForSelector('.revelado', { timeout: 8000 });
+    const chipDemo = (await page.locator('.chip-docura').innerText()).trim();
+    assert(chipDemo === 'seco', `chip da cena demo: "${chipDemo}"`);
+    await shot('desafio-chip-docura');
+    /* dado real do dia: o chip aparece exatamente quando o campo existe */
+    await page.evaluate((dia) => {
+      localStorage.setItem(
+        'tp.desafio.v1',
+        JSON.stringify({ data: dia, acertos: 2, grade: '■□■□' }),
+      );
+    }, DIA);
+    await page.goto(`${base}/desafio`, { waitUntil: 'load' });
+    await page.waitForSelector('.revelado', { timeout: 8000 });
+    const docuraHoje = (
+      DESAFIO_HOJE.vinho.subtipoDocura ?? DESAFIO_HOJE.vinho.subtipo_docura ?? ''
+    ).trim();
+    const chips = await page.locator('.chip-docura').count();
+    if (docuraHoje) {
+      assert(chips === 1, `vinho de hoje tem docura "${docuraHoje}" e o chip nao apareceu`);
+      const texto = (await page.locator('.chip-docura').innerText()).trim().toLowerCase();
+      assert(texto === docuraHoje.toLowerCase(), `chip "${texto}" difere do dado "${docuraHoje}"`);
+    } else {
+      assert(chips === 0, 'chip de docura apareceu sem dado no payload');
+      console.log('  (vinho de hoje ainda sem subtipo_docura no payload: chip ausente, correto)');
+    }
   });
 
   await step('(extra) cena demo do tipo ordenar (screenshot)', async () => {

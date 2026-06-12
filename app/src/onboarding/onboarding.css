@@ -217,6 +217,35 @@
   flex: 1;
 }
 
+/* J3 com 6 objetivos: grid 2x3 de cards curtos, leitura de relance.
+   Alvo de toque segue >= 44pt (min-height 88px). */
+.cartas-grade {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.cartas-grade .carta-grande {
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  gap: var(--space-2);
+  min-height: 88px;
+  padding: 12px var(--space-2);
+}
+
+.cartas-grade .carta-icone {
+  width: 36px;
+  height: 36px;
+}
+
+.cartas-grade .carta-rotulo {
+  flex: none;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
 /* --------------------- Conclusao da Licao 1 (aha) --------------------- */
 
 .c1-mascote {

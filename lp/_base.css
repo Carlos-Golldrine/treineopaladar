@@ -1,0 +1,530 @@
+﻿/* ============================================================
+   Treine seu Paladar - LPs de aquisicao
+   Tokens herdados de BRIEF-DESIGN.md. Hex travados, papeis fixos.
+   Fontes self-hosted (mesmos woff2 do app). Sem framework.
+   ============================================================ */
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("fonts/fraunces-latin-600-normal.woff2") format("woff2");
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Fraunces";
+  src: url("fonts/fraunces-latin-600-italic.woff2") format("woff2");
+  font-weight: 600; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("fonts/inter-latin-400-normal.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("fonts/inter-latin-600-normal.woff2") format("woff2");
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("fonts/jetbrains-mono-latin-600-normal.woff2") format("woff2");
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+
+:root {
+  /* cores do brief, papeis fixos */
+  --wine-900: #4A1F24;   /* texto display, fundos profundos */
+  --wine-700: #722F37;   /* acao primaria */
+  --wine-950: #38171B;   /* base do botao 3D (derivado do wine-900) */
+  --gold-500: #D4A574;   /* recompensa, destaque */
+  --gold-700: #B8894A;   /* tier medio */
+  --bg: #FAFAF8;         /* fundo base quente */
+  --ink: #4A1F24;
+  --body-ink: #423735;   /* neutro quente proprio */
+  --muted: #6B5D57;      /* neutro quente, AA em 13px sobre o bg (auditoria) */
+  --line: rgba(74, 31, 36, 0.14);
+  --card: #F6F2EE;       /* superficie quente para selos e badges */
+  --paper-deep: #401B20; /* painel profundo (flight desafio) */
+
+  /* sombras tingidas de vinho, 2 niveis */
+  --shadow-1: 0 2px 8px rgba(74, 31, 36, 0.10);
+  --shadow-2: 0 16px 40px rgba(74, 31, 36, 0.16);
+
+  /* raios com intencao: 8 chips, 16 cards, pill botoes */
+  --r-chip: 8px;
+  --r-card: 16px;
+  --r-pill: 999px;
+
+  /* escala: 13 / 15 / 17 / 22 / 28 / 36 (+ display de marketing) */
+  --t-13: 0.8125rem; --t-15: 0.9375rem; --t-17: 1.0625rem;
+  --t-22: 1.375rem;  --t-28: 1.75rem;   --t-36: 2.25rem;
+
+  --font-display: "Fraunces", Georgia, serif;
+  --font-ui: "Inter", system-ui, sans-serif;
+  --font-data: "JetBrains Mono", ui-monospace, monospace;
+
+  --w-page: 1120px;
+  --w-prose: 65ch;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--body-ink);
+  font-family: var(--font-ui);
+  font-size: var(--t-17);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+a { color: var(--wine-700); }
+
+::selection { background: var(--gold-500); color: var(--wine-900); }
+
+/* ---------- estrutura ---------- */
+
+.wrap {
+  width: min(100% - 40px, var(--w-page));
+  margin-inline: auto;
+}
+
+/* ---------- header ---------- */
+
+.top {
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+}
+.top-inner {
+  display: flex; align-items: center; gap: 12px;
+  padding: 16px 0;
+}
+.lockup {
+  display: flex; align-items: baseline; gap: 10px;
+  text-decoration: none;
+}
+.lockup .nome {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--t-22);
+  color: var(--wine-900);
+  letter-spacing: -0.01em;
+}
+.selo-beta {
+  font-family: var(--font-data);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  color: var(--gold-700);
+  border: 1px solid var(--gold-500);
+  border-radius: var(--r-pill);
+  padding: 3px 10px;
+  text-transform: uppercase;
+  background: var(--bg);
+  align-self: center;
+}
+.top .cta-mini { margin-left: auto; }
+
+/* ---------- botoes 3D da marca ---------- */
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: var(--t-17);
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  border-radius: var(--r-pill);
+  padding: 17px 32px 15px;
+  color: #FFF6EE;
+  background: var(--wine-700);
+  border: 0;
+  border-bottom: 4px solid var(--wine-950);
+  box-shadow: 0 4px 0 var(--wine-950), var(--shadow-1);
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out, filter 0.15s ease-out;
+  cursor: pointer;
+}
+@media (hover: hover) {
+  .btn:hover { filter: brightness(1.07); }
+}
+.btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 var(--wine-950);
+}
+.btn:focus-visible {
+  outline: 3px solid var(--gold-500);
+  outline-offset: 3px;
+}
+.btn-gold {
+  color: var(--wine-900);
+  background: var(--gold-500);
+  border-bottom-color: var(--gold-700);
+  box-shadow: 0 4px 0 var(--gold-700), var(--shadow-1);
+}
+.btn-gold:active { box-shadow: 0 0 0 var(--gold-700); }
+.cta-mini {
+  font-size: var(--t-15);
+  padding: 11px 20px 9px;
+  box-shadow: 0 3px 0 var(--wine-950);
+  border-bottom-width: 3px;
+}
+.cta-micro {
+  display: block;
+  margin-top: 12px;
+  font-size: var(--t-13);
+  color: var(--muted);
+}
+
+/* ---------- hero editorial: headline forte a esquerda, prova a direita ---------- */
+
+.hero { padding: 48px 0 56px; }
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-items: center;
+}
+.eyebrow {
+  font-family: var(--font-data);
+  font-size: var(--t-13);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  /* gold-700 dava 3,0:1 em 13px; tom escurecido passa AA (auditoria) */
+  color: #8F6A39;
+  margin: 0 0 16px;
+}
+h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.125rem, 5.4vw, 3.375rem);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  color: var(--wine-900);
+  margin: 0 0 20px;
+  text-wrap: balance;
+}
+.subhead {
+  font-size: var(--t-22);
+  line-height: 1.45;
+  color: var(--body-ink);
+  margin: 0 0 28px;
+  max-width: 34ch;
+  text-wrap: pretty;
+}
+.subhead strong { color: var(--wine-900); }
+
+/* hero invertido (flight desafio) */
+.hero-escuro {
+  background: var(--wine-900);
+  background: linear-gradient(168deg, var(--wine-900) 0%, var(--paper-deep) 100%);
+}
+.hero-escuro h1 { color: #F8EFE6; }
+.hero-escuro .subhead { color: rgba(248, 239, 230, 0.85); }
+.hero-escuro .subhead strong { color: var(--gold-500); }
+.hero-escuro .eyebrow { color: var(--gold-500); }
+.hero-escuro .cta-micro { color: rgba(248, 239, 230, 0.6); }
+
+/* ---------- moldura de celular ---------- */
+
+.prova-visual {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+.phone {
+  width: 250px;
+  flex: none;
+  background: #241114;
+  border-radius: 38px;
+  padding: 10px;
+  box-shadow: var(--shadow-2);
+  position: relative;
+}
+.phone::before {
+  content: "";
+  position: absolute;
+  top: 4px; left: 50%;
+  width: 88px; height: 4px;
+  transform: translateX(-50%);
+  border-radius: var(--r-pill);
+  background: rgba(248, 239, 230, 0.16);
+}
+.phone img {
+  border-radius: 29px;
+  width: 100%;
+}
+.phone-legenda {
+  font-size: var(--t-13);
+  color: var(--muted);
+  text-align: center;
+  margin-top: 12px;
+  max-width: 250px;
+}
+.hero .phone { transform: rotate(1.6deg); }
+
+/* mascote como medalhao sobreposto */
+.mascote-badge {
+  position: absolute;
+  bottom: -22px; left: -42px;
+  width: 96px; height: 96px;
+  border-radius: 50%;
+  background: #F6F3F1;
+  border: 3px solid var(--bg);
+  box-shadow: var(--shadow-1);
+  overflow: hidden;
+}
+.mascote-badge img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+/* ---------- citacao real do publico ---------- */
+
+.dor {
+  padding: 40px 0 8px;
+}
+blockquote.fala {
+  margin: 0;
+  max-width: 46ch;
+  border-left: 4px solid var(--gold-500);
+  padding: 8px 0 8px 24px;
+}
+blockquote.fala p {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(1.375rem, 3vw, 1.75rem);
+  line-height: 1.35;
+  color: var(--wine-700);
+  margin: 0 0 12px;
+  text-wrap: pretty;
+}
+blockquote.fala cite {
+  font-family: var(--font-ui);
+  font-style: normal;
+  font-size: var(--t-13);
+  color: var(--muted);
+}
+
+/* ---------- long copy, coluna de leitura ---------- */
+
+.prosa { padding: 32px 0 8px; }
+.prosa > * { max-width: var(--w-prose); }
+.prosa h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--t-28);
+  line-height: 1.2;
+  color: var(--wine-900);
+  margin: 40px 0 16px;
+  letter-spacing: -0.01em;
+}
+.prosa p { margin: 0 0 20px; }
+.prosa strong { color: var(--wine-900); }
+.traducao {
+  background: var(--card);
+  border-radius: var(--r-card);
+  padding: 20px 24px;
+  margin: 24px 0 28px;
+}
+.traducao p { margin: 0; }
+.traducao .termo {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--wine-900);
+}
+
+/* ---------- metodo em passos editoriais ---------- */
+
+.metodo { padding: 40px 0; }
+.metodo h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--t-28);
+  color: var(--wine-900);
+  margin: 0 0 28px;
+}
+.passos {
+  list-style: none;
+  counter-reset: passo;
+  margin: 0; padding: 0;
+  max-width: var(--w-prose);
+}
+.passos li {
+  counter-increment: passo;
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 20px;
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+.passos li::before {
+  content: counter(passo);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--t-36);
+  line-height: 1;
+  color: var(--gold-500);
+}
+.passos h3 {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: var(--t-17);
+  color: var(--wine-900);
+  margin: 2px 0 6px;
+}
+.passos p { margin: 0; font-size: var(--t-15); color: var(--body-ink); }
+
+/* ---------- prova honesta em numeros reais ---------- */
+
+.numeros {
+  background: var(--wine-900);
+  color: #F8EFE6;
+  padding: 48px 0;
+}
+.numeros h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--t-28);
+  margin: 0 0 8px;
+  color: #F8EFE6;
+}
+.numeros .nota {
+  font-size: var(--t-15);
+  color: rgba(248, 239, 230, 0.7);
+  margin: 0 0 32px;
+  max-width: 60ch;
+}
+.numeros-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px 24px;
+}
+.numeros dt {
+  font-family: var(--font-data);
+  font-weight: 600;
+  font-size: clamp(1.625rem, 4vw, 2.25rem);
+  color: var(--gold-500);
+  letter-spacing: -0.02em;
+}
+.numeros dd {
+  margin: 6px 0 0;
+  font-size: var(--t-15);
+  color: rgba(248, 239, 230, 0.85);
+  max-width: 24ch;
+}
+
+/* ---------- galeria de prova ---------- */
+
+.galeria { padding: 56px 0; }
+.galeria h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--t-28);
+  color: var(--wine-900);
+  margin: 0 0 32px;
+  max-width: var(--w-prose);
+}
+.galeria-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px 32px;
+  justify-content: flex-start;
+}
+.galeria figure { margin: 0; }
+
+/* ---------- chamada final ---------- */
+
+.fim {
+  padding: 56px 0 72px;
+  border-top: 1px solid var(--line);
+}
+.fim h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  color: var(--wine-900);
+  margin: 0 0 12px;
+  max-width: 24ch;
+  letter-spacing: -0.01em;
+}
+.fim p {
+  margin: 0 0 28px;
+  max-width: 52ch;
+  color: var(--body-ink);
+}
+
+/* ---------- rodape ---------- */
+
+.rodape {
+  background: var(--wine-900);
+  color: rgba(248, 239, 230, 0.8);
+  padding: 40px 0 48px;
+  font-size: var(--t-15);
+}
+.rodape-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px 32px;
+}
+.rodape .by {
+  display: flex; align-items: center; gap: 14px;
+}
+.rodape .by img {
+  width: 44px; height: auto;
+  background: var(--bg);
+  border-radius: var(--r-chip);
+  padding: 6px;
+}
+.rodape .by-texto strong {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--t-17);
+  color: #F8EFE6;
+}
+.rodape .by-texto span { font-size: var(--t-13); color: rgba(248, 239, 230, 0.65); }
+.rodape .selo-beta { color: var(--gold-500); border-color: var(--gold-700); background: transparent; }
+.rodape-links { margin-left: auto; display: flex; gap: 20px; }
+.rodape a { color: var(--gold-500); text-decoration: none; }
+.rodape a:hover { text-decoration: underline; }
+.rodape .moderacao {
+  width: 100%;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(248, 239, 230, 0.14);
+  font-size: var(--t-13);
+  color: rgba(248, 239, 230, 0.6);
+}
+
+/* ---------- desktop ---------- */
+
+@media (min-width: 880px) {
+  .hero { padding: 72px 0 88px; }
+  .hero-grid {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: 56px;
+  }
+  .hero-prova { justify-self: end; }
+  .numeros-grid { grid-template-columns: repeat(4, 1fr); }
+  .dor { padding-top: 56px; }
+  .galeria-grid { gap: 48px; }
+}
+
+@media (max-width: 879px) {
+  .hero .phone { width: 220px; }
+  .mascote-badge { left: -12px; width: 80px; height: 80px; }
+  .top .cta-mini { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .btn { transition: none; }
+}

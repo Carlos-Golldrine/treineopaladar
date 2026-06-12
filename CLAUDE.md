@@ -24,4 +24,4 @@ Web app PWA standalone do "Duolingo do vinho" do ecossistema Tchin Tchin (pt-BR,
 - Nunca aceitar a primeira geração de uma tela: gerar → screenshot → autocrítica contra o brief → revisar
 
 ## Fonte de dados
-Origem: `C:\Users\camargo\OneDrive\Área de Trabalho\Tchin Tchin\ai.vinhos\tchintchin_vinhos_seed_v10_5.xlsx` (NUNCA modificar). O pipeline limpa, deduplica e gera a view estrita (~11,4k vinhos elegíveis para questões). App real do ecossistema: `C:\Users\camargo\tchin-tchin-app` (referência de tokens e lógica da feature original em `src/legacy/screens-treino-paladar.jsx`).
+Origem: `C:\Users\camargo\OneDrive\Área de Trabalho\Tchin Tchin\ai.vinhos\tchintchin_vinhos_seed_v10_5.xlsx` (NUNCA modificar). O pipeline limpa, deduplica e gera a view estrita (10,7 mil vinhos elegíveis para questões; total catalogado 12,6 mil). App real do ecossistema: `C:\Users\camargo\tchin-tchin-app` (referência de tokens e lógica da feature original em `src/legacy/screens-treino-paladar.jsx`).

@@ -10,12 +10,13 @@
 import type { PassoCena } from '../mascote';
 
 export const ROTEIROS_UNIDADE: Record<string, PassoCena[]> = {
-  /* Fundamentos do Paladar: 6 passos x 3s = ~18s */
+  /* Fundamentos do Paladar: 6 passos x 3s = ~18s.
+     Ordem segue a trilha (C6): docura abre a unidade. */
   u1: [
+    { estado: 'ensina', prop: 'uva', fala: 'Doçura é açúcar que sobrou da fermentação.' } /* u1-l4 */,
     { estado: 'ensina', prop: 'taca-cha', fala: 'Tanino seca a boca, como chá preto.' } /* u1-l1 */,
     { estado: 'ensina', prop: 'limao', fala: 'Acidez faz a boca encher de água.' } /* u1-l2 */,
     { estado: 'ensina', prop: 'sol', fala: 'Mais álcool no vinho, mais corpo.' } /* u1-l3 */,
-    { estado: 'ensina', prop: 'uva', fala: 'Doçura é açúcar que sobrou da fermentação.' } /* u1-l4 */,
     { estado: 'surpreso', fala: 'São quatro sensações, por canais diferentes.' } /* u1-l5 */,
     { estado: 'celebra', prop: 'garrafa', fala: 'Vamos treinar uma de cada vez.' } /* convite */,
   ],

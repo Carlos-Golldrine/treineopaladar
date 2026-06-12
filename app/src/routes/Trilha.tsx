@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { unidades } from '../content';
 import type { Unidade } from '../content';
+import { unidadesDoObjetivo } from '../trilha/ordem';
+import { NOTA_OBJETIVO } from '../trilha/objetivo';
 import { PRECOS_LOJA, obterStore, useProgresso, useWallet, VIDAS_MAX } from '../engine';
 import type { ProgressoLicao } from '../engine';
 import { Ic } from '../icones/Icones';
@@ -58,6 +59,7 @@ interface VistaUnidade {
 }
 
 function montarVistas(
+  unidades: readonly Unidade[],
   progresso: Record<string, ProgressoLicao>,
   desbloqueios: readonly string[],
 ): VistaUnidade[] {
@@ -87,7 +89,7 @@ function montarVistas(
 export default function Trilha() {
   const navigate = useNavigate();
   const { wallet, streakEfetivo, streakEmRisco, proximaVidaEmMs } = useWallet();
-  const { progresso, revisoesVencidas, checkpoints, onboardingCompleto } = useProgresso();
+  const { progresso, revisoesVencidas, checkpoints, onboardingCompleto, objetivo } = useProgresso();
   const desbloqueios = useDesbloqueios();
   const [aba, setAba] = useState<Aba>(null);
   const [unidadeComprando, setUnidadeComprando] = useState<VistaUnidade | null>(null);
@@ -103,7 +105,14 @@ export default function Trilha() {
      enche com onda e a coroa nova cai com bounce (consumido uma vez) */
   const [animRecente] = useState(consumirAnimTrilha);
 
-  const vistas = useMemo(() => montarVistas(progresso, desbloqueios), [progresso, desbloqueios]);
+  /* Unidades na ordem do objetivo declarado (gating segue ESTA ordem) */
+  const unidadesTrilha = useMemo(() => unidadesDoObjetivo(objetivo), [objetivo]);
+  const notaObjetivo = objetivo ? NOTA_OBJETIVO[objetivo] : undefined;
+
+  const vistas = useMemo(
+    () => montarVistas(unidadesTrilha, progresso, desbloqueios),
+    [unidadesTrilha, progresso, desbloqueios],
+  );
   const totalConcluidas = vistas.reduce((soma, v) => soma + v.concluidas, 0);
 
   /* O no "atual" (pill Comecar) e a 1a licao nao concluida da 1a unidade
@@ -168,6 +177,13 @@ export default function Trilha() {
           </button>
         )}
       </header>
+
+      {notaObjetivo && (
+        <p className="trilha-nota app-chrome">
+          <Ic nome="raio-energia" size={16} />
+          {notaObjetivo}
+        </p>
+      )}
 
       {totalConcluidas > 0 && (
         <button

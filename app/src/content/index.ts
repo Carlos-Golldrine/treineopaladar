@@ -54,14 +54,29 @@ export interface Unidade {
   licoes: readonly Licao[];
 }
 
+/**
+ * Monta a unidade respeitando meta.ordemLicoes (a ordem de JOGO pode
+ * diferir da ordem autoral dos arquivos; ex.: u1 abre pela docura, C6).
+ * Id fora do meta ou faltando: cai na ordem dos arquivos, nada some.
+ */
+function montarUnidade(metaRaw: unknown, licoesRaw: unknown[]): Unidade {
+  const meta = asMeta(metaRaw);
+  const licoes = licoesRaw.map(asLicao);
+  const porId = new Map(licoes.map((l) => [l.id, l]));
+  const ordenadas = meta.ordemLicoes
+    .map((id) => porId.get(id))
+    .filter((l): l is Licao => l !== undefined);
+  return { meta, licoes: ordenadas.length === licoes.length ? ordenadas : licoes };
+}
+
 /** As 6 unidades, na ordem da trilha. */
 export const unidades: readonly Unidade[] = [
-  { meta: asMeta(unidade1MetaJson), licoes: [u1l1, u1l2, u1l3, u1l4, u1l5].map(asLicao) },
-  { meta: asMeta(unidade2MetaJson), licoes: [u2l1, u2l2, u2l3, u2l4, u2l5].map(asLicao) },
-  { meta: asMeta(unidade3MetaJson), licoes: [u3l1, u3l2, u3l3, u3l4, u3l5].map(asLicao) },
-  { meta: asMeta(unidade4MetaJson), licoes: [u4l1, u4l2, u4l3, u4l4, u4l5].map(asLicao) },
-  { meta: asMeta(unidade5MetaJson), licoes: [u5l1, u5l2, u5l3, u5l4, u5l5].map(asLicao) },
-  { meta: asMeta(unidade6MetaJson), licoes: [u6l1, u6l2, u6l3, u6l4, u6l5].map(asLicao) },
+  montarUnidade(unidade1MetaJson, [u1l1, u1l2, u1l3, u1l4, u1l5]),
+  montarUnidade(unidade2MetaJson, [u2l1, u2l2, u2l3, u2l4, u2l5]),
+  montarUnidade(unidade3MetaJson, [u3l1, u3l2, u3l3, u3l4, u3l5]),
+  montarUnidade(unidade4MetaJson, [u4l1, u4l2, u4l3, u4l4, u4l5]),
+  montarUnidade(unidade5MetaJson, [u5l1, u5l2, u5l3, u5l4, u5l5]),
+  montarUnidade(unidade6MetaJson, [u6l1, u6l2, u6l3, u6l4, u6l5]),
 ];
 
 export const unidade1Meta: UnidadeMeta = unidades[0].meta;

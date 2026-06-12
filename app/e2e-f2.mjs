@@ -75,7 +75,9 @@ const SEED = {
   scorePaladarTs: Object.fromEntries(HABILIDADES.map((h) => [h, AGORA])),
   checkpoints: [],
   ultimoDesafioXp: null,
-  objetivo: 'mercado',
+  /* 'outros' mantem a ordem padrao U1..U6 (a ordem por objetivo e
+     coberta no e2e-f1, que joga o FTUE escolhendo 'No mercado') */
+  objetivo: 'outros',
   nivelDeclarado: 'iniciante',
   onboardingCompleto: true,
 };

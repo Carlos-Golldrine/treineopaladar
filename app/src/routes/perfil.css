@@ -230,3 +230,37 @@
   line-height: 1.5;
   color: var(--neutral-500);
 }
+
+/* ---------- Objetivo do treino (sheet de troca) ---------- */
+.objetivo-lista {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: var(--space-3);
+}
+
+.objetivo-opcao {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 72px;
+  padding: 10px var(--space-2);
+  border-radius: var(--radius-card);
+  border: 1.5px solid var(--neutral-200);
+  background: var(--bg);
+  font: 600 var(--text-sm) / 1.25 var(--font-ui);
+  color: var(--neutral-700);
+  text-align: center;
+}
+
+.objetivo-opcao .ic {
+  color: var(--wine-700);
+}
+
+.objetivo-atual {
+  border-color: var(--wine-700);
+  background: rgba(114, 47, 55, 0.06);
+  color: var(--wine-900);
+}

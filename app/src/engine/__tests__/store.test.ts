@@ -49,6 +49,17 @@ describe('migracao do store', () => {
     expect(store.getEstado().wallet.cristais).toBe(CRISTAIS_BOAS_VINDAS);
   });
 
+  it('objetivo: os 6 valores vigentes passam, hobby (legado) vira outros, lixo vira null', () => {
+    for (const objetivo of ['mercado', 'restaurante', 'receber', 'presente', 'trabalho', 'outros']) {
+      expect(migrar({ versao: 1, objetivo }, T0).objetivo).toBe(objetivo);
+    }
+    // valor da primeira versao publicada (matriz de 4): segue valido via migracao
+    expect(migrar({ versao: 1, objetivo: 'hobby' }, T0).objetivo).toBe('outros');
+    // valor desconhecido nao quebra o estado: o app pergunta de novo
+    expect(migrar({ versao: 1, objetivo: 'sommelier' }, T0).objetivo).toBeNull();
+    expect(migrar({ versao: 1 }, T0).objetivo).toBeNull();
+  });
+
   it('estado v1 persistido sobrevive a um reload, com defaults para campos novos', () => {
     const storage = memStorage();
     const r = relogio(T0);

@@ -45,7 +45,8 @@ describe('derivacao das cartas (30 licoes)', () => {
   it('ids estaveis e unicos (licao:indiceDoFato)', () => {
     const ids = cartas.map((c) => c.id);
     expect(new Set(ids).size).toBe(ids.length);
-    expect(ids[0]).toBe('u1-l1:0');
+    /* a unidade 1 abre pela docura (C6): u1-l4 e a 1a licao da trilha */
+    expect(ids[0]).toBe('u1-l4:0');
   });
 
   it('variedade: uma licao nao usa a mesma chave em todos os cards', () => {

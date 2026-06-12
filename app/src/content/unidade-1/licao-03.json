@@ -52,7 +52,12 @@
         "Creme de leite",
         "Leite desnatado"
       ],
-      "ordemCorreta": [1, 3, 0, 2],
+      "ordemCorreta": [
+        1,
+        3,
+        0,
+        2
+      ],
       "porque": "Essa escada de texturas é exatamente a régua do corpo do vinho, sem nenhum mistério."
     },
     {
@@ -156,5 +161,5 @@
     "Você descreve textura com a escada da água ao creme de leite, sem precisar de palavra difícil"
   ],
   "curiosidade": "As lágrimas que escorrem devagar pela parede da taça indicam um vinho com mais álcool. Bonitas de ver, mas a boca segue sendo o melhor medidor de corpo.",
-  "teaser": "Na próxima lição, a gente desmonta o mito mais injusto do mundo do vinho: o de que gostar de suave seria motivo de vergonha."
+  "teaser": "Última lição da unidade: juntar doçura, tanino, acidez e corpo e ler um vinho inteiro logo no primeiro gole."
 }

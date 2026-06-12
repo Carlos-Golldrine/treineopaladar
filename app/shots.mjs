@@ -24,7 +24,8 @@ const server = await preview({ root, preview: { port: PORT, strictPort: true } }
    - app: onboarding concluido + cristais ja coletados (telas do dia a dia)
    - coleta: 1a licao da trilha feita, cristais ainda nao coletados */
 const SEED_APP = {
-  estado: JSON.stringify({ versao: 1, onboardingCompleto: true }),
+  /* objetivo mercado: trilha reordenada (U4 em 2o) e Perfil com "Treinando para" */
+  estado: JSON.stringify({ versao: 1, onboardingCompleto: true, objetivo: 'mercado' }),
   flags: JSON.stringify({ cristaisColetados: true, lojaVista: true }),
 };
 const SEED_COLETA = {
@@ -60,6 +61,7 @@ const SEED_PROGRESSO = {
   estado: JSON.stringify({
     versao: 1,
     onboardingCompleto: true,
+    objetivo: 'mercado',
     progresso: progressoFeito,
     checkpoints: ['u1'],
     wallet: { cristais: 230, xpTotal: 320, streak: 4, bestStreak: 4 },
@@ -133,7 +135,11 @@ const grupos = [
   },
   {
     seed: SEED_DESAFIO_FEITO,
-    routes: [['desafio-resultado', '/desafio']],
+    routes: [
+      ['desafio-resultado', '/desafio'],
+      // DD C6: ficha do vinho revelado com o chip de docura (cena demo)
+      ['desafio-chip-docura', '/desafio?cena=resultado'],
+    ],
   },
 ];
 

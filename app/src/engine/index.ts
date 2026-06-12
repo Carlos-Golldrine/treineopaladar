@@ -28,7 +28,7 @@ export type {
   UnidadeMeta,
   Wallet,
 } from './types';
-export { HABILIDADES } from './types';
+export { HABILIDADES, OBJETIVOS } from './types';
 
 /* Economia (secao 6) */
 export {

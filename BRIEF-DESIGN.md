@@ -20,10 +20,11 @@
 
 **Na copy:**
 - Travessão (em dash e en dash). Vírgula, ponto e dois-pontos resolvem.
-- Fórmulas de IA: "não é X, é Y", tricolons retóricos, "e isso importa"
+- Fórmulas de IA: "não é X, é Y", tricolons retóricos, "e isso importa". Exceção única, sancionada pela DD de público (mapa de mensagens, LP4) por carregar o nome do produto na língua do cliente: a assinatura de marca "Paladar não é dom. É treino." Nenhuma outra instância da fórmula é permitida.
 - Jargão enológico sem tradução; tom professor/enciclopédia
 - Vocabulário proibido da marca: usuário, consumidor, premium, expert (rótulo), "última chance", "para verdadeiros conhecedores", "erro de iniciante"
 - Terminologia de IA: nada de "gerado por IA", "assistente", "inteligente/smart", interfaces de chat/prompt
+- **Suave sem vergonha (regra editorial, DD C6 jun/2026)**: gosto por vinho suave JAMAIS é tratado como inferior, em copy, distrator ou reveal; doçura é eixo de identidade, não régua de status. Toda ficha de vinho exibida mostra seco / meio seco / suave com destaque quando o dado existe.
 
 **Nunca aceitar a primeira geração de uma tela.** Toda tela passa por: gerar → screenshot (412×892 e 360×800) → autocrítica contra este brief → revisar.
 

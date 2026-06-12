@@ -28,7 +28,22 @@ import type { Habilidade } from '../content/types';
 
 /* ------------------------------ Estado ------------------------------ */
 
-export type Objetivo = 'mercado' | 'restaurante' | 'receber' | 'hobby';
+export type Objetivo =
+  | 'mercado'
+  | 'restaurante'
+  | 'receber'
+  | 'presente'
+  | 'trabalho'
+  | 'outros';
+
+export const OBJETIVOS: readonly Objetivo[] = [
+  'mercado',
+  'restaurante',
+  'receber',
+  'presente',
+  'trabalho',
+  'outros',
+] as const;
 
 export type Nivel = 'iniciante' | 'intermediario' | 'avancado';
 
