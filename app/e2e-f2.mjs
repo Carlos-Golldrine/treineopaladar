@@ -329,7 +329,16 @@ try {
   let xpAposLicao = 0;
   await step('(d) licao u2-l1 jogada de verdade ate a conclusao', async () => {
     await page.locator('.trail-item.current button.node-taca').click();
+    /* F2.5: a 1a visita da unidade 2 abre com a micro-aula; pular nao paga XP */
+    await page.waitForSelector('.microaula', { timeout: 8000 });
+    await shot('microaula-u2');
+    const xpAntesAula = (await lerStore()).wallet.xpTotal;
+    await page.getByRole('button', { name: 'Pular' }).click();
     await page.waitForSelector('.player-meio', { timeout: 8000 });
+    assert(
+      (await lerStore()).wallet.xpTotal === xpAntesAula,
+      'pular a micro-aula nao deve pagar os +5 XP',
+    );
     assert(new URL(page.url()).pathname === '/licao/u2-l1', `URL e ${page.url()}`);
     let fim = false;
     for (let i = 0; i < 14 && !fim; i++) {
@@ -403,8 +412,11 @@ try {
         await esperarRevealOk(qi === 7 ? 'Ver resultado' : 'Continuar');
       }
       await page.waitForSelector('.pratica-placar', { timeout: 8000 });
-      const ganho = await page.locator('.pratica-ganho-xp').innerText();
-      assert(/\+\d+ XP/.test(ganho), `placar da pratica: "${ganho}"`);
+      /* O XP virou odometro (F2.5): o valor semantico vive no aria-label */
+      const ganho = Number(
+        await page.locator('.pratica-ganho-xp .odometro').getAttribute('aria-label'),
+      );
+      assert(ganho > 0, `placar da pratica: "${ganho}"`);
       if (teveImagem) break;
       assert(rodada < MAX_RODADAS, `nenhum exercicio com rotulo real em ${MAX_RODADAS} rodadas`);
       await page.getByRole('button', { name: 'Mais uma rodada' }).click();
@@ -415,6 +427,59 @@ try {
     assert(estado.wallet.praticasHoje >= 1, `praticasHoje = ${estado.wallet.praticasHoje}`);
     assert(estado.wallet.xpTotal > xpAposLicao, `xp da pratica nao entrou: ${estado.wallet.xpTotal}`);
     await page.getByRole('button', { name: 'Voltar à trilha' }).click();
+    await page.waitForSelector('.trail', { timeout: 8000 });
+  });
+
+  await step('(e2) revisar com cartas (F2.5): flip 3D + autoavaliacao em tp.cartas.v1', async () => {
+    await page.locator('.pratica-card').click();
+    await page.getByRole('button', { name: /Revisar com cartas/ }).click();
+    await page.waitForSelector('.carta3d', { timeout: 8000 });
+    assert(
+      (await page.locator('.cartas-avaliacao').count()) === 0,
+      'autoavaliacao visivel antes do flip',
+    );
+    await shot('cartas-frente');
+    await page.locator('.carta3d').click();
+    await page.getByRole('button', { name: 'Sabia', exact: true }).waitFor({ timeout: 4000 });
+    await shot('cartas-verso');
+    await page.getByRole('button', { name: 'Sabia', exact: true }).click();
+    const agenda = await page.evaluate(() => JSON.parse(localStorage.getItem('tp.cartas.v1')));
+    const ids = Object.keys(agenda ?? {});
+    assert(ids.length === 1, `agenda deveria ter 1 card avaliado, tem ${ids.length}`);
+    assert(
+      agenda[ids[0]].fase === 1,
+      `"Sabia" no 1o contato deveria subir para a fase 1 (D+3), veio ${agenda[ids[0]].fase}`,
+    );
+    /* sair no meio: sem XP (a sessao de cartas so paga concluida) */
+    await page.locator('.player-fechar').click();
+    await page.waitForSelector('.trail', { timeout: 8000 });
+  });
+
+  await step('(e3) ficha de bolso e dica por cristais (F2.5) na licao u1-l1', async () => {
+    await page.goto(`${base}/licao/u1-l1`, { waitUntil: 'load' });
+    await page.waitForSelector('.player-meio .opcao', { timeout: 8000 });
+    /* ficha de bolso: sheet opcional com 3 fatos, fecha sem bloquear */
+    await page.locator('.ficha-chamada').click();
+    await page.waitForSelector('.folha', { timeout: 4000 });
+    const fichas = await page.locator('.ficha-carta').count();
+    assert(fichas === 3, `ficha de bolso com ${fichas} cards, esperava 3`);
+    await shot('ficha-bolso');
+    await page.getByRole('button', { name: 'Pronto, bora jogar' }).click();
+    /* dica: debita 10 cristais e elimina exatamente 1 alternativa */
+    const antes = (await lerStore()).wallet.cristais;
+    await page.locator('.dica-botao').click();
+    await page.waitForSelector('.opcao-eliminada', { timeout: 4000 });
+    const depois = (await lerStore()).wallet.cristais;
+    assert(depois === antes - 10, `dica deveria debitar 10 (${antes} -> ${depois})`);
+    const eliminadas = await page.locator('.opcao-eliminada').count();
+    assert(eliminadas === 1, `opcoes eliminadas: ${eliminadas}`);
+    assert(
+      (await page.locator('.dica-botao').count()) === 0,
+      'botao de dica deveria sumir apos o uso (max 1 por exercicio)',
+    );
+    await shot('dica-aplicada');
+    await page.locator('.player-fechar').click();
+    await page.getByRole('button', { name: 'Sair mesmo assim' }).click();
     await page.waitForSelector('.trail', { timeout: 8000 });
   });
 

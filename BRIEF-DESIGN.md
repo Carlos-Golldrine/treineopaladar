@@ -114,4 +114,4 @@ A lição da F2: conformidade não é alma. Screenshot estática não enxerga vi
 5. **Nenhuma tela sem pelo menos uma peça de arte proprietária** (mascote, emblema de unidade, ilustração de cena ou ícone do set).
 6. **Som de jogo** (acerto, erro, conclusão, marco): sintetizado em runtime via Web Audio (zero assets), com toggle de mudo no Perfil, desbloqueado na primeira interação.
 7. **Review de motion por rajada de frames**: toda verificação visual captura 4-6 frames durante as animações (não só o estado final); se os frames são idênticos, a tela está morta e reprova.
-8. **Marca-mãe sempre presente**: lockup "by Tchin Tchin" + selo Beta no splash e no Perfil; linha de ecossistema na soft wall. Logo oficial em `app/src/components/LogoTchin.tsx` (slot único; asset provisório até a logo real do Gabriel entrar).
+8. **Marca-mãe sempre presente**: lockup "by Tchin Tchin" + selo Beta no splash e no Perfil; linha de ecossistema na soft wall. Logo oficial em `app/src/icones/LogoTchin.tsx` (slot único; asset provisório até a logo real do Gabriel entrar).

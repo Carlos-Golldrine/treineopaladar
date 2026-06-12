@@ -2,14 +2,17 @@ import { useState } from 'react';
 import type { ExercicioIntruso } from '../engine';
 import type { FaseExercicio, ResolucaoExercicio } from './tipos';
 import { RotuloFigura } from './RotuloFigura';
+import { Ic } from '../icones/Icones';
 
 interface Props {
   ex: ExercicioIntruso;
   fase: FaseExercicio;
   onResolver: (r: ResolucaoExercicio) => void;
+  /** Dica comprada: mostra a regra do grupo antes da resposta. */
+  regraRevelada?: boolean;
 }
 
-export function ExIntruso({ ex, fase, onResolver }: Props) {
+export function ExIntruso({ ex, fase, onResolver, regraRevelada }: Props) {
   const [sel, setSel] = useState<number | null>(null);
   const travado = fase !== 'respondendo';
 
@@ -27,6 +30,12 @@ export function ExIntruso({ ex, fase, onResolver }: Props) {
     <div className="ex">
       {ex.imagem && <RotuloFigura src={ex.imagem} />}
       <h2 className="ex-pergunta">{ex.pergunta}</h2>
+      {regraRevelada && fase === 'respondendo' && (
+        <p className="dica-regra">
+          <Ic nome="lampada-dica" size={16} />
+          {ex.regra}
+        </p>
+      )}
       <div className="ex-opcoes ex-grade" role="group" aria-label="Opções">
         {ex.opcoes.map((opcao, i) => {
           let extra = '';
@@ -53,7 +62,7 @@ export function ExIntruso({ ex, fase, onResolver }: Props) {
       </div>
       {fase === 'respondendo' && (
         <div className="ex-rodape">
-          <button type="button" className="btn btn-primary btn-cheio tap" disabled={sel === null} onClick={conferir}>
+          <button type="button" className="btn btn-primary btn-jogo btn-cheio tap" disabled={sel === null} onClick={conferir}>
             Conferir
           </button>
         </div>

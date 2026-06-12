@@ -1,8 +1,7 @@
 import { useRef, useState } from 'react';
 import type { ExercicioOrdenar } from '../engine';
 import type { FaseExercicio, ResolucaoExercicio } from './tipos';
-import { Icon } from '../components/Icon';
-import dragIcon from '@material-symbols/svg-500/rounded/drag_indicator.svg?raw';
+import { Ic } from '../icones/Icones';
 
 interface Props {
   ex: ExercicioOrdenar;
@@ -134,14 +133,14 @@ export function ExOrdenar({ ex, fase, onResolver }: Props) {
             >
               <span className="ordenar-pos app-chrome">{i + 1}</span>
               <span className="ordenar-texto">{ex.itens[item]}</span>
-              <Icon svg={dragIcon} size={20} className="ordenar-pega" />
+              <Ic nome="arrastar" size={20} className="ordenar-pega" />
             </li>
           );
         })}
       </ol>
       {fase === 'respondendo' && (
         <div className="ex-rodape">
-          <button type="button" className="btn btn-primary btn-cheio tap" onClick={conferir}>
+          <button type="button" className="btn btn-primary btn-jogo btn-cheio tap" onClick={conferir}>
             Conferir
           </button>
         </div>

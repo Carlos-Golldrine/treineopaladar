@@ -43,6 +43,7 @@ export {
   XP_DESAFIO_DIA,
   XP_LICAO,
   XP_LICAO_PERFEITA,
+  XP_MICRO_AULA,
   XP_REVISAO,
   cristaisDeLicao,
   ehD0,

@@ -5,14 +5,11 @@ import { ExMC } from '../licao/ExMC';
 import { PainelReveal } from '../licao/Feedback';
 import type { FaseExercicio, ResolucaoExercicio } from '../licao/tipos';
 import { vibrar } from '../licao/tipos';
-import { Icon } from '../components/Icon';
+import { Ic } from '../icones/Icones';
+import type { NomeIcone } from '../icones/Icones';
 import { DelayedSkeleton } from '../components/DelayedSkeleton';
-
-import closeIcon from '@material-symbols/svg-500/rounded/close.svg?raw';
-import wineIcon from '@material-symbols/svg-500/rounded/wine_bar-fill.svg?raw';
-import targetIcon from '@material-symbols/svg-500/rounded/target.svg?raw';
-import tableIcon from '@material-symbols/svg-500/rounded/table_restaurant.svg?raw';
-import shareIcon from '@material-symbols/svg-500/rounded/share.svg?raw';
+import { TchinObservador } from '../coreografia/Coreografias';
+import { tocar } from '../som/som';
 
 import '../licao/player.css';
 import './desafio.css';
@@ -126,10 +123,10 @@ type Etapa =
   | { t: 'jogando' }
   | { t: 'resultado'; tentativa: TentativaDia; xpGanho: number | null };
 
-const COMO_FUNCIONA = [
-  { icon: wineIcon, text: 'Um rótulo real por dia, o mesmo para todo mundo.' },
-  { icon: targetIcon, text: 'Quatro perguntas rápidas sobre ele.' },
-  { icon: tableIcon, text: 'Compare seu resultado com a sua mesa, sem spoiler.' },
+const COMO_FUNCIONA: { icone: NomeIcone; text: string }[] = [
+  { icone: 'garrafa', text: 'Um rótulo real por dia, o mesmo para todo mundo.' },
+  { icone: 'alvo-desafio', text: 'Quatro perguntas rápidas sobre ele.' },
+  { icone: 'mesa', text: 'Compare seu resultado com a sua mesa, sem spoiler.' },
 ];
 
 export default function Desafio() {
@@ -162,6 +159,7 @@ export default function Desafio() {
     };
     gravarTentativa(tentativa);
     const xpGanho = obterStore().concluirDesafioDia(dia);
+    tocar('marco');
     setEtapa({ t: 'resultado', tentativa, xpGanho });
   };
 
@@ -199,7 +197,7 @@ export default function Desafio() {
         {COMO_FUNCIONA.map((step) => (
           <div className="how-row" key={step.text}>
             <span className="how-icon">
-              <Icon svg={step.icon} size={20} />
+              <Ic nome={step.icone} size={20} />
             </span>
             <p>{step.text}</p>
           </div>
@@ -228,7 +226,7 @@ function AbertoHoje({
       </div>
       <h2 className="daily-title">Olhe com calma. O rótulo entrega muito.</h2>
       <p className="daily-copy">Quatro perguntas sobre esta garrafa. Uma chance por dia, sem vidas em jogo.</p>
-      <button type="button" className="btn btn-gold btn-cheio tap" onClick={onJogar}>
+      <button type="button" className="btn btn-gold btn-jogo btn-cheio tap" onClick={onJogar}>
         Aceitar o desafio
       </button>
     </section>
@@ -260,6 +258,7 @@ function DesafioJogo({
     setResolucao(r);
     setAcertos((a) => [...a, r.correto]);
     vibrar();
+    tocar(r.correto ? 'acerto' : 'erro');
     setFase('revelado');
   };
 
@@ -278,7 +277,7 @@ function DesafioJogo({
       <div className="player">
         <header className="player-topo app-chrome">
           <button type="button" className="player-fechar tap" aria-label="Sair do desafio" onClick={onSair}>
-            <Icon svg={closeIcon} size={22} />
+            <Ic nome="x-fechar" size={22} />
           </button>
           <div
             className="player-barra"
@@ -304,11 +303,14 @@ function DesafioJogo({
           <ExMC ex={pergunta} fase={fase} onResolver={onResolver} />
         </div>
 
+        <TchinObservador visivel={fase === 'respondendo'} />
+
         {fase === 'revelado' && resolucao && (
           <PainelReveal
             resolucao={resolucao}
             calibracao={null}
             rotuloContinuar={posicao + 1 >= desafio.perguntas.length ? 'Ver resultado' : 'Continuar'}
+            marco={posicao + 1 >= desafio.perguntas.length}
             onContinuar={onContinuar}
           />
         )}
@@ -377,8 +379,8 @@ function ResultadoHoje({
             : `${tentativa.acertos} de 4. ${tentativa.acertos >= 2 ? 'Bonito olho.' : 'Amanhã tem revanche.'}`}
         </h2>
         {xpGanho !== null && <p className="daily-xp">+{xpGanho} XP</p>}
-        <button type="button" className="btn btn-gold btn-cheio tap" onClick={compartilhar}>
-          <Icon svg={shareIcon} size={18} />
+        <button type="button" className="btn btn-gold btn-jogo btn-cheio tap" onClick={compartilhar}>
+          <Ic nome="compartilhar" size={18} />
           Compartilhar com a mesa
         </button>
         {copiado && (

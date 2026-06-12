@@ -25,6 +25,7 @@ import {
   PRECOS_LOJA,
   XP_CHECKPOINT,
   XP_DESAFIO_DIA,
+  XP_MICRO_AULA,
   XP_REVISAO,
   ehD0,
   multiplicadorSoftCap,
@@ -95,6 +96,7 @@ export function estadoInicial(agora: number): EstadoV1 {
     scorePaladar: scoreZerado(),
     scorePaladarTs: tsZerado(agora),
     checkpoints: [],
+    microAulas: [],
     ultimoDesafioXp: null,
     objetivo: null,
     nivelDeclarado: null,
@@ -136,6 +138,9 @@ export function migrar(bruto: unknown, agora: number): EstadoV1 {
     },
     checkpoints: Array.isArray(dado.checkpoints)
       ? dado.checkpoints.filter((c): c is string => typeof c === 'string')
+      : [],
+    microAulas: Array.isArray(dado.microAulas)
+      ? dado.microAulas.filter((m): m is string => typeof m === 'string')
       : [],
     ultimoDesafioXp: typeof dado.ultimoDesafioXp === 'string' ? dado.ultimoDesafioXp : null,
     objetivo: (dado.objetivo as Objetivo | undefined) ?? null,
@@ -426,6 +431,23 @@ export class TPStore {
   }
 
   /**
+   * Paga a micro-aula da unidade assistida INTEIRA (XP 5), uma unica vez
+   * por unidade. Pular nao paga; reassistir inteira depois paga (se ainda
+   * nao pagou). Retorna o XP pago, ou null se esta unidade ja foi paga.
+   */
+  concluirMicroAula(unidadeId: string): number | null {
+    this.sincronizar();
+    if (this.estado.microAulas.includes(unidadeId)) return null;
+    const wallet = this.aplicarXpAvulso(this.estado.wallet, XP_MICRO_AULA);
+    this.commit({
+      ...this.estado,
+      wallet,
+      microAulas: [...this.estado.microAulas, unidadeId],
+    });
+    return XP_MICRO_AULA;
+  }
+
+  /**
    * Paga o XP do Desafio do Dia (30), uma unica vez por dia.
    * `dia` e a data oficial do desafio (YYYY-MM-DD em America/Sao_Paulo).
    * Retorna o XP pago, ou null se o desafio de hoje ja foi premiado.
@@ -521,6 +543,15 @@ export class TPStore {
     }
     this.commit({ ...this.estado, wallet: novo });
     return true;
+  }
+
+  /**
+   * Debita a dica de exercicio (10 cristais). O EFEITO (eliminar
+   * alternativa, revelar regra, estreitar faixa) e da camada de UI.
+   * Retorna false sem debitar quando faltam cristais.
+   */
+  usarDica(): boolean {
+    return this.comprar('dica');
   }
 
   /* ----------------------- Onboarding ------------------------- */

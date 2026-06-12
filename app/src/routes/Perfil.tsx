@@ -1,13 +1,40 @@
-import { Icon } from '../components/Icon';
-
-import fireIcon from '@material-symbols/svg-500/rounded/local_fire_department-fill.svg?raw';
-import diamondIcon from '@material-symbols/svg-500/rounded/diamond-fill.svg?raw';
+import { useState } from 'react';
+import { Ic } from '../icones/Icones';
+import { LogoTchin } from '../icones/LogoTchin';
+import { definirSom, somLigado } from '../som/som';
+import { useProgresso, useWallet } from '../engine';
+import type { Habilidade } from '../engine';
 
 import './perfil.css';
 
-const dimensions = ['Acidez', 'Tanino', 'Corpo', 'Frutado', 'Doçura'];
+const DIMENSOES: Array<{ nome: string; chave: Habilidade }> = [
+  { nome: 'Acidez', chave: 'acidez' },
+  { nome: 'Tanino', chave: 'tanino' },
+  { nome: 'Corpo', chave: 'corpo' },
+  { nome: 'Frutado', chave: 'frutado' },
+  { nome: 'Doçura', chave: 'docura' },
+];
+
+function desdeQuando(criadoEm: number): string {
+  const dias = Math.max(0, Math.floor((Date.now() - criadoEm) / 86_400_000));
+  if (dias === 0) return 'Treinando desde hoje';
+  if (dias === 1) return 'Treinando desde ontem';
+  return `Treinando há ${dias} dias`;
+}
 
 export default function Perfil() {
+  const [som, setSom] = useState(somLigado);
+  const { wallet, streakEfetivo } = useWallet();
+  const { scorePaladar } = useProgresso();
+
+  const alternarSom = () => {
+    const novo = !som;
+    setSom(novo);
+    definirSom(novo);
+  };
+
+  const algumScore = DIMENSOES.some(({ chave }) => Math.round(scorePaladar[chave]) > 0);
+
   return (
     <>
       <header className="profile-head app-chrome">
@@ -15,18 +42,30 @@ export default function Perfil() {
           V
         </div>
         <h1 className="profile-name">Visitante</h1>
-        <p className="profile-sub">Treinando desde hoje</p>
+        <p className="profile-sub">{desdeQuando(wallet.criadoEm)}</p>
+        <div className="profile-marca" aria-label="Parte do ecossistema Tchin Tchin, versão beta">
+          <LogoTchin size={14} className="profile-logo" />
+          <span className="profile-by">by Tchin Tchin</span>
+          <span className="chip-beta">Beta</span>
+        </div>
         <div className="profile-stats">
-          <div className="stat-chip" aria-label="Sequência de 1 dia">
-            <Icon svg={fireIcon} size={16} className="stat-fire" />
-            <span className="stat-value">1</span>
+          <div
+            className="stat-chip"
+            aria-label={`Sequência de ${streakEfetivo} ${streakEfetivo === 1 ? 'dia' : 'dias'}`}
+          >
+            <Ic
+              nome={streakEfetivo === 0 ? 'chama-apagada' : 'chama-streak'}
+              size={16}
+              className="stat-fire"
+            />
+            <span className="stat-value">{streakEfetivo}</span>
           </div>
-          <div className="stat-chip" aria-label="65 cristais">
-            <Icon svg={diamondIcon} size={16} className="stat-gem" />
-            <span className="stat-value">65</span>
+          <div className="stat-chip" aria-label={`${wallet.cristais} cristais`}>
+            <Ic nome="cristal" size={16} className="stat-gem" />
+            <span className="stat-value">{wallet.cristais}</span>
           </div>
-          <div className="stat-chip" aria-label="80 pontos de experiência">
-            <span className="stat-value">80 XP</span>
+          <div className="stat-chip" aria-label={`${wallet.xpTotal} pontos de experiência`}>
+            <span className="stat-value">{wallet.xpTotal} XP</span>
           </div>
         </div>
       </header>
@@ -37,26 +76,56 @@ export default function Perfil() {
           Cinco dimensões, de 0 a 1000. Cada acerto treina uma delas.
         </p>
         <div className="score-rows">
-          {dimensions.map((name) => (
-            <div className="score-row" key={name}>
-              <span className="score-name">{name}</span>
-              <div
-                className="score-bar"
-                role="progressbar"
-                aria-valuenow={0}
-                aria-valuemin={0}
-                aria-valuemax={1000}
-                aria-label={`${name}: 0 de 1000`}
-              >
-                <div className="score-bar-fill" />
+          {DIMENSOES.map(({ nome, chave }) => {
+            const valor = Math.round(scorePaladar[chave]);
+            return (
+              <div className="score-row" key={chave}>
+                <span className="score-name">{nome}</span>
+                <div
+                  className="score-bar"
+                  role="progressbar"
+                  aria-valuenow={valor}
+                  aria-valuemin={0}
+                  aria-valuemax={1000}
+                  aria-label={`${nome}: ${valor} de 1000`}
+                >
+                  <div
+                    className="score-bar-fill"
+                    style={{ width: `${Math.min(100, (valor / 1000) * 100)}%` }}
+                  />
+                </div>
+                <span className="score-value">{valor}</span>
               </div>
-              <span className="score-value">0</span>
-            </div>
-          ))}
+            );
+          })}
         </div>
         <p className="score-note">
-          Seu score nasce nas primeiras lições. Continue treinando.
+          {algumScore
+            ? 'O score sobe com acerto e desce devagar com o tempo parado. Igual paladar.'
+            : 'Seu score nasce nas primeiras lições. Continue treinando.'}
         </p>
+      </section>
+
+      <section className="ajustes" aria-label="Ajustes">
+        <button
+          type="button"
+          className="ajuste-som tap app-chrome"
+          aria-pressed={som}
+          onClick={alternarSom}
+        >
+          <span className="ajuste-icone">
+            <Ic nome={som ? 'som-on' : 'som-off'} size={22} />
+          </span>
+          <span className="ajuste-textos">
+            <span className="ajuste-titulo">Sons do treino</span>
+            <span className="ajuste-sub">
+              {som ? 'Ligados, em volume de boa conversa' : 'Desligados por enquanto'}
+            </span>
+          </span>
+          <span className={`ajuste-estado${som ? ' ajuste-estado-on' : ''}`}>
+            {som ? 'on' : 'off'}
+          </span>
+        </button>
       </section>
 
       <section className="save-cta">

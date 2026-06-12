@@ -1,16 +1,17 @@
-import { Icon } from '../components/Icon';
-import { MascoteBalao } from './Mascote';
+import { Ic } from '../icones/Icones';
+import type { NomeIcone } from '../icones/Icones';
+import { MascoteBalao } from '../mascote';
 
 /**
  * Interstitials da Licao 1 que parecem jogada: J3 (objetivo) e J6 (nivel).
- * Cartas grandes, resposta de 1 toque, mascote reagindo quando ha payoff.
+ * Cartas grandes, resposta de 1 toque, mascote vivo reagindo quando ha payoff.
  */
 
 export interface CartaUi {
   id: string;
   rotulo: string;
-  /** Icone SVG bruto (Material Symbols Rounded), opcional. */
-  svg?: string;
+  /** Icone do set proprietario, opcional. */
+  icone?: NomeIcone;
   /** 1 a 3: pontinhos de nivel, opcional. */
   pontos?: number;
 }
@@ -42,9 +43,9 @@ export function CartasEscolha({ pergunta, sub, cartas, selecionada, reacao, onEs
             aria-pressed={selecionada === carta.id}
             onClick={() => onEscolher(carta.id)}
           >
-            {carta.svg && (
+            {carta.icone && (
               <span className="carta-icone">
-                <Icon svg={carta.svg} size={22} />
+                <Ic nome={carta.icone} size={22} />
               </span>
             )}
             {carta.pontos !== undefined && (
@@ -58,10 +59,10 @@ export function CartasEscolha({ pergunta, sub, cartas, selecionada, reacao, onEs
           </button>
         ))}
       </div>
-      {reacao && <MascoteBalao texto={reacao} />}
+      {reacao && <MascoteBalao texto={reacao} estado="feliz" />}
       {onContinuar && selecionada && (
         <div className="ex-rodape">
-          <button type="button" className="btn btn-primary btn-cheio tap" onClick={onContinuar}>
+          <button type="button" className="btn btn-primary btn-jogo btn-cheio tap" onClick={onContinuar}>
             Continuar
           </button>
         </div>

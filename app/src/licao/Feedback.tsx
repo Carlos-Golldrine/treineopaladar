@@ -1,10 +1,8 @@
 import { useState } from 'react';
 import type { Licao } from '../engine';
 import type { Calibracao, ResolucaoExercicio } from './tipos';
-import { Icon } from '../components/Icon';
-import checkIcon from '@material-symbols/svg-500/rounded/check.svg?raw';
-import closeIcon from '@material-symbols/svg-500/rounded/close.svg?raw';
-import expandIcon from '@material-symbols/svg-500/rounded/keyboard_arrow_down.svg?raw';
+import { Ic } from '../icones/Icones';
+import { Tchin } from '../mascote';
 
 /* ------------------------ "Certeza ou chute?" ------------------------ */
 
@@ -17,7 +15,11 @@ export function PainelCalibrar({ onEscolher }: { onEscolher: (c: Calibracao) => 
         <button type="button" className="btn btn-outline btn-meio tap" onClick={() => onEscolher('chute')}>
           Chute
         </button>
-        <button type="button" className="btn btn-primary btn-meio tap" onClick={() => onEscolher('certeza')}>
+        <button
+          type="button"
+          className="btn btn-primary btn-jogo btn-meio tap"
+          onClick={() => onEscolher('certeza')}
+        >
           Certeza
         </button>
       </div>
@@ -58,6 +60,10 @@ interface PainelRevealProps {
   /** Sem licao (pratica e Desafio do Dia) o "Entenda melhor" nao aparece. */
   licao?: Licao;
   rotuloContinuar: string;
+  /** Acerto de marco (ultima resposta da rodada): o Tchin entra feliz. */
+  marco?: boolean;
+  /** False quando outro mascote ja esta em cena (toast do FTUE). */
+  comMascote?: boolean;
   onContinuar: () => void;
   /** So para a cena de screenshot: abre o "Entenda melhor" ja expandido. */
   entendaInicial?: boolean;
@@ -68,11 +74,17 @@ export function PainelReveal({
   calibracao,
   licao,
   rotuloContinuar,
+  marco = false,
+  comMascote = true,
   onContinuar,
   entendaInicial,
 }: PainelRevealProps) {
   const [entenda, setEntenda] = useState(entendaInicial ?? false);
   const { correto, titulo, porque } = resolucao;
+  /* Mascote vivo em TODO feedback (delight 7.1): feliz discreto no acerto,
+     lamenta gentil no erro. Celebracao grande continua so nos marcos. */
+  const mascoteEmCena = comMascote;
+  void marco;
 
   let nota: string | null = null;
   if (calibracao === 'certeza' && !correto) {
@@ -87,9 +99,14 @@ export function PainelReveal({
       role="status"
       aria-live="polite"
     >
+      {mascoteEmCena && (
+        <div className="reveal-tchin" aria-hidden="true">
+          <Tchin estado={correto ? 'feliz' : 'lamenta'} tamanho={60} />
+        </div>
+      )}
       <div className="reveal-cabeca">
         <span className={`reveal-selo ${correto ? 'reveal-selo-ok' : 'reveal-selo-erro'}`}>
-          <Icon svg={correto ? checkIcon : closeIcon} size={20} />
+          <Ic nome={correto ? 'check' : 'x-fechar'} size={20} />
         </span>
         <p className="reveal-titulo">{titulo}</p>
       </div>
@@ -104,14 +121,14 @@ export function PainelReveal({
             onClick={() => setEntenda(!entenda)}
           >
             Entenda melhor
-            <Icon svg={expandIcon} size={18} className={entenda ? 'entenda-seta entenda-seta-aberta' : 'entenda-seta'} />
+            <Ic nome="seta-baixo" size={16} className={entenda ? 'entenda-seta entenda-seta-aberta' : 'entenda-seta'} />
           </button>
           {entenda && <p className="entenda-texto">{trechoFicha(licao, porque)}</p>}
         </div>
       )}
       <button
         type="button"
-        className={`btn btn-cheio tap ${correto ? 'btn-ok' : 'btn-erro'}`}
+        className={`btn btn-jogo btn-cheio tap ${correto ? 'btn-ok' : 'btn-erro'}`}
         onClick={onContinuar}
       >
         {rotuloContinuar}

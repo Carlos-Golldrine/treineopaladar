@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { ExercicioDuasVerdades } from '../engine';
 import type { FaseExercicio, ResolucaoExercicio } from './tipos';
 
@@ -6,11 +6,18 @@ interface Props {
   ex: ExercicioDuasVerdades;
   fase: FaseExercicio;
   onResolver: (r: ResolucaoExercicio) => void;
+  /** Dica comprada: indice de uma verdade confirmada (nao e a mentira). */
+  eliminada?: number;
 }
 
-export function ExDuasVerdades({ ex, fase, onResolver }: Props) {
+export function ExDuasVerdades({ ex, fase, onResolver, eliminada }: Props) {
   const [sel, setSel] = useState<number | null>(null);
   const travado = fase !== 'respondendo';
+
+  /* A dica pode confirmar a afirmacao que estava marcada: desmarca */
+  useEffect(() => {
+    if (eliminada !== undefined && sel === eliminada) setSel(null);
+  }, [eliminada, sel]);
 
   const conferir = () => {
     if (sel === null) return;
@@ -28,6 +35,7 @@ export function ExDuasVerdades({ ex, fase, onResolver }: Props) {
       <h2 className="ex-pergunta">Toque na mentira.</h2>
       <div className="ex-opcoes" role="group" aria-label="Afirmações">
         {ex.afirmacoes.map((frase, i) => {
+          const fora = eliminada === i;
           let extra = '';
           if (fase === 'revelado') {
             if (i === ex.mentira) extra = ' opcao-certa';
@@ -39,20 +47,21 @@ export function ExDuasVerdades({ ex, fase, onResolver }: Props) {
             <button
               key={frase}
               type="button"
-              className={`opcao tap entra${extra}`}
+              className={`opcao tap entra${extra}${fora ? ' opcao-eliminada' : ''}`}
               style={{ animationDelay: `${i * 50}ms` }}
-              disabled={travado}
+              disabled={travado || fora}
               aria-pressed={i === sel}
               onClick={() => setSel(i)}
             >
               {frase}
+              {fora && <span className="opcao-fora">é verdade</span>}
             </button>
           );
         })}
       </div>
       {fase === 'respondendo' && (
         <div className="ex-rodape">
-          <button type="button" className="btn btn-primary btn-cheio tap" disabled={sel === null} onClick={conferir}>
+          <button type="button" className="btn btn-primary btn-jogo btn-cheio tap" disabled={sel === null} onClick={conferir}>
             Conferir
           </button>
         </div>

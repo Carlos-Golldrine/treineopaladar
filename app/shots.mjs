@@ -1,5 +1,7 @@
 // Sobe o vite preview (exige build feito) e salva screenshots das telas
-// em 412x892 e 360x800 dentro de _shots/.
+// em 412x892 e 360x800 dentro de _shots/, mais as RAJADAS de motion
+// (5 frames a cada 250ms) exigidas pelo delight checklist (BRIEF secao 7,
+// item 7): frames identicos = tela morta = reprova.
 // Uso: npm run build && node shots.mjs
 import { createRequire } from 'module';
 import { mkdirSync } from 'fs';
@@ -103,6 +105,12 @@ const grupos = [
       // Conteudo novo das unidades 2-6 no player real de demo
       ['licao-u2-mc', '/licao/u2-l1?cena=mc'],
       ['licao-u6-mc', '/licao/u6-l3?cena=mc'],
+      // F2.5: ficha de bolso, dica por cristais e micro-aula de unidade
+      ['licao-ficha-bolso', '/licao/u1-l1?cena=mc&estado=ficha'],
+      ['licao-dica-mc', '/licao/u1-l1?cena=mc&estado=dica'],
+      ['licao-dica-slider', '/licao/u1-l1?cena=slider&estado=dica'],
+      ['licao-dica-intruso', '/licao/u1-l1?cena=intruso&estado=dica'],
+      ['microaula-u2', '/licao/u2-l1?cena=microaula'],
     ],
   },
   {
@@ -119,12 +127,57 @@ const grupos = [
       ['pratica', '/pratica'],
       ['pratica-jogo', '/pratica?cena=jogo'],
       ['pratica-rotulo', '/pratica?cena=rotulo'],
+      // F2.5: flashcards das fichas canonicas (frente da carta)
+      ['pratica-cartas', '/pratica?cena=cartas'],
     ],
   },
   {
     seed: SEED_DESAFIO_FEITO,
     routes: [['desafio-resultado', '/desafio']],
   },
+];
+
+/* RAJADAS de motion: 5 frames, 250ms entre eles, em 412x892.
+   - press: pressiona o seletor com page.mouse entre os frames 1 e 3
+     (captura o botao 3D afundado)
+   - anim: sessionStorage que dispara coreografia na Trilha (taca enche).
+   Seed proprio: so 2 licoes feitas para o no recem-concluido (u1-l2)
+   ficar NA TELA (sem auto-scroll para outra unidade). */
+const SEED_TACA = {
+  estado: JSON.stringify({
+    versao: 1,
+    onboardingCompleto: true,
+    progresso: {
+      'u1-l1': {
+        coroas: 1,
+        vezesConcluida: 1,
+        ultimaConclusao: Date.now(),
+        proximaRevisao: null,
+        errosPendentes: [],
+      },
+      'u1-l2': {
+        coroas: 1,
+        vezesConcluida: 1,
+        ultimaConclusao: Date.now(),
+        proximaRevisao: null,
+        errosPendentes: [],
+      },
+    },
+    wallet: { cristais: 80, xpTotal: 90 },
+  }),
+  flags: JSON.stringify({ cristaisColetados: true, lojaVista: true }),
+  anim: JSON.stringify({ licao: 'u1-l2', coroa: true }),
+};
+
+const rajadas = [
+  { name: 'rajada-mascote-erro', seed: null, route: '/licao-1?cena=erro' },
+  { name: 'rajada-chama-acende', seed: SEED_APP, route: '/licao/u1-l1?cena=conclusao' },
+  { name: 'rajada-odometro', seed: SEED_APP, route: '/licao/u1-l1?cena=conclusao' },
+  { name: 'rajada-taca-enche', seed: SEED_TACA, route: '/' },
+  { name: 'rajada-botao-3d', seed: null, route: '/comecar', press: '.splash-acao .btn-jogo' },
+  // F2.5: flip 3D da carta (press solta entre os frames 1 e 3) e micro-aula
+  { name: 'rajada-carta-flip', seed: SEED_PROGRESSO, route: '/pratica?cena=cartas', press: '.carta3d' },
+  { name: 'rajada-microaula', seed: SEED_APP, route: '/licao/u2-l1?cena=microaula' },
 ];
 
 const viewports = [
@@ -154,6 +207,7 @@ for (const vp of viewports) {
         try {
           localStorage.setItem('tp.v1', seed.estado);
           localStorage.setItem('tp.ftue.v1', seed.flags);
+          if (seed.anim) sessionStorage.setItem('tp.anim.v1', seed.anim);
           if (seed.desafioHoje) {
             // O dia oficial (America/Sao_Paulo) e calculado aqui, na pagina
             const dia = new Intl.DateTimeFormat('en-CA', {
@@ -189,6 +243,64 @@ for (const vp of viewports) {
     }
     await ctx.close();
   }
+}
+
+/* ---------------------- RAJADAS de motion ----------------------------- */
+
+const FRAMES = 5;
+const INTERVALO = 250;
+
+for (const rajada of rajadas) {
+  const ctx = await browser.newContext({
+    viewport: { width: 412, height: 892 },
+    deviceScaleFactor: 2,
+    locale: 'pt-BR',
+    isMobile: true,
+    hasTouch: true,
+  });
+  if (rajada.seed) {
+    await ctx.addInitScript((seed) => {
+      try {
+        localStorage.setItem('tp.v1', seed.estado);
+        localStorage.setItem('tp.ftue.v1', seed.flags);
+        if (seed.anim) sessionStorage.setItem('tp.anim.v1', seed.anim);
+      } catch {
+        /* sem storage */
+      }
+    }, rajada.seed);
+  } else {
+    await ctx.addInitScript(() => {
+      try {
+        localStorage.clear();
+      } catch {
+        /* sem storage */
+      }
+    });
+  }
+  const page = await ctx.newPage();
+  await page.goto(`http://localhost:${PORT}${rajada.route}`, { waitUntil: 'load' }).catch(() => {});
+
+  let alvoPress = null;
+  if (rajada.press) {
+    /* Deixa a entrada assentar, depois pressiona entre os frames 1 e 3 */
+    await page.waitForTimeout(700);
+    const el = page.locator(rajada.press).first();
+    const box = await el.boundingBox().catch(() => null);
+    if (box) alvoPress = { x: box.x + box.width / 2, y: box.y + box.height / 2 };
+  }
+
+  for (let i = 0; i < FRAMES; i++) {
+    if (alvoPress && i === 1) {
+      await page.mouse.move(alvoPress.x, alvoPress.y);
+      await page.mouse.down();
+    }
+    if (alvoPress && i === 3) await page.mouse.up();
+    const file = path.join(shotsDir, `${rajada.name}-f${i}.png`);
+    await page.screenshot({ path: file });
+    console.log('rajada', path.basename(file));
+    if (i < FRAMES - 1) await page.waitForTimeout(INTERVALO);
+  }
+  await ctx.close();
 }
 
 await browser.close();

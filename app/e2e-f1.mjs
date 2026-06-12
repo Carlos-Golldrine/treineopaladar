@@ -215,8 +215,10 @@ try {
   await step('(d) conclusao mostra XP e streak dia 1', async () => {
     await page.waitForSelector('.conclusao.c1', { timeout: 8000 });
     await page.waitForTimeout(1100);
-    const xpTxt = (await page.locator('.c1-xp-num').innerText()).trim();
-    const xpNum = Number(xpTxt.replace('+', ''));
+    /* O XP virou odometro (F2.5): o valor semantico vive no aria-label
+       do componente (innerText concatenaria a fita inteira de digitos) */
+    const xpTxt = await page.locator('.c1-xp-num .odometro').getAttribute('aria-label');
+    const xpNum = Number(xpTxt);
     assert(xpNum > 0, `XP exibido invalido: "${xpTxt}"`);
     const streakTxt = await page.locator('.c1-streak').innerText();
     assert(/Dia\s*1/.test(streakTxt), `streak dia 1 nao apareceu: "${streakTxt}"`);
@@ -259,6 +261,12 @@ try {
 
   await step('(h) abrir a licao 2 do dia (no 1 da trilha, u1-l1)', async () => {
     await page.locator('.trail-item').first().locator('button.node-taca').click();
+    /* F2.5: a 1a visita da unidade abre com a micro-aula (sempre pulavel) */
+    await page.waitForSelector('.microaula', { timeout: 8000 });
+    const tituloAula = await page.locator('.microaula-titulo').innerText();
+    assert(tituloAula.includes('Fundamentos'), `micro-aula de outra unidade: "${tituloAula}"`);
+    await shot('microaula-u1');
+    await page.getByRole('button', { name: 'Pular' }).click();
     await esperarPergunta('chá preto que ficou tempo demais');
     assert(new URL(page.url()).pathname === '/licao/u1-l1', `URL e ${page.url()}`);
   });
@@ -463,5 +471,6 @@ try {
   console.log(JSON.stringify(a11y, null, 1).slice(0, 6000));
   await browser.close();
   server.httpServer.close();
-  if (fatal || consoleErrors.length > 0) process.exitCode = fatal ? 1 : 0;
+  // erro de console tambem reprova, mesmo sem step falho (auditoria f2.5)
+  if (fatal || consoleErrors.length > 0) process.exitCode = 1;
 }

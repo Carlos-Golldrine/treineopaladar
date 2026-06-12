@@ -1,0 +1,72 @@
+/* ---------- Micro-aula de abertura de unidade ---------- */
+
+.microaula {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  padding-top: max(env(safe-area-inset-top), var(--space-4));
+  padding-bottom: max(env(safe-area-inset-bottom), var(--space-4));
+  background: var(--bg);
+}
+
+.microaula-cartao {
+  width: 100%;
+  max-width: 448px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  animation: microaula-entra 220ms ease-out both;
+}
+
+@keyframes microaula-entra {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .microaula-cartao,
+  .microaula-xp {
+    animation: none;
+  }
+}
+
+.microaula-eyebrow {
+  font: 600 var(--text-xs) / 1.2 var(--font-ui);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold-700);
+}
+
+.microaula-titulo {
+  font: 600 var(--text-xl) / 1.15 var(--font-display);
+  color: var(--wine-900);
+  margin-bottom: var(--space-2);
+}
+
+.microaula-xp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 96px;
+  border-radius: var(--radius-card);
+  background: rgba(212, 165, 116, 0.18);
+  color: var(--gold-700);
+  font: 500 var(--text-md) / 1 var(--font-mono);
+  animation: microaula-entra 200ms ease-out both;
+}
+
+.microaula-xp .ic {
+  color: var(--gold-700);
+}

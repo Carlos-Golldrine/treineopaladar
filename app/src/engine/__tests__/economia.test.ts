@@ -53,7 +53,7 @@ describe('XP e cristais (secao 6)', () => {
     expect(cristaisDeLicao(false)).toBe(5);
   });
 
-  it('precos da loja e boas-vindas seguem a secao 6', () => {
+  it('precos da loja e boas-vindas seguem a secao 6 (+ dica da F2.5)', () => {
     expect(PRECOS_LOJA).toEqual({
       freeze: 60,
       recargaVidas: 50,
@@ -61,6 +61,7 @@ describe('XP e cristais (secao 6)', () => {
       dobroXp: 30,
       desbloqueioUnidade: 200,
       desbloqueioModo: 300,
+      dica: 10,
     });
     expect(CRISTAIS_BOAS_VINDAS).toBe(60); // paga exatamente 1 freeze
   });

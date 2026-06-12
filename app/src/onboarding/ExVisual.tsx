@@ -55,7 +55,12 @@ export function ExVisual({ ex, fase, onResolver }: Props) {
       </div>
       {fase === 'respondendo' && (
         <div className="ex-rodape">
-          <button type="button" className="btn btn-primary btn-cheio tap" disabled={sel === null} onClick={conferir}>
+          <button
+            type="button"
+            className="btn btn-primary btn-jogo btn-cheio tap"
+            disabled={sel === null}
+            onClick={conferir}
+          >
             Conferir
           </button>
         </div>

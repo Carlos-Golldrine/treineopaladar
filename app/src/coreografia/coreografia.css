@@ -1,0 +1,255 @@
+/* ============================================================
+   Coreografias de marco: chama do streak, odometro de XP,
+   confete em canvas, bau de recompensa e mascote observador.
+   So transform/opacity (60fps em Android mid-range).
+   ============================================================ */
+
+/* ----------------------- Chama que acende ---------------------------- */
+
+.chama-coreo {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+}
+
+.chama-glifo {
+  display: inline-flex;
+  width: 100%;
+  height: 100%;
+}
+
+/* Ignicao: cresce do pe da chama com overshoot (squash & stretch) */
+.chama-acende {
+  transform-origin: 50% 92%;
+  animation: chama-acende 520ms cubic-bezier(0.34, 1.46, 0.44, 1) both;
+}
+
+@keyframes chama-acende {
+  0% {
+    transform: scale(0.55, 0.35);
+  }
+
+  55% {
+    transform: scale(0.94, 1.22) rotate(-3deg);
+  }
+
+  78% {
+    transform: scale(1.06, 0.94) rotate(2deg);
+  }
+
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+.chama-particulas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.chama-particula {
+  position: absolute;
+  left: 50%;
+  bottom: 30%;
+  width: 4px;
+  height: 4px;
+  border-radius: var(--radius-pill);
+  background: var(--ember-500);
+  opacity: 0;
+  animation: chama-particula 640ms ease-out both;
+}
+
+.chama-particula-0 { --px: -11px; animation-delay: 60ms; }
+.chama-particula-1 { --px: 9px; animation-delay: 120ms; background: var(--gold-500); }
+.chama-particula-2 { --px: -5px; animation-delay: 180ms; width: 3px; height: 3px; }
+.chama-particula-3 { --px: 13px; animation-delay: 240ms; }
+.chama-particula-4 { --px: 2px; animation-delay: 300ms; background: var(--gold-500); width: 3px; height: 3px; }
+.chama-particula-5 { --px: -14px; animation-delay: 360ms; background: var(--gold-700); width: 3px; height: 3px; }
+
+@keyframes chama-particula {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 0) scale(1);
+  }
+
+  18% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--px)), -22px) scale(0.2);
+  }
+}
+
+/* -------------------------- Odometro ---------------------------------- */
+
+.odometro {
+  display: inline-flex;
+  vertical-align: baseline;
+  font-variant-numeric: tabular-nums;
+}
+
+.odometro-coluna {
+  display: inline-block;
+  height: 1em;
+  overflow: hidden;
+}
+
+.odometro-fita {
+  display: block;
+  will-change: transform;
+}
+
+.odometro-digito {
+  display: block;
+  height: 1em;
+  line-height: 1;
+  text-align: center;
+}
+
+/* ----------------------- Confete em canvas ---------------------------- */
+
+.confete-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* ------------------------ Bau de recompensa --------------------------- */
+
+.bau-coreo {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  color: var(--wine-900);
+}
+
+/* Antecipacao: o bau balanca antes de abrir */
+.bau-fechado {
+  display: inline-flex;
+  width: 100%;
+  height: 100%;
+  transform-origin: 50% 88%;
+  animation: bau-balanca 360ms ease-in-out 120ms 2;
+}
+
+@keyframes bau-balanca {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  30% {
+    transform: rotate(-5deg) scale(1.02);
+  }
+
+  70% {
+    transform: rotate(5deg) scale(1.02);
+  }
+}
+
+/* Pop: o cristal salta do bau com overshoot */
+.bau-pop {
+  display: inline-flex;
+  width: 100%;
+  height: 100%;
+  animation: bau-pop 420ms cubic-bezier(0.34, 1.56, 0.5, 1) both;
+}
+
+.bau-cristal {
+  color: var(--gold-700);
+}
+
+@keyframes bau-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.4);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translateY(-4px) scale(1.12);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.bau-faiscas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.bau-faisca {
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  width: 5px;
+  height: 5px;
+  border-radius: var(--radius-pill);
+  background: var(--gold-500);
+  opacity: 0;
+  animation: bau-faisca 540ms ease-out both;
+}
+
+.bau-faisca-0 { --fx: -22px; --fy: -18px; animation-delay: 40ms; }
+.bau-faisca-1 { --fx: 20px; --fy: -22px; animation-delay: 90ms; }
+.bau-faisca-2 { --fx: -14px; --fy: -30px; animation-delay: 140ms; width: 4px; height: 4px; background: var(--ember-500); }
+.bau-faisca-3 { --fx: 24px; --fy: -10px; animation-delay: 190ms; width: 4px; height: 4px; }
+
+@keyframes bau-faisca {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 0) scale(1);
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--fx)), var(--fy)) scale(0.25);
+  }
+}
+
+/* ------------------- Mascote observador no rodape ---------------------- */
+
+/* Fica atras do conteudo: o vazio vertical ganha vida sem cobrir alvo
+   de toque (z negativo dentro do stacking context do .player).
+   Acima da faixa do CTA (botao Conferir), no respiro entre as opcoes
+   e o rodape, fora do caminho do polegar. */
+.tchin-observa {
+  position: absolute;
+  right: var(--space-4);
+  bottom: calc(max(env(safe-area-inset-bottom), 8px) + 92px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chama-acende,
+  .chama-particula,
+  .bau-fechado,
+  .bau-pop,
+  .bau-faisca {
+    animation: none;
+  }
+
+  .chama-particula,
+  .bau-faisca {
+    display: none;
+  }
+
+  .bau-pop {
+    opacity: 1;
+  }
+}

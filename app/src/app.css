@@ -73,9 +73,11 @@
   font-weight: 500;
 }
 
-.tab .icon {
-  width: 26px;
-  height: 26px;
+/* Aba inativa: o duotone hiberna em cinza; a ativa acende em cor.
+   Filtro estatico (sem animacao): barato mesmo em Android mid-range. */
+.tab .ic {
+  filter: grayscale(1);
+  opacity: 0.66;
 }
 
 .tab-active {
@@ -83,25 +85,15 @@
   font-weight: 600;
 }
 
+.tab-active .ic {
+  filter: none;
+  opacity: 1;
+}
+
 @media (hover: hover) {
   .tab:hover {
     color: var(--wine-700);
   }
-}
-
-.tab-avatar {
-  width: 26px;
-  height: 26px;
-  border-radius: var(--radius-pill);
-  display: grid;
-  place-items: center;
-  background: var(--neutral-400);
-  color: var(--bg);
-  font: 600 13px / 1 var(--font-display);
-}
-
-.tab-active .tab-avatar {
-  background: var(--wine-700);
 }
 
 /* ---------- Skeleton (so aparece apos 300ms) ---------- */
@@ -172,6 +164,50 @@
 .btn-outline {
   border: 1.5px solid var(--wine-700);
   color: var(--wine-700);
+}
+
+/* ---------- Botao 3D de jogo (BRIEF secao 7, item 3) ----------
+   Borda inferior grossa que AFUNDA no toque: o sinal mais barato de
+   "jogo, nao site". Sombra derivada por papel via --jogo-sombra. */
+.btn.btn-jogo {
+  --jogo-sombra: var(--wine-900);
+  box-shadow: 0 4px 0 var(--jogo-sombra);
+  transition: transform 120ms ease-out, box-shadow 120ms ease-out;
+}
+
+.btn.btn-jogo:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--jogo-sombra);
+}
+
+.btn.btn-jogo.btn-ok {
+  --jogo-sombra: color-mix(in srgb, var(--ok-700) 70%, #000);
+}
+
+.btn.btn-jogo.btn-erro {
+  --jogo-sombra: color-mix(in srgb, var(--warm-700) 70%, #000);
+}
+
+.btn.btn-jogo.btn-gold {
+  --jogo-sombra: var(--gold-700);
+}
+
+.btn.btn-jogo:disabled {
+  box-shadow: none;
+  transform: none;
+}
+
+/* ---------- Selo Beta (marca-mae, discreto em gold) ---------- */
+.chip-beta {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border: 1.5px solid var(--gold-700);
+  border-radius: var(--radius-control);
+  font: 600 var(--text-xs) / 1.2 var(--font-ui);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold-700);
 }
 
 /* ---------- Bottom sheet (folha) ---------- */
@@ -255,11 +291,11 @@
   color: var(--neutral-700);
 }
 
-.folha-num-streak .icon {
+.folha-num-streak .ic {
   color: var(--ember-500);
 }
 
-.folha-num-cristais .icon {
+.folha-num-cristais .ic {
   color: var(--gold-700);
 }
 

@@ -4,24 +4,22 @@ import { unidades } from '../content';
 import type { Unidade } from '../content';
 import { PRECOS_LOJA, obterStore, useProgresso, useWallet, VIDAS_MAX } from '../engine';
 import type { ProgressoLicao } from '../engine';
-import { Icon } from '../components/Icon';
+import { Ic } from '../icones/Icones';
 import { Sheet } from '../components/Sheet';
 import { Taca } from '../components/Taca';
 import type { EstadoTaca } from '../components/Taca';
+import { lazy, Suspense } from 'react';
 import { desbloquearUnidade, useDesbloqueios } from '../trilha/desbloqueios';
+// lazy: a micro-aula nao pode entrar no JS da primeira tela (orcamento 150KB)
+const MicroAula = lazy(() =>
+  import('../trilha/MicroAula').then((m) => ({ default: m.MicroAula })),
+);
 import { useFtueFlags } from '../onboarding/flags';
 import { RevelacaoCristais } from '../onboarding/RevelacoesTrilha';
-import { MascoteToast } from '../onboarding/Mascote';
+import { MascoteToast } from '../mascote';
 import { FALAS } from '../onboarding/conteudo';
-
-import fireIcon from '@material-symbols/svg-500/rounded/local_fire_department-fill.svg?raw';
-import heartIcon from '@material-symbols/svg-500/rounded/favorite-fill.svg?raw';
-import diamondIcon from '@material-symbols/svg-500/rounded/diamond-fill.svg?raw';
-import crownIcon from '@material-symbols/svg-500/rounded/crown-fill.svg?raw';
-import lockIcon from '@material-symbols/svg-500/rounded/lock-fill.svg?raw';
-import flagIcon from '@material-symbols/svg-500/rounded/flag-fill.svg?raw';
-import wineIcon from '@material-symbols/svg-500/rounded/wine_bar-fill.svg?raw';
-import chevronIcon from '@material-symbols/svg-500/rounded/chevron_right.svg?raw';
+import { consumirAnimTrilha } from '../licao/tipos';
+import { tocar } from '../som/som';
 
 import './trilha.css';
 
@@ -93,12 +91,17 @@ export default function Trilha() {
   const desbloqueios = useDesbloqueios();
   const [aba, setAba] = useState<Aba>(null);
   const [unidadeComprando, setUnidadeComprando] = useState<VistaUnidade | null>(null);
+  const [aulaAberta, setAulaAberta] = useState<Unidade | null>(null);
   useTique(aba === 'vidas' && proximaVidaEmMs !== null);
 
   /* Revelacao progressiva (FTUE): cristais so entram no HUD apos o
      1 toque de coleta; tooltip de loja so na primeira vez sem vidas */
   const [ftue, marcarFtue] = useFtueFlags();
   const [recemColetado, setRecemColetado] = useState(false);
+
+  /* Coreografia de marco vinda do player: a taca do no recem-concluido
+     enche com onda e a coroa nova cai com bounce (consumido uma vez) */
+  const [animRecente] = useState(consumirAnimTrilha);
 
   const vistas = useMemo(() => montarVistas(progresso, desbloqueios), [progresso, desbloqueios]);
   const totalConcluidas = vistas.reduce((soma, v) => soma + v.concluidas, 0);
@@ -125,7 +128,10 @@ export default function Trilha() {
 
   const comprarDesbloqueio = (vista: VistaUnidade) => {
     const ok = obterStore().comprar('desbloqueioUnidade');
-    if (ok) desbloquearUnidade(vista.unidade.meta.id);
+    if (ok) {
+      desbloquearUnidade(vista.unidade.meta.id);
+      tocar('moeda');
+    }
     setUnidadeComprando(null);
   };
 
@@ -138,7 +144,7 @@ export default function Trilha() {
           aria-label={`Sequência de ${streakEfetivo} ${streakEfetivo === 1 ? 'dia' : 'dias'}`}
           onClick={() => setAba('streak')}
         >
-          <Icon svg={fireIcon} size={18} />
+          <Ic nome={streakEmRisco || streakEfetivo === 0 ? 'chama-apagada' : 'chama-streak'} size={18} />
           <span className="hud-value">{streakEfetivo}</span>
         </button>
         <button
@@ -147,7 +153,7 @@ export default function Trilha() {
           aria-label={`${wallet.vidas} vidas`}
           onClick={() => setAba('vidas')}
         >
-          <Icon svg={heartIcon} size={18} />
+          <Ic nome={wallet.vidas > 0 ? 'coracao-vida' : 'coracao-vazio'} size={18} />
           <span className="hud-value">{wallet.vidas}</span>
         </button>
         {ftue.cristaisColetados && (
@@ -157,7 +163,7 @@ export default function Trilha() {
             aria-label={`${wallet.cristais} cristais`}
             onClick={() => setAba('cristais')}
           >
-            <Icon svg={diamondIcon} size={18} />
+            <Ic nome="cristal" size={18} />
             <span className="hud-value">{wallet.cristais}</span>
           </button>
         )}
@@ -171,13 +177,13 @@ export default function Trilha() {
           aria-label="Abrir a prática livre"
         >
           <span className="pratica-selo">
-            <Icon svg={wineIcon} size={22} />
+            <Ic nome="taca" size={22} />
           </span>
           <span className="pratica-textos">
             <span className="pratica-titulo">Prática livre</span>
             <span className="pratica-sub">Rodadas de 8 com rótulos de verdade. Sem gastar vida.</span>
           </span>
-          <Icon svg={chevronIcon} size={22} className="pratica-seta" />
+          <Ic nome="seta-direita" size={20} className="pratica-seta" />
         </button>
       )}
 
@@ -194,7 +200,7 @@ export default function Trilha() {
               aria-label={`Unidade ${numero}, ${meta.titulo}, bloqueada`}
             >
               <span className="unit-locked-selo">
-                <Icon svg={lockIcon} size={18} />
+                <Ic nome="cadeado" size={18} />
               </span>
               <div className="unit-locked-textos">
                 <p className="unit-locked-eyebrow">Unidade {numero}</p>
@@ -209,7 +215,7 @@ export default function Trilha() {
                   className="unit-abrir tap"
                   onClick={() => setUnidadeComprando(vista)}
                 >
-                  <Icon svg={diamondIcon} size={16} />
+                  <Ic nome="cristal" size={16} />
                   Abrir antes
                 </button>
               )}
@@ -226,6 +232,15 @@ export default function Trilha() {
               <p className="unit-eyebrow">Unidade {numero}</p>
               <h2 className="unit-title">{meta.titulo}</h2>
               <p className="unit-desc">{meta.subtitulo}</p>
+              <button
+                type="button"
+                className="unit-aula tap"
+                aria-label={`Assistir a apresentação da unidade ${numero}`}
+                onClick={() => setAulaAberta(vista.unidade)}
+              >
+                <Ic nome="play" size={14} />
+                Apresentação
+              </button>
               <div className="unit-progress">
                 <div
                   className="unit-bar"
@@ -267,6 +282,8 @@ export default function Trilha() {
 
                 const classe = `trail-item${atual ? ' current' : ''}${feita || !bloqueada ? ' reached' : ''}${bloqueada ? ' locked' : ''}`;
 
+                const recemConcluida = animRecente?.licao === licao.id;
+
                 return (
                   <li className={classe} key={licao.id}>
                     {bloqueada ? (
@@ -286,7 +303,12 @@ export default function Trilha() {
                                 ? `Treinar de novo a lição ${licao.titulo}`
                                 : `Começar a lição ${licao.titulo}`
                         }
-                        onClick={() => navigate(`/licao/${licao.id}`)}
+                        onClick={(e) => {
+                          /* View Transition: o circulo do no vira a tela da
+                             licao (morph); sem suporte, navegacao normal */
+                          (e.currentTarget as HTMLElement).style.viewTransitionName = 'licao-zoom';
+                          navigate(`/licao/${licao.id}`, { viewTransition: true });
+                        }}
                       >
                         {atual && (
                           <span className="start-pill" aria-hidden="true">
@@ -298,17 +320,19 @@ export default function Trilha() {
                             Revisar
                           </span>
                         )}
-                        <Taca estado={estado} coroas={coroas} />
+                        <Taca estado={estado} coroas={coroas} enche={recemConcluida} />
                       </button>
                     )}
                     {feita && (
                       <span className="node-coroas" aria-label={`${coroas} de 3 coroas`}>
                         {[1, 2, 3].map((n) => (
-                          <Icon
+                          <Ic
                             key={n}
-                            svg={crownIcon}
+                            nome="coroa"
                             size={13}
-                            className={n <= coroas ? 'coroa coroa-ganha' : 'coroa'}
+                            className={`${n <= coroas ? 'coroa coroa-ganha' : 'coroa'}${
+                              recemConcluida && animRecente?.coroa && n === coroas ? ' coroa-cai' : ''
+                            }`}
                           />
                         ))}
                       </span>
@@ -328,7 +352,7 @@ export default function Trilha() {
                 <span
                   className={`checkpoint-selo${checkpoints.includes(meta.id) ? ' checkpoint-ganho' : ''}`}
                 >
-                  <Icon svg={flagIcon} size={20} />
+                  <Ic nome="bandeira-meta" size={20} />
                 </span>
                 <span className="node-label">
                   {checkpoints.includes(meta.id) ? 'Checkpoint, 50 XP' : 'Checkpoint'}
@@ -342,7 +366,7 @@ export default function Trilha() {
       {aba === 'streak' && (
         <Sheet titulo="Sua sequência" onFechar={() => setAba(null)}>
           <p className="folha-numero folha-num-streak">
-            <Icon svg={fireIcon} size={26} />
+            <Ic nome={streakEmRisco ? 'chama-apagada' : 'chama-streak'} size={26} />
             {streakEfetivo} {streakEfetivo === 1 ? 'dia' : 'dias'}
           </p>
           <p className="folha-texto">
@@ -364,7 +388,12 @@ export default function Trilha() {
         <Sheet titulo="Vidas" onFechar={() => setAba(null)}>
           <div className="folha-coracoes" aria-label={`${wallet.vidas} de ${VIDAS_MAX} vidas`}>
             {Array.from({ length: VIDAS_MAX }, (_, i) => (
-              <Icon key={i} svg={heartIcon} size={26} className={i < wallet.vidas ? 'vida vida-cheia' : 'vida'} />
+              <Ic
+                key={i}
+                nome={i < wallet.vidas ? 'coracao-vida' : 'coracao-vazio'}
+                size={26}
+                className={i < wallet.vidas ? 'vida vida-cheia' : 'vida'}
+              />
             ))}
           </div>
           <p className="folha-texto">
@@ -386,7 +415,7 @@ export default function Trilha() {
       {aba === 'cristais' && (
         <Sheet titulo="Cristais" onFechar={() => setAba(null)}>
           <p className="folha-numero folha-num-cristais">
-            <Icon svg={diamondIcon} size={24} />
+            <Ic nome="cristal" size={24} />
             {wallet.cristais}
           </p>
           <p className="folha-texto">
@@ -407,7 +436,7 @@ export default function Trilha() {
             de treino.
           </p>
           <p className="folha-numero folha-num-cristais" aria-label={`Você tem ${wallet.cristais} cristais`}>
-            <Icon svg={diamondIcon} size={20} />
+            <Ic nome="cristal" size={20} />
             {wallet.cristais}
             <span className="folha-saldo-rotulo">seu saldo</span>
           </p>
@@ -419,7 +448,7 @@ export default function Trilha() {
           )}
           <button
             type="button"
-            className="btn btn-primary btn-cheio tap"
+            className="btn btn-primary btn-jogo btn-cheio tap"
             disabled={wallet.cristais < PRECOS_LOJA.desbloqueioUnidade}
             onClick={() => comprarDesbloqueio(unidadeComprando)}
           >
@@ -439,6 +468,12 @@ export default function Trilha() {
       )}
 
       {mostrarLoja && <MascoteToast texto={FALAS.loja} fixo onFechar={() => marcarFtue({ lojaVista: true })} />}
+
+      {aulaAberta && (
+        <Suspense fallback={null}>
+          <MicroAula unidade={aulaAberta} onFim={() => setAulaAberta(null)} />
+        </Suspense>
+      )}
     </>
   );
 }

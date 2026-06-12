@@ -28,7 +28,6 @@ const Trilha = lazy(() => import('./routes/Trilha'));
 const Desafio = lazy(() => import('./routes/Desafio'));
 const Mesa = lazy(() => import('./routes/Mesa'));
 const Perfil = lazy(() => import('./routes/Perfil'));
-const PlayerLicao = lazy(() => import('./licao/Player'));
 const Pratica = lazy(() => import('./routes/Pratica'));
 
 const router = createBrowserRouter([
@@ -58,13 +57,12 @@ const router = createBrowserRouter([
     element: <LicaoUm />,
   },
   {
-    /* Player em tela cheia, fora do Shell (sem tab bar durante a licao) */
+    /* Player em tela cheia, fora do Shell (sem tab bar durante a licao).
+       Lazy DE ROTA (nao React.lazy): o router espera o chunk antes de
+       trocar a tela, e a View Transition do no da trilha captura a licao
+       pronta (morph do circulo), nunca um fallback vazio. */
     path: '/licao/:id',
-    element: (
-      <Suspense fallback={null}>
-        <PlayerLicao />
-      </Suspense>
-    ),
+    lazy: async () => ({ Component: (await import('./licao/Player')).default }),
   },
   {
     /* Pratica livre em tela cheia: drill do banco da fabrica, sem vidas */
@@ -75,6 +73,15 @@ const router = createBrowserRouter([
       </Suspense>
     ),
   },
+  /* Laboratorio do mascote, so no dev server */
+  ...(import.meta.env.DEV
+    ? [
+        {
+          path: '/mascote',
+          lazy: async () => ({ Component: (await import('./mascote/DemoMascote')).default }),
+        },
+      ]
+    : []),
 ]);
 
 registerSW({ immediate: true });

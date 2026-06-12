@@ -1,0 +1,173 @@
+/* ---------- Revisar com cartas: flashcards com flip 3D ---------- */
+
+.cartas-palco {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  padding-bottom: max(env(safe-area-inset-bottom), var(--space-4));
+}
+
+/* O card inteiro e um botao (alvo gigante): perspective no pai.
+   Altura com teto para continuar parecendo CARTA, nao tela. */
+.carta3d {
+  flex: 1;
+  min-height: 300px;
+  max-height: 460px;
+  margin-top: auto;
+  perspective: 1200px;
+  border: 0;
+  background: none;
+  padding: 0;
+  text-align: left;
+  display: block;
+  cursor: pointer;
+}
+
+/* O par carta + avaliacao centra no espaco que sobrar */
+.cartas-avaliacao,
+.cartas-dica-virar {
+  margin-bottom: auto;
+}
+
+.carta3d-miolo {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.carta3d-virada .carta3d-miolo {
+  transform: rotateY(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carta3d-miolo {
+    transition: none;
+  }
+}
+
+.carta3d-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  border-radius: var(--radius-card);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+/* Frente: o lado fundo-vinho do baralho (pergunta) */
+.carta3d-frente {
+  background: var(--wine-900);
+  color: var(--bg);
+}
+
+/* Verso: claro, a resposta respira (flip = luz acendendo) */
+.carta3d-verso {
+  background: var(--bg);
+  color: var(--wine-900);
+  border: 1.5px solid var(--neutral-200);
+  transform: rotateY(180deg);
+}
+
+.carta3d-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font: 600 var(--text-xs) / 1.2 var(--font-ui);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--gold-500);
+}
+
+.carta3d-eyebrow-verso {
+  color: var(--ok-700);
+}
+
+.carta3d-texto {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  font: 600 var(--text-lg) / 1.45 var(--font-display);
+}
+
+.carta3d-lacuna {
+  display: inline-block;
+  width: 72px;
+  height: 0.9em;
+  margin: 0 2px -2px;
+  border-bottom: 3px solid var(--gold-500);
+  border-radius: 2px;
+}
+
+.carta3d-chave {
+  color: var(--wine-700);
+  font-style: italic;
+  text-decoration: underline;
+  text-decoration-color: var(--gold-500);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 4px;
+}
+
+.carta3d-rodape {
+  font-size: var(--text-xs);
+  color: var(--gold-500);
+  opacity: 0.85;
+}
+
+.carta3d-fonte {
+  font-size: var(--text-xs);
+  color: var(--neutral-500);
+}
+
+/* Autoavaliacao: 3 botoes lado a lado, o "Sabia" e o 3D verde */
+.cartas-avaliacao {
+  display: flex;
+  gap: var(--space-2);
+  animation: entra 200ms ease-out both;
+}
+
+.btn-carta {
+  flex: 1;
+  padding: 0 var(--space-2);
+  font-size: var(--text-xs);
+}
+
+.btn-carta-nao {
+  border: 1.5px solid var(--warm-700);
+  color: var(--warm-700);
+}
+
+.btn-carta-quase {
+  border: 1.5px solid var(--neutral-300);
+  color: var(--neutral-600);
+}
+
+.cartas-dica-virar {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* respiro lateral: nao esbarra no Tchin observador do canto */
+  padding-inline: 64px;
+  font-size: var(--text-xs);
+  color: var(--neutral-400);
+  text-align: center;
+}
+
+@media (hover: hover) {
+  .btn-carta-nao:hover {
+    background: rgba(160, 82, 45, 0.07);
+  }
+
+  .btn-carta-quase:hover {
+    background: var(--neutral-50);
+  }
+}

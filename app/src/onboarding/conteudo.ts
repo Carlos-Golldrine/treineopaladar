@@ -190,6 +190,7 @@ export const CARTAS_NIVEL: CartaConteudo[] = [
    Maximo de 8 palavras por fala, sem excecao. */
 
 export const FALAS = {
+  abertura: 'Vou te provar uma coisa.',
   celebraJ1: 'Viu? Você já sabia o começo.',
   vidas: 'Errou? Tranquilo. Você tem 5 vidas.',
   conclusao: 'Tchin! Pelo seu primeiro passo.',

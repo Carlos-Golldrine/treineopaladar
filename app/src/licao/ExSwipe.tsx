@@ -97,7 +97,8 @@ export function ExSwipe({ ex, fase, onResolver }: Props) {
       </div>
 
       <div className="deck entra">
-        {/* Carta de tras (proxima), espiando */}
+        {/* Pilha do deck: as duas proximas cartas espiando atras */}
+        {idx + 2 < total && <div className="carta carta-tras-2" aria-hidden="true" />}
         {idx + 1 < total && <div className="carta carta-tras" aria-hidden="true" />}
         {carta ? (
           <div

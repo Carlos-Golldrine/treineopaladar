@@ -27,3 +27,40 @@ export function vibrar(): void {
     navigator.vibrate(15);
   }
 }
+
+/* ------------- Coreografias de marco na volta a Trilha ---------------- */
+
+/** Chave de sessionStorage: o player avisa a Trilha do marco recem-ganho. */
+export const CHAVE_ANIM_TRILHA = 'tp.anim.v1';
+
+export interface AnimTrilha {
+  /** Licao concluida agora: o no dela enche a taca com onda. */
+  licao: string;
+  /** True quando a conclusao rendeu coroa nova: ela cai com bounce. */
+  coroa: boolean;
+}
+
+/** Grava o marco para a Trilha coreografar na proxima montagem. */
+export function gravarAnimTrilha(anim: AnimTrilha): void {
+  try {
+    sessionStorage.setItem(CHAVE_ANIM_TRILHA, JSON.stringify(anim));
+  } catch {
+    /* sem sessionStorage: a coreografia simplesmente nao acontece */
+  }
+}
+
+/** Le e consome (uma vez so) o marco pendente. */
+export function consumirAnimTrilha(): AnimTrilha | null {
+  try {
+    const cru = sessionStorage.getItem(CHAVE_ANIM_TRILHA);
+    if (!cru) return null;
+    sessionStorage.removeItem(CHAVE_ANIM_TRILHA);
+    const dado = JSON.parse(cru) as Partial<AnimTrilha>;
+    if (typeof dado.licao === 'string') {
+      return { licao: dado.licao, coroa: dado.coroa === true };
+    }
+  } catch {
+    /* sem sessionStorage */
+  }
+  return null;
+}

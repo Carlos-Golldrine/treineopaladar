@@ -1,4 +1,4 @@
-import { useId } from 'react';
+import { useEffect, useId, useRef } from 'react';
 
 /**
  * Elemento-assinatura da trilha: taca de vinho proprietaria que se preenche
@@ -7,6 +7,7 @@ import { useId } from 'react';
  * - disponivel: contorno vinho, vazia (pronta para encher)
  * - concluida: cheia de vinho (sobe um dedo a cada coroa)
  * - ouro (3 coroas): transbordando dourado
+ * Com `enche`, o vinho SOBE com onda (coreografia de marco ao concluir).
  */
 export type EstadoTaca = 'bloqueada' | 'disponivel' | 'concluida' | 'ouro';
 
@@ -15,12 +16,16 @@ interface TacaProps {
   /** 0 a 3; afina o nivel do vinho quando concluida. */
   coroas?: number;
   size?: number;
+  /** Coreografia de marco: o vinho sobe do fundo com wobble de onda. */
+  enche?: boolean;
 }
 
 const BOJO = 'M17 7 C17 28 22 39 32 42.5 C42 39 47 28 47 7 Z';
 
-export function Taca({ estado, coroas = 0, size = 44 }: TacaProps) {
+export function Taca({ estado, coroas = 0, size = 44, enche = false }: TacaProps) {
   const clipId = `taca-${useId().replace(/[^a-zA-Z0-9-]/g, '')}`;
+  const vinhoRef = useRef<SVGGElement>(null);
+  const superficieRef = useRef<SVGEllipseElement>(null);
 
   const contorno = estado === 'bloqueada' ? 'var(--neutral-300)' : 'var(--wine-700)';
 
@@ -29,6 +34,41 @@ export function Taca({ estado, coroas = 0, size = 44 }: TacaProps) {
   const topoBojo = 7;
   const fundoBojo = 42.5;
   const yVinho = topoBojo + (1 - nivel) * (fundoBojo - topoBojo);
+
+  /* Coreografia "taca enche": o grupo do vinho sobe do fundo do bojo com
+     overshoot de mola e a superficie ondula. So transform, interrompivel. */
+  useEffect(() => {
+    if (!enche || nivel <= 0) return;
+    if (typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+    const grupo = vinhoRef.current;
+    if (!grupo) return;
+    const distancia = fundoBojo - yVinho + 3;
+    const sobe = grupo.animate(
+      [
+        { transform: `translateY(${distancia}px)`, easing: 'cubic-bezier(0.22, 0.9, 0.32, 1)' },
+        { transform: 'translateY(-2.6px)', offset: 0.62, easing: 'ease-in-out' },
+        { transform: 'translateY(1.6px)', offset: 0.82, easing: 'ease-in-out' },
+        { transform: 'translateY(0)' },
+      ],
+      { duration: 980, delay: 220, fill: 'backwards' },
+    );
+    const superficie = superficieRef.current;
+    const onda = superficie?.animate(
+      [
+        { transform: 'scale(0.55, 0.7)' },
+        { transform: 'scale(1.14, 1.5)', offset: 0.6 },
+        { transform: 'scale(0.94, 0.8)', offset: 0.82 },
+        { transform: 'scale(1, 1)' },
+      ],
+      { duration: 980, delay: 220, easing: 'ease-out', fill: 'backwards' },
+    );
+    return () => {
+      sobe.cancel();
+      onda?.cancel();
+    };
+  }, [enche, nivel, yVinho]);
 
   return (
     <svg
@@ -45,11 +85,21 @@ export function Taca({ estado, coroas = 0, size = 44 }: TacaProps) {
         </clipPath>
       </defs>
 
-      {/* Vinho dentro do bojo */}
+      {/* Vinho dentro do bojo (o grupo anima ao encher; o clip fica parado) */}
       {nivel > 0 && (
         <g clipPath={`url(#${clipId})`}>
-          <rect x="14" y={yVinho} width="36" height={fundoBojo - yVinho + 2} fill="var(--wine-700)" />
-          <ellipse cx="32" cy={yVinho} rx="15" ry="2.4" fill="rgba(250, 250, 248, 0.28)" />
+          <g ref={vinhoRef}>
+            <rect x="14" y={yVinho} width="36" height={fundoBojo - yVinho + 38} fill="var(--wine-700)" />
+            <ellipse
+              ref={superficieRef}
+              cx="32"
+              cy={yVinho}
+              rx="15"
+              ry="2.4"
+              fill="rgba(250, 250, 248, 0.28)"
+              style={{ transformBox: 'fill-box', transformOrigin: 'center' }}
+            />
+          </g>
         </g>
       )}
 

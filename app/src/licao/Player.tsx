@@ -1,7 +1,8 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { licoesPorId, unidadeDaLicao } from '../content';
 import {
+  PRECOS_LOJA,
   ehD0,
   finalizarSessao,
   indiceAtual,
@@ -14,7 +15,7 @@ import {
 } from '../engine';
 import type { Exercicio, Licao, ResultadoSessao, Sessao, TipoSessao } from '../engine';
 import type { Calibracao, FaseExercicio, ResolucaoExercicio } from './tipos';
-import { vibrar } from './tipos';
+import { gravarAnimTrilha, vibrar } from './tipos';
 import { ExMC } from './ExMC';
 import { ExSwipe } from './ExSwipe';
 import { ExSlider } from './ExSlider';
@@ -23,11 +24,39 @@ import { ExIntruso } from './ExIntruso';
 import { ExDuasVerdades } from './ExDuasVerdades';
 import { PainelCalibrar, PainelReveal } from './Feedback';
 import { Conclusao } from './Conclusao';
-import { Icon } from '../components/Icon';
-import closeIcon from '@material-symbols/svg-500/rounded/close.svg?raw';
-import heartIcon from '@material-symbols/svg-500/rounded/favorite-fill.svg?raw';
-import hourglassIcon from '@material-symbols/svg-500/rounded/hourglass-fill.svg?raw';
+import { FichaBolso } from './FichaBolso';
+import { MicroAula } from '../trilha/MicroAula';
+import { microAulasVistas } from '../trilha/microaulas';
+import { Ic } from '../icones/Icones';
+import { TchinObservador } from '../coreografia/Coreografias';
+import { tocar } from '../som/som';
 import './player.css';
+
+/* --------------------------- Dica comprada --------------------------- */
+
+type DicaAplicada =
+  | { tipo: 'eliminar'; indice: number }
+  | { tipo: 'regra' }
+  | { tipo: 'faixa'; min: number; max: number };
+
+/** O efeito da dica por formato (mc/duasverdades eliminam, intruso revela
+ *  a regra, slider estreita a faixa em 50%). Null = formato sem dica. */
+function dicaPara(ex: Exercicio): DicaAplicada | null {
+  switch (ex.tipo) {
+    case 'mc':
+      return { tipo: 'eliminar', indice: ex.opcoes.findIndex((_, i) => i !== ex.correta) };
+    case 'duasverdades':
+      return { tipo: 'eliminar', indice: ex.afirmacoes.findIndex((_, i) => i !== ex.mentira) };
+    case 'intruso':
+      return { tipo: 'regra' };
+    case 'slider': {
+      const min = Math.min(Math.max(0, Math.round(ex.alvo) - 25), 50);
+      return { tipo: 'faixa', min, max: min + 50 };
+    }
+    default:
+      return null;
+  }
+}
 
 /* ------------------------------ Rota -------------------------------- */
 
@@ -43,14 +72,14 @@ export default function PlayerLicao() {
       <div className="player player-vazio">
         <h1 className="vazio-titulo">Essa lição ainda não mora aqui</h1>
         <p className="vazio-texto">A trilha sabe o caminho. Vamos voltar para ela?</p>
-        <button type="button" className="btn btn-primary tap" onClick={() => navigate('/')}>
+        <button type="button" className="btn btn-primary btn-jogo tap" onClick={() => navigate('/')}>
           Voltar à trilha
         </button>
       </div>
     );
   }
   if (cena) {
-    return <PlayerDemo licao={licao} cena={cena} estadoErro={params.get('estado') === 'erro'} />;
+    return <PlayerDemo licao={licao} cena={cena} estado={params.get('estado')} />;
   }
   return <PlayerReal licao={licao} />;
 }
@@ -96,12 +125,19 @@ interface VistaProps {
   mostrarHook: boolean;
   fases: Fases;
   rotuloContinuar: string;
+  /** True quando esta resposta fecha a licao: acerto vira marco (mascote feliz). */
+  marco?: boolean;
   onResolver: (r: ResolucaoExercicio) => void;
   onCalibrar: (c: Calibracao) => void;
   onContinuar: () => void;
   onSair: () => void;
+  /** Debita a dica (10 cristais). Ausente = dica indisponivel (Desafio). */
+  onUsarDica?: () => boolean;
   presetErro?: boolean;
   entendaInicial?: boolean;
+  /** So para cenas de screenshot. */
+  dicaInicial?: boolean;
+  fichaInicial?: boolean;
 }
 
 function VistaJogo({
@@ -112,33 +148,77 @@ function VistaJogo({
   mostrarHook,
   fases,
   rotuloContinuar,
+  marco,
   onResolver,
   onCalibrar,
   onContinuar,
   onSair,
+  onUsarDica,
   presetErro,
   entendaInicial,
+  dicaInicial,
+  fichaInicial,
 }: VistaProps) {
   const [confirmandoSaida, setConfirmandoSaida] = useState(false);
   const { fase, resolucao, calibracao } = fases;
   const errou = fase === 'revelado' && resolucao !== null && !resolucao.correto;
   const { ex } = atual;
 
+  /* Ficha de bolso (pre-licao) e dica por cristais (max 1 por exercicio) */
+  const [fichaAberta, setFichaAberta] = useState(fichaInicial ?? false);
+  const [dica, setDica] = useState<DicaAplicada | null>(() => (dicaInicial ? dicaPara(ex) : null));
+  const [dicaAviso, setDicaAviso] = useState(false);
+
+  /* Cada exercicio novo zera a dica (max 1 por exercicio) */
+  const jogadaRef = useRef(atual.jogada);
+  useEffect(() => {
+    if (jogadaRef.current === atual.jogada) return;
+    jogadaRef.current = atual.jogada;
+    setDica(null);
+    setDicaAviso(false);
+  }, [atual.jogada]);
+
+  const podeDica =
+    onUsarDica !== undefined && fase === 'respondendo' && dica === null && dicaPara(ex) !== null;
+
+  const comprarDica = () => {
+    if (!podeDica || !onUsarDica) return;
+    if (onUsarDica()) {
+      tocar('moeda');
+      setDica(dicaPara(ex));
+    } else {
+      setDicaAviso(true);
+    }
+  };
+
   const corpo = (() => {
     const comum = { fase, onResolver } as const;
     switch (ex.tipo) {
       case 'mc':
-        return <ExMC ex={ex} {...comum} presetErro={presetErro} />;
+        return (
+          <ExMC
+            ex={ex}
+            {...comum}
+            presetErro={presetErro}
+            eliminada={dica?.tipo === 'eliminar' ? dica.indice : undefined}
+          />
+        );
       case 'swipe':
         return <ExSwipe ex={ex} {...comum} />;
       case 'slider':
-        return <ExSlider ex={ex} {...comum} />;
+        return <ExSlider ex={ex} {...comum} faixaDica={dica?.tipo === 'faixa' ? dica : undefined} />;
       case 'ordenar':
         return <ExOrdenar ex={ex} {...comum} />;
       case 'intruso':
-        return <ExIntruso ex={ex} {...comum} />;
+        return <ExIntruso ex={ex} {...comum} regraRevelada={dica?.tipo === 'regra'} />;
       case 'duasverdades':
-        return <ExDuasVerdades ex={ex} {...comum} />;
+        return (
+          <ExDuasVerdades
+            ex={ex}
+            {...comum}
+            eliminada={dica?.tipo === 'eliminar' ? dica.indice : undefined}
+          />
+        );
     }
   })();
 
@@ -151,7 +231,7 @@ function VistaJogo({
           aria-label="Sair da lição"
           onClick={() => setConfirmandoSaida(true)}
         >
-          <Icon svg={closeIcon} size={22} />
+          <Ic nome="x-fechar" size={22} />
         </button>
         <div
           className="player-barra"
@@ -167,7 +247,7 @@ function VistaJogo({
           />
         </div>
         <div className="player-vidas" aria-label={`${vidas} vidas`}>
-          <Icon svg={heartIcon} size={18} />
+          <Ic nome={vidas > 0 ? 'coracao-vida' : 'coracao-vazio'} size={18} />
           <span className="player-vidas-num" key={vidas}>
             {vidas}
           </span>
@@ -182,8 +262,41 @@ function VistaJogo({
             {ex.dificuldade === 3 && <span className="tag tag-desafio">Desafio</span>}
           </div>
         )}
+        {(mostrarHook || podeDica || dicaAviso) && (
+          <div className="player-extras app-chrome">
+            {mostrarHook && (
+              <button type="button" className="ficha-chamada tap" onClick={() => setFichaAberta(true)}>
+                <Ic nome="livro-flashcard" size={16} />
+                Dar uma olhada antes
+              </button>
+            )}
+            {podeDica && (
+              <button
+                type="button"
+                className="dica-botao tap"
+                aria-label={`Usar uma dica por ${PRECOS_LOJA.dica} cristais`}
+                onClick={comprarDica}
+              >
+                <Ic nome="lampada-dica" size={16} />
+                Dica
+                <span className="dica-preco">
+                  <Ic nome="cristal" size={13} />
+                  {PRECOS_LOJA.dica}
+                </span>
+              </button>
+            )}
+            {dicaAviso && (
+              <p className="dica-aviso" role="status">
+                Cristais curtos por agora. Lições e meta diária enchem o cofre.
+              </p>
+            )}
+          </div>
+        )}
         {corpo}
       </div>
+
+      {/* Vazio vertical: o Tchin observa em idle enquanto a pessoa pensa */}
+      <TchinObservador visivel={fase === 'respondendo'} />
 
       {fase === 'aguardando' && <PainelCalibrar onEscolher={onCalibrar} />}
       {fase === 'revelado' && resolucao && (
@@ -192,10 +305,13 @@ function VistaJogo({
           calibracao={calibracao}
           licao={licao}
           rotuloContinuar={rotuloContinuar}
+          marco={marco}
           onContinuar={onContinuar}
           entendaInicial={entendaInicial}
         />
       )}
+
+      {fichaAberta && <FichaBolso licao={licao} onFechar={() => setFichaAberta(false)} />}
 
       {confirmandoSaida && (
         <div className="veu" role="dialog" aria-modal="true" aria-label="Sair da lição?">
@@ -206,7 +322,11 @@ function VistaJogo({
               Tudo bem parar. O treino dessa lição não fica salvo, mas a trilha continua no mesmo lugar.
             </p>
             <div className="painel-botoes painel-botoes-coluna">
-              <button type="button" className="btn btn-primary btn-cheio tap" onClick={() => setConfirmandoSaida(false)}>
+              <button
+                type="button"
+                className="btn btn-primary btn-jogo btn-cheio tap"
+                onClick={() => setConfirmandoSaida(false)}
+              >
                 Voltar ao treino
               </button>
               <button type="button" className="btn btn-sair tap" onClick={onSair}>
@@ -224,10 +344,17 @@ function VistaJogo({
 
 type Etapa =
   | { t: 'carregando' }
+  | { t: 'microaula' }
   | { t: 'aviso-pacing' }
   | { t: 'sem-vidas' }
   | { t: 'jogando' }
-  | { t: 'conclusao'; resultado: ResultadoSessao; xpCheckpoint: number | null };
+  | {
+      t: 'conclusao';
+      resultado: ResultadoSessao;
+      xpCheckpoint: number | null;
+      /** True quando ESTA conclusao garantiu o dia do streak (chama acende). */
+      streakGanho: boolean;
+    };
 
 function PlayerReal({ licao }: { licao: Licao }) {
   const navigate = useNavigate();
@@ -255,7 +382,7 @@ function PlayerReal({ licao }: { licao: Licao }) {
   );
 
   /* Gates de entrada: vidas e soft cap (nunca bloqueia, so avisa) */
-  useEffect(() => {
+  const entrar = useCallback(() => {
     store.sincronizar();
     const w = store.getEstado().wallet;
     const t: TipoSessao = store.revisoesVencidas().includes(licao.id) ? 'revisao' : 'nova';
@@ -270,6 +397,23 @@ function PlayerReal({ licao }: { licao: Licao }) {
       return;
     }
     comecar(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [licao.id, comecar, store]);
+
+  /* Abertura de unidade (primeira visita): a micro-aula apresenta o
+     conceito antes da 1a licao; pulavel, e quem ja jogou nao reve */
+  useEffect(() => {
+    store.sincronizar();
+    const unidade = unidadeDaLicao(licao.id);
+    const inedita =
+      unidade !== undefined &&
+      !microAulasVistas().includes(unidade.meta.id) &&
+      unidade.licoes.every((l) => (store.getEstado().progresso[l.id]?.vezesConcluida ?? 0) === 0);
+    if (inedita) {
+      setEtapa({ t: 'microaula' });
+      return;
+    }
+    entrar();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [licao.id]);
 
@@ -294,6 +438,7 @@ function PlayerReal({ licao }: { licao: Licao }) {
     (r: ResolucaoExercicio) => {
       responder(r.correto);
       vibrar();
+      tocar(r.correto ? 'acerto' : 'erro');
       fases.setFase('revelado');
     },
     [responder, fases],
@@ -316,18 +461,28 @@ function PlayerReal({ licao }: { licao: Licao }) {
   const onContinuar = () => {
     const ativa = store.getSessao();
     if (!ativa || sessaoConcluida(ativa.sessao)) {
+      /* Marcos: streak ganho agora e coroa nova alimentam as coreografias */
+      const riscoAntes = store.streakEmRisco();
+      const coroasAntes = store.getEstado().progresso[licao.id]?.coroas ?? 0;
       const r = finalizar();
       if (!r) {
         navigate('/');
         return;
       }
+      const coroasDepois = store.getEstado().progresso[licao.id]?.coroas ?? 0;
+      gravarAnimTrilha({ licao: licao.id, coroa: coroasDepois > coroasAntes });
       /* Checkpoint: a conclusao que fecha a unidade paga 50 XP, uma vez */
       const unidade = unidadeDaLicao(licao.id);
       const fechouUnidade =
         unidade !== undefined &&
         unidade.licoes.every((l) => (store.getEstado().progresso[l.id]?.vezesConcluida ?? 0) > 0);
       const xpCheckpoint = fechouUnidade ? store.concluirCheckpoint(unidade.meta.id) : null;
-      setEtapa({ t: 'conclusao', resultado: r, xpCheckpoint });
+      setEtapa({
+        t: 'conclusao',
+        resultado: r,
+        xpCheckpoint,
+        streakGanho: riscoAntes && !store.streakEmRisco(),
+      });
       return;
     }
     fases.reset();
@@ -339,17 +494,23 @@ function PlayerReal({ licao }: { licao: Licao }) {
     navigate('/');
   };
 
+  if (etapa.t === 'microaula') {
+    const unidade = unidadeDaLicao(licao.id);
+    if (!unidade) return <div className="player" aria-busy="true" />;
+    return <MicroAula unidade={unidade} onFim={entrar} />;
+  }
+
   if (etapa.t === 'aviso-pacing') {
     return (
       <div className="player player-vazio">
         <span className="vazio-selo">
-          <Icon svg={hourglassIcon} size={28} />
+          <Ic nome="ampulheta" size={28} />
         </span>
         <h1 className="vazio-titulo">Pausa boa também é treino</h1>
         <p className="vazio-texto">
           Seu cérebro fixa melhor dormindo em cima disso. Amanhã tem mais. XP reduzido a partir daqui.
         </p>
-        <button type="button" className="btn btn-primary btn-cheio tap" onClick={() => comecar('nova')}>
+        <button type="button" className="btn btn-primary btn-jogo btn-cheio tap" onClick={() => comecar('nova')}>
           Seguir assim mesmo
         </button>
         <button type="button" className="btn btn-outline btn-cheio tap" onClick={() => navigate('/')}>
@@ -364,7 +525,7 @@ function PlayerReal({ licao }: { licao: Licao }) {
     return (
       <div className="player player-vazio">
         <span className="vazio-selo vazio-selo-vida">
-          <Icon svg={heartIcon} size={28} />
+          <Ic nome="coracao-vazio" size={28} />
         </span>
         <h1 className="vazio-titulo">Suas vidas acabaram por agora</h1>
         <p className="vazio-texto">
@@ -372,7 +533,11 @@ function PlayerReal({ licao }: { licao: Licao }) {
           recupera 1 vida na hora.
         </p>
         {jaConcluida && (
-          <button type="button" className="btn btn-primary btn-cheio tap" onClick={() => comecar('revisao')}>
+          <button
+            type="button"
+            className="btn btn-primary btn-jogo btn-cheio tap"
+            onClick={() => comecar('revisao')}
+          >
             Revisar esta lição
           </button>
         )}
@@ -390,6 +555,7 @@ function PlayerReal({ licao }: { licao: Licao }) {
         resultado={etapa.resultado}
         tipo={tipo}
         streak={streakEfetivo}
+        streakGanhoAgora={etapa.streakGanho}
         xpCheckpoint={etapa.xpCheckpoint}
         onTrilha={() => navigate('/')}
         onRevisar={() => comecar('revisao')}
@@ -410,10 +576,12 @@ function PlayerReal({ licao }: { licao: Licao }) {
       mostrarHook={atual.indice === 0 && sessao.respostas.length === 0}
       fases={fases}
       rotuloContinuar={concluida ? 'Ver resultado' : 'Continuar'}
+      marco={concluida}
       onResolver={onResolver}
       onCalibrar={onCalibrar}
       onContinuar={onContinuar}
       onSair={sair}
+      onUsarDica={() => store.usarDica()}
     />
   );
 }
@@ -439,7 +607,7 @@ const RESULTADO_DEMO: ResultadoSessao = {
   errosPendentes: [],
 };
 
-function PlayerDemo({ licao, cena, estadoErro }: { licao: Licao; cena: string; estadoErro: boolean }) {
+function PlayerDemo({ licao, cena, estado }: { licao: Licao; cena: string; estado: string | null }) {
   const navigate = useNavigate();
   if (cena === 'conclusao') {
     return (
@@ -448,16 +616,23 @@ function PlayerDemo({ licao, cena, estadoErro }: { licao: Licao; cena: string; e
         resultado={RESULTADO_DEMO}
         tipo="nova"
         streak={1}
+        streakGanhoAgora
         onTrilha={() => navigate('/')}
         onRevisar={() => navigate('/')}
       />
     );
   }
-  return <DemoJogo licao={licao} cena={cena} estadoErro={estadoErro} />;
+  if (cena === 'microaula') {
+    const unidade = unidadeDaLicao(licao.id);
+    if (!unidade) return <div className="player" aria-busy="true" />;
+    return <MicroAula unidade={unidade} onFim={() => navigate('/')} />;
+  }
+  return <DemoJogo licao={licao} cena={cena} estado={estado} />;
 }
 
-function DemoJogo({ licao, cena, estadoErro }: { licao: Licao; cena: string; estadoErro: boolean }) {
+function DemoJogo({ licao, cena, estado }: { licao: Licao; cena: string; estado: string | null }) {
   const navigate = useNavigate();
+  const estadoErro = estado === 'erro';
   const alvo = Math.max(
     0,
     licao.exercicios.findIndex((e) => e.tipo === cena),
@@ -493,6 +668,7 @@ function DemoJogo({ licao, cena, estadoErro }: { licao: Licao; cena: string; est
   const revelar = (r: ResolucaoExercicio) => {
     setSessao((s) => responderSessao(s, r.correto, licao).sessao);
     vibrar();
+    tocar(r.correto ? 'acerto' : 'erro');
     fases.setFase('revelado');
   };
 
@@ -508,6 +684,7 @@ function DemoJogo({ licao, cena, estadoErro }: { licao: Licao; cena: string; est
       mostrarHook={atual.indice === 0 && sessao.respostas.length === 0 && !estadoErro}
       fases={fases}
       rotuloContinuar={sessaoConcluida(sessao) ? 'Ver resultado' : 'Continuar'}
+      marco={sessaoConcluida(sessao)}
       onResolver={(r) => {
         fases.setResolucao(r);
         if (atual.ex.calibrar) fases.setFase('aguardando');
@@ -533,8 +710,11 @@ function DemoJogo({ licao, cena, estadoErro }: { licao: Licao; cena: string; est
         });
       }}
       onSair={() => navigate('/')}
+      onUsarDica={() => true}
       presetErro={estadoErro}
       entendaInicial={estadoErro}
+      dicaInicial={estado === 'dica'}
+      fichaInicial={estado === 'ficha'}
     />
   );
 }

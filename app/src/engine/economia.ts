@@ -12,6 +12,8 @@ export const XP_LICAO_PERFEITA = 25;
 export const XP_REVISAO = 10;
 export const XP_DESAFIO_DIA = 30;
 export const XP_CHECKPOINT = 50;
+/** Micro-aula da unidade assistida inteira (uma vez por unidade). */
+export const XP_MICRO_AULA = 5;
 
 /** Meta diaria sugerida (~10 min). */
 export const META_DIARIA_PADRAO = 50;
@@ -33,6 +35,8 @@ export const PRECOS_LOJA = {
   dobroXp: 30,
   desbloqueioUnidade: 200,
   desbloqueioModo: 300,
+  /** Dica no exercicio (elimina alternativa / revela regra / estreita faixa). */
+  dica: 10,
 } as const;
 
 export type ItemLoja = keyof typeof PRECOS_LOJA;

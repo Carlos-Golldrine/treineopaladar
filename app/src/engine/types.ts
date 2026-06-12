@@ -2,7 +2,7 @@
  * Types do engine.
  *
  * O contrato de conteudo agora vive em `../content/types.ts` (fonte da
- * verdade); aqui ele e re-exportado para o engine e seus consumidores.
+ * verdade); aqui ele e re-exportado para o engine e para quem o importa.
  * Os types de ESTADO (Wallet, ProgressoLicao, EstadoV1...) sao do engine.
  */
 
@@ -83,6 +83,8 @@ export interface EstadoV1 {
   scorePaladarTs: Record<Habilidade, number>;
   /** Unidades cujo checkpoint (XP 50) ja foi pago. */
   checkpoints: string[];
+  /** Unidades cuja micro-aula assistida inteira (XP 5) ja foi paga. */
+  microAulas: string[];
   /** Dia (YYYY-MM-DD em America/Sao_Paulo) do ultimo Desafio do Dia premiado. */
   ultimoDesafioXp: string | null;
   objetivo: Objetivo | null;

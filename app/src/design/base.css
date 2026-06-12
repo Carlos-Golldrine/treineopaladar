@@ -100,16 +100,11 @@ ul {
   transform: scale(0.98);
 }
 
-/* Icones inline: SVG do Material Symbols Rounded, so os usados */
-.icon {
+/* Icones inline: set proprietario (src/icones), traco currentColor,
+   duotone gold-500/wine-100. Nenhum icone de estoque. */
+.ic {
   display: inline-flex;
   flex: none;
-}
-
-.icon svg {
-  width: 100%;
-  height: 100%;
-  fill: currentColor;
 }
 
 @media (prefers-reduced-motion: reduce) {

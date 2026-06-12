@@ -11,13 +11,12 @@ import { ExIntruso } from '../licao/ExIntruso';
 import { PainelReveal } from '../licao/Feedback';
 import type { FaseExercicio, ResolucaoExercicio } from '../licao/tipos';
 import { vibrar } from '../licao/tipos';
-import { Icon } from '../components/Icon';
+import { Ic } from '../icones/Icones';
 import { DelayedSkeleton } from '../components/DelayedSkeleton';
-
-import closeIcon from '@material-symbols/svg-500/rounded/close.svg?raw';
-import wineIcon from '@material-symbols/svg-500/rounded/wine_bar-fill.svg?raw';
-import heartIcon from '@material-symbols/svg-500/rounded/favorite-fill.svg?raw';
-import checkIcon from '@material-symbols/svg-500/rounded/check.svg?raw';
+import { Odometro, TchinObservador } from '../coreografia/Coreografias';
+import { tocar } from '../som/som';
+import { RevisarCartas, baralhoDisponivel } from '../pratica/RevisarCartas';
+import { cartasVencidas, lerAgenda } from '../pratica/cartas';
 
 import '../licao/player.css';
 import './pratica.css';
@@ -26,6 +25,7 @@ type Etapa =
   | { t: 'carregando' }
   | { t: 'pronto'; foco: Habilidade }
   | { t: 'jogando' }
+  | { t: 'cartas' }
   | { t: 'resultado'; resultado: ResultadoPratica };
 
 export default function Pratica() {
@@ -54,6 +54,11 @@ export default function Pratica() {
   }, []);
 
   const rng = useMemo(() => (cena ? rngDeterministico(20260611) : Math.random), [cena]);
+
+  /* cena=cartas (screenshot): o modo de cartas nao depende do banco */
+  useEffect(() => {
+    if (cena === 'cartas' && etapa.t === 'carregando') setEtapa({ t: 'cartas' });
+  }, [cena, etapa]);
 
   /* Com o banco em maos, monta a rodada da vez */
   useEffect(() => {
@@ -93,6 +98,7 @@ export default function Pratica() {
       { correto: r.correto, dificuldade: rodada[posicao].dificuldade, habilidade: rodada[posicao].habilidade },
     ]);
     vibrar();
+    tocar(r.correto ? 'acerto' : 'erro');
     setFase('revelado');
   };
 
@@ -116,11 +122,17 @@ export default function Pratica() {
     );
   }
 
+  if (etapa.t === 'cartas') {
+    return <RevisarCartas aoVoltar={() => navigate('/')} cena={cena === 'cartas'} />;
+  }
+
   if (etapa.t === 'pronto') {
+    const baralho = baralhoDisponivel();
+    const vencidas = cartasVencidas(baralho, lerAgenda(), Date.now());
     return (
       <div className="player player-vazio">
         <span className="vazio-selo">
-          <Icon svg={wineIcon} size={28} />
+          <Ic nome="taca" size={28} />
         </span>
         <h1 className="vazio-titulo">Prática livre</h1>
         <p className="vazio-texto">
@@ -130,9 +142,20 @@ export default function Pratica() {
         <p className="vazio-texto pratica-nota">
           Aqui não se gasta vida. Concluir a rodada recupera 1.
         </p>
-        <button type="button" className="btn btn-primary btn-cheio tap" onClick={comecar}>
+        <button type="button" className="btn btn-primary btn-jogo btn-cheio tap" onClick={comecar}>
           Começar a rodada
         </button>
+        {baralho.length > 0 && (
+          <button
+            type="button"
+            className="btn btn-outline btn-cheio tap"
+            onClick={() => setEtapa({ t: 'cartas' })}
+          >
+            <Ic nome="livro-flashcard" size={18} />
+            Revisar com cartas
+            {vencidas > 0 && <span className="pratica-vencidas">{vencidas} para hoje</span>}
+          </button>
+        )}
         <button type="button" className="btn btn-outline btn-cheio tap" onClick={() => navigate('/')}>
           Voltar à trilha
         </button>
@@ -145,7 +168,7 @@ export default function Pratica() {
     return (
       <div className="player player-vazio">
         <span className="vazio-selo vazio-selo-ok">
-          <Icon svg={checkIcon} size={28} />
+          <Ic nome="check" size={28} />
         </span>
         <h1 className="vazio-titulo">
           {resultado.erros === 0 ? 'Rodada impecável.' : 'Rodada concluída.'}
@@ -155,10 +178,12 @@ export default function Pratica() {
           {resultado.erros > 0 ? ' Os tropeços de hoje voltam mais fáceis amanhã.' : ' Paladar afiado.'}
         </p>
         <div className="pratica-placar">
-          <span className="pratica-ganho pratica-ganho-xp">+{resultado.xp} XP</span>
+          <span className="pratica-ganho pratica-ganho-xp">
+            +<Odometro valor={resultado.xp} /> XP
+          </span>
           {resultado.vidaRecuperada && (
             <span className="pratica-ganho pratica-ganho-vida">
-              <Icon svg={heartIcon} size={16} />
+              <Ic nome="coracao-vida" size={16} />
               +1 vida
             </span>
           )}
@@ -166,7 +191,7 @@ export default function Pratica() {
         {resultado.xp < XP_REVISAO && (
           <p className="vazio-texto pratica-nota">XP de prática reduzido pelo ritmo de hoje. Amanhã volta cheio.</p>
         )}
-        <button type="button" className="btn btn-primary btn-cheio tap" onClick={maisUma}>
+        <button type="button" className="btn btn-primary btn-jogo btn-cheio tap" onClick={maisUma}>
           Mais uma rodada
         </button>
         <button type="button" className="btn btn-outline btn-cheio tap" onClick={() => navigate('/')}>
@@ -194,7 +219,7 @@ export default function Pratica() {
           aria-label="Sair da prática"
           onClick={() => navigate('/')}
         >
-          <Icon svg={closeIcon} size={22} />
+          <Ic nome="x-fechar" size={22} />
         </button>
         <div
           className="player-barra"
@@ -224,11 +249,14 @@ export default function Pratica() {
         )}
       </div>
 
+      <TchinObservador visivel={fase === 'respondendo'} />
+
       {fase === 'revelado' && resolucao && (
         <PainelReveal
           resolucao={resolucao}
           calibracao={null}
           rotuloContinuar={posicao + 1 >= rodada.length ? 'Ver resultado' : 'Continuar'}
+          marco={posicao + 1 >= rodada.length}
           onContinuar={onContinuar}
         />
       )}
