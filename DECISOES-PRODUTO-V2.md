@@ -44,7 +44,7 @@ Decisão em 3 camadas (nunca bloquear conteúdo):
 2. **Soft cap de XP**: 100% nas lições 1-3 do dia, 50% nas 4-5, 25% da 6 em diante + mensagem de pacing no tom da marca ("seu cérebro fixa melhor dormindo em cima disso, amanhã tem mais"). D0 é isento (ativação primeiro; pacing começa no dia 2).
 3. **Máx. 2 unidades NOVAS por dia; revisão sempre livre com XP integral** (modelo Anki: o limite é de conteúdo novo, não de prática).
 
-Vidas recalibradas para público 73% iniciante: 5 vidas, regen 1/4h, primeiro erro de cada lição não custa vida, **concluir uma sessão de revisão recupera 1 vida**, zero vidas → revisão livre (caminho triste vira estudo). Instrumentar coortes por lições/dia na semana 1 (1 / 2-3 / 4-5 / 6+) e medir D7/D30: previsão de U invertido com pico em 2-3/dia; ajustar o soft cap pelos dados.
+Vidas recalibradas para público de maioria iniciante (52-65% observável; correção C1 da DD de jun/2026: o "73%" é mercado total Consevitis, não nosso público): 5 vidas, regen 1/4h, primeiro erro de cada lição não custa vida, **concluir uma sessão de revisão recupera 1 vida**, zero vidas → revisão livre (caminho triste vira estudo). Instrumentar coortes por lições/dia na semana 1 (1 / 2-3 / 4-5 / 6+) e medir D7/D30: previsão de U invertido com pico em 2-3/dia; ajustar o soft cap pelos dados.
 
 ## 4. Aprender vs sentir que aprendeu: dois sistemas de design (ambos obrigatórios)
 

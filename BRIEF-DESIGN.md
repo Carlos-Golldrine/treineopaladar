@@ -8,7 +8,8 @@
 ## 1. PROIBIÇÕES ABSOLUTAS (verbatim, sem exceção)
 
 **Na UI:**
-- Emoji em qualquer texto de interface (ícones são SVG proprietários ou Material Symbols Rounded)
+- Emoji em qualquer texto de interface
+- **Ícone de estoque (Material Symbols, Font Awesome, qualquer biblioteca)**: todo ícone é SVG proprietário do set do app, traço grosso arredondado, duotone vinho/dourado (revisão de 12/jun: Material Symbols denunciava template e foi banido da UI final)
 - Gradiente roxo/índigo; qualquer roxo como acento
 - Glassmorphism sem função; sombras grandes difusas em tudo
 - Hero centralizado + 3 cards com iconezinho; layout tudo-centralizado
@@ -99,3 +100,18 @@ O mascote Tchin (duas taças brindando) + o nó da trilha como taça que se pree
 3. Screenshot loop: Playwright (já existe `render.mjs` no padrão dos protótipos) em 412×892 e 360×800
 4. Estados obrigatórios por tela: padrão, vazio, carregando, erro, offline. Caminho triste tem o mesmo capricho do feliz ("Garrafa não encontrada" acolhedor, nunca 404)
 5. Toda decisão visual nova entra neste brief; o brief é a fonte da verdade, não a memória da conversa
+
+---
+
+## 7. DELIGHT CHECKLIST (gate obrigatório por tela, desde 12/jun)
+
+A lição da F2: conformidade não é alma. Screenshot estática não enxerga vida. Regras:
+
+1. **Mascote vivo**: o Tchin é um boneco rigado em camadas SVG com máquina de estados (idle respira e pisca, feliz pula com o vinho balançando, lamenta com gentileza, ensina apontando, celebra brindando). Presente na J1, no feedback de erro/acerto e em toda celebração. Nunca estático em cena de emoção.
+2. **Toda interação responde em menos de 100ms com motion físico** (spring/ease-out), não fade genérico.
+3. **Botões de ação no padrão 3D de jogo**: borda inferior grossa que afunda no toque (translateY + sombra), o sinal mais barato de "jogo, não site".
+4. **Todo marco tem coreografia própria**: chama do streak acende com partículas; taça da trilha enche com onda; XP roda em odômetro; baú abre; coroa cai com bounce. Celebração concentrada nos marcos, dia a dia discreto (regra antiga mantida).
+5. **Nenhuma tela sem pelo menos uma peça de arte proprietária** (mascote, emblema de unidade, ilustração de cena ou ícone do set).
+6. **Som de jogo** (acerto, erro, conclusão, marco): sintetizado em runtime via Web Audio (zero assets), com toggle de mudo no Perfil, desbloqueado na primeira interação.
+7. **Review de motion por rajada de frames**: toda verificação visual captura 4-6 frames durante as animações (não só o estado final); se os frames são idênticos, a tela está morta e reprova.
+8. **Marca-mãe sempre presente**: lockup "by Tchin Tchin" + selo Beta no splash e no Perfil; linha de ecossistema na soft wall. Logo oficial em `app/src/components/LogoTchin.tsx` (slot único; asset provisório até a logo real do Gabriel entrar).

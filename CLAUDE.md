@@ -1,6 +1,6 @@
 # CLAUDE.md — Treine seu Paladar (standalone)
 
-Web app PWA standalone do "Duolingo do vinho" do ecossistema Tchin Tchin (pt-BR, público 35-54, 73% iniciantes, 82% Android). Teste de mercado de 3 meses com gates: 2.000 usuários +10% D30 → entra no app Tchin Tchin · 3.500 +15% → vira core · 5.000 +30% → app apartado.
+Web app PWA standalone do "Duolingo do vinho" do ecossistema Tchin Tchin (pt-BR, público-alvo 35-54, maioria iniciante: 52-65% do público observável é iniciante segundo a DD de jun/2026; o "73%" é do mercado total (Consevitis n=1.709) e NÃO descreve nosso público; 82% Android). Teste de mercado de 3 meses com gates: 2.000 usuários +10% D30 → entra no app Tchin Tchin · 3.500 +15% → vira core · 5.000 +30% → app apartado.
 
 ## Fontes da verdade (ler nesta ordem antes de mexer em produto ou UI)
 1. `DECISOES-PRODUTO-V2.md` — TODAS as decisões de produto vigentes (trilha, pacing, formatos, economia, onboarding FTUE, "A Mesa", fábrica de questões)
