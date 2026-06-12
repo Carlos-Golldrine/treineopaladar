@@ -26,15 +26,18 @@ export const IDX_J7 = 4;
 
 /* ----------------------- Jogadas de exercicio ----------------------- */
 
+/* Comparativo de proposito: o tinto TAMBEM aceita geladeira (a J4 ensina
+   exatamente isso), entao a pergunta precisa do "MAIS gelado" para ser
+   factualmente exata. Branco serve a 8-12 graus; tinto fresco, 12-16. */
 const j1: ExercicioMC = {
   tipo: 'mc',
   dificuldade: 1,
-  pergunta: 'Qual destes você serviria gelado?',
+  pergunta: 'Qual destes você serviria mais gelado?',
   opcoes: ['Vinho branco', 'Vinho tinto'],
   correta: 0,
-  okMsg: 'Isso. O branco pede geladeira.',
-  erroMsg: 'Tudo bem. Aqui, o branco é o que vai gelado para a taça.',
-  porque: 'Branco e espumante vão bem gelados à mesa. O tinto prefere um fresco mais leve.',
+  okMsg: 'Isso. Os dois gostam de frescor, o branco só gosta de mais.',
+  erroMsg: 'Tudo bem. Os dois gostam de frescor, o branco só gosta de mais.',
+  porque: 'Branco e espumante vão bem gelados de verdade. O tinto também agradece um fresco, só que mais leve. Guarde essa: ela volta já, já.',
 };
 
 const j2: ExercicioMC = {

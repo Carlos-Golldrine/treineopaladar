@@ -1,4 +1,4 @@
-// Teste manual do fluxo REAL do FTUE (engine de verdade, store limpo).
+﻿// Teste manual do fluxo REAL do FTUE (engine de verdade, store limpo).
 // Uso: npm run build && node _teste-ftue.mjs
 import { createRequire } from 'module';
 import { preview } from 'vite';
@@ -44,7 +44,7 @@ await passo('1a visita redireciona ao splash', async () => {
 
 await passo('Comecar abre a J1', async () => {
   await page.getByRole('button', { name: 'Começar' }).click();
-  await page.getByText('Qual destes você serviria gelado?').waitFor({ timeout: 5000 });
+  await page.getByText('Qual destes você serviria mais gelado?').waitFor({ timeout: 5000 });
 });
 
 await passo('J1 certa celebra com o mascote', async () => {

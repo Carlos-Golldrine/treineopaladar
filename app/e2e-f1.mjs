@@ -1,4 +1,4 @@
-// E2E F1: fluxo real do FTUE + Licao da trilha contra vite preview.
+﻿// E2E F1: fluxo real do FTUE + Licao da trilha contra vite preview.
 // Uso: npm run build && node e2e-f1.mjs
 // Screenshots em _shots/e2e/. Sai com codigo 1 se algum passo falhar.
 import { createRequire } from 'module';
@@ -182,7 +182,7 @@ try {
   await step('(b) tocar Começar abre a J1 em ate 3s', async () => {
     const t0 = Date.now();
     await page.getByRole('button', { name: 'Começar' }).click();
-    await esperarPergunta('Qual destes você serviria gelado?', 3000);
+    await esperarPergunta('Qual destes você serviria mais gelado?', 3000);
     msAteJ1 = Date.now() - t0;
     console.log(`  Comecar -> J1 em ${msAteJ1}ms`);
     assert(msAteJ1 <= 3000, `J1 demorou ${msAteJ1}ms`);
