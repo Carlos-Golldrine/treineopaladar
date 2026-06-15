@@ -1,0 +1,5 @@
+name = "treineopaladar"
+compatibility_date = "2026-06-15"
+# Cloudflare Pages: serve a pasta buildada (app/dist). Com Root directory = app,
+# isso fixa a saida pelo repo e dispensa o campo "Build output directory" do dashboard.
+pages_build_output_dir = "./dist"
