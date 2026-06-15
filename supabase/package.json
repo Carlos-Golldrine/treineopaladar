@@ -1,0 +1,17 @@
+{
+  "name": "treine-paladar-supabase",
+  "private": true,
+  "type": "module",
+  "version": "0.0.0",
+  "description": "Ferramental de migracao e seed do Supabase (aplica migrations/*.sql e importa o catalogo de vinhos).",
+  "scripts": {
+    "migrate": "node --env-file=.env migrate.mjs",
+    "seed": "node --env-file=.env seed.mjs",
+    "upload-rotulos": "node --env-file=.env upload_rotulos.mjs"
+  },
+  "dependencies": {
+    "csv-parse": "^5.6.0",
+    "pg": "^8.13.1",
+    "pg-copy-streams": "^6.0.6"
+  }
+}

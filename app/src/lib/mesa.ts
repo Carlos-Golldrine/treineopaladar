@@ -1,0 +1,129 @@
+/**
+ * Camada de dados da Mesa (F3, social). Le da nuvem (mesas/mesa_posts/mesa_tchins),
+ * entra na mesa da semana via RPC garantir_mesa_semana, reage com Tchin! e assina
+ * realtime. Best-effort: sem nuvem, a tela cai no estado vazio.
+ */
+import { getSupabase } from './supabase';
+
+export type TipoPost = 'conquista' | 'degustacao_palpite' | 'desafio_resultado' | 'provei';
+
+export interface PostMesa {
+  id: string;
+  userId: string | null;
+  tipo: TipoPost;
+  payload: Record<string, unknown>;
+  criadoEm: string;
+  tchins: number;
+  meuTchin: boolean;
+  meu: boolean;
+}
+
+export interface RankItem {
+  userId: string;
+  pontos: number;
+  posicao: number;
+  eu: boolean;
+}
+
+export interface FeedMesa {
+  mesaId: string;
+  semana: string;
+  membros: number;
+  divisao: string;
+  ranking: RankItem[];
+  posts: PostMesa[];
+}
+
+/** Entra (ou cria) na mesa da semana corrente. Retorna o id, ou null sem nuvem. */
+export async function garantirMesa(): Promise<string | null> {
+  const sb = getSupabase();
+  if (!sb) return null;
+  const { data, error } = await sb.rpc('garantir_mesa_semana');
+  if (error) return null;
+  return (data as string) ?? null;
+}
+
+/** Carrega o feed da mesa: semana, contagem de membros e posts com Tchins. */
+export async function carregarFeed(mesaId: string): Promise<FeedMesa | null> {
+  const sb = getSupabase();
+  if (!sb) return null;
+  const uid = (await sb.auth.getUser()).data.user?.id ?? null;
+
+  const [mesaRes, membrosRes, postsRes, tchinsRes, divRes, rankRes] = await Promise.all([
+    sb.from('mesas').select('semana_iso').eq('id', mesaId).maybeSingle(),
+    sb.from('mesa_membros').select('user_id', { count: 'exact', head: true }).eq('mesa_id', mesaId),
+    sb.from('mesa_posts').select('*').eq('mesa_id', mesaId).order('created_at', { ascending: false }),
+    sb.from('mesa_tchins').select('post_id, user_id'),
+    uid
+      ? sb.from('profiles').select('divisao').eq('id', uid).maybeSingle()
+      : Promise.resolve({ data: null as { divisao?: string } | null }),
+    sb.rpc('ranking_da_mesa', { p_mesa: mesaId }),
+  ]);
+
+  const ranking: RankItem[] = (
+    (rankRes.data ?? []) as Array<{ user_id: string; pontos: number; posicao: number }>
+  ).map((r) => ({ userId: r.user_id, pontos: r.pontos, posicao: r.posicao, eu: r.user_id === uid }));
+
+  const tchins = (tchinsRes.data ?? []) as Array<{ post_id: string; user_id: string }>;
+  const posts: PostMesa[] = ((postsRes.data ?? []) as Array<Record<string, unknown>>).map((p) => {
+    const id = p.id as string;
+    const doPost = tchins.filter((t) => t.post_id === id);
+    return {
+      id,
+      userId: (p.user_id as string | null) ?? null,
+      tipo: p.tipo as TipoPost,
+      payload: (p.payload as Record<string, unknown>) ?? {},
+      criadoEm: p.created_at as string,
+      tchins: doPost.length,
+      meuTchin: doPost.some((t) => t.user_id === uid),
+      meu: (p.user_id as string | null) === uid,
+    };
+  });
+
+  return {
+    mesaId,
+    semana: (mesaRes.data?.semana_iso as string) ?? '',
+    membros: membrosRes.count ?? 0,
+    divisao: (divRes.data?.divisao as string) ?? 'bronze',
+    ranking,
+    posts,
+  };
+}
+
+/** Liga/desliga o Tchin! do usuario num post. */
+export async function alternarTchin(postId: string, ligar: boolean): Promise<void> {
+  const sb = getSupabase();
+  if (!sb) return;
+  const uid = (await sb.auth.getUser()).data.user?.id;
+  if (!uid) return;
+  if (ligar) {
+    await sb
+      .from('mesa_tchins')
+      .upsert({ post_id: postId, user_id: uid }, { onConflict: 'post_id,user_id', ignoreDuplicates: true });
+  } else {
+    await sb.from('mesa_tchins').delete().eq('post_id', postId).eq('user_id', uid);
+  }
+}
+
+/** Publica um "Provei" (chips sensoriais estruturados, sem texto livre obrigatorio). */
+export async function postarProvei(mesaId: string, chips: string[]): Promise<void> {
+  const sb = getSupabase();
+  if (!sb) return;
+  const uid = (await sb.auth.getUser()).data.user?.id;
+  if (!uid) return;
+  await sb.from('mesa_posts').insert({ mesa_id: mesaId, user_id: uid, tipo: 'provei', payload: { chips } });
+}
+
+/** Assina mudancas da mesa (posts e tchins) em realtime. Retorna o cancelador. */
+export function assinarMesa(mesaId: string, aoMudar: () => void): () => void {
+  const sb = getSupabase();
+  if (!sb) return () => {};
+  const canal = sb
+    .channel(`mesa-${mesaId}`)
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'mesa_posts', filter: `mesa_id=eq.${mesaId}` }, aoMudar)
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'mesa_tchins' }, aoMudar)
+    .subscribe();
+  return () => {
+    void sb.removeChannel(canal);
+  };
+}

@@ -292,6 +292,15 @@ export class TPStore {
     if (mudou) this.commit({ ...this.estado, wallet: w });
   }
 
+  /**
+   * Substitui o estado local pelo vindo da nuvem (hidratacao da F3).
+   * Persiste e notifica os ouvintes (a UI re-renderiza). Usado no boot quando o
+   * estado local esta intocado e a nuvem ja tem progresso.
+   */
+  hidratar(estado: EstadoV1): void {
+    this.commit(estado);
+  }
+
   /* ------------------------- Sessao --------------------------- */
 
   /**

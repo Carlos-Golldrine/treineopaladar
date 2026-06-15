@@ -8,6 +8,8 @@ Passo a passo para quando o projeto Supabase existir. Pré-requisitos: [Supabase
 |---|---|
 | `supabase/migrations/0001_vinhos.sql` | enum `tipo_vinho`, tabela `vinhos`, `vinhos_quarentena`, indexes |
 | `supabase/migrations/0002_app.sql` | tabelas do app (profiles, trilha, economia, Mesa, factory) |
+| `supabase/migrations/0003_rls.sql` | Row Level Security e policies de todas as tabelas |
+| `supabase/migrations/0004_app_init.sql` | trigger `handle_new_user` (bootstrap do estado-base, inclusive anônimo) |
 | `data/vinhos_clean.csv` | dados (UTF-8 com BOM, header na 1a linha) |
 
 ## 1. Criar o projeto e vincular
@@ -36,7 +38,9 @@ A connection string fica em Dashboard > Settings > Database (use o pooler em mod
 ```bash
 psql "postgresql://postgres.<ref>:<senha>@aws-0-sa-east-1.pooler.supabase.com:5432/postgres" \
   -f supabase/migrations/0001_vinhos.sql \
-  -f supabase/migrations/0002_app.sql
+  -f supabase/migrations/0002_app.sql \
+  -f supabase/migrations/0003_rls.sql \
+  -f supabase/migrations/0004_app_init.sql
 ```
 
 ## 3. Importar o CSV
@@ -71,7 +75,7 @@ select count(*) total,
        count(*) filter (where preco_valido) as preco_valido,
        count(distinct tipo) as tipos
 from vinhos;
--- esperado: total = 12958, view_estrita = 11064 (confira com data/QA-pipeline.md da execução vigente)
+-- esperado: total = 12597, view_estrita = 10717 (conforme data/QA-pipeline.md)
 
 select tipo, count(*) from vinhos group by tipo order by 2 desc;
 ```
@@ -87,6 +91,6 @@ truncate table vinhos cascade;  -- cascade por causa de exercicios.vinho_id
 
 ## 6. Depois do import
 
-1. Ativar as policies de RLS comentadas no fim de cada migração.
+1. RLS e o trigger de bootstrap já vêm das migrações `0003`/`0004` (não há mais policy comentada para ativar).
 2. Subir as imagens baixadas (`data/imagens/`) para o Storage (`bucket rotulos`) e popular `thumbnail_url`.
 3. Apontar a fábrica de questões para `select * from vinhos where view_estrita`.

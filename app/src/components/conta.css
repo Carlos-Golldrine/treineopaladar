@@ -1,0 +1,111 @@
+/* Folha de conta (ContaSheet). Tokens do design system, sem cor sem papel. */
+
+.conta-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.conta-campo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  text-align: left;
+}
+
+.conta-label {
+  font: 500 var(--text-xs) / 1.2 var(--font-ui);
+  color: var(--neutral-600);
+}
+
+.conta-input {
+  font: 400 var(--text-md) / 1.3 var(--font-ui); /* 17px: >= 16 evita zoom no iOS */
+  color: var(--wine-900);
+  background: var(--bg);
+  border: 1.5px solid var(--neutral-300);
+  border-radius: var(--radius-control);
+  padding: var(--space-3);
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.conta-input::placeholder {
+  color: var(--neutral-400);
+}
+
+.conta-input:focus {
+  outline: none;
+  border-color: var(--wine-700);
+  box-shadow: 0 0 0 3px rgba(114, 47, 55, 0.12);
+}
+
+.conta-erro {
+  margin: 0;
+  font: 500 var(--text-sm) / 1.35 var(--font-ui);
+  color: var(--warm-700);
+  background: var(--warm-100);
+  border-radius: var(--radius-control);
+  padding: var(--space-2) var(--space-3);
+}
+
+.conta-google {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+.conta-google:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.conta-embreve {
+  font: 600 11px / 1 var(--font-ui);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--neutral-500);
+  border: 1px solid var(--neutral-300);
+  border-radius: var(--radius-pill);
+  padding: 3px 8px;
+}
+
+.conta-ou {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: var(--space-4) 0 var(--space-2);
+  color: var(--neutral-400);
+}
+
+.conta-ou::before,
+.conta-ou::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--neutral-200);
+}
+
+.conta-ou span {
+  font: 500 var(--text-xs) / 1 var(--font-ui);
+}
+
+.conta-troca {
+  display: block;
+  width: 100%;
+  margin-top: var(--space-3);
+  padding: var(--space-2);
+  background: none;
+  border: none;
+  font: 500 var(--text-sm) / 1.3 var(--font-ui);
+  color: var(--wine-700);
+  text-align: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.conta-troca:active {
+  opacity: 0.7;
+}

@@ -5,6 +5,7 @@ import { Ic } from '../icones/Icones';
 import { Tchin } from '../mascote';
 import { ChamaStreak, ConfeteFisica, Odometro } from '../coreografia/Coreografias';
 import { tocar } from '../som/som';
+import { track } from '../lib/analytics';
 
 /* ------------------------- Tela de conclusao ------------------------- */
 
@@ -37,6 +38,15 @@ export function Conclusao({
 
   /* Som de jogo: acorde de conclusao; marcos ganham o arpejo com brilho */
   useEffect(() => {
+    track('licao_concluida', {
+      licao_id: licao.id,
+      habilidade: licao.habilidade,
+      tipo,
+      perfeita,
+      xp: resultado.xp,
+      acertos: resultado.acertos,
+      erros: resultado.erros,
+    });
     tocar('conclusao');
     if (!temMarco) return;
     const t = window.setTimeout(() => tocar('marco'), 520);

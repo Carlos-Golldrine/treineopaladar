@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Tchin } from '../mascote';
 import { ChamaStreak, Odometro } from '../coreografia/Coreografias';
 import { tocar } from '../som/som';
+import { track } from '../lib/analytics';
 
 /**
  * Conclusao especial da Licao 1 (fase 2 do blueprint): o aha.
@@ -22,8 +23,10 @@ export function Conclusao1({ xp, streak, onMeta }: Props) {
 
   /* Primeiro marco da jornada: arpejo com brilho */
   useEffect(() => {
+    track('ftue_concluido', { xp, streak });
     const t = window.setTimeout(() => tocar('marco'), 350);
     return () => window.clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const escolher = (meta: number) => {

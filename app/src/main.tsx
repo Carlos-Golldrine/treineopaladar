@@ -23,6 +23,10 @@ import Splash from './onboarding/Splash';
 import LicaoUm from './onboarding/Licao1';
 import { PortaoOnboarding } from './onboarding/Portao';
 
+import { nuvemConfigurada } from './lib/supabase';
+import { iniciarNuvem } from './lib/cloud';
+import { iniciarTelemetria } from './lib/analytics';
+
 /* Code-splitting por rota: cada aba carrega sob demanda */
 const Trilha = lazy(() => import('./routes/Trilha'));
 const Desafio = lazy(() => import('./routes/Desafio'));
@@ -85,6 +89,16 @@ const router = createBrowserRouter([
 ]);
 
 registerSW({ immediate: true });
+
+/* F3: telemetria (PostHog). No-op quando nao ha chave configurada. */
+iniciarTelemetria();
+
+/* F3: sincronizacao com a nuvem (Supabase). Best-effort e fora do caminho de
+   render (o app funciona na copia local mesmo sem rede). Pulada quando nao ha
+   credenciais configuradas. Se um dia houver E2E headless, gate por env aqui. */
+if (nuvemConfigurada()) {
+  void iniciarNuvem();
+}
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

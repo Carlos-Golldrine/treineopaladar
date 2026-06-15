@@ -1,4 +1,4 @@
-/* ---------- Estado vazio acolhedor da Mesa ---------- */
+/* ---------- Estado vazio / indisponivel da Mesa ---------- */
 .mesa-empty {
   flex: 1;
   display: flex;
@@ -34,12 +34,322 @@
   color: var(--neutral-600);
 }
 
-.mesa-empty .btn {
-  margin-top: var(--space-5);
-}
-
 .mesa-note {
   margin-top: var(--space-3);
   font-size: var(--text-xs);
   color: var(--neutral-500);
+}
+
+/* ---------- Carregando ---------- */
+.mesa-carregando {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+}
+
+.mesa-skel {
+  height: 96px;
+  border-radius: var(--radius-card);
+  background: linear-gradient(100deg, var(--neutral-100) 30%, var(--neutral-50) 50%, var(--neutral-100) 70%);
+  background-size: 200% 100%;
+  animation: mesa-shimmer 1.2s ease-in-out infinite;
+}
+
+@keyframes mesa-shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+/* ---------- Feed ---------- */
+.mesa-feed {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-4) calc(72px + var(--space-6));
+}
+
+.mesa-vazio {
+  text-align: center;
+  color: var(--neutral-500);
+  font-size: var(--text-sm);
+  padding: var(--space-6) var(--space-4);
+}
+
+.mesa-card {
+  background: var(--bg);
+  border: 1px solid var(--neutral-200);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-4);
+}
+
+.mesa-card-degustacao_palpite {
+  border-color: var(--gold-700);
+  background: rgba(212, 165, 116, 0.06);
+}
+
+.mesa-card-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: var(--space-2);
+}
+
+.mesa-autor {
+  font: 600 var(--text-sm) / 1 var(--font-ui);
+  color: var(--wine-900);
+}
+
+.mesa-tempo {
+  font-size: var(--text-xs);
+  color: var(--neutral-500);
+}
+
+/* Degustacao da Semana */
+.mesa-degustacao {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.mesa-degustacao-foto {
+  width: 64px;
+  height: 96px;
+  object-fit: contain;
+  border-radius: var(--radius-control);
+  background: #fff;
+  flex-shrink: 0;
+}
+
+.mesa-eyebrow {
+  font: 600 var(--text-xs) / 1 var(--font-ui);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--gold-700);
+}
+
+.mesa-vinho-nome {
+  margin-top: var(--space-1);
+  font: 600 var(--text-md) / 1.2 var(--font-display);
+  color: var(--wine-900);
+}
+
+.mesa-vinho-prod {
+  font-size: var(--text-xs);
+  color: var(--neutral-600);
+}
+
+.mesa-perfil {
+  margin-top: var(--space-2);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mesa-perfil-linha {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  font-size: var(--text-xs);
+}
+
+.mesa-perfil-nome {
+  color: var(--neutral-600);
+}
+
+.mesa-perfil-pontos {
+  font-family: var(--font-mono);
+  letter-spacing: 1px;
+  color: var(--gold-700);
+}
+
+/* Conquista e Desafio */
+.mesa-conquista {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--wine-900);
+}
+
+.mesa-grade {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.mesa-grade-mono {
+  font-family: var(--font-mono);
+  font-size: var(--text-lg);
+  letter-spacing: 3px;
+  color: var(--wine-700);
+}
+
+.mesa-grade-num {
+  font-size: var(--text-sm);
+  color: var(--neutral-600);
+}
+
+/* Provei + chips */
+.mesa-provei-titulo {
+  font-size: var(--text-sm);
+  color: var(--wine-900);
+  margin-bottom: var(--space-2);
+}
+
+.mesa-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.mesa-chip {
+  font: 500 var(--text-xs) / 1 var(--font-ui);
+  color: var(--wine-700);
+  background: rgba(114, 47, 55, 0.08);
+  border-radius: var(--radius-pill);
+  padding: 6px 12px;
+}
+
+.mesa-chips-escolha {
+  margin: var(--space-3) 0 var(--space-4);
+}
+
+.mesa-chip-btn {
+  border: 1px solid var(--neutral-300);
+  background: var(--bg);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mesa-chip-on {
+  background: var(--wine-700);
+  color: var(--bg);
+  border-color: var(--wine-700);
+}
+
+/* Tchin! */
+.mesa-tchin {
+  margin-top: var(--space-3);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: 600 var(--text-sm) / 1 var(--font-ui);
+  color: var(--wine-700);
+  background: none;
+  border: 1.5px solid var(--neutral-300);
+  border-radius: var(--radius-pill);
+  padding: 8px 14px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.1s ease-out;
+}
+
+.mesa-tchin:active {
+  transform: scale(0.96);
+}
+
+.mesa-tchin-on {
+  color: var(--gold-700);
+  border-color: var(--gold-500);
+  background: rgba(212, 165, 116, 0.14);
+}
+
+/* Botao flutuante "Provei" */
+.mesa-provei {
+  position: fixed;
+  right: var(--space-4);
+  bottom: calc(64px + env(safe-area-inset-bottom, 0px) + var(--space-3));
+  z-index: 20;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  box-shadow: var(--shadow-md);
+}
+
+/* ---------- Liga (ranking semanal) ---------- */
+.liga-card {
+  background: var(--wine-900);
+  color: var(--bg);
+  border-radius: var(--radius-card);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-md);
+}
+
+.liga-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-3);
+}
+
+.liga-divisao {
+  font: 600 var(--text-xs) / 1 var(--font-ui);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--gold-500);
+  color: var(--wine-900);
+}
+
+.liga-prata {
+  background: #cdd2d6;
+}
+.liga-ouro {
+  background: var(--gold-500);
+}
+.liga-platina {
+  background: #d8e6e6;
+}
+.liga-diamante {
+  background: #bfe3f2;
+}
+
+.liga-pos {
+  font-size: var(--text-xs);
+  color: rgba(250, 250, 248, 0.75);
+}
+
+.liga-lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.liga-linha {
+  display: grid;
+  grid-template-columns: 24px 1fr auto;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 6px 8px;
+  border-radius: var(--radius-control);
+  font-size: var(--text-sm);
+}
+
+.liga-eu {
+  background: rgba(212, 165, 116, 0.18);
+}
+
+.liga-rank {
+  font-family: var(--font-mono);
+  color: var(--gold-500);
+  text-align: center;
+}
+
+.liga-nome {
+  color: var(--bg);
+}
+
+.liga-pts {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: rgba(250, 250, 248, 0.8);
 }

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { track } from '../lib/analytics';
 import { useSearchParams } from 'react-router-dom';
 import { obterStore } from '../engine';
 import type { ExercicioMC } from '../engine';
@@ -189,6 +190,7 @@ export default function Desafio() {
     };
     gravarTentativa(tentativa);
     const xpGanho = obterStore().concluirDesafioDia(dia);
+    track('desafio_concluido', { acertos: tentativa.acertos, total: acertosArr.length, xp: xpGanho ?? 0 });
     tocar('marco');
     setEtapa({ t: 'resultado', tentativa, xpGanho });
   };

@@ -6,6 +6,8 @@ import { OBJETIVOS, obterStore, useProgresso, useWallet } from '../engine';
 import type { Habilidade, Objetivo } from '../engine';
 import { ICONE_OBJETIVO, ROTULO_OBJETIVO } from '../trilha/objetivo';
 import { Sheet } from '../components/Sheet';
+import { ContaSheet } from '../components/ContaSheet';
+import { useConta } from '../lib/conta';
 
 import './perfil.css';
 
@@ -29,6 +31,8 @@ export default function Perfil() {
   const [trocandoObjetivo, setTrocandoObjetivo] = useState(false);
   const { wallet, streakEfetivo } = useWallet();
   const { scorePaladar, objetivo } = useProgresso();
+  const conta = useConta();
+  const [criandoConta, setCriandoConta] = useState(false);
 
   const alternarSom = () => {
     const novo = !som;
@@ -47,10 +51,10 @@ export default function Perfil() {
     <>
       <header className="profile-head app-chrome">
         <div className="profile-avatar" aria-hidden="true">
-          V
+          {conta.email ? conta.email[0]!.toUpperCase() : 'V'}
         </div>
-        <h1 className="profile-name">Visitante</h1>
-        <p className="profile-sub">{desdeQuando(wallet.criadoEm)}</p>
+        <h1 className="profile-name">{conta.anonimo || !conta.email ? 'Visitante' : 'Sua conta'}</h1>
+        <p className="profile-sub">{conta.email ?? desdeQuando(wallet.criadoEm)}</p>
         <div className="profile-marca" aria-label="Parte do ecossistema Tchin Tchin, versão beta">
           <LogoTchin size={14} className="profile-logo" />
           <span className="profile-by">by Tchin Tchin</span>
@@ -177,15 +181,24 @@ export default function Perfil() {
         </Sheet>
       )}
 
-      <section className="save-cta">
-        <button type="button" className="btn btn-outline tap">
-          Salvar meu progresso
-        </button>
-        <p className="save-note">
-          Por enquanto, seu treino fica só neste aparelho. Criar conta leva
-          menos de um minuto.
-        </p>
-      </section>
+      {conta.anonimo || !conta.email ? (
+        <section className="save-cta">
+          <button type="button" className="btn btn-outline tap" onClick={() => setCriandoConta(true)}>
+            Salvar meu progresso
+          </button>
+          <p className="save-note">
+            Por enquanto, seu treino fica só neste aparelho. Criar conta leva menos de um minuto.
+          </p>
+        </section>
+      ) : (
+        <section className="save-cta">
+          <p className="save-note">
+            Progresso salvo na sua conta: {conta.email}. Você acessa de qualquer aparelho.
+          </p>
+        </section>
+      )}
+
+      {criandoConta && <ContaSheet onFechar={() => setCriandoConta(false)} />}
     </>
   );
 }

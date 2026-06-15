@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { Ic } from '../icones/Icones';
 import { LogoTchin } from '../icones/LogoTchin';
-import { Sheet } from '../components/Sheet';
+import { ContaSheet } from '../components/ContaSheet';
 
 /**
  * Soft wall de cadastro (fase 3 do blueprint): so depois do aha.
  * Mostra o que a pessoa ja construiu, convida a salvar e oferece um
  * "Depois" discreto e neutro. Nunca palavras como descartar ou perder.
- * Cadastro real chega com o Supabase: por ora, stub elegante.
+ * "Criar conta" anexa e-mail+senha ao usuario anonimo (mesmo progresso).
  */
 interface Props {
   xp: number;
@@ -15,7 +15,7 @@ interface Props {
 }
 
 export function SoftWall({ xp, onTrilha }: Props) {
-  const [stub, setStub] = useState(false);
+  const [conta, setConta] = useState(false);
 
   return (
     <div className="player wall">
@@ -54,7 +54,7 @@ export function SoftWall({ xp, onTrilha }: Props) {
       </div>
 
       <footer className="wall-acoes">
-        <button type="button" className="btn btn-primary btn-jogo btn-cheio tap" onClick={() => setStub(true)}>
+        <button type="button" className="btn btn-primary btn-jogo btn-cheio tap" onClick={() => setConta(true)}>
           Criar conta
         </button>
         <button type="button" className="btn btn-depois tap" onClick={onTrilha}>
@@ -62,16 +62,7 @@ export function SoftWall({ xp, onTrilha }: Props) {
         </button>
       </footer>
 
-      {stub && (
-        <Sheet titulo="Contas abrem em breve" onFechar={() => setStub(false)}>
-          <p className="folha-texto">
-            Contas abrem na próxima versão do beta. Seu progresso está guardado neste aparelho.
-          </p>
-          <button type="button" className="btn btn-primary btn-jogo btn-cheio tap" onClick={onTrilha}>
-            Seguir treinando
-          </button>
-        </Sheet>
-      )}
+      {conta && <ContaSheet onFechar={() => setConta(false)} onSucesso={onTrilha} />}
     </div>
   );
 }

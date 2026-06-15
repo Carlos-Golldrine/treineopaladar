@@ -4,6 +4,7 @@ import { useProgresso } from '../engine';
 import { Tchin } from '../mascote';
 import { LogoTchin } from '../icones/LogoTchin';
 import { Sheet } from '../components/Sheet';
+import { track } from '../lib/analytics';
 
 /**
  * Splash unico (fase 0 do blueprint): mascote vivo, 1 frase de valor com
@@ -57,7 +58,10 @@ export default function Splash() {
           ref={btnRef}
           type="button"
           className="btn btn-primary btn-jogo btn-cheio tap"
-          onClick={() => navigate('/licao-1')}
+          onClick={() => {
+            track('ftue_iniciado');
+            navigate('/licao-1');
+          }}
         >
           Começar
         </button>
