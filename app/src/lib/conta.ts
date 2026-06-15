@@ -5,6 +5,7 @@
  */
 import { useEffect, useState } from 'react';
 import { getSupabase } from './supabase';
+import { CHAVE_STORE } from '../engine/store';
 
 /** Google so aparece quando o OAuth client estiver configurado (Google Cloud + Supabase). */
 export const GOOGLE_PRONTO = true;
@@ -95,6 +96,24 @@ export async function entrarComEmail(email: string, senha: string): Promise<Resu
   const { error } = await sb.auth.signInWithPassword({ email, password: senha });
   if (error) return { ok: false, erro: traduzErro(error.message) };
   return { ok: true };
+}
+
+/** Sai da conta: encerra a sessao, limpa o estado local e recomeca como visitante. */
+export async function sairDaConta(): Promise<void> {
+  const sb = getSupabase();
+  if (sb) {
+    try {
+      await sb.auth.signOut();
+    } catch {
+      /* ignore */
+    }
+  }
+  try {
+    localStorage.removeItem(CHAVE_STORE);
+  } catch {
+    /* ambiente sem localStorage */
+  }
+  window.location.assign('/');
 }
 
 /** Traduz erros comuns do Auth para o tom da marca (sem jargao, acolhedor). */

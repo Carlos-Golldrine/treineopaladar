@@ -7,7 +7,7 @@ import type { Habilidade, Objetivo } from '../engine';
 import { ICONE_OBJETIVO, ROTULO_OBJETIVO } from '../trilha/objetivo';
 import { Sheet } from '../components/Sheet';
 import { ContaSheet } from '../components/ContaSheet';
-import { useConta } from '../lib/conta';
+import { useConta, sairDaConta } from '../lib/conta';
 
 import './perfil.css';
 
@@ -195,6 +195,9 @@ export default function Perfil() {
           <p className="save-note">
             Progresso salvo na sua conta: {conta.email}. Você acessa de qualquer aparelho.
           </p>
+          <button type="button" className="btn btn-outline tap" onClick={() => void sairDaConta()}>
+            Sair
+          </button>
         </section>
       )}
 
