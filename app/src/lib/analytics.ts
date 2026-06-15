@@ -6,7 +6,9 @@
  */
 import posthog from 'posthog-js';
 
-const key = import.meta.env.VITE_POSTHOG_KEY as string | undefined;
+// Chave publica do PostHog (client-side por design). Env var tem prioridade; fallback garante o deploy.
+const key =
+  (import.meta.env.VITE_POSTHOG_KEY as string | undefined) ?? 'phc_rQtYFuuXF6E2oHsaRioWiMkrARLJXH4yxahDEmMjPG2P';
 const host = (import.meta.env.VITE_POSTHOG_HOST as string | undefined) ?? 'https://us.i.posthog.com';
 
 let ligado = false;
