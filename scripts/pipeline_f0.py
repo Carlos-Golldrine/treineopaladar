@@ -63,7 +63,20 @@ def preenchido(v):
 RE_NAO_VINHO_SEMPRE = re.compile(
     r"\b(gin|cacha[çc]a|licor|brandy|conhaque|whisk(?:e)?y|vodka|sucos?|"
     r"vinagres?|sacolas?|ta[çc]as?|saca[\s\-]?rolhas?|"
-    r"coolers?|sangrias?|coquetel|coquet[eé]is)\b",
+    r"coolers?|sangrias?|coquetel|coquet[eé]is|"
+    # acessorios/decoracao que vazaram do Mercado Livre (auditoria jun/2026)
+    r"quadros?|poltronas?|m[oó]vel|m[oó]veis|decorativos?|decorativa)\b",
+    re.IGNORECASE,
+)
+
+# Produtores/regioes inequivocamente brasileiros: corrigem pais errado (a
+# ingestao do Mercado Livre jogou ~24 nacionais no balde "EUA"). So atuam
+# sobre linhas ja marcadas como pais != Brasil, para nao tocar legitimos.
+RE_PRODUTOR_BR = re.compile(
+    r"\b(casa valduga|valduga|casa perini|perini|lidio carraro|carraro|"
+    r"salton|miolo|aurora|garibaldi|pizzato|almad[eé]n|naturelle|"
+    r"serra ga[úu]cha|vale dos vinhedos|campanha ga[úu]cha|brasileir|"
+    r"colheita tardia)\b",
     re.IGNORECASE,
 )
 # Termos ambiguos (ha vinhos reais com esses nomes, ex. "Abridor Blend 2019"):
@@ -209,6 +222,14 @@ def main():
     stats["p4_pais_alterados"] = int(alterados_pais.fillna(False).sum())
     stats["p4_paises_depois"] = {str(k): int(v) for k, v in df["pais"].value_counts(dropna=False).items()}
     log(f"PASSO 4: pais normalizado ({alterados_pais.fillna(False).sum()} celulas alteradas)")
+
+    # PASSO 4b: corrige nacionais marcados com pais estrangeiro (auditoria jun/2026)
+    blob_origem = (df["nome"].fillna("") + " " + df.get("produtor", pd.Series("", index=df.index)).fillna(""))
+    br_marcado_errado = (df["pais"] != "Brasil") & blob_origem.apply(lambda s: bool(RE_PRODUTOR_BR.search(s)))
+    df["pais_corrigido_br"] = br_marcado_errado
+    df.loc[br_marcado_errado, "pais"] = "Brasil"
+    stats["p4b_pais_br_corrigido"] = int(br_marcado_errado.sum())
+    log(f"PASSO 4b: {br_marcado_errado.sum()} vinhos brasileiros tinham pais errado -> Brasil")
 
     # ---------------- PASSO 5: status_moderacao ----------------
     antes_status = df["status_moderacao"].value_counts(dropna=False).to_dict()

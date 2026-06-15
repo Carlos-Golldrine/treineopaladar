@@ -1,0 +1,18 @@
+
+================= GATE DE MOTION (rajada de frames) =================
+Frames por rajada: 14 a ~80ms. Saida: C:\Users\camargo\Downloads\treino-paladar-app\app\_shots\motion
+
+MICRO-AULA (u2-l1, 6 passos): entrada passo1 14/14 distintos, transicao 14/14 distintos, video=microaula-inteira.webm
+CENA tanino: idle 14/14, reacao 14/14 (14 novos vs idle)
+CENA acidez: idle 14/14, reacao 14/14 (14 novos vs idle)
+CENA corpo: idle 14/14, reacao 14/14 (14 novos vs idle)
+CENA docura: idle 14/14, reacao 14/14 (14 novos vs idle)
+CENA frutado: idle 14/14, reacao 14/14 (14 novos vs idle)
+CENA rotulo: idle 14/14, reacao 12/14 (14 novos vs idle)
+CENA harmonizacao: idle 14/14, reacao 14/14 (14 novos vs idle)
+REDUCED-MOTION: idle 1/14 distintos (esperado ~1, congelado)
+
+--- PROBLEMAS ---
+nenhum: todas as rajadas tem frames distintos (nada morto).
+
+VEREDITO DO GATE: PASS

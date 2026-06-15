@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import type { ReactNode } from 'react';
 import type { ExercicioMC } from '../engine';
 import type { FaseExercicio, ResolucaoExercicio } from './tipos';
 import { RotuloFigura } from './RotuloFigura';
@@ -11,9 +12,11 @@ interface Props {
   eliminada?: number;
   /** So para a cena de screenshot: comeca com uma opcao errada marcada. */
   presetErro?: boolean;
+  /** Cena interativa da habilidade, entre a pergunta e as opcoes. */
+  cena?: ReactNode;
 }
 
-export function ExMC({ ex, fase, onResolver, eliminada, presetErro }: Props) {
+export function ExMC({ ex, fase, onResolver, eliminada, presetErro, cena }: Props) {
   const [sel, setSel] = useState<number | null>(() =>
     presetErro ? ex.opcoes.findIndex((_, i) => i !== ex.correta) : null,
   );
@@ -34,6 +37,7 @@ export function ExMC({ ex, fase, onResolver, eliminada, presetErro }: Props) {
     <div className="ex">
       {ex.imagem && <RotuloFigura src={ex.imagem} />}
       <h2 className="ex-pergunta">{ex.pergunta}</h2>
+      {cena}
       <div className="ex-opcoes" role="group" aria-label="Opções de resposta">
         {ex.opcoes.map((opcao, i) => {
           const fora = eliminada === i;

@@ -1,0 +1,44 @@
+/* ============================================================
+   Cenas interativas por habilidade. Preenchem o vazio entre a
+   pergunta e as opcoes do exercicio. Toque = brincadeira (afago),
+   nunca muda resposta nem bloqueia o fluxo. Movimento vive no WAAPI
+   (cenas.tsx); aqui so a casca e o fallback estatico.
+   BRIEF-DESIGN.md secoes 3 e 7.
+   ============================================================ */
+
+.cena-card {
+  /* Fundo: tinta sutil da unidade (definida inline) com fallback quente */
+  --cena-tinta: var(--neutral-50);
+  margin: var(--space-3) 0 var(--space-1);
+  padding: var(--space-2) var(--space-4);
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-card);
+  background: var(--cena-tinta);
+  /* Curto e baixo: ocupa o vazio sem empurrar as opcoes para fora do
+     alcance do polegar. Encolhe se a tela for baixa (slider/ordenar). */
+  min-height: 92px;
+}
+
+.cena-svg {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  /* O afago e so na cena: nao rouba selecao nem scroll */
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Affordance de "toca em mim": a cena recua de leve no toque (sinal de
+   vida em < 100ms, padrao 3D de jogo aplicado de leve a arte). */
+.cena-svg:active {
+  transform: scale(0.985);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cena-svg:active {
+    transform: none;
+  }
+}

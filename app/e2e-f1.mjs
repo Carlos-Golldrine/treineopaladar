@@ -202,11 +202,13 @@ try {
     await continuar();
   });
 
-  await step('(c) J3 objetivo: grid de 6 cards, escolha No mercado, payoff', async () => {
+  await step('(c) J3 objetivo: grid de 6 cards, escolha objetivo mercado, payoff', async () => {
     await esperarPergunta('Onde você mais quer mandar bem?');
     const cartas = await page.locator('.player-meio .carta-grande').count();
     assert(cartas === 6, `J3 deveria ter 6 cards de objetivo, tem ${cartas}`);
-    await page.locator('.player-meio .carta-grande', { hasText: 'No mercado' }).click();
+    /* copy do card de objetivo mudou para beneficio: o componente renderiza apenas o
+       rotulo (o sub nao aparece), entao o card de mercado e "Comprar sem medo de errar". */
+    await page.locator('.player-meio .carta-grande', { hasText: 'Comprar sem medo de errar' }).click();
     await page.getByRole('button', { name: 'Continuar' }).waitFor({ timeout: 4000 });
     await shot('j3-objetivo');
     await page.getByRole('button', { name: 'Continuar' }).click();
@@ -361,7 +363,7 @@ try {
 
   await step('(h) ex5 ordenar do mais seco ao mais doce (C6, na 1a licao)', async () => {
     await esperarPergunta('Organize a prateleira do mais seco ao mais doce');
-    await ordenarPara(['Seco', 'Meio seco', 'Suave', 'Colheita tardia bem doce']);
+    await ordenarPara(['Seco', 'Meio seco', 'Suave', 'Colheita tardia, néctar de sobremesa']);
     await medirAlvos('ex-ordenar-docura');
     await shot('ex-ordenar-docura');
     await page.getByRole('button', { name: 'Conferir' }).click();

@@ -1,0 +1,322 @@
+  shot 01-splash.png
+PASS  (a) 1a visita em "/" redireciona ao splash
+  Comecar -> J1 em 165ms
+  shot 02-j1-visual.png
+PASS  (b) tocar Começar abre a J1 em ate 3s
+  shot 03-j1-acerto.png
+PASS  (c) J1 correta (carta visual)
+PASS  (c) J2 correta
+  shot 04-j3-objetivo.png
+PASS  (c) J3 objetivo: grid de 6 cards, escolha objetivo mercado, payoff
+  shot 05-j4-erro-tooltip-vidas.png
+PASS  (c) J4 erro proposital mostra tooltip de vidas
+PASS  (c) J5 personalizada pelo objetivo (mercado)
+  shot 06-j6-nivel.png
+PASS  (c) J6 nivel (intersticial)
+PASS  (c) J7 consolidacao correta
+PASS  (c) J4 reaparece no fim e e corrigida
+  shot 07-conclusao-licao1.png
+PASS  (d) conclusao mostra XP e streak dia 1
+PASS  (e) escolher meta diaria (Leve)
+  shot 08-softwall.png
+PASS  (f) soft wall aparece e "Depois" leva a Trilha
+  shot 09-trilha-pos-ftue.png
+PASS  (g-pre) estado da Trilha logo apos o FTUE
+  shot 10-microaula-u1.png
+PASS  (h) abrir a licao 2 do dia (no 1 da trilha, u1-l4: docura abre a unidade)
+PASS  (h) erro proposital 1 no ex0 (grace, sem perder vida)
+PASS  (h) ex1 MC correta
+  shot 11-ex-swipe.png
+PASS  (h) ex2 swipe (deck de 5 cartas)
+PASS  (h) ex3 MC correta
+  shot 12-ex-slider.png
+PASS  (h) ex4 slider no alvo
+  shot 13-ex-ordenar-docura.png
+PASS  (h) ex5 ordenar do mais seco ao mais doce (C6, na 1a licao)
+  shot 14-ex-duasverdades-calibrar.png
+PASS  (h) ex6 duas verdades + calibracao
+PASS  (h) ex7 MC desafio correta
+PASS  (h) ex8 MC + calibracao
+PASS  (h) ex9 MC correta (suave sem vergonha)
+  shot 15-ex0-repetida-erro2.png
+PASS  (h) ex0 reaparece: erro proposital 2 custa vida
+PASS  (h) ex0 reaparece DE NOVO antes do fim e e corrigida
+  shot 16-conclusao-licao2.png
+PASS  (i) conclusao da licao 2 (sem confete: nao foi perfeita)
+  shot 17-trilha-coleta-cristais.png
+PASS  (g) coleta de cristais aparece 1 vez na Trilha
+  shot 18-trilha-tacas.png
+PASS  (g) no 1 preenchido (taca com vinho + coroa) e no 2 disponivel
+  wallet: {"xpTotal":40,"cristais":70,"vidas":4,"vidasTs":1781549331618,"streak":1,"bestStreak":1,"freezes":0,"lastDone":"2026-06-15","metaDiaria":20,"xpHoje":40,"dataHoje":"2026-06-15","licoesHoje":2,"praticasHoje":0,"criadoEm":1781549315747}
+PASS  (i) localStorage tp.v1: xpTotal > 0, streak 1, licoesHoje 2, vidas <= 5
+  shot 19-trilha-apos-reload.png
+PASS  (j) recarregar: estado persiste e abre direto na Trilha
+  shot 20-trilha-reordenada-mercado.png
+PASS  (k) trilha na ordem do objetivo mercado: Comprar sem errar e a 2a unidade
+  shot 21-desafio-chip-docura.png
+  (vinho de hoje ainda sem subtipo_docura no payload: chip ausente, correto)
+PASS  (l) chip de docura na ficha do vinho revelado (Desafio)
+  shot 22-ex-ordenar-demo.png
+PASS  (extra) cena demo do tipo ordenar (screenshot)
+PASS  (a11y) foco visivel e contraste sobre wine-700
+
+================= RESUMO =================
+PASS  (a) 1a visita em "/" redireciona ao splash
+PASS  (b) tocar Começar abre a J1 em ate 3s
+PASS  (c) J1 correta (carta visual)
+PASS  (c) J2 correta
+PASS  (c) J3 objetivo: grid de 6 cards, escolha objetivo mercado, payoff
+PASS  (c) J4 erro proposital mostra tooltip de vidas
+PASS  (c) J5 personalizada pelo objetivo (mercado)
+PASS  (c) J6 nivel (intersticial)
+PASS  (c) J7 consolidacao correta
+PASS  (c) J4 reaparece no fim e e corrigida
+PASS  (d) conclusao mostra XP e streak dia 1
+PASS  (e) escolher meta diaria (Leve)
+PASS  (f) soft wall aparece e "Depois" leva a Trilha
+PASS  (g-pre) estado da Trilha logo apos o FTUE
+PASS  (h) abrir a licao 2 do dia (no 1 da trilha, u1-l4: docura abre a unidade)
+PASS  (h) erro proposital 1 no ex0 (grace, sem perder vida)
+PASS  (h) ex1 MC correta
+PASS  (h) ex2 swipe (deck de 5 cartas)
+PASS  (h) ex3 MC correta
+PASS  (h) ex4 slider no alvo
+PASS  (h) ex5 ordenar do mais seco ao mais doce (C6, na 1a licao)
+PASS  (h) ex6 duas verdades + calibracao
+PASS  (h) ex7 MC desafio correta
+PASS  (h) ex8 MC + calibracao
+PASS  (h) ex9 MC correta (suave sem vergonha)
+PASS  (h) ex0 reaparece: erro proposital 2 custa vida
+PASS  (h) ex0 reaparece DE NOVO antes do fim e e corrigida
+PASS  (i) conclusao da licao 2 (sem confete: nao foi perfeita)
+PASS  (g) coleta de cristais aparece 1 vez na Trilha
+PASS  (g) no 1 preenchido (taca com vinho + coroa) e no 2 disponivel
+PASS  (i) localStorage tp.v1: xpTotal > 0, streak 1, licoesHoje 2, vidas <= 5
+PASS  (j) recarregar: estado persiste e abre direto na Trilha
+PASS  (k) trilha na ordem do objetivo mercado: Comprar sem errar e a 2a unidade
+PASS  (l) chip de docura na ficha do vinho revelado (Desafio)
+PASS  (extra) cena demo do tipo ordenar (screenshot)
+PASS  (a11y) foco visivel e contraste sobre wine-700
+
+Console errors (0):
+
+A11Y (alvos de toque, foco, contraste):
+{
+ "ftue-j1": [
+  {
+   "cls": "opcao.carta-visual",
+   "w": 185,
+   "h": 172
+  },
+  {
+   "cls": "opcao.carta-visual",
+   "w": 185,
+   "h": 172
+  },
+  {
+   "cls": "btn.btn-primary",
+   "w": 380,
+   "h": 48
+  }
+ ],
+ "conclusao-l1": [
+  {
+   "cls": "meta-carta.tap",
+   "w": 184,
+   "h": 102
+  },
+  {
+   "cls": "meta-carta.tap",
+   "w": 184,
+   "h": 102
+  }
+ ],
+ "trilha-pos-ftue": [
+  {
+   "cls": "hud-chip.hud-streak",
+   "w": 57,
+   "h": 44
+  },
+  {
+   "cls": "hud-chip.hud-lives",
+   "w": 57,
+   "h": 44
+  },
+  {
+   "cls": "unit-aula.tap",
+   "w": 134,
+   "h": 44
+  },
+  {
+   "cls": "node.node-taca",
+   "w": 84,
+   "h": 92
+  },
+  {
+   "cls": "unit-abrir.tap",
+   "w": 117,
+   "h": 44
+  },
+  {
+   "cls": "tab.tap",
+   "w": 99,
+   "h": 49
+  },
+  {
+   "cls": "tab.tap",
+   "w": 99,
+   "h": 49
+  },
+  {
+   "cls": "tab.tap",
+   "w": 99,
+   "h": 49
+  },
+  {
+   "cls": "tab.tap",
+   "w": 99,
+   "h": 49
+  }
+ ],
+ "ex-swipe": [
+  {
+   "cls": "player-fechar.tap",
+   "w": 44,
+   "h": 44
+  },
+  {
+   "cls": "btn.btn-deck",
+   "w": 184,
+   "h": 52
+  },
+  {
+   "cls": "btn.btn-deck",
+   "w": 184,
+   "h": 52
+  }
+ ],
+ "ex-slider": [
+  {
+   "cls": "player-fechar.tap",
+   "w": 44,
+   "h": 44
+  },
+  {
+   "cls": "dica-botao.tap",
+   "w": 123,
+   "h": 44
+  },
+  {
+   "cls": "INPUT",
+   "w": 380,
+   "h": 48
+  },
+  {
+   "cls": "btn.btn-primary",
+   "w": 380,
+   "h": 48
+  }
+ ],
+ "ex-ordenar-docura": [
+  {
+   "cls": "player-fechar.tap",
+   "w": 44,
+   "h": 44
+  },
+  {
+   "cls": "btn.btn-primary",
+   "w": 380,
+   "h": 48
+  }
+ ],
+ "trilha-final": [
+  {
+   "cls": "hud-chip.hud-streak",
+   "w": 57,
+   "h": 44
+  },
+  {
+   "cls": "hud-chip.hud-lives",
+   "w": 57,
+   "h": 44
+  },
+  {
+   "cls": "hud-chip.hud-gems",
+   "w": 64,
+   "h": 43
+  },
+  {
+   "cls": "pratica-card.tap",
+   "w": 380,
+   "h": 85
+  },
+  {
+   "cls": "pratica-card.tap",
+   "w": 380,
+   "h": 85
+  },
+  {
+   "cls": "unit-aula.tap",
+   "w": 134,
+   "h": 44
+  },
+  {
+   "cls": "node.node-taca",
+   "w": 72,
+   "h": 80
+  },
+  {
+   "cls": "node.node-taca",
+   "w": 84,
+   "h": 92
+  },
+  {
+   "cls": "unit-abrir.tap",
+   "w": 117,
+   "h": 44
+  },
+  {
+   "cls": "tab.tap",
+   "w": 99,
+   "h": 49
+  },
+  {
+   "cls": "tab.tap",
+   "w": 99,
+   "h": 49
+  },
+  {
+   "cls": "tab.tap",
+   "w": 99,
+   "h": 49
+  },
+  {
+   "cls": "tab.tap",
+   "w": 99,
+   "h": 49
+  }
+ ],
+ "ex-ordenar": [
+  {
+   "cls": "player-fechar.tap",
+   "w": 44,
+   "h": 44
+  },
+  {
+   "cls": "btn.btn-primary",
+   "w": 380,
+   "h": 48
+  }
+ ],
+ "foco": {
+  "tag": "BUTTON",
+  "cls": "hud-chip hud-streak tap",
+  "outline": "solid",
+  "largura": "2px",
+  "cor": "rgb(114, 47, 55)"
+ },
+ "contrasteWine": {
+  "color": "rgb(250, 250, 248)",
+  "bg": "rgb(74, 31, 36)"
+ }
+}

@@ -6,9 +6,9 @@
   "habilidade": "acidez",
   "hook": "As bolhas da taça não vêm de gás de fábrica. Elas nascem de um truque antigo, e combinam com pastel mais do que você imagina.",
   "fichaCanonica": [
-    "As bolhas do espumante nascem de uma segunda fermentação: leveduras transformam açúcar em álcool e gás carbônico, e o gás fica preso no líquido.",
+    "Na maioria dos espumantes, as bolhas nascem de uma segunda fermentação: leveduras transformam açúcar em álcool e gás carbônico, e o gás fica preso no líquido. O moscatel é a exceção charmosa, de uma única fermentação interrompida ainda doce.",
     "No método tradicional, usado no Champagne, a segunda fermentação acontece dentro da própria garrafa; no método Charmat, usado na maioria dos Proseccos, ela acontece em grandes tanques.",
-    "Só pode se chamar Champagne o espumante feito na região de Champagne, na França; fora dela, o vinho com bolhas atende por espumante, Cava, Prosecco e outros nomes.",
+    "Pelas regras internacionais de indicação de origem, só o espumante da região de Champagne, na França, usa esse nome; fora dela, o vinho com bolhas atende por espumante, Cava, Prosecco e outros nomes.",
     "Pela legislação brasileira, o espumante nature tem até 3 gramas de açúcar por litro e o brut fica na faixa de 8 a 15 gramas por litro: os dois são estilos secos.",
     "A acidez alta e as bolhas do espumante seco limpam a gordura da boca, e por isso ele tende a combinar com frituras como pastel, coxinha e batata frita.",
     "Espumante costuma ser servido bem gelado, em torno de 6 a 8 graus."
@@ -71,7 +71,7 @@
           "porque": "Brut carrega pouco açúcar: no Brasil, entre 8 e 15 gramas por litro."
         },
         {
-          "texto": "As bolhas nascem de uma segunda fermentação",
+          "texto": "Na maioria dos espumantes, as bolhas nascem de uma segunda fermentação",
           "verdade": true,
           "porque": "Leveduras, açúcar e paciência: nasce o gás que vira festa."
         },
@@ -142,7 +142,7 @@
     {
       "tipo": "mc",
       "dificuldade": 3,
-      "pergunta": "Por que um espumante de fora da região de Champagne não pode usar esse nome?",
+      "pergunta": "Por que, pelas regras de origem, um espumante de fora da região de Champagne usa outro nome?",
       "opcoes": [
         "O nome é protegido e pertence só àquela região da França",
         "Porque o gosto é sempre inferior",

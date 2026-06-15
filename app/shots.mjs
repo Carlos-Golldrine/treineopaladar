@@ -16,7 +16,7 @@ const root = path.dirname(fileURLToPath(import.meta.url));
 const shotsDir = path.join(root, '_shots');
 mkdirSync(shotsDir, { recursive: true });
 
-const PORT = 4173;
+const PORT = Number(process.env.SHOTS_PORT) || 4173;
 const server = await preview({ root, preview: { port: PORT, strictPort: true } });
 
 /* Seeds de localStorage por grupo de cenas:
@@ -27,6 +27,12 @@ const SEED_APP = {
   /* objetivo mercado: trilha reordenada (U4 em 2o) e Perfil com "Treinando para" */
   estado: JSON.stringify({ versao: 1, onboardingCompleto: true, objetivo: 'mercado' }),
   flags: JSON.stringify({ cristaisColetados: true, lojaVista: true }),
+};
+
+/* Cenas por habilidade: fichaApontada=true para o toast nao cobrir a cena */
+const SEED_CENAS = {
+  estado: JSON.stringify({ versao: 1, onboardingCompleto: true, objetivo: 'mercado' }),
+  flags: JSON.stringify({ cristaisColetados: true, lojaVista: true, fichaApontada: true }),
 };
 const SEED_COLETA = {
   estado: JSON.stringify({
@@ -109,10 +115,26 @@ const grupos = [
       ['licao-u6-mc', '/licao/u6-l3?cena=mc'],
       // F2.5: ficha de bolso, dica por cristais e micro-aula de unidade
       ['licao-ficha-bolso', '/licao/u1-l1?cena=mc&estado=ficha'],
+      // Descobribilidade: toast unico do mascote apontando a ficha de bolso
+      ['licao-ficha-aponta', '/licao/u1-l1?cena=mc&estado=aponta'],
       ['licao-dica-mc', '/licao/u1-l1?cena=mc&estado=dica'],
       ['licao-dica-slider', '/licao/u1-l1?cena=slider&estado=dica'],
       ['licao-dica-intruso', '/licao/u1-l1?cena=intruso&estado=dica'],
       ['microaula-u2', '/licao/u2-l1?cena=microaula'],
+    ],
+  },
+  {
+    /* Cenas interativas por habilidade no espaco entre pergunta e opcoes.
+       Uma por habilidade, em licao sem rotulo (a cena so aparece ai). */
+    seed: SEED_CENAS,
+    routes: [
+      ['cena-tanino', '/licao/u1-l1?cena=mc'],
+      ['cena-acidez', '/licao/u1-l2?cena=slider'],
+      ['cena-corpo', '/licao/u1-l3?cena=slider'],
+      ['cena-docura', '/licao/u1-l4?cena=mc'],
+      ['cena-frutado', '/licao/u2-l2?cena=swipe'],
+      ['cena-rotulo', '/licao/u4-l1?cena=mc'],
+      ['cena-harmonizacao', '/licao/u5-l1?cena=mc'],
     ],
   },
   {
@@ -184,6 +206,10 @@ const rajadas = [
   // F2.5: flip 3D da carta (press solta entre os frames 1 e 3) e micro-aula
   { name: 'rajada-carta-flip', seed: SEED_PROGRESSO, route: '/pratica?cena=cartas', press: '.carta3d' },
   { name: 'rajada-microaula', seed: SEED_APP, route: '/licao/u2-l1?cena=microaula' },
+  // Cenas por habilidade: press na cena dispara a reacao (vapor, espremer, tinido)
+  { name: 'rajada-cena-tanino', seed: SEED_CENAS, route: '/licao/u1-l1?cena=mc', press: '.cena-svg' },
+  { name: 'rajada-cena-acidez', seed: SEED_CENAS, route: '/licao/u1-l2?cena=slider', press: '.cena-svg' },
+  { name: 'rajada-cena-harmonizacao', seed: SEED_CENAS, route: '/licao/u5-l1?cena=mc', press: '.cena-svg' },
 ];
 
 const viewports = [

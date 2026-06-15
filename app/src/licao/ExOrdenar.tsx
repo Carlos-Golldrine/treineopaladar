@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import type { ReactNode } from 'react';
 import type { ExercicioOrdenar } from '../engine';
 import type { FaseExercicio, ResolucaoExercicio } from './tipos';
 import { Ic } from '../icones/Icones';
@@ -7,6 +8,8 @@ interface Props {
   ex: ExercicioOrdenar;
   fase: FaseExercicio;
   onResolver: (r: ResolucaoExercicio) => void;
+  /** Cena interativa da habilidade, entre a instrucao e a lista. */
+  cena?: ReactNode;
 }
 
 interface EstadoDrag {
@@ -33,7 +36,7 @@ function embaralhar(n: number, evitar: number[]): number[] {
  * Ordenar por arraste vertical (pointer events) com fallback por toques:
  * toque em um item para escolher, toque em outro para trocar de lugar.
  */
-export function ExOrdenar({ ex, fase, onResolver }: Props) {
+export function ExOrdenar({ ex, fase, onResolver, cena }: Props) {
   const [ordem, setOrdem] = useState<number[]>(() => embaralhar(ex.itens.length, ex.ordemCorreta));
   const [drag, setDrag] = useState<EstadoDrag | null>(null);
   const [sel, setSel] = useState<number | null>(null);
@@ -110,6 +113,7 @@ export function ExOrdenar({ ex, fase, onResolver }: Props) {
     <div className="ex">
       <h2 className="ex-pergunta">{ex.instrucao}</h2>
       <p className="ex-dica app-chrome">Arraste para ordenar, ou toque em dois itens para trocar.</p>
+      {cena}
       <ol className="ordenar" ref={lista}>
         {ordem.map((item, i) => {
           const arrastando = drag?.de === i && drag.moveu;

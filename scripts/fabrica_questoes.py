@@ -207,6 +207,11 @@ COPY_PROIBIDA = [
     "para verdadeiros conhecedores", "gerado por ia", "assistente",
 ]
 
+
+def _fem(cor):
+    """Concordancia feminina de cor de uva: tinto->tinta, branco->branca."""
+    return {"tinto": "tinta", "branco": "branca"}.get(cor, cor)
+
 LEAK_DOCURA = ["seco", "suave", "doce", "demi", "brut", "nature", "moscatel",
                "moscato", "late harvest", "colheita tardia", "licoroso", "dolce",
                "sweet", "moelleux", "auslese", "spatlese", "icewine", "sauternes",
@@ -1099,11 +1104,13 @@ class Fabrica:
                 "id": "{}-{}".format(t, hashlib.md5(key.encode()).hexdigest()[:10]),
                 "template": t, "habilidade": self._habilidade_uva(intruso),
                 "tipo": "intruso", "dificuldade": dif,
-                "pergunta": "Três destas uvas dão vinho {}. Qual é a intrusa?".format(cor_grupo),
+                # fala da CASTA, nao do vinho: Pinot Noir e tinta mas faz
+                # espumante branco, entao "da vinho tinto" e falso (auditoria)
+                "pergunta": "Três destas são uvas {}s. Qual é a intrusa?".format(_fem(cor_grupo)),
                 "opcoes": opcoes, "intruso": idx_intruso,
-                "regra": "{} e {} são uvas de vinho {}; {} é uva de vinho {}.".format(
-                    ", ".join(grupo_disp[:2]), grupo_disp[2], cor_grupo,
-                    self.uvas[intruso]["display"], cor_inv),
+                "regra": "{} e {} são uvas {}s; {} é uva {}.".format(
+                    ", ".join(grupo_disp[:2]), grupo_disp[2], _fem(cor_grupo),
+                    self.uvas[intruso]["display"], _fem(cor_inv)),
             }
             if self._add(ex, []):
                 gerados += 1

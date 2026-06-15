@@ -93,6 +93,8 @@
 }
 
 /* ------------------------ Micro-cena ------------------------------- */
+/* Movimento da cena: timelines GSAP no CenaMascote (chunk lazy da
+   MicroAula). Aqui só estrutura, affordance e fallback estático. */
 
 .tchin-cena {
   position: relative;
@@ -102,7 +104,15 @@
   padding: var(--space-4);
 }
 
+/* Área tocável: a cena inteira avança por toque (alvo >= 44pt de sobra) */
+.tchin-cena-toque {
+  display: block;
+  width: 100%;
+  text-align: initial;
+}
+
 .tchin-cena-fala {
+  position: relative;
   min-height: 56px;
   display: flex;
   align-items: flex-start;
@@ -118,7 +128,6 @@
   font-weight: 500;
   line-height: 1.4;
   color: var(--wine-900);
-  animation: tchin-pop 260ms cubic-bezier(0.2, 0.9, 0.3, 1.3) both;
 }
 
 .tchin-cena-balao::after {
@@ -134,7 +143,30 @@
   transform: rotate(45deg);
 }
 
-/* Palco tocável: avança a cena (alvo >= 44pt é a área inteira) */
+/* Fala do passo que sai: solta do fluxo p/ o overlap não empurrar layout */
+.tchin-cena-balao-saindo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.tchin-cena-palavra {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+/* Texto completo para leitores de tela (palavras animadas são decorativas) */
+.tchin-vh {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 .tchin-cena-palco {
   width: 100%;
   display: flex;
@@ -142,13 +174,48 @@
   justify-content: space-between;
   gap: var(--space-4);
   padding: var(--space-3) var(--space-2) 0;
-  text-align: initial;
+}
+
+.tchin-cena-props {
+  position: relative;
+  flex: none;
+  display: flex;
+  align-items: flex-end;
 }
 
 .tchin-cena-prop {
   flex: none;
   margin-bottom: var(--space-2);
-  animation: tchin-prop-entra 420ms cubic-bezier(0.2, 0.9, 0.3, 1.35) both;
+}
+
+.tchin-cena-prop-saindo {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+/* Affordance da pausa: aparece 1,2s depois do passo completo,
+   com pulso discreto (só opacity; nada se mexe) */
+.tchin-cena-hint {
+  display: block;
+  min-height: 20px;
+  margin-top: var(--space-2);
+  text-align: center;
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--neutral-400);
+  opacity: 0;
+  transition: opacity 200ms ease-out;
+}
+
+.tchin-cena-hint-visivel {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tchin-cena-hint-visivel {
+    animation: tchin-hint-pulsa 1.6s ease-in-out 400ms infinite;
+  }
 }
 
 .tchin-cena-rodape {
@@ -175,6 +242,13 @@
   background: var(--wine-700);
 }
 
+.tchin-cena-acoes {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.tchin-cena-rever,
 .tchin-cena-pular {
   min-height: 44px;
   padding: 0 var(--space-3);
@@ -269,14 +343,13 @@
   }
 }
 
-@keyframes tchin-prop-entra {
-  from {
-    opacity: 0;
-    transform: translateX(16px) scale(0.7) rotate(6deg);
+@keyframes tchin-hint-pulsa {
+  0%,
+  100% {
+    opacity: 1;
   }
 
-  to {
-    opacity: 1;
-    transform: none;
+  50% {
+    opacity: 0.45;
   }
 }

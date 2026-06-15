@@ -1,13 +1,13 @@
 # QA — Fabrica de questoes (deterministica, sem LLM)
 
 **Gerado por:** `scripts/fabrica_questoes.py` (seed 20260611, idempotente). Fonte: `data/vinhos_clean.csv` filtrada por `view_estrita=True` e `preco_valido!=False` + filtro defensivo de nao-vinhos.
-**Quando:** 2026-06-12 07:09 UTC · duracao 31.9s
+**Quando:** 2026-06-15 19:00 UTC · duracao 37.2s
 
 ## Totais
 
 | Onde | Total |
 |---|---|
-| Banco completo (`data/banco_pratica_full.jsonl`) | 19497 |
+| Banco completo (`data/banco_pratica_full.jsonl`) | 19508 |
 | Bundle curado (`app/src/content/pratica/banco-pratica.json`) | 480 |
 | Desafios do Dia (`app/src/content/pratica/desafios.json`) | 40 (160 perguntas) |
 
@@ -15,13 +15,13 @@
 
 | template | dif 1 | dif 2 | dif 3 | total |
 |---|---|---|---|---|
-| de-onde-vem | 1558 | 201 | 3536 | 5295 |
+| de-onde-vem | 1589 | 181 | 3536 | 5306 |
 | harmoniza | 1151 | 1935 | 130 | 3216 |
-| intruso-uva | 28 | 123 | 69 | 220 |
-| mais-encorpado | 802 | 2362 | 857 | 4021 |
+| intruso-uva | 32 | 132 | 56 | 220 |
+| mais-encorpado | 790 | 2371 | 860 | 4021 |
 | qual-uva | 1339 | 717 | 349 | 2405 |
 | rotulo | 2516 | 1564 | 260 | 4340 |
-| **total** | 7394 | 6902 | 5201 | 19497 |
+| **total** | 7417 | 6900 | 5191 | 19508 |
 
 ### Bundle curado, por template e dificuldade
 
@@ -41,13 +41,13 @@
 |---|---|
 | rotulo | 162 |
 | harmonizacao | 78 |
-| acidez | 73 |
-| frutado | 61 |
+| acidez | 70 |
+| frutado | 65 |
 | tanino | 41 |
 | docura | 33 |
-| corpo | 32 |
+| corpo | 31 |
 
-Bundle: 365 exercicios de vinhos com imagem baixada · 418 de vinhos do mercado BR.
+Bundle: 371 exercicios de vinhos com imagem baixada · 418 de vinhos do mercado BR.
 
 ## Distribuicao de preco (correcao C3 da DD de publico)
 
@@ -56,9 +56,9 @@ A faixa real de compra do publico e R$30-80; a mediana do banco (R$108) nao desc
 | faixa | antes (12/jun, pre-C3) | depois |
 |---|---|---|
 | abaixo de R$30 | 2 (0%) | 0 (0%) |
-| R$30-80 (gondola do publico) | 44 (9%) | 293 (61%) |
-| R$80-150 | 57 (12%) | 9 (2%) |
-| acima de R$150 (aspiracional) | 317 (66%) | 118 (25%) |
+| R$30-80 (gondola do publico) | 44 (9%) | 286 (60%) |
+| R$80-150 | 57 (12%) | 17 (4%) |
+| acima de R$150 (aspiracional) | 317 (66%) | 117 (24%) |
 | sem vinho ancorado (intruso-uva) | 60 (12%) | 60 (12%) |
 | vinho sem preco de referencia | 0 (0%) | 0 (0%) |
 
@@ -66,8 +66,8 @@ A faixa real de compra do publico e R$30-80; a mediana do banco (R$108) nao desc
 
 | dificuldade | <30 | 30-80 | 80-150 | >150 | sem vinho | sem preco |
 |---|---|---|---|---|---|---|
-| 1 | 0 | 147 | 0 | 15 | 24 | 0 |
-| 2 | 0 | 146 | 9 | 7 | 24 | 0 |
+| 1 | 0 | 148 | 0 | 14 | 24 | 0 |
+| 2 | 0 | 138 | 17 | 7 | 24 | 0 |
 | 3 | 0 | 0 | 0 | 96 | 12 | 0 |
 
 Desafios do Dia com vinho de R$30-150 (gondola BR): 40/40 (antes: 11/40). Por faixa: <30 0 · 30-80 21 · 80-150 19 · >150 0.
@@ -78,30 +78,30 @@ Desafios do Dia com vinho de R$30-150 (gondola BR): 40/40 (antes: 11/40). Por fa
 |---|---|
 | qual-uva/nome_contem_uva | 5208 |
 | mais-encorpado/nome_vaza_docura | 1888 |
-| qual-uva/uva_invalida_ou_blend | 1500 |
-| de-onde-vem/poucos_paises_distratores | 1140 |
-| de-onde-vem/nome_contem_pais | 1118 |
-| de-onde-vem/pais_invalido | 1047 |
+| qual-uva/uva_invalida_ou_blend | 1491 |
+| de-onde-vem/poucos_paises_distratores | 1155 |
+| de-onde-vem/nome_contem_pais | 1129 |
+| de-onde-vem/pais_invalido | 1004 |
 | qual-uva/uva_sem_cor_ou_rara_demais | 827 |
 | harmoniza/perfil_fora_dos_arquetipos | 822 |
 | de-onde-vem/nome_contem_regiao_que_entrega | 685 |
-| de-onde-vem/nome_sujo | 633 |
-| de-onde-vem/dedup | 560 |
-| mais-encorpado/nome_vaza_tanino | 522 |
+| de-onde-vem/nome_sujo | 629 |
+| de-onde-vem/dedup | 561 |
+| mais-encorpado/nome_vaza_tanino | 525 |
 | harmoniza/nome_sujo | 357 |
 | de-onde-vem/poucas_regioes_distratoras | 331 |
-| mais-encorpado/nome_vaza_corpo | 304 |
+| mais-encorpado/nome_vaza_corpo | 309 |
 | qual-uva/nome_sujo | 164 |
 | qual-uva/dedup | 126 |
 | harmoniza/categoria_certa_ausente_no_arquetipo | 103 |
 | harmoniza/texto_sem_categoria_mapeavel | 83 |
 | qual-uva/pais_invalido | 75 |
 | harmoniza/dedup | 70 |
-| intruso-uva/combo_repetido | 30 |
+| intruso-uva/combo_repetido | 32 |
 | rotulo/sem_variante_valida | 22 |
-| **total** | 17615 |
+| **total** | 17596 |
 
-Aproveitamento: 19497 aceitos / 37112 tentados (53%).
+Aproveitamento: 19508 aceitos / 37104 tentados (53%).
 
 ## Exemplos (5 por template, do bundle)
 
@@ -110,32 +110,32 @@ Aproveitamento: 19497 aceitos / 37112 tentados (53%).
 - (dif 3) O Sassicaia vem da Itália. De qual região? **Opcoes:** Piemonte / Puglia / Sicilia / Toscana **Resposta:** Toscana
 - (dif 3) O Rainwater Medium Dry vem de Portugal. De qual região? **Opcoes:** Douro / Dão / Madeira / Alentejo **Resposta:** Madeira
 - (dif 3) O Arrogant Frog Syrah Viognier Croak Rotie 2022 vem da França. De qual região? **Opcoes:** Bordeaux / Pézenas, Languedoc / Rhône / Bourgogne **Resposta:** Pézenas, Languedoc
-- (dif 1) De qual país vem o Catena Dv Chardonnay 2020? **Opcoes:** Itália / Argentina / Portugal / França **Resposta:** Argentina
-- (dif 2) De qual país vem o Brut N.V? **Opcoes:** Argentina / Brasil / EUA / Chile **Resposta:** EUA
+- (dif 1) De qual país vem o Catena Alta Chardonnay Catena Zapata 2021? **Opcoes:** Argentina / Portugal / Itália / França **Resposta:** Argentina
+- (dif 2) De qual país vem o Africano Nederburg Cabernet Sauvignon? **Opcoes:** Argentina / África do Sul / Chile / Brasil **Resposta:** África do Sul
 
 ### harmoniza
 
-- (dif 2) Qual destes pratos costuma cair bem com o Blason del Valle Bonarda 2025? **Opcoes:** Ostras frescas / Churrasco / Sushi / Ceviche **Resposta:** Churrasco
-- (dif 3) Qual destes pratos costuma cair bem com o Château Pajzos Hárslevelu "H" Late Harvest? **Opcoes:** Ceviche / Sobremesa de frutas / Sushi / Ostras frescas **Resposta:** Sobremesa de frutas
-- (dif 3) Qual destes pratos costuma cair bem com o Paul Mas Rivesaltes Ambre Hors d'Age? **Opcoes:** Ostras frescas / Ceviche / Queijo gorgonzola / Sushi **Resposta:** Queijo gorgonzola
-- (dif 1) Qual destes pratos costuma cair bem com o Santa Carolina Reservado Merlot? **Opcoes:** Ceviche / Sushi / Massa ao sugo / Ostras frescas **Resposta:** Massa ao sugo
-- (dif 1) Qual destes pratos costuma cair bem com o Drama Red Blend? **Opcoes:** Sushi / Ostras frescas / Ceviche / Carne vermelha grelhada **Resposta:** Carne vermelha grelhada
+- (dif 2) Qual destes pratos costuma cair bem com o Blason del Valle Bonarda 2025? **Opcoes:** Sushi / Ceviche / Churrasco / Ostras frescas **Resposta:** Churrasco
+- (dif 3) Qual destes pratos costuma cair bem com o Château Pajzos Hárslevelu "H" Late Harvest? **Opcoes:** Ceviche / Sushi / Sobremesa de frutas / Ostras frescas **Resposta:** Sobremesa de frutas
+- (dif 3) Qual destes pratos costuma cair bem com o Paul Mas Rivesaltes Ambre Hors d'Age? **Opcoes:** Ceviche / Sushi / Ostras frescas / Queijo gorgonzola **Resposta:** Queijo gorgonzola
+- (dif 1) Qual destes pratos costuma cair bem com o Santa Carolina Reservado Merlot? **Opcoes:** Ostras frescas / Sushi / Ceviche / Massa ao sugo **Resposta:** Massa ao sugo
+- (dif 1) Qual destes pratos costuma cair bem com o Drama Red Blend? **Opcoes:** Ostras frescas / Ceviche / Sushi / Carne vermelha grelhada **Resposta:** Carne vermelha grelhada
 
 ### intruso-uva
 
-- (dif 2) Três destas uvas dão vinho tinto. Qual é a intrusa? **Opcoes:** Cabernet Sauvignon / Gamay / Castelão / Chenin Blanc **Resposta:** Chenin Blanc
-- (dif 2) Três destas uvas dão vinho branco. Qual é a intrusa? **Opcoes:** Sémillon / Alvarinho / Castelão / Pinot Grigio **Resposta:** Castelão
-- (dif 2) Três destas uvas dão vinho tinto. Qual é a intrusa? **Opcoes:** Tempranillo / Nero d'Avola / Arinto / Cabernet Franc **Resposta:** Arinto
-- (dif 1) Três destas uvas dão vinho tinto. Qual é a intrusa? **Opcoes:** Cabernet Sauvignon / Sauvignon Blanc / Malbec / Tempranillo **Resposta:** Sauvignon Blanc
-- (dif 1) Três destas uvas dão vinho tinto. Qual é a intrusa? **Opcoes:** Merlot / Cabernet Sauvignon / Syrah / Sauvignon Blanc **Resposta:** Sauvignon Blanc
+- (dif 2) Três destas são uvas tintas. Qual é a intrusa? **Opcoes:** Cabernet Sauvignon / Merlot / Riesling / Barbera **Resposta:** Riesling
+- (dif 2) Três destas são uvas brancas. Qual é a intrusa? **Opcoes:** Bonarda / Arinto / Chardonnay / Sémillon **Resposta:** Bonarda
+- (dif 2) Três destas são uvas brancas. Qual é a intrusa? **Opcoes:** Cabernet Sauvignon / Sémillon / Chenin Blanc / Pinot Grigio **Resposta:** Cabernet Sauvignon
+- (dif 1) Três destas são uvas tintas. Qual é a intrusa? **Opcoes:** Pinot Noir / Chardonnay / Syrah / Cabernet Sauvignon **Resposta:** Chardonnay
+- (dif 1) Três destas são uvas tintas. Qual é a intrusa? **Opcoes:** Merlot / Cabernet Sauvignon / Syrah / Sauvignon Blanc **Resposta:** Sauvignon Blanc
 
 ### mais-encorpado
 
-- (dif 1) Qual destes costuma ser mais doce? **Opcoes:** Chile Raposa Andina Sauvignon Blanc / Château Doisy Védrines **Resposta:** Château Doisy Védrines
-- (dif 1) Qual destes costuma ser mais doce? **Opcoes:** B. P. de Rothschild Baronne Pauline / D.v. Catena Zapata Cabernet Malbec 2020 **Resposta:** B. P. de Rothschild Baronne Pauline
-- (dif 2) Qual destes costuma ser mais doce? **Opcoes:** Macaw Tropical / Nat Cool Niepoort **Resposta:** Macaw Tropical
-- (dif 1) Qual destes costuma ser mais doce? **Opcoes:** Arcadia Malbec / Andre Kientzler Alsace Gewurztraminer SGN 2000 **Resposta:** Andre Kientzler Alsace Gewurztraminer SGN 2000
-- (dif 1) Qual destes costuma ter o tanino mais firme, aquele que seca a boca? **Opcoes:** Bianchi Iv Generacion Gran Corte 2022 / Azul Ice Moscato Casa Motter **Resposta:** Bianchi Iv Generacion Gran Corte 2022
+- (dif 1) Qual destes costuma ser mais doce? **Opcoes:** Santa Carolina Reserva Carmenere Cx/6 / Andre Kientzler Alsace Gewurztraminer SGN 2000 **Resposta:** Andre Kientzler Alsace Gewurztraminer SGN 2000
+- (dif 1) Qual destes costuma ser mais doce? **Opcoes:** Salton Intenso Cabernet Sauvignon 2020 / Château Doisy Védrines **Resposta:** Château Doisy Védrines
+- (dif 2) Qual destes costuma ser mais doce? **Opcoes:** Frisante Ponto Nero Freebie / Rocim O Estrangeiro **Resposta:** Frisante Ponto Nero Freebie
+- (dif 1) Qual destes costuma ser mais doce? **Opcoes:** Dv Catena Malbec - Malbec 2022 / Château Lafaurie-Peyraguey **Resposta:** Château Lafaurie-Peyraguey
+- (dif 1) Qual destes costuma ter o tanino mais firme, aquele que seca a boca? **Opcoes:** Errazuriz Don Maximiano Foundens Reserva Ed. 150anos / Lidio Carraro Shaar-adonay **Resposta:** Errazuriz Don Maximiano Foundens Reserva Ed. 150anos
 
 ### qual-uva
 
@@ -150,7 +150,7 @@ Aproveitamento: 19497 aceitos / 37112 tentados (53%).
 - (dif 3) Este rótulo é de um vinho feito com qual uva? **Opcoes:** Barbera / Bobal / Pinot Noir / Nerello Mascalese **Resposta:** Bobal · imagem: `/rotulos/62e9ddd0-1813-466a-8920-4a11d2e76a84.webp`
 - (dif 2) Olhe o rótulo com calma. Este vinho vem de qual país? **Opcoes:** Portugal / Itália / Chile / França **Resposta:** Chile · imagem: `/rotulos/24204e0d-8c75-4b48-9424-2a03d09abf5a.webp`
 - (dif 3) Olhe o rótulo com calma. Este vinho vem de qual país? **Opcoes:** África do Sul / Chile / Argentina / Brasil **Resposta:** África do Sul · imagem: `/rotulos/f22a3aee-718f-4dc8-a32c-18bb4a0a474d.webp`
-- (dif 2) Olhe o rótulo com calma. Este vinho vem de qual país? **Opcoes:** Chile / França / Argentina / Brasil **Resposta:** Argentina · imagem: `/rotulos/83b27e6f-b316-4cd8-affa-723ba3c2b913.webp`
+- (dif 2) Olhe o rótulo com calma. Este vinho vem de qual país? **Opcoes:** Chile / França / Brasil / Argentina **Resposta:** Brasil · imagem: `/rotulos/83b27e6f-b316-4cd8-affa-723ba3c2b913.webp`
 - (dif 3) Este rótulo é de um vinho feito com qual uva? **Opcoes:** Chenin Blanc / Macabeo / Riesling / Grillo **Resposta:** Chenin Blanc · imagem: `/rotulos/dd55e29f-2893-4721-9076-f948a94ed8c3.webp`
 
 ## Desafios do Dia (amostra)

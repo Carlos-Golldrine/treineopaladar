@@ -1,8 +1,14 @@
 /**
- * Micro-aula animada de abertura de unidade: o Tchin encena o conceito
- * da unidade em 15-25s (CenaMascote), pulavel a qualquer momento.
- * Assistir INTEIRA paga +5 XP, uma vez por unidade (engine). Reassistivel
- * pelo cartao da unidade na Trilha.
+ * Micro-aula de abertura de unidade: o Tchin encena o conceito da
+ * unidade passo a passo (CenaMascote, timeline GSAP). O ritmo e de
+ * quem assiste: cada passo coreografa a entrada e espera o TOQUE,
+ * nunca avanca sozinho. Pulavel a qualquer momento.
+ * Chegar ao ultimo passo paga +5 XP, uma vez por unidade (engine).
+ * Reassistivel pelo cartao da unidade na Trilha.
+ *
+ * Este componente e carregado por React.lazy (Trilha) e por lazy de
+ * rota (Player): o gsap importado pelo CenaMascote vive SO neste
+ * chunk, fora do bundle inicial e fora do precache do app shell.
  */
 import { useEffect, useState } from 'react';
 import type { Unidade } from '../content';

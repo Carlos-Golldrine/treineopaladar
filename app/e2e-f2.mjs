@@ -370,10 +370,13 @@ try {
 
   let teveImagem = false;
   await step('(e) cartao Pratica livre visivel e rodada de 8 jogada de verdade', async () => {
-    await page.locator('.pratica-card').waitFor({ timeout: 6000 });
-    const titulo = await page.locator('.pratica-titulo').innerText();
+    /* dois cartoes de pratica existem agora (livre + revisar com cartas);
+       miramos o de pratica livre pelo aria-label estavel. */
+    const cardLivre = page.locator('.pratica-card[aria-label="Abrir a prática livre"]');
+    await cardLivre.waitFor({ timeout: 6000 });
+    const titulo = await cardLivre.locator('.pratica-titulo').innerText();
     assert(titulo.includes('Prática livre'), `cartao: "${titulo}"`);
-    await page.locator('.pratica-card').click();
+    await cardLivre.click();
     await page.waitForSelector('.vazio-titulo', { timeout: 8000 });
     assert(new URL(page.url()).pathname === '/pratica', `URL e ${page.url()}`);
     /* a rodada adaptativa deve focar a habilidade mais fraca do seed */
@@ -433,8 +436,7 @@ try {
   });
 
   await step('(e2) revisar com cartas (F2.5): flip 3D + autoavaliacao em tp.cartas.v1', async () => {
-    await page.locator('.pratica-card').click();
-    await page.getByRole('button', { name: /Revisar com cartas/ }).click();
+    await page.locator('.pratica-card[aria-label^="Revisar com cartas"]').click();
     await page.waitForSelector('.carta3d', { timeout: 8000 });
     assert(
       (await page.locator('.cartas-avaliacao').count()) === 0,
@@ -490,11 +492,17 @@ try {
     xpAntesDesafio = (await lerStore()).wallet.xpTotal;
     await page.locator('.tabbar a', { hasText: 'Desafio' }).click();
     await page.waitForSelector('.daily-card', { timeout: 8000 });
-    const imgOk = await page.evaluate((src) => {
-      const img = document.querySelector('.daily-rotulo img');
-      return img && img.getAttribute('src') === src && img.complete && img.naturalWidth > 0;
-    }, DESAFIO_HOJE.imagem);
-    assert(imgOk, `rotulo do dia nao carregou (${DESAFIO_HOJE.imagem})`);
+    /* o card aparece antes da imagem decodificar (lazy/async); espera o load real
+       igual ao passo (e), em vez de checar img.complete no mesmo tick (flaky). */
+    const srcOk = await page.waitForFunction(
+      (src) => {
+        const img = document.querySelector('.daily-rotulo img');
+        return !!img && img.getAttribute('src') === src && img.complete && img.naturalWidth > 0;
+      },
+      DESAFIO_HOJE.imagem,
+      { timeout: 8000 },
+    ).then(() => true).catch(() => false);
+    assert(srcOk, `rotulo do dia nao carregou (${DESAFIO_HOJE.imagem})`);
     await shot('desafio-aberto');
     await page.getByRole('button', { name: 'Aceitar o desafio' }).click();
 

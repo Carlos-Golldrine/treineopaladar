@@ -25,8 +25,8 @@
       ],
       "correta": 0,
       "okMsg": "Isso. Doçura é um eixo separado: dá para mexer nela sem mudar o resto.",
-      "erroMsg": "Quase. Açúcar muda a doçura e mais nada. Guarde essa ideia: ela vale para o vinho inteiro.",
-      "porque": "No vinho funciona igual: seco e suave são o mesmo universo, mudando a quantidade de açúcar."
+      "erroMsg": "Quase. No café, açúcar mexe na doçura, não na cafeína nem na temperatura.",
+      "porque": "No vinho, seco e suave são o mesmo universo mudando o açúcar, que em dose alta também soma corpo."
     },
     {
       "tipo": "mc",
@@ -40,7 +40,7 @@
       "correta": 0,
       "okMsg": "Exato. A uva chega doce, e parte desse doce pode ficar no vinho.",
       "erroMsg": "Quase. A levedura transforma o açúcar da uva em álcool. O que sobra desse processo é a doçura que você sente.",
-      "porque": "Doçura é açúcar residual: o açúcar que a fermentação não transformou em álcool."
+      "porque": "Na maior parte do mundo, doçura é açúcar residual da própria uva; no Brasil, parte dos suaves também recebe açúcar depois da fermentação."
     },
     {
       "tipo": "swipe",
@@ -105,7 +105,7 @@
       "itens": [
         "Suave",
         "Seco",
-        "Colheita tardia bem doce",
+        "Colheita tardia, néctar de sobremesa",
         "Meio seco"
       ],
       "ordemCorreta": [1, 3, 0, 2],

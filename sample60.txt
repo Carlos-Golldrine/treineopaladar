@@ -1,0 +1,622 @@
+===== qual-uva-506e294d76 | tmpl qual-uva | hab acidez | dif 1 | var -
+Q: O Partridge Stars Brut, da região de Mendoza, é feito principalmente de qual uva?
+      0 Viognier
+    * 1 Chardonnay
+      2 Sauvignon Blanc
+      3 Sémillon
+PORQUE: A ficha do Partridge Stars Brut traz Chardonnay como uva principal.
+OK: Na mosca. Chardonnay é a uva que dá a cara deste rótulo.
+ERRO: Sem drama. O Partridge Stars Brut é feito principalmente de Chardonnay. Agora você já sabe.
+vinhoId: 6f979510-72a7-446a-8977-58ea888e469e
+
+===== de-onde-vem-32cff6adfa | tmpl de-onde-vem | hab rotulo | dif 2 | var pais
+Q: De qual país vem o Aquarela Moscatel Casa Perini?
+      0 Itália
+    * 1 EUA
+      2 Chile
+      3 Brasil
+PORQUE: A ficha do Aquarela Moscatel Casa Perini marca EUA como país de origem. Os outros três países também aparecem no nosso banco com vinhos de Moscato.
+OK: Exato. Este rótulo nasce mesmo dos EUA.
+ERRO: Sem drama. O Aquarela Moscatel Casa Perini vem dos EUA. Anota essa para a próxima compra.
+vinhoId: v10-ml-b9204c50e2ee
+
+===== qual-uva-3ad68db7b8 | tmpl qual-uva | hab frutado | dif 2 | var -
+Q: O Carmim Terras del Rei Alentejo, de Portugal, é feito principalmente de qual uva?
+      0 Cabernet Franc
+    * 1 Castelão
+      2 Merlot
+      3 Grenache
+PORQUE: A ficha do Carmim Terras del Rei Alentejo traz Castelão como uva principal.
+OK: Isso. Castelão é a uva que dá a cara deste rótulo.
+ERRO: Sem drama. O Carmim Terras del Rei Alentejo é feito principalmente de Castelão. Fica para a próxima taça.
+vinhoId: cdc83711-294f-4b29-8917-652791bf5859
+
+===== intruso-uva-2729982dfc | tmpl intruso-uva | hab acidez | dif 2 | var -
+Q: Três destas uvas dão vinho tinto. Qual é a intrusa?
+      0 Grenache
+      1 Carignan
+    * 2 Riesling
+      3 Primitivo
+REGRA: Primitivo, Carignan e Grenache são uvas de vinho tinto; Riesling é uva de vinho branco.
+
+===== mais-encorpado-docura-d4a0982a50-be7ec238a1 | tmpl mais-encorpado | hab docura | dif 1 | var docura
+Q: Qual destes costuma ser mais doce?
+      0 Gregoire Hoppenot Fleurie Indigène
+    * 1 Quarts de Chaume 2008
+PORQUE: Na nossa ficha, Quarts de Chaume 2008 marca 5 de 5 em doçura e Gregoire Hoppenot Fleurie Indigène fica em 1.
+OK: Na mosca. Esse tende a vir com mais açúcar na taça.
+ERRO: Sem drama. O Quarts de Chaume 2008 costuma ser o mais doce da dupla: 5 de 5 contra 1. Fica para a próxima taça.
+vinhoId: 78e32c2a-8235-4957-b707-798c0250b82b vinhoIdB: 6aa244d1-359b-480a-b8c2-7408ff256492
+
+===== de-onde-vem-2e49339274 | tmpl de-onde-vem | hab rotulo | dif 2 | var pais
+Q: De qual país vem o Chardonnay Sutter Home?
+    * 0 EUA
+      1 Argentina
+      2 Chile
+      3 Brasil
+PORQUE: A ficha do Chardonnay Sutter Home marca EUA como país de origem. Os outros três países também aparecem no nosso banco com vinhos de Chardonnay.
+OK: Isso. Este rótulo nasce mesmo dos EUA.
+ERRO: Sem drama. O Chardonnay Sutter Home vem dos EUA. Fica para a próxima taça.
+vinhoId: v10-ml-b3e11397d5b2
+
+===== qual-uva-7bbf763db1 | tmpl qual-uva | hab frutado | dif 2 | var -
+Q: O Winebag Azul Decanter, da Itália, é feito principalmente de qual uva?
+      0 Grenache Noir
+      1 Touriga Franca
+      2 Negroamaro
+    * 3 Primitivo
+PORQUE: A ficha do Winebag Azul Decanter traz Primitivo como uva principal.
+OK: Na mosca. Primitivo é a uva que dá a cara deste rótulo.
+ERRO: Sem drama. O Winebag Azul Decanter é feito principalmente de Primitivo. Fica para a próxima taça.
+vinhoId: d8de4059-6e12-4531-8fc9-76868da40a44
+
+===== rotulo-uva-1c1273653c | tmpl rotulo | hab rotulo | dif 1 | var uva
+Q: Este rótulo é de um vinho feito com qual uva?
+      0 Bordô
+      1 Cinsault
+    * 2 Cabernet Sauvignon
+      3 Pinot Noir
+PORQUE: A ficha deste vinho traz Cabernet Sauvignon como uva principal; muitos rótulos estampam a uva na frente.
+OK: É isso mesmo. Ler a uva no rótulo é meio caminho andado na prateleira.
+ERRO: Acontece. Este é um Cabernet Sauvignon. Fica para a próxima taça.
+vinhoId: ff299d20-8c45-4fd4-a47d-f11b2519e950
+
+===== rotulo-uva-799756ade3 | tmpl rotulo | hab rotulo | dif 2 | var uva
+Q: Este rótulo é de um vinho feito com qual uva?
+      0 Negroamaro
+      1 Trincadeira
+    * 2 Grenache
+      3 Castelão
+PORQUE: A ficha deste vinho traz Grenache como uva principal; muitos rótulos estampam a uva na frente.
+OK: Bonito. Ler a uva no rótulo é meio caminho andado na prateleira.
+ERRO: Acontece. Este é um Grenache. Fica para a próxima taça.
+vinhoId: 1f6e815c-6fee-46e8-9d7a-2b5e69e3f883
+
+===== rotulo-uva-3e60576ee8 | tmpl rotulo | hab rotulo | dif 2 | var uva
+Q: Este rótulo é de um vinho feito com qual uva?
+    * 0 Arinto
+      1 Vermentino
+      2 Doña Blanca
+      3 Carricante
+PORQUE: A ficha deste vinho traz Arinto como uva principal; muitos rótulos estampam a uva na frente.
+OK: Isso. Ler a uva no rótulo é meio caminho andado na prateleira.
+ERRO: Sem drama. Este é um Arinto. Fica para a próxima taça.
+vinhoId: e60e75a4-9aaf-49f1-9caf-e36ad0d7a6a0
+
+===== qual-uva-3b69bbc420 | tmpl qual-uva | hab frutado | dif 1 | var -
+Q: O M. Janeil Les Hauts de Janeil Rouge, da região de IGP Côtes Catalanes, é feito principalmente de qual uva?
+    * 0 Syrah
+      1 Bordô
+      2 Pinot Noir
+      3 Cinsault
+PORQUE: A ficha do M. Janeil Les Hauts de Janeil Rouge traz Syrah como uva principal.
+OK: Isso. Syrah é a uva que dá a cara deste rótulo.
+ERRO: Acontece. O M. Janeil Les Hauts de Janeil Rouge é feito principalmente de Syrah. Esse detalhe vem com o treino.
+vinhoId: a92b0dc9-7cd0-463f-b4b1-a3b9648d21f4
+
+===== mais-encorpado-docura-debb0d7f5c-5bd32250d0 | tmpl mais-encorpado | hab docura | dif 1 | var docura
+Q: Qual destes costuma ser mais doce?
+    * 0 Château Guiraud
+      1 Angove Long Row Sauvignon Blanc
+PORQUE: Na nossa ficha, Château Guiraud marca 5 de 5 em doçura e Angove Long Row Sauvignon Blanc fica em 1.
+OK: É isso mesmo. Esse tende a vir com mais açúcar na taça.
+ERRO: Sem drama. O Château Guiraud costuma ser o mais doce da dupla: 5 de 5 contra 1. Fica para a próxima taça.
+vinhoId: 8780104c-73fc-4573-85d4-396096c4a735 vinhoIdB: 2f7b77e3-95f5-4735-98c7-b5261c872a81
+
+===== harmoniza-02bdaf7352 | tmpl harmoniza | hab harmonizacao | dif 1 | var -
+Q: Qual destes pratos costuma cair bem com o Trampolim Cabernet Sauvignon 2023?
+      0 Ceviche
+      1 Sushi
+      2 Ostras frescas
+    * 3 Queijo curado tipo parmesão
+PORQUE: Tinto firme de tanino pede gordura e proteína; pratos delicados do mar somem do lado dele. A ficha deste rótulo sugere queijo curado tipo parmesão.
+OK: Na mosca. Queijo curado tipo parmesão é o par que a ficha dele sugere.
+ERRO: Acontece. A ficha do Trampolim Cabernet Sauvignon 2023 aponta queijo curado tipo parmesão como companhia. Fica para a próxima taça.
+vinhoId: ae2d055e-88b0-420f-8f4a-715654db7104
+
+===== harmoniza-1a90a13aa0 | tmpl harmoniza | hab harmonizacao | dif 1 | var -
+Q: Qual destes pratos costuma cair bem com o Cordero con Piel de Lobo Malbec 2025?
+    * 0 Queijo curado tipo parmesão
+      1 Sushi
+      2 Ostras frescas
+      3 Ceviche
+PORQUE: Tinto firme de tanino pede gordura e proteína; pratos delicados do mar somem do lado dele. A ficha deste rótulo sugere queijo curado tipo parmesão.
+OK: Na mosca. Queijo curado tipo parmesão é o par que a ficha dele sugere.
+ERRO: Acontece. A ficha do Cordero con Piel de Lobo Malbec 2025 aponta queijo curado tipo parmesão como companhia. Agora você já sabe.
+vinhoId: f7cfebb7-33ba-4ddf-8dbb-bca4234aa3de
+
+===== de-onde-vem-r-0098a901c9 | tmpl de-onde-vem | hab rotulo | dif 3 | var regiao
+Q: O Château Quinault L’Enclos vem da França. De qual região?
+      0 Champagne
+      1 Bourgogne
+      2 Rhône
+    * 3 Bordeaux
+PORQUE: A ficha do Château Quinault L’Enclos marca Bordeaux como região de origem, dentro do mapa da França.
+OK: É isso mesmo. Bordeaux é a casa deste rótulo.
+ERRO: Quase. O Château Quinault L’Enclos vem de Bordeaux. Esse detalhe vem com o treino.
+vinhoId: 88c1bd47-0ee6-4800-ae3e-4102c4aa813d
+
+===== de-onde-vem-r-00de4b12da | tmpl de-onde-vem | hab rotulo | dif 3 | var regiao
+Q: O Dom. Philippe Germain Hautes-Côtes de Beaune Blanc vem da França. De qual região?
+      0 Rhône
+      1 Champagne
+      2 Bordeaux
+    * 3 Bourgogne
+PORQUE: A ficha do Dom. Philippe Germain Hautes-Côtes de Beaune Blanc marca Bourgogne como região de origem, dentro do mapa da França.
+OK: Exato. Bourgogne é a casa deste rótulo.
+ERRO: Tudo bem. O Dom. Philippe Germain Hautes-Côtes de Beaune Blanc vem de Bourgogne. Agora você já sabe.
+vinhoId: 8662e237-25cb-438e-b813-73ed3967fa67
+
+===== rotulo-pais-0cba32ca52 | tmpl rotulo | hab rotulo | dif 2 | var pais
+Q: Olhe o rótulo com calma. Este vinho vem de qual país?
+      0 Chile
+      1 França
+    * 2 Argentina
+      3 Brasil
+PORQUE: A ficha deste vinho marca Argentina como país de origem; o rótulo costuma trazer essa pista.
+OK: Na mosca. O rótulo entrega a origem para quem aprende a ler.
+ERRO: Acontece. Este rótulo vem da Argentina. Anota essa para a próxima compra.
+vinhoId: 83b27e6f-b316-4cd8-affa-723ba3c2b913
+
+===== qual-uva-10a87b3b31 | tmpl qual-uva | hab corpo | dif 3 | var -
+Q: O Amarone della Valpolicella Classico Sant'Urbano 2019, da região de Veneto, é feito principalmente de qual uva?
+      0 Corvina
+      1 Egiodola
+    * 2 Corvina Veronese
+      3 Touriga Nacional
+PORQUE: A ficha do Amarone della Valpolicella Classico Sant'Urbano 2019 traz Corvina Veronese como uva principal.
+OK: Exato. Corvina Veronese é a uva que dá a cara deste rótulo.
+ERRO: Tudo bem. O Amarone della Valpolicella Classico Sant'Urbano 2019 é feito principalmente de Corvina Veronese. Fica para a próxima taça.
+vinhoId: 793b3704-88f7-4f88-a6e0-4642e42b9dd9
+
+===== qual-uva-dd957ae63e | tmpl qual-uva | hab corpo | dif 2 | var -
+Q: O Lagar de Burmester Reserva D.O.C. Douro 2022, de Portugal, é feito principalmente de qual uva?
+      0 Syrah
+      1 Corvina
+    * 2 Touriga Nacional
+      3 Corvina Veronese
+PORQUE: A ficha do Lagar de Burmester Reserva D.O.C. Douro 2022 traz Touriga Nacional como uva principal.
+OK: Na mosca. Touriga Nacional é a uva que dá a cara deste rótulo.
+ERRO: Quase. O Lagar de Burmester Reserva D.O.C. Douro 2022 é feito principalmente de Touriga Nacional. Fica para a próxima taça.
+vinhoId: cd07975a-8dad-42f4-b463-7fe63abc1ff9
+
+===== de-onde-vem-r-00a62ecf82 | tmpl de-onde-vem | hab rotulo | dif 3 | var regiao
+Q: O Château Dalem vem da França. De qual região?
+    * 0 Bordeaux
+      1 Bourgogne
+      2 Champagne
+      3 Rhône
+PORQUE: A ficha do Château Dalem marca Bordeaux como região de origem, dentro do mapa da França.
+OK: É isso mesmo. Bordeaux é a casa deste rótulo.
+ERRO: Acontece. O Château Dalem vem de Bordeaux. Anota essa para a próxima compra.
+vinhoId: 247664b0-486e-4c65-b8e8-bfa73cbe93d0
+
+===== intruso-uva-5a2b1a8fe3 | tmpl intruso-uva | hab acidez | dif 1 | var -
+Q: Três destas uvas dão vinho tinto. Qual é a intrusa?
+      0 Syrah
+      1 Tempranillo
+    * 2 Chardonnay
+      3 Merlot
+REGRA: Merlot, Tempranillo e Syrah são uvas de vinho tinto; Chardonnay é uva de vinho branco.
+
+===== de-onde-vem-0729c196fd | tmpl de-onde-vem | hab rotulo | dif 1 | var pais
+Q: De qual país vem o Catena Dv Chardonnay 2020?
+      0 Itália
+    * 1 Argentina
+      2 Portugal
+      3 França
+PORQUE: A ficha do Catena Dv Chardonnay 2020 marca Argentina como país de origem. Os outros três países também aparecem no nosso banco com vinhos de Chardonnay.
+OK: É isso mesmo. Este rótulo nasce mesmo da Argentina.
+ERRO: Acontece. O Catena Dv Chardonnay 2020 vem da Argentina. Agora você já sabe.
+vinhoId: v10_5-saf-c2e1afc67380
+
+===== qual-uva-11ac9f0150 | tmpl qual-uva | hab frutado | dif 3 | var -
+Q: O 10 Years Old Malmsey Rich, da região de Madeira, é feito principalmente de qual uva?
+      0 Sémillon
+      1 Viognier
+      2 Gewurztraminer
+    * 3 Malvasia
+PORQUE: A ficha do 10 Years Old Malmsey Rich traz Malvasia como uva principal.
+OK: Na mosca. Malvasia é a uva que dá a cara deste rótulo.
+ERRO: Tudo bem. O 10 Years Old Malmsey Rich é feito principalmente de Malvasia. Fica para a próxima taça.
+vinhoId: 97ac2114-bf54-4fe2-9e51-1de881957c8d
+
+===== qual-uva-0724a7968d | tmpl qual-uva | hab frutado | dif 1 | var -
+Q: O Gordo Rosé, da região de Vale Central, é feito principalmente de qual uva?
+    * 0 Merlot
+      1 Pinot Noir
+      2 Bordô
+      3 Cinsault
+PORQUE: A ficha do Gordo Rosé traz Merlot como uva principal.
+OK: É isso mesmo. Merlot é a uva que dá a cara deste rótulo.
+ERRO: Acontece. O Gordo Rosé é feito principalmente de Merlot. Fica para a próxima taça.
+vinhoId: 36c7bdfb-c323-47a7-9c0e-f283f31b2391
+
+===== rotulo-uva-fcd7b3ad6d | tmpl rotulo | hab rotulo | dif 3 | var uva
+Q: Este rótulo é de um vinho feito com qual uva?
+    * 0 Negroamaro
+      1 Nero d'Avola
+      2 Trincadeira
+      3 Grenache Noir
+PORQUE: A ficha deste vinho traz Negroamaro como uva principal; muitos rótulos estampam a uva na frente.
+OK: É isso mesmo. Ler a uva no rótulo é meio caminho andado na prateleira.
+ERRO: Acontece. Este é um Negroamaro. Agora você já sabe.
+vinhoId: 8828548f-ff11-4ee6-88ba-b6374ea03b59
+
+===== mais-encorpado-docura-379d5d06be-cc43d2a0f1 | tmpl mais-encorpado | hab docura | dif 2 | var docura
+Q: Qual destes costuma ser mais doce?
+      0 Torrevento È Arte Bianco Puglia IGT
+    * 1 Frisante Tropical Macaw Casa Perini
+PORQUE: Na nossa ficha, Frisante Tropical Macaw Casa Perini marca 4 de 5 em doçura e Torrevento È Arte Bianco Puglia IGT fica em 1.
+OK: Bonito. Esse tende a vir com mais açúcar na taça.
+ERRO: Tudo bem. O Frisante Tropical Macaw Casa Perini costuma ser o mais doce da dupla: 4 de 5 contra 1. Anota essa para a próxima compra.
+vinhoId: v10-ml-bb86f7640342 vinhoIdB: c729d4b0-18a0-4882-b9f1-eb99623df78a
+
+===== intruso-uva-00df1d4ce2 | tmpl intruso-uva | hab corpo | dif 3 | var -
+Q: Três destas uvas dão vinho branco. Qual é a intrusa?
+      0 Trebbiano
+    * 1 Aglianico
+      2 Pinot Grigio
+      3 Arinto
+REGRA: Arinto, Pinot Grigio e Trebbiano são uvas de vinho branco; Aglianico é uva de vinho tinto.
+
+===== rotulo-uva-53a51ff744 | tmpl rotulo | hab rotulo | dif 2 | var uva
+Q: Este rótulo é de um vinho feito com qual uva?
+      0 Merlot
+      1 Trincadeira
+      2 Syrah
+    * 3 Bonarda
+PORQUE: A ficha deste vinho traz Bonarda como uva principal; muitos rótulos estampam a uva na frente.
+OK: Isso. Ler a uva no rótulo é meio caminho andado na prateleira.
+ERRO: Tudo bem. Este é um Bonarda. Esse detalhe vem com o treino.
+vinhoId: a9a6932b-3e08-430f-a4ad-112d53df3e52
+
+===== harmoniza-0b15db6e2f | tmpl harmoniza | hab harmonizacao | dif 2 | var -
+Q: Qual destes pratos costuma cair bem com o Fox Trail Red Blend?
+      0 Ceviche
+    * 1 Massa ao sugo
+      2 Ostras frescas
+      3 Sushi
+PORQUE: Tinto firme de tanino pede gordura e proteína; pratos delicados do mar somem do lado dele. A ficha deste rótulo sugere massa ao sugo.
+OK: Na mosca. Massa ao sugo é o par que a ficha dele sugere.
+ERRO: Acontece. A ficha do Fox Trail Red Blend aponta massa ao sugo como companhia. Agora você já sabe.
+vinhoId: f4d308f3-236f-454c-ab10-b251f7670bb8
+
+===== mais-encorpado-tanino-ff6bd319a9-a73f28cfba | tmpl mais-encorpado | hab tanino | dif 1 | var tanino
+Q: Qual destes costuma ter o tanino mais firme, aquele que seca a boca?
+    * 0 1986 Cabernet Sauvignon
+      1 Influente Regional Lisboa
+PORQUE: Na nossa ficha, 1986 Cabernet Sauvignon marca 4 de 5 em tanino e Influente Regional Lisboa marca 0.
+OK: É isso mesmo. Esse tende a segurar mais a sua saliva.
+ERRO: Sem drama. O 1986 Cabernet Sauvignon costuma secar mais: tanino 4 de 5 contra 0. Agora você já sabe.
+vinhoId: fe84b678-22d6-43b0-91f4-f45ef7dfd107 vinhoIdB: 4db123bf-ed22-42bd-90a1-8f16abcc8edd
+
+===== qual-uva-6f98f1ac56 | tmpl qual-uva | hab frutado | dif 1 | var -
+Q: O Baron de Lusson, da região de Comunidade Europeia, é feito principalmente de qual uva?
+      0 Bordô
+    * 1 Tempranillo
+      2 Pinot Noir
+      3 Cinsault
+PORQUE: A ficha do Baron de Lusson traz Tempranillo como uva principal.
+OK: Isso. Tempranillo é a uva que dá a cara deste rótulo.
+ERRO: Acontece. O Baron de Lusson é feito principalmente de Tempranillo. Agora você já sabe.
+vinhoId: a94a5dcb-09a4-4184-acfc-109a111f8d4a
+
+===== qual-uva-0905cf0956 | tmpl qual-uva | hab acidez | dif 1 | var -
+Q: O Miolo Terranova Demi-Sec, da região de Vale do São Francisco, é feito principalmente de qual uva?
+      0 Sémillon
+      1 Viognier
+    * 2 Sauvignon Blanc
+      3 Antão Vaz
+PORQUE: A ficha do Miolo Terranova Demi-Sec traz Sauvignon Blanc como uva principal.
+OK: Isso. Sauvignon Blanc é a uva que dá a cara deste rótulo.
+ERRO: Sem drama. O Miolo Terranova Demi-Sec é feito principalmente de Sauvignon Blanc. Fica para a próxima taça.
+vinhoId: dad6202a-6126-42fa-ad81-5a51bd7dd81f
+
+===== de-onde-vem-r-d14adb2c19 | tmpl de-onde-vem | hab rotulo | dif 3 | var regiao
+Q: O Marqués de Tomares Cohiba Atmosphere Reserva vem da Espanha. De qual região?
+    * 0 Rioja
+      1 Jerez
+      2 Ribera del Duero
+      3 Valencia
+PORQUE: A ficha do Marqués de Tomares Cohiba Atmosphere Reserva marca Rioja como região de origem, dentro do mapa da Espanha.
+OK: Na mosca. Rioja é a casa deste rótulo.
+ERRO: Acontece. O Marqués de Tomares Cohiba Atmosphere Reserva vem de Rioja. Fica para a próxima taça.
+vinhoId: 4a7a0a36-57ce-4fd5-b896-4e37c5b38a22
+
+===== intruso-uva-05cb5e6ecc | tmpl intruso-uva | hab acidez | dif 2 | var -
+Q: Três destas uvas dão vinho tinto. Qual é a intrusa?
+      0 Merlot
+      1 Bonarda
+    * 2 Chardonnay
+      3 Nebbiolo
+REGRA: Nebbiolo, Bonarda e Merlot são uvas de vinho tinto; Chardonnay é uva de vinho branco.
+
+===== mais-encorpado-docura-ab72366f17-79b6b1fc42 | tmpl mais-encorpado | hab docura | dif 2 | var docura
+Q: Qual destes costuma ser mais doce?
+      0 Fluminense Campeao Da America Gran Malbec 2023
+    * 1 Royal Oporto Lbv
+PORQUE: Na nossa ficha, Royal Oporto Lbv marca 4 de 5 em doçura e Fluminense Campeao Da America Gran Malbec 2023 fica em 1.
+OK: Na mosca. Esse tende a vir com mais açúcar na taça.
+ERRO: Tudo bem. O Royal Oporto Lbv costuma ser o mais doce da dupla: 4 de 5 contra 1. Esse detalhe vem com o treino.
+vinhoId: v10-ml-5e9480063ceb vinhoIdB: v10-ml-81f8e45e9a5c
+
+===== qual-uva-6d4d202c1d | tmpl qual-uva | hab frutado | dif 2 | var -
+Q: O Altos Las Hormigas, da região de Mendoza, é feito principalmente de qual uva?
+      0 Trincadeira
+    * 1 Bonarda
+      2 Merlot
+      3 Syrah
+PORQUE: A ficha do Altos Las Hormigas traz Bonarda como uva principal.
+OK: Bonito. Bonarda é a uva que dá a cara deste rótulo.
+ERRO: Quase. O Altos Las Hormigas é feito principalmente de Bonarda. Fica para a próxima taça.
+vinhoId: f8bbe53c-8208-4710-b42b-5a9a8416a771
+
+===== qual-uva-46e704a5bb | tmpl qual-uva | hab acidez | dif 1 | var -
+Q: O Finca Silverado White Blend, da região de Mendoza, é feito principalmente de qual uva?
+      0 Sauvignon Blanc
+      1 Sémillon
+    * 2 Chardonnay
+      3 Viognier
+PORQUE: A ficha do Finca Silverado White Blend traz Chardonnay como uva principal.
+OK: Na mosca. Chardonnay é a uva que dá a cara deste rótulo.
+ERRO: Sem drama. O Finca Silverado White Blend é feito principalmente de Chardonnay. Fica para a próxima taça.
+vinhoId: 2a595a06-02b5-4491-9912-09f20776e0c6
+
+===== qual-uva-4a3f34a070 | tmpl qual-uva | hab frutado | dif 2 | var -
+Q: O Francês Montmeyrac, da França, é feito principalmente de qual uva?
+      0 Trincadeira
+      1 Castelão
+    * 2 Grenache
+      3 Negroamaro
+PORQUE: A ficha do Francês Montmeyrac traz Grenache como uva principal.
+OK: Na mosca. Grenache é a uva que dá a cara deste rótulo.
+ERRO: Sem drama. O Francês Montmeyrac é feito principalmente de Grenache. Agora você já sabe.
+vinhoId: 64d3d1d6-1716-44a2-8a7c-632efcbfd459
+
+===== harmoniza-0bdf23cbbe | tmpl harmoniza | hab harmonizacao | dif 3 | var -
+Q: Qual destes pratos costuma cair bem com o Graham's Blend N5?
+      0 Sushi
+      1 Ceviche
+      2 Ostras frescas
+    * 3 Queijo gorgonzola
+PORQUE: Vinho doce e potente conversa com sobremesa e queijos fortes, nunca com pratos leves do mar. A ficha deste rótulo sugere queijo gorgonzola.
+OK: Bonito. Queijo gorgonzola é o par que a ficha dele sugere.
+ERRO: Sem drama. A ficha do Graham's Blend N5 aponta queijo gorgonzola como companhia. Fica para a próxima taça.
+vinhoId: 01dfbe23-a798-4874-9c61-a0eb5da694d7
+
+===== qual-uva-00fc04c5a2 | tmpl qual-uva | hab frutado | dif 3 | var -
+Q: O G. Bertrand Clos Du Temple Rosé, da região de Languedoc-Roussillon, é feito principalmente de qual uva?
+    * 0 Cinsault
+      1 Gamay
+      2 Pinot Noir
+      3 Bobal
+PORQUE: A ficha do G. Bertrand Clos Du Temple Rosé traz Cinsault como uva principal.
+OK: É isso mesmo. Cinsault é a uva que dá a cara deste rótulo.
+ERRO: Sem drama. O G. Bertrand Clos Du Temple Rosé é feito principalmente de Cinsault. Esse detalhe vem com o treino.
+vinhoId: 3e34cddd-d3f9-4c36-9e1b-3255dd99e087
+
+===== qual-uva-bc05290454 | tmpl qual-uva | hab frutado | dif 2 | var -
+Q: O Altos Las Hormigas La Danza Blend, da região de Mendoza, é feito principalmente de qual uva?
+    * 0 Bonarda
+      1 Syrah
+      2 Trincadeira
+      3 Merlot
+PORQUE: A ficha do Altos Las Hormigas La Danza Blend traz Bonarda como uva principal.
+OK: Isso. Bonarda é a uva que dá a cara deste rótulo.
+ERRO: Acontece. O Altos Las Hormigas La Danza Blend é feito principalmente de Bonarda. Agora você já sabe.
+vinhoId: 6fb8bb56-2557-4ad0-b9a9-ccff9f9ef8bd
+
+===== intruso-uva-1027c5a075 | tmpl intruso-uva | hab frutado | dif 3 | var -
+Q: Três destas uvas dão vinho branco. Qual é a intrusa?
+      0 Loureiro
+      1 Gewurztraminer
+      2 Malvasia
+    * 3 Negroamaro
+REGRA: Malvasia, Gewurztraminer e Loureiro são uvas de vinho branco; Negroamaro é uva de vinho tinto.
+
+===== rotulo-pais-04a0cd01b3 | tmpl rotulo | hab rotulo | dif 3 | var pais
+Q: Olhe o rótulo com calma. Este vinho vem de qual país?
+      0 Áustria
+      1 França
+    * 2 Alemanha
+      3 Brasil
+PORQUE: A ficha deste vinho marca Alemanha como país de origem; o rótulo costuma trazer essa pista.
+OK: Exato. O rótulo entrega a origem para quem aprende a ler.
+ERRO: Quase. Este rótulo vem da Alemanha. Agora você já sabe.
+vinhoId: 2fd9af89-a3ff-4001-bea9-2c6d2b536081
+
+===== qual-uva-198b227bae | tmpl qual-uva | hab acidez | dif 1 | var -
+Q: O Salton Poética, da região de Serra Gaúcha, é feito principalmente de qual uva?
+      0 Tannat
+      1 Malbec
+    * 2 Pinot Noir
+      3 Nebbiolo
+PORQUE: A ficha do Salton Poética traz Pinot Noir como uva principal.
+OK: Bonito. Pinot Noir é a uva que dá a cara deste rótulo.
+ERRO: Sem drama. O Salton Poética é feito principalmente de Pinot Noir. Esse detalhe vem com o treino.
+vinhoId: cd012d7f-b05e-4ecb-8ace-00cd758e0321
+
+===== de-onde-vem-168b42bf79 | tmpl de-onde-vem | hab rotulo | dif 2 | var pais
+Q: De qual país vem o Garzón Estate Cabernet de Corte?
+      0 Chile
+    * 1 Uruguai
+      2 Brasil
+      3 Argentina
+PORQUE: A ficha do Garzón Estate Cabernet de Corte marca Uruguai como país de origem. Os outros três países também aparecem no nosso banco com vinhos de Cabernet Franc.
+OK: Isso. Este rótulo nasce mesmo do Uruguai.
+ERRO: Sem drama. O Garzón Estate Cabernet de Corte vem do Uruguai. Fica para a próxima taça.
+vinhoId: 081426f2-cc5e-4332-9693-5b9da8948601
+
+===== rotulo-pais-04b511ac9c | tmpl rotulo | hab rotulo | dif 3 | var pais
+Q: Olhe o rótulo com calma. Este vinho vem de qual país?
+    * 0 África do Sul
+      1 Chile
+      2 Argentina
+      3 Brasil
+PORQUE: A ficha deste vinho marca África do Sul como país de origem; o rótulo costuma trazer essa pista.
+OK: Na mosca. O rótulo entrega a origem para quem aprende a ler.
+ERRO: Quase. Este rótulo vem da África do Sul. Anota essa para a próxima compra.
+vinhoId: f22a3aee-718f-4dc8-a32c-18bb4a0a474d
+
+===== mais-encorpado-docura-129f9b23db-d9b9931d0b | tmpl mais-encorpado | hab docura | dif 2 | var docura
+Q: Qual destes costuma ser mais doce?
+    * 0 Garibaldi Ice Rosé
+      1 El Torito Cabernet Sauvignon
+PORQUE: Na nossa ficha, Garibaldi Ice Rosé marca 4 de 5 em doçura e El Torito Cabernet Sauvignon fica em 1.
+OK: Bonito. Esse tende a vir com mais açúcar na taça.
+ERRO: Quase. O Garibaldi Ice Rosé costuma ser o mais doce da dupla: 4 de 5 contra 1. Agora você já sabe.
+vinhoId: v10-ml-094a341dd3ac vinhoIdB: v10-ml-049e8c01b1e0
+
+===== harmoniza-25348f70a2 | tmpl harmoniza | hab harmonizacao | dif 1 | var -
+Q: Qual destes pratos costuma cair bem com o Alfacinha Reserva Regional Lisboa 2022?
+      0 Sushi
+    * 1 Queijo curado tipo parmesão
+      2 Ceviche
+      3 Ostras frescas
+PORQUE: Tinto firme de tanino pede gordura e proteína; pratos delicados do mar somem do lado dele. A ficha deste rótulo sugere queijo curado tipo parmesão.
+OK: É isso mesmo. Queijo curado tipo parmesão é o par que a ficha dele sugere.
+ERRO: Acontece. A ficha do Alfacinha Reserva Regional Lisboa 2022 aponta queijo curado tipo parmesão como companhia. Agora você já sabe.
+vinhoId: dd771d91-1fc1-4a6d-ad29-3c4eff942f45
+
+===== mais-encorpado-docura-0988d894d4-1fff9d8b4c | tmpl mais-encorpado | hab docura | dif 2 | var docura
+Q: Qual destes costuma ser mais doce?
+      0 Poltrona Decorativa - Valentina - Bianchi Móveis
+    * 1 Macaw Frisante Tropical Rosé
+PORQUE: Na nossa ficha, Macaw Frisante Tropical Rosé marca 4 de 5 em doçura e Poltrona Decorativa - Valentina - Bianchi Móveis fica em 1.
+OK: Isso. Esse tende a vir com mais açúcar na taça.
+ERRO: Quase. O Macaw Frisante Tropical Rosé costuma ser o mais doce da dupla: 4 de 5 contra 1. Agora você já sabe.
+vinhoId: v10-ml-0efc143b9ca3 vinhoIdB: v10-ml-34796ac5e8d6
+
+===== de-onde-vem-2a323fff5a | tmpl de-onde-vem | hab rotulo | dif 2 | var pais
+Q: De qual país vem o Lidio Carraro Faces do Brasil Moscatel?
+    * 0 EUA
+      1 Itália
+      2 Chile
+      3 Brasil
+PORQUE: A ficha do Lidio Carraro Faces do Brasil Moscatel marca EUA como país de origem. Os outros três países também aparecem no nosso banco com vinhos de Moscato.
+OK: Na mosca. Este rótulo nasce mesmo dos EUA.
+ERRO: Acontece. O Lidio Carraro Faces do Brasil Moscatel vem dos EUA. Esse detalhe vem com o treino.
+vinhoId: v10-ml-b05f7632db14
+
+===== mais-encorpado-corpo-4278a29e2d-459367eaaa | tmpl mais-encorpado | hab corpo | dif 2 | var corpo
+Q: Qual destes costuma ser mais encorpado?
+      0 Fausto De Pizzato Violette
+    * 1 Sena Premiado 1 - Chileno
+PORQUE: Na nossa ficha, Sena Premiado 1 - Chileno pontua 5 de 5 em corpo e Fausto De Pizzato Violette fica em 2.
+OK: Bonito. O mais encorpado tende a ser esse mesmo.
+ERRO: Quase. O Sena Premiado 1 - Chileno costuma encher mais a boca: corpo 5 de 5 contra 2. Anota essa para a próxima compra.
+vinhoId: v10-ml-c0cfca7bf7ba vinhoIdB: v10-ml-4756e09ce719
+
+===== rotulo-tipo-113fe4c497 | tmpl rotulo | hab rotulo | dif 1 | var tipo
+Q: Pelo rótulo e pela garrafa, este vinho é de qual tipo?
+    * 0 Branco
+      1 Tinto
+      2 Espumante
+PORQUE: A ficha deste vinho marca o tipo branco; cor da garrafa e desenho do rótulo costumam dar a pista.
+OK: Isso. A garrafa conta muita coisa antes da primeira taça.
+ERRO: Acontece. Este é um branco. Fica para a próxima taça.
+vinhoId: 3a1a50fe-820c-46c3-84f8-381dfef9318f
+
+===== qual-uva-3906d674e9 | tmpl qual-uva | hab frutado | dif 1 | var -
+Q: O Santa Carolina Estelar 57 Red Blend, da região de Vale Central, é feito principalmente de qual uva?
+    * 0 Syrah
+      1 Bordô
+      2 Pinot Noir
+      3 Cinsault
+PORQUE: A ficha do Santa Carolina Estelar 57 Red Blend traz Syrah como uva principal.
+OK: Na mosca. Syrah é a uva que dá a cara deste rótulo.
+ERRO: Quase. O Santa Carolina Estelar 57 Red Blend é feito principalmente de Syrah. Anota essa para a próxima compra.
+vinhoId: 73c5ad02-0271-49b3-8463-dd131d66fc36
+
+===== de-onde-vem-r-42c47f4c50 | tmpl de-onde-vem | hab rotulo | dif 3 | var regiao
+Q: O Cinquanta Collezione N.V vem da Itália. De qual região?
+    * 0 Puglia
+      1 Sicilia
+      2 Piemonte
+      3 Toscana
+PORQUE: A ficha do Cinquanta Collezione N.V marca Puglia como região de origem, dentro do mapa da Itália.
+OK: É isso mesmo. Puglia é a casa deste rótulo.
+ERRO: Acontece. O Cinquanta Collezione N.V vem de Puglia. Anota essa para a próxima compra.
+vinhoId: 5bb02469-adef-4305-af05-9d0836dc48a5
+
+===== de-onde-vem-r-00fb4a8651 | tmpl de-onde-vem | hab rotulo | dif 3 | var regiao
+Q: O Pinot Grigio 2023 vem da Itália. De qual região?
+      0 Toscana
+      1 Piemonte
+    * 2 Friuli
+      3 Puglia
+PORQUE: A ficha do Pinot Grigio 2023 marca Friuli como região de origem, dentro do mapa da Itália.
+OK: Exato. Friuli é a casa deste rótulo.
+ERRO: Acontece. O Pinot Grigio 2023 vem de Friuli. Esse detalhe vem com o treino.
+vinhoId: c348c10e-7aec-4ba5-b1a1-2b9cb415b2c7
+
+===== mais-encorpado-corpo-234f6bc8af-4185c9b832 | tmpl mais-encorpado | hab corpo | dif 3 | var corpo
+Q: Qual destes costuma ser mais encorpado?
+    * 0 Valderiz Valdehermoso 9 meses
+      1 Violette Pizzato Vale Dos Vinhedos 2021
+PORQUE: Na nossa ficha, Valderiz Valdehermoso 9 meses pontua 4 de 5 em corpo e Violette Pizzato Vale Dos Vinhedos 2021 fica em 2.
+OK: Exato. O mais encorpado tende a ser esse mesmo.
+ERRO: Sem drama. O Valderiz Valdehermoso 9 meses costuma encher mais a boca: corpo 4 de 5 contra 2. Agora você já sabe.
+vinhoId: 23ba3b9f-5546-42de-a180-1fecf5b6a5d9 vinhoIdB: v10_5-saf-e32f4203c9c4
+
+===== rotulo-tipo-02db4ab35e | tmpl rotulo | hab rotulo | dif 1 | var tipo
+Q: Pelo rótulo e pela garrafa, este vinho é de qual tipo?
+      0 Espumante
+    * 1 Rosé
+      2 Tinto
+      3 Branco
+PORQUE: A ficha deste vinho marca o tipo rosé; cor da garrafa e desenho do rótulo costumam dar a pista.
+OK: Exato. A garrafa conta muita coisa antes da primeira taça.
+ERRO: Tudo bem. Este é um rosé. Anota essa para a próxima compra.
+vinhoId: ea7b5891-ed56-45ea-a0c6-dd243624ce4e
+
+===== mais-encorpado-docura-07aba9304f-45509322b9 | tmpl mais-encorpado | hab docura | dif 3 | var docura
+Q: Qual destes costuma ser mais doce?
+      0 Racines Pinot Noir 2020
+    * 1 5 Years Old Verdelho
+PORQUE: Na nossa ficha, 5 Years Old Verdelho marca 3 de 5 em doçura e Racines Pinot Noir 2020 fica em 1.
+OK: Isso. Esse tende a vir com mais açúcar na taça.
+ERRO: Acontece. O 5 Years Old Verdelho costuma ser o mais doce da dupla: 3 de 5 contra 1. Esse detalhe vem com o treino.
+vinhoId: add0eea6-4a54-4e06-a16d-9861ff46a806 vinhoIdB: 49827a11-0dba-4e08-9e0c-bd01f9a6e191
+
+===== de-onde-vem-01c7910506 | tmpl de-onde-vem | hab rotulo | dif 1 | var pais
+Q: De qual país vem o Salton Intenso Malbec?
+    * 0 Brasil
+      1 Chile
+      2 Argentina
+      3 França
+PORQUE: A ficha do Salton Intenso Malbec marca Brasil como país de origem. Os outros três países também aparecem no nosso banco com vinhos de Malbec.
+OK: É isso mesmo. Este rótulo nasce mesmo do Brasil.
+ERRO: Sem drama. O Salton Intenso Malbec vem do Brasil. Esse detalhe vem com o treino.
+vinhoId: v10-ml-5efbc25acc7b
+
+===== rotulo-tipo-0bcb81c229 | tmpl rotulo | hab rotulo | dif 1 | var tipo
+Q: Pelo rótulo e pela garrafa, este vinho é de qual tipo?
+      0 Tinto
+      1 Branco
+    * 2 Espumante
+PORQUE: A ficha deste vinho marca o tipo espumante; cor da garrafa e desenho do rótulo costumam dar a pista.
+OK: Bonito. A garrafa conta muita coisa antes da primeira taça.
+ERRO: Sem drama. Este é um espumante. Agora você já sabe.
+vinhoId: 2db69d11-44ae-4554-bd51-ebe2a02a08f0

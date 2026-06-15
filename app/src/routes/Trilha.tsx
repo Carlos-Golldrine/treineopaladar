@@ -21,6 +21,7 @@ import { MascoteToast } from '../mascote';
 import { FALAS } from '../onboarding/conteudo';
 import { consumirAnimTrilha } from '../licao/tipos';
 import { tocar } from '../som/som';
+import { baralhoDisponivel, cartasParaHoje, lerAgenda } from '../pratica/cartas';
 
 import './trilha.css';
 
@@ -115,6 +116,14 @@ export default function Trilha() {
   );
   const totalConcluidas = vistas.reduce((soma, v) => soma + v.concluidas, 0);
 
+  /* Baralho de cartas das licoes ja feitas: o cartao de revisao so aparece
+     quando ha o que revisar, e o chip puxa a contagem real do SRS. */
+  const cartasHoje = useMemo(() => {
+    if (totalConcluidas === 0) return 0;
+    return cartasParaHoje(baralhoDisponivel(), lerAgenda(), Date.now());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [progresso, totalConcluidas]);
+
   /* O no "atual" (pill Comecar) e a 1a licao nao concluida da 1a unidade
      aberta e incompleta; outras unidades abertas tem a 1a pendente livre */
   const vistaAtual = vistas.find((v) => v.aberta && !v.completa);
@@ -200,6 +209,27 @@ export default function Trilha() {
             <span className="pratica-sub">Rodadas de 8 com rótulos de verdade. Sem gastar vida.</span>
           </span>
           <Ic nome="seta-direita" size={20} className="pratica-seta" />
+        </button>
+      )}
+
+      {cartasHoje > 0 && (
+        <button
+          type="button"
+          className="pratica-card tap"
+          onClick={() => navigate('/pratica?ir=cartas')}
+          aria-label={`Revisar com cartas, ${cartasHoje} para hoje`}
+        >
+          <span className="pratica-selo">
+            <Ic nome="livro-flashcard" size={22} />
+          </span>
+          <span className="pratica-textos">
+            <span className="pratica-titulo">Revisar com cartas</span>
+            <span className="pratica-sub">Fixe o que já viu, uma frase por vez.</span>
+          </span>
+          <span className="cartas-chip">
+            <span className="cartas-chip-num">{cartasHoje}</span>
+            {cartasHoje === 1 ? 'carta hoje' : 'cartas hoje'}
+          </span>
         </button>
       )}
 

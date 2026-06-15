@@ -13,9 +13,11 @@ export interface FtueFlags {
   cristaisColetados: boolean;
   /** True depois do tooltip de loja (mostrado so ao zerar as vidas). */
   lojaVista: boolean;
+  /** True depois do toast unico que aponta a ficha de bolso (1a licao aberta). */
+  fichaApontada: boolean;
 }
 
-const PADRAO: FtueFlags = { cristaisColetados: false, lojaVista: false };
+const PADRAO: FtueFlags = { cristaisColetados: false, lojaVista: false, fichaApontada: false };
 
 function ler(): FtueFlags {
   try {
@@ -25,6 +27,7 @@ function ler(): FtueFlags {
     return {
       cristaisColetados: dado.cristaisColetados === true,
       lojaVista: dado.lojaVista === true,
+      fichaApontada: dado.fichaApontada === true,
     };
   } catch {
     return PADRAO;

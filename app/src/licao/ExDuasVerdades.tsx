@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import type { ReactNode } from 'react';
 import type { ExercicioDuasVerdades } from '../engine';
 import type { FaseExercicio, ResolucaoExercicio } from './tipos';
 
@@ -8,9 +9,11 @@ interface Props {
   onResolver: (r: ResolucaoExercicio) => void;
   /** Dica comprada: indice de uma verdade confirmada (nao e a mentira). */
   eliminada?: number;
+  /** Cena interativa da habilidade, entre a pergunta e as afirmacoes. */
+  cena?: ReactNode;
 }
 
-export function ExDuasVerdades({ ex, fase, onResolver, eliminada }: Props) {
+export function ExDuasVerdades({ ex, fase, onResolver, eliminada, cena }: Props) {
   const [sel, setSel] = useState<number | null>(null);
   const travado = fase !== 'respondendo';
 
@@ -33,6 +36,7 @@ export function ExDuasVerdades({ ex, fase, onResolver, eliminada }: Props) {
     <div className="ex">
       <p className="ex-eyebrow">Duas verdades e uma mentira sobre {ex.tema.toLowerCase()}</p>
       <h2 className="ex-pergunta">Toque na mentira.</h2>
+      {cena}
       <div className="ex-opcoes" role="group" aria-label="Afirmações">
         {ex.afirmacoes.map((frase, i) => {
           const fora = eliminada === i;

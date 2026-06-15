@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import type { ReactNode } from 'react';
 import type { ExercicioIntruso } from '../engine';
 import type { FaseExercicio, ResolucaoExercicio } from './tipos';
 import { RotuloFigura } from './RotuloFigura';
@@ -10,9 +11,11 @@ interface Props {
   onResolver: (r: ResolucaoExercicio) => void;
   /** Dica comprada: mostra a regra do grupo antes da resposta. */
   regraRevelada?: boolean;
+  /** Cena interativa da habilidade, entre a pergunta e as opcoes. */
+  cena?: ReactNode;
 }
 
-export function ExIntruso({ ex, fase, onResolver, regraRevelada }: Props) {
+export function ExIntruso({ ex, fase, onResolver, regraRevelada, cena }: Props) {
   const [sel, setSel] = useState<number | null>(null);
   const travado = fase !== 'respondendo';
 
@@ -36,6 +39,7 @@ export function ExIntruso({ ex, fase, onResolver, regraRevelada }: Props) {
           {ex.regra}
         </p>
       )}
+      {cena}
       <div className="ex-opcoes ex-grade" role="group" aria-label="Opções">
         {ex.opcoes.map((opcao, i) => {
           let extra = '';

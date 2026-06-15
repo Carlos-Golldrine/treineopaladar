@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import type { ReactNode } from 'react';
 import type { ExercicioSwipe } from '../engine';
 import type { FaseExercicio, ResolucaoExercicio } from './tipos';
 
@@ -6,6 +7,8 @@ interface Props {
   ex: ExercicioSwipe;
   fase: FaseExercicio;
   onResolver: (r: ResolucaoExercicio) => void;
+  /** Cena interativa da habilidade, entre a instrucao e o deck. */
+  cena?: ReactNode;
 }
 
 interface FeedbackCarta {
@@ -20,7 +23,7 @@ const LIMIAR = 88;
  * "não é". Fisica de arraste com pointer events + fallback por botoes.
  * O exercicio fecha certo quando todas as cartas saem para o lado certo.
  */
-export function ExSwipe({ ex, fase, onResolver }: Props) {
+export function ExSwipe({ ex, fase, onResolver, cena }: Props) {
   const [idx, setIdx] = useState(0);
   const [acertosCartas, setAcertosCartas] = useState(0);
   const [feedback, setFeedback] = useState<FeedbackCarta | null>(null);
@@ -89,6 +92,7 @@ export function ExSwipe({ ex, fase, onResolver }: Props) {
   return (
     <div className="ex">
       <h2 className="ex-pergunta">{ex.instrucao}</h2>
+      {cena}
 
       <div className="deck-pontos app-chrome" aria-label={`Carta ${Math.min(idx + 1, total)} de ${total}`}>
         {ex.cartas.map((c, i) => (

@@ -1,8 +1,8 @@
 {
   "total": 112,
-  "convertidas_agora": 80,
-  "puladas_ja_existiam": 32,
-  "orfas_removidas": 80,
+  "convertidas_agora": 0,
+  "puladas_ja_existiam": 112,
+  "orfas_removidas": 0,
   "falhas": 0,
   "peso_mb": 0.79,
   "media_kb": 7.2,

@@ -108,6 +108,27 @@
   color: var(--neutral-300);
 }
 
+/* Chip "N cartas hoje" no cartao de revisar com cartas (contagem real do SRS) */
+.cartas-chip {
+  flex: none;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  padding: 6px 10px;
+  border-radius: var(--radius-card);
+  background: rgba(212, 165, 116, 0.18);
+  color: var(--gold-700);
+  font-size: var(--text-xs);
+  line-height: 1.1;
+  text-align: center;
+}
+
+.cartas-chip-num {
+  font: 600 var(--text-md) / 1 var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
 /* ---------- Cartao da unidade ---------- */
 .unit-card {
   margin: var(--space-5) var(--space-4) 0;

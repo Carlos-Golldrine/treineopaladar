@@ -1,5 +1,8 @@
 /**
- * Roteiros das micro-aulas de abertura de unidade (15-25s cada).
+ * Roteiros das micro-aulas de abertura de unidade.
+ * O ritmo e por TOQUE (CenaMascote): cada passo coreografa a entrada
+ * (mascote, prop, fala palavra a palavra) e espera quem assiste tocar.
+ * Roteiro nao define duracao: define sequencia.
  *
  * REGRA DE FATO: toda fala com conteudo enologico deriva DIRETAMENTE de um
  * fato da fichaCanonica das licoes da propria unidade (a fonte esta anotada
@@ -10,7 +13,7 @@
 import type { PassoCena } from '../mascote';
 
 export const ROTEIROS_UNIDADE: Record<string, PassoCena[]> = {
-  /* Fundamentos do Paladar: 6 passos x 3s = ~18s.
+  /* Fundamentos do Paladar: 6 passos no ritmo do toque.
      Ordem segue a trilha (C6): docura abre a unidade. */
   u1: [
     { estado: 'ensina', prop: 'uva', fala: 'Doçura é açúcar que sobrou da fermentação.' } /* u1-l4 */,

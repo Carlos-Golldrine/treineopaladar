@@ -28,7 +28,7 @@ export const IDX_J7 = 4;
 
 /* Comparativo de proposito: o tinto TAMBEM aceita geladeira (a J4 ensina
    exatamente isso), entao a pergunta precisa do "MAIS gelado" para ser
-   factualmente exata. Branco serve a 8-12 graus; tinto fresco, 12-16. */
+   factualmente exata. Branco serve a 8-12 graus; tinto fresco, 12-18 (leves no lado frio). */
 const j1: ExercicioMC = {
   tipo: 'mc',
   dificuldade: 1,
@@ -73,10 +73,10 @@ const j4: ExercicioMC = {
 const j5Mercado: ExercicioMC = {
   tipo: 'mc',
   dificuldade: 2,
-  pergunta: 'No mercado, o rótulo diz seco. O que esperar do gole?',
+  pergunta: 'No mercado, o rótulo diz seco. O que essa palavra conta sobre o vinho?',
   opcoes: [
     'Um vinho com quase nada de açúcar',
-    'Um vinho que resseca a língua',
+    'Que ele resseca a língua',
     'Um vinho perto de vencer',
   ],
   correta: 0,
@@ -148,10 +148,10 @@ const j5Trabalho: ExercicioMC = {
 const j5Outros: ExercicioMC = {
   tipo: 'mc',
   dificuldade: 2,
-  pergunta: 'Uma garrafa diz seco no rótulo. O que esperar do primeiro gole?',
+  pergunta: 'Uma garrafa diz seco no rótulo. O que essa palavra conta sobre o vinho?',
   opcoes: [
     'Um vinho com quase nada de açúcar',
-    'Um vinho que resseca a língua',
+    'Que ele resseca a língua',
     'Um vinho perto de vencer',
   ],
   correta: 0,
@@ -172,7 +172,7 @@ const j7: ExercicioMC = {
   correta: 0,
   okMsg: 'Pronto. Primeira lição no bolso.',
   erroMsg: 'Respira. Espumante pede geladeira: bem gelado ele brilha.',
-  porque: 'Espumante se serve bem gelado, entre 6 e 10 graus. É a regra que abre qualquer encontro.',
+  porque: 'Espumante se serve bem gelado, entre 6 e 8 graus. É a regra que abre qualquer encontro.',
 };
 
 /** J5 muda conforme o objetivo escolhido na J3 (payoff visivel da escolha). */
@@ -195,8 +195,8 @@ export const licaoFtue: Licao = {
   habilidade: 'rotulo',
   hook: '',
   fichaCanonica: [
-    'Vinhos brancos e espumantes são servidos bem gelados, entre 6 e 10 graus.',
-    'Vinhos tintos são servidos frescos, entre 14 e 18 graus, abaixo da temperatura ambiente do Brasil.',
+    'Vinhos brancos e espumantes são servidos bem gelados, abaixo de uns 10 graus.',
+    'Vinhos tintos são servidos frescos, entre 12 e 18 graus, com os leves no lado mais frio, abaixo da temperatura ambiente do Brasil.',
     'Tintos leves, como o Pinot Noir, ficam mais saborosos com uns 20 minutos de geladeira antes de servir.',
     'Vinho seco é o que tem pouco ou nenhum açúcar sobrando da fermentação.',
     'A acidez e as bolhas do espumante limpam a gordura da boca, por isso ele acompanha bem frituras e salgados.',
@@ -219,18 +219,22 @@ export const licaoFtue: Licao = {
 export interface CartaConteudo {
   id: string;
   rotulo: string;
+  /** Subtitulo opcional por beneficio (so cartas de objetivo). O componente
+     da J3 deve exibir o sub abaixo do rotulo quando presente. */
+  sub?: string;
   /** 1 a 3, so para as cartas de nivel (pontinhos). */
   pontos?: number;
 }
 
-/* J3: grid 2x3, rotulos curtos (1 toque, leitura de relance) */
+/* J3: grid 2x3, rotulos por beneficio (decisao do fundador). Mesmos ids/valores;
+   so a copy mudou. O sub e exibido pelo componente quando presente. */
 export const CARTAS_OBJETIVO: CartaConteudo[] = [
-  { id: 'mercado', rotulo: 'No mercado' },
-  { id: 'restaurante', rotulo: 'No restaurante' },
-  { id: 'receber', rotulo: 'Recebendo em casa' },
-  { id: 'presente', rotulo: 'Presentear' },
-  { id: 'trabalho', rotulo: 'Trabalho com vinho' },
-  { id: 'outros', rotulo: 'Outro motivo' },
+  { id: 'mercado', rotulo: 'Comprar sem medo de errar', sub: 'na gôndola do mercado' },
+  { id: 'restaurante', rotulo: 'Pedir bem no restaurante', sub: 'carta de vinhos sem pânico' },
+  { id: 'receber', rotulo: 'Harmonizar em casa', sub: 'casar prato e taça' },
+  { id: 'presente', rotulo: 'Acertar no presente', sub: 'a garrafa certa para a pessoa certa' },
+  { id: 'trabalho', rotulo: 'Trabalhar com vinho', sub: 'balcão, salão ou adega' },
+  { id: 'outros', rotulo: 'Só quero aprender', sub: 'curiosidade e motivo de sobra' },
 ];
 
 export const CARTAS_NIVEL: CartaConteudo[] = [

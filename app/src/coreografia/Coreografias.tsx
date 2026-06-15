@@ -258,18 +258,24 @@ interface ObservadorProps {
   visivel: boolean;
   tamanho?: number;
   estilo?: CSSProperties;
+  /** Alvo do olhar (clientX/clientY): o Tchin olha a opcao recem-tocada. */
+  alvoX?: number;
+  alvoY?: number;
 }
 
 /**
  * Tchin pequeno em idle no rodape da tela de exercicio: respira, pisca
  * e segue o toque. Fica ATRAS do conteudo (z-index negativo) e nunca
  * captura toques: presenca sem atrapalhar o polegar.
+ *
+ * Quando o Player passa alvoX/alvoY (opcao tocada), o olhar mira ali em
+ * vez de seguir o toque generico: o mascote reage a selecao.
  */
-export function TchinObservador({ visivel, tamanho = 54, estilo }: ObservadorProps) {
+export function TchinObservador({ visivel, tamanho = 54, estilo, alvoX, alvoY }: ObservadorProps) {
   if (!visivel) return null;
   return (
     <div className="tchin-observa" style={estilo} aria-hidden="true">
-      <Tchin estado="idle" tamanho={tamanho} />
+      <Tchin estado="idle" tamanho={tamanho} alvoX={alvoX} alvoY={alvoY} />
     </div>
   );
 }

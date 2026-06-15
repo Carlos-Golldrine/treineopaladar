@@ -7,6 +7,7 @@ import { todasLicoes } from '../../content';
 import { INTERVALOS_REVISAO_DIAS, MS_DIA } from '../../engine';
 import {
   avaliarCarta,
+  cartasParaHoje,
   cartasVencidas,
   derivarCartas,
   montarSessaoCartas,
@@ -105,5 +106,34 @@ describe('sessao de cartas', () => {
     const sessao = montarSessaoCartas(cartas, agenda, T0, rng);
     expect(sessao.length).toBe(10);
     expect(cartasVencidas(cartas, agenda, T0)).toBe(0);
+  });
+});
+
+describe('contagem para o chip da Trilha (cartasParaHoje)', () => {
+  const cartas = derivarCartas(todasLicoes.slice(0, 3)); /* ~18 cards */
+
+  it('baralho novo conta todas, mas nunca passa do tamanho da sessao (10)', () => {
+    expect(cartas.length).toBeGreaterThan(10);
+    expect(cartasParaHoje(cartas, {}, T0)).toBe(10);
+    /* casa com o que a sessao de fato serve */
+    expect(cartasParaHoje(cartas, {}, T0)).toBe(
+      montarSessaoCartas(cartas, {}, T0, () => 0.5).length,
+    );
+  });
+
+  it('soma vencidas (ja vistas) e nunca vistas, sem contar as futuras', () => {
+    let agenda: AgendaCartas = {};
+    /* 2 vencidas */
+    agenda = avaliarCarta(agenda, cartas[0].id, 'sabia', T0 - 9 * MS_DIA);
+    agenda = avaliarCarta(agenda, cartas[1].id, 'naosabia', T0 - 5 * MS_DIA);
+    /* 1 agendada para o futuro (nao conta hoje) */
+    agenda = avaliarCarta(agenda, cartas[2].id, 'sabia', T0);
+    const novas = cartas.length - 3;
+    const esperado = Math.min(2 + novas, 10);
+    expect(cartasParaHoje(cartas, agenda, T0)).toBe(esperado);
+  });
+
+  it('baralho vazio conta zero', () => {
+    expect(cartasParaHoje([], {}, T0)).toBe(0);
   });
 });

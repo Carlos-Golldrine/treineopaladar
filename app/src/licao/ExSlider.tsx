@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import type { ReactNode } from 'react';
 import type { ExercicioSlider } from '../engine';
 import type { FaseExercicio, ResolucaoExercicio } from './tipos';
 
@@ -13,9 +14,11 @@ interface Props {
   onResolver: (r: ResolucaoExercicio) => void;
   /** Dica comprada: a regua so aceita valores dentro desta faixa (50%). */
   faixaDica?: FaixaDica;
+  /** Cena interativa da habilidade, entre a pergunta e a regua. */
+  cena?: ReactNode;
 }
 
-export function ExSlider({ ex, fase, onResolver, faixaDica }: Props) {
+export function ExSlider({ ex, fase, onResolver, faixaDica, cena }: Props) {
   const [valor, setValor] = useState(50);
   const travado = fase !== 'respondendo';
   const revelado = fase === 'revelado';
@@ -44,6 +47,7 @@ export function ExSlider({ ex, fase, onResolver, faixaDica }: Props) {
   return (
     <div className="ex">
       <h2 className="ex-pergunta">{ex.pergunta}</h2>
+      {cena}
 
       <div className="regua entra">
         <div className={`regua-trilho${revelado ? (acertou ? ' trilho-ok' : ' trilho-erro') : ''}`}>
