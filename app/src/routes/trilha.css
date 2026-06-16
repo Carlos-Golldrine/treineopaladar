@@ -219,7 +219,22 @@ section:first-of-type > .unit-card {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 26px;
   padding: var(--space-4) var(--space-4) var(--space-5);
+}
+
+/* O mascote Tchin acompanha a trilha da unidade atual (na lateral do caminho) */
+.trail-wrap {
+  position: relative;
+}
+
+.trilha-mascote {
+  position: absolute;
+  top: 44%; /* na altura da 3a licao (Acidez), no meio do caminho */
+  left: 6px;
+  transform: translateY(-50%);
+  z-index: 1;
+  pointer-events: none;
 }
 
 /* Folga extra so quando o pill "Começar" flutua acima do 1o no da unidade */
@@ -233,44 +248,65 @@ section:first-of-type > .unit-card {
   align-items: center;
 }
 
-.trail-item + .trail-item::before {
-  content: '';
-  width: 4px;
-  height: 32px;
-  margin: var(--space-2) 0;
-  border-radius: var(--radius-pill);
-  background: var(--neutral-200);
+/* Caminho serpenteado (mais ludico): os nos desviam em S pela coluna.
+   A propria curva guia o olhar, sem a linha reta de antes. */
+.trail-item:nth-child(8n + 2) {
+  transform: translateX(38px);
+}
+.trail-item:nth-child(8n + 3) {
+  transform: translateX(60px);
+}
+.trail-item:nth-child(8n + 4) {
+  transform: translateX(38px);
+}
+.trail-item:nth-child(8n + 6) {
+  transform: translateX(-38px);
+}
+.trail-item:nth-child(8n + 7) {
+  transform: translateX(-60px);
+}
+.trail-item:nth-child(8n + 8) {
+  transform: translateX(-38px);
 }
 
-.trail-item.reached::before {
-  background: var(--gold-500);
+/* Folga p/ o pill quando o no atual nao e o primeiro da unidade */
+.trail-item.current:not(:first-child) {
+  margin-top: 28px;
 }
 
 .node {
   position: relative;
-  width: 72px;
-  height: 80px;
-  border-radius: var(--radius-pill);
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
   display: grid;
   place-items: center;
 }
 
-/* No da trilha: a taca e o elemento-assinatura, sem moldura pesada */
+/* No da trilha: disco 3D gordo (estilo Duolingo) com a taca-assinatura
+   dentro. A "base" e a sombra solida embaixo, que afunda no toque. */
 .node-taca {
   background: var(--neutral-50);
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 5px 0 var(--neutral-300);
 }
 
-.trail-item.locked .node-taca {
-  background: transparent;
-  box-shadow: none;
+/* Concluida: pe dourado, sensacao de recompensa */
+.trail-item.reached:not(.current) .node-taca {
+  box-shadow: 0 5px 0 var(--gold-500);
+}
+
+/* No ainda bloqueado: disco cinza com cadeado claro */
+.node-bloq {
+  background: var(--neutral-100);
+  color: var(--neutral-400);
+  box-shadow: 0 5px 0 var(--neutral-200);
 }
 
 .node-atual {
-  width: 84px;
-  height: 92px;
+  width: 88px;
+  height: 88px;
   background: var(--bg);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 6px 0 var(--wine-900);
 }
 
 /* Pulso sutil do no atual: so transform e opacity, 60fps */
@@ -402,21 +438,21 @@ section:first-of-type > .unit-card {
 }
 
 .checkpoint-selo {
-  width: 48px;
-  height: 48px;
+  width: 64px;
+  height: 64px;
   display: grid;
   place-items: center;
-  border-radius: var(--radius-pill);
-  border: 2px dashed var(--neutral-300);
-  color: var(--neutral-300);
-  background: var(--bg);
+  border-radius: 50%;
+  border: none;
+  color: var(--gold-700);
+  background: var(--neutral-100);
+  box-shadow: 0 5px 0 var(--neutral-200);
 }
 
 .checkpoint-ganho {
-  border: none;
   background: var(--gold-500);
   color: var(--wine-900);
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 6px 0 var(--gold-700);
 }
 
 .trail-checkpoint .node-label {
@@ -426,24 +462,40 @@ section:first-of-type > .unit-card {
 /* ---------- Unidade bloqueada (cartao compacto) ---------- */
 .unit-locked {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: var(--space-3);
-  margin: var(--space-5) var(--space-4) 0;
-  padding: var(--space-4);
+  margin: var(--space-3) var(--space-4) 0;
+  padding: var(--space-3) var(--space-4);
   border-radius: var(--radius-card);
-  border: 1.5px dashed var(--neutral-200);
+  border: 1px solid var(--neutral-100);
   background: var(--neutral-50);
 }
 
-.unit-locked-selo {
+.unit-locked-num {
+  position: relative;
   flex: none;
-  width: 36px;
-  height: 36px;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-control);
+  background: var(--neutral-100);
+  font: 600 var(--text-lg) / 1 var(--font-display);
+  color: var(--neutral-500);
+}
+
+.unit-locked-cadeado {
+  position: absolute;
+  right: -5px;
+  bottom: -5px;
+  width: 21px;
+  height: 21px;
   display: grid;
   place-items: center;
   border-radius: var(--radius-pill);
-  background: var(--neutral-100);
-  color: var(--neutral-400);
+  background: var(--neutral-200);
+  color: var(--neutral-500);
+  border: 2px solid var(--bg);
 }
 
 .unit-locked-textos {

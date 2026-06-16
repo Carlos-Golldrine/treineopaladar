@@ -30,6 +30,8 @@ export interface FeedMesa {
   semana: string;
   membros: number;
   divisao: string;
+  privada: boolean;
+  codigoConvite: string;
   ranking: RankItem[];
   posts: PostMesa[];
 }
@@ -50,7 +52,7 @@ export async function carregarFeed(mesaId: string): Promise<FeedMesa | null> {
   const uid = (await sb.auth.getUser()).data.user?.id ?? null;
 
   const [mesaRes, membrosRes, postsRes, tchinsRes, divRes, rankRes] = await Promise.all([
-    sb.from('mesas').select('semana_iso').eq('id', mesaId).maybeSingle(),
+    sb.from('mesas').select('semana_iso, codigo_convite, privada').eq('id', mesaId).maybeSingle(),
     sb.from('mesa_membros').select('user_id', { count: 'exact', head: true }).eq('mesa_id', mesaId),
     sb.from('mesa_posts').select('*').eq('mesa_id', mesaId).order('created_at', { ascending: false }),
     sb.from('mesa_tchins').select('post_id, user_id'),
@@ -85,9 +87,29 @@ export async function carregarFeed(mesaId: string): Promise<FeedMesa | null> {
     semana: (mesaRes.data?.semana_iso as string) ?? '',
     membros: membrosRes.count ?? 0,
     divisao: (divRes.data?.divisao as string) ?? 'bronze',
+    privada: (mesaRes.data?.privada as boolean) ?? false,
+    codigoConvite: (mesaRes.data?.codigo_convite as string) ?? '',
     ranking,
     posts,
   };
+}
+
+/** Liga/desliga a privacidade da mesa (so membros). Retorna o novo estado. */
+export async function definirPrivacidade(mesaId: string, privada: boolean): Promise<boolean | null> {
+  const sb = getSupabase();
+  if (!sb) return null;
+  const { data, error } = await sb.rpc('definir_privacidade_mesa', { p_mesa: mesaId, p_privada: privada });
+  if (error) return null;
+  return (data as boolean) ?? privada;
+}
+
+/** Entra numa mesa pelo codigo de convite. Retorna o mesaId, ou null. */
+export async function entrarPorConvite(codigo: string): Promise<string | null> {
+  const sb = getSupabase();
+  if (!sb) return null;
+  const { data, error } = await sb.rpc('entrar_por_convite', { p_codigo: codigo });
+  if (error) return null;
+  return (data as string) ?? null;
 }
 
 /** Liga/desliga o Tchin! do usuario num post. */

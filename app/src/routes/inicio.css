@@ -1,0 +1,355 @@
+/* ---------- Inicio: cabecalho com saudacao + stats ---------- */
+.inicio-topo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: max(env(safe-area-inset-top), 14px) var(--space-4) var(--space-2);
+}
+
+.inicio-saud-eyebrow {
+  font-size: var(--text-xs);
+  color: var(--neutral-500);
+}
+
+.inicio-saud-titulo {
+  margin-top: 3px;
+  font: 600 var(--text-lg) / 1.1 var(--font-display);
+  color: var(--wine-900);
+}
+
+.inicio-stats {
+  flex: none;
+  display: flex;
+  gap: 7px;
+}
+
+.inicio-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 9px;
+  border-radius: var(--radius-control);
+  background: var(--neutral-50);
+  font: 500 var(--text-sm) / 1 var(--font-mono);
+  color: var(--wine-900);
+}
+
+.inicio-stat-streak .ic {
+  color: var(--ember-500);
+}
+.inicio-stat-vidas .ic {
+  color: var(--wine-700);
+}
+.inicio-stat-cristais .ic {
+  color: var(--gold-700);
+}
+
+/* ---------- Card de contexto da unidade ---------- */
+.inicio-unidade {
+  display: block;
+  width: auto;
+  margin: var(--space-2) var(--space-4) 0;
+  padding: var(--space-4);
+  border-radius: var(--radius-card);
+  background: var(--wine-700);
+  color: var(--bg);
+  text-align: left;
+  box-shadow: var(--shadow-md);
+}
+
+.inicio-unidade-eyebrow {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold-500);
+}
+
+.inicio-unidade-titulo {
+  margin-top: var(--space-1);
+  font: 600 var(--text-lg) / 1.2 var(--font-display);
+}
+
+.inicio-unidade-prog {
+  margin-top: var(--space-3);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.inicio-bar {
+  flex: 1;
+  height: 7px;
+  border-radius: var(--radius-pill);
+  background: rgba(250, 250, 248, 0.18);
+  overflow: hidden;
+}
+
+.inicio-bar-fill {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: var(--gold-500);
+}
+
+.inicio-unidade-cont {
+  font: 500 var(--text-xs) / 1 var(--font-mono);
+  color: var(--gold-500);
+}
+
+/* ---------- Acao principal: Continuar (botao 3D vinho) ---------- */
+.inicio-continuar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: auto;
+  margin: var(--space-3) var(--space-4) 0;
+  padding: 14px 15px;
+  border-radius: var(--radius-card);
+  background: var(--wine-900);
+  color: var(--bg);
+  text-align: left;
+  box-shadow: 0 5px 0 #2c1216;
+}
+
+.inicio-continuar:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 #2c1216;
+}
+
+.inicio-continuar-ico {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-control);
+  background: rgba(212, 165, 116, 0.2);
+  color: var(--gold-500);
+}
+
+.inicio-continuar-txt {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.inicio-continuar-titulo {
+  font: 600 var(--text-md) / 1.1 var(--font-display);
+}
+
+.inicio-continuar-sub {
+  margin-top: 2px;
+  font-size: var(--text-xs);
+  line-height: 1.3;
+  color: rgba(250, 250, 248, 0.7);
+}
+
+.inicio-continuar-seta {
+  color: var(--gold-500);
+}
+
+/* ---------- Atalhos (grid 2x2, estilo Suggestions) ---------- */
+.inicio-atalhos-cab {
+  margin: var(--space-5) var(--space-4) var(--space-2);
+}
+
+.inicio-atalhos-titulo {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--neutral-500);
+}
+
+.inicio-atalhos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+  margin: 0 var(--space-4) var(--space-5);
+}
+
+.inicio-atalho {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: var(--space-3);
+  border-radius: var(--radius-card);
+  border: 1.5px solid var(--neutral-200);
+  background: var(--neutral-50);
+  text-align: left;
+}
+
+.inicio-atalho-topo {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 9px;
+}
+
+.inicio-atalho-ico {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-control);
+  background: rgba(114, 47, 55, 0.12);
+  color: var(--wine-700);
+  margin-bottom: 9px;
+}
+
+.inicio-atalho-topo .inicio-atalho-ico {
+  margin-bottom: 0;
+}
+
+.inicio-atalho-ico-ouro {
+  background: rgba(184, 137, 74, 0.2);
+  color: var(--gold-700);
+}
+
+.inicio-atalho-badge {
+  background: var(--ok-700);
+  color: var(--bg);
+  font: 600 10px / 1 var(--font-ui);
+  padding: 4px 8px;
+  border-radius: var(--radius-control);
+}
+
+.inicio-atalho-titulo {
+  font: 600 var(--text-sm) / 1.15 var(--font-display);
+  color: var(--wine-900);
+}
+
+.inicio-atalho-sub {
+  margin-top: 3px;
+  font-size: var(--text-xs);
+  line-height: 1.25;
+  color: var(--neutral-500);
+}
+
+/* ---------- Card de coach (mascote + sequência) no rodapé ---------- */
+.inicio-coach {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: var(--space-3) var(--space-4) var(--space-6);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-card);
+  border: 1.5px solid var(--neutral-200);
+  background: rgba(114, 47, 55, 0.06);
+}
+
+.inicio-coach-masc {
+  flex: none;
+}
+
+/* Entrada: o mascote ENTRA ANDANDO (waddle: gingado no pe + passinhos)
+   de fora ate o lugar dele dentro do card. */
+.inicio-coach-entra {
+  transform-origin: 50% 88%;
+  animation: coach-entra 1300ms ease-out both;
+}
+
+@keyframes coach-entra {
+  0% {
+    transform: translateX(-74px) translateY(0) rotate(-6deg);
+    opacity: 0;
+  }
+  12% {
+    transform: translateX(-62px) translateY(-3px) rotate(6deg);
+    opacity: 1;
+  }
+  30% {
+    transform: translateX(-48px) translateY(0) rotate(-6deg);
+  }
+  48% {
+    transform: translateX(-34px) translateY(-3px) rotate(6deg);
+  }
+  66% {
+    transform: translateX(-20px) translateY(0) rotate(-6deg);
+  }
+  84% {
+    transform: translateX(-8px) translateY(-3px) rotate(5deg);
+  }
+  100% {
+    transform: translateX(0) translateY(0) rotate(0);
+  }
+}
+
+/* No Inicio ele NAO fica pulando: entra, olha pros lados e pra cima, e
+   confere a hora no pulso. Sorriso leve padrao, sem acenar. As animacoes
+   do idle comecam apos a caminhada (delay 1.3s). */
+.inicio-coach .masc-pupilas {
+  animation: inicio-olhar 8s ease-in-out 1.3s infinite !important;
+}
+
+.inicio-coach .masc-bd {
+  animation: inicio-relogio-braco 8s ease-in-out 1.3s infinite !important;
+}
+
+.inicio-coach .masc-bd-ante {
+  animation: inicio-relogio-ante 8s ease-in-out 1.3s infinite !important;
+}
+
+.inicio-coach .masc-corpo {
+  animation: inicio-respira 3.6s ease-in-out infinite !important;
+}
+
+.inicio-coach .masc-relogio {
+  display: block;
+}
+
+/* olha: centro -> esquerda -> direita -> cima -> pro pulso (baixo) -> centro */
+@keyframes inicio-olhar {
+  0%, 7% { transform: translate(0, 0); }
+  14%, 22% { transform: translate(-2.6px, 0); }
+  30%, 38% { transform: translate(2.6px, 0); }
+  45%, 53% { transform: translate(0, -2.6px); }
+  61%, 79% { transform: translate(1.4px, 2.4px); }
+  87%, 100% { transform: translate(0, 0); }
+}
+
+/* confere a hora: levanta o braco e dobra o antebraco, o pulso sobe ao rosto */
+@keyframes inicio-relogio-braco {
+  0%, 55% { transform: rotate(0); }
+  62%, 78% { transform: rotate(-46deg); }
+  85%, 100% { transform: rotate(0); }
+}
+
+@keyframes inicio-relogio-ante {
+  0%, 55% { transform: rotate(0); }
+  62%, 78% { transform: rotate(-122deg); }
+  85%, 100% { transform: rotate(0); }
+}
+
+@keyframes inicio-respira {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-1.6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .inicio-coach-entra,
+  .inicio-coach .masc-pupilas,
+  .inicio-coach .masc-bd,
+  .inicio-coach .masc-bd-ante,
+  .inicio-coach .masc-corpo {
+    animation: none !important;
+  }
+}
+
+.inicio-coach-txt {
+  flex: 1;
+  min-width: 0;
+}
+
+.inicio-coach-titulo {
+  font: 600 var(--text-md) / 1.2 var(--font-display);
+  color: var(--wine-900);
+}
+
+.inicio-coach-sub {
+  margin-top: 3px;
+  font-size: var(--text-sm);
+  line-height: 1.35;
+  color: var(--neutral-600);
+}

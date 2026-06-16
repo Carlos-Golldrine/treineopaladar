@@ -17,7 +17,7 @@ const MicroAula = lazy(() =>
 );
 import { useFtueFlags } from '../onboarding/flags';
 import { RevelacaoCristais } from '../onboarding/RevelacoesTrilha';
-import { MascoteToast } from '../mascote';
+import { MascoteToast, Mascotinho } from '../mascote';
 import { FALAS } from '../onboarding/conteudo';
 import { consumirAnimTrilha } from '../licao/tipos';
 import { tocar } from '../som/som';
@@ -245,8 +245,15 @@ export default function Trilha() {
               key={meta.id}
               aria-label={`Unidade ${numero}, ${meta.titulo}, bloqueada`}
             >
-              <span className="unit-locked-selo">
-                <Ic nome="cadeado" size={18} />
+              <span
+                className="unit-locked-num"
+                aria-hidden="true"
+                style={{ backgroundColor: `${meta.cor}22` }}
+              >
+                {numero}
+                <span className="unit-locked-cadeado">
+                  <Ic nome="cadeado" size={11} />
+                </span>
               </span>
               <div className="unit-locked-textos">
                 <p className="unit-locked-eyebrow">Unidade {numero}</p>
@@ -307,7 +314,13 @@ export default function Trilha() {
               </div>
             </div>
 
-            <ol className="trail" aria-label={`Lições da unidade ${numero}`}>
+            <div className="trail-wrap">
+              {vista === vistaAtual && (
+                <div className="trilha-mascote" aria-hidden="true">
+                  <Mascotinho tamanho={96} />
+                </div>
+              )}
+              <ol className="trail" aria-label={`Lições da unidade ${numero}`}>
               {licoes.map((licao) => {
                 const p = progresso[licao.id];
                 const coroas = p?.coroas ?? 0;
@@ -333,8 +346,8 @@ export default function Trilha() {
                 return (
                   <li className={classe} key={licao.id}>
                     {bloqueada ? (
-                      <div className="node node-taca" aria-label={`${licao.titulo}, bloqueada`}>
-                        <Taca estado="bloqueada" />
+                      <div className="node node-bloq" aria-label={`${licao.titulo}, bloqueada`}>
+                        <Ic nome="cadeado" size={26} />
                       </div>
                     ) : (
                       <button
@@ -398,13 +411,14 @@ export default function Trilha() {
                 <span
                   className={`checkpoint-selo${checkpoints.includes(meta.id) ? ' checkpoint-ganho' : ''}`}
                 >
-                  <Ic nome="bandeira-meta" size={20} />
+                  <Ic nome="bandeira-meta" size={26} />
                 </span>
                 <span className="node-label">
                   {checkpoints.includes(meta.id) ? 'Checkpoint, 50 XP' : 'Checkpoint'}
                 </span>
               </li>
-            </ol>
+              </ol>
+            </div>
           </section>
         );
       })}

@@ -6,6 +6,9 @@
 export { Tchin } from './Tchin';
 export type { EstadoTchin, TchinProps } from './Tchin';
 
+export { Mascotinho } from './Mascotinho';
+export type { EstadoMascote, MascotinhoProps } from './Mascotinho';
+
 export { MascoteBalao, MascoteToast } from './Balao';
 
 export { CenaMascote } from './CenaMascote';

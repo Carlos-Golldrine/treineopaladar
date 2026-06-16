@@ -28,11 +28,13 @@ import { iniciarNuvem } from './lib/cloud';
 import { iniciarTelemetria } from './lib/analytics';
 
 /* Code-splitting por rota: cada aba carrega sob demanda */
+const Inicio = lazy(() => import('./routes/Inicio'));
 const Trilha = lazy(() => import('./routes/Trilha'));
 const Desafio = lazy(() => import('./routes/Desafio'));
 const Mesa = lazy(() => import('./routes/Mesa'));
 const Perfil = lazy(() => import('./routes/Perfil'));
 const Pratica = lazy(() => import('./routes/Pratica'));
+const EntrarMesa = lazy(() => import('./routes/EntrarMesa'));
 
 const router = createBrowserRouter([
   {
@@ -44,7 +46,8 @@ const router = createBrowserRouter([
       </PortaoOnboarding>
     ),
     children: [
-      { index: true, element: <Trilha /> },
+      { index: true, element: <Inicio /> },
+      { path: 'trilha', element: <Trilha /> },
       { path: 'desafio', element: <Desafio /> },
       { path: 'mesa', element: <Mesa /> },
       { path: 'perfil', element: <Perfil /> },
@@ -74,6 +77,15 @@ const router = createBrowserRouter([
     element: (
       <Suspense fallback={null}>
         <Pratica />
+      </Suspense>
+    ),
+  },
+  {
+    /* Link de convite da Mesa: entra na mesa do codigo e abre a Mesa */
+    path: '/mesa/entrar/:codigo',
+    element: (
+      <Suspense fallback={null}>
+        <EntrarMesa />
       </Suspense>
     ),
   },

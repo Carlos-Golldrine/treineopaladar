@@ -1,0 +1,341 @@
+/* ------------------------------------------------------------------ */
+/* Mascotinho: maquina de estados por classe (idle / feliz / triste)   */
+/* So transform e opacity sao animados.                                */
+/* ------------------------------------------------------------------ */
+
+.mascotinho {
+  display: block;
+  overflow: visible; /* o pulo do feliz sobe alem do viewBox sem cortar */
+}
+
+/* origens em coordenadas do viewBox */
+.mascotinho .masc-corpo,
+.mascotinho .masc-be,
+.mascotinho .masc-bd,
+.mascotinho .masc-bd-ante,
+.mascotinho .masc-olhos,
+.mascotinho .masc-pupilas,
+.mascotinho .masc-vinho,
+.mascotinho .masc-faisca,
+.mascotinho .masc-lagrima {
+  transform-box: view-box;
+}
+
+.mascotinho .masc-corpo {
+  transform-origin: 60px 134px;
+}
+.mascotinho .masc-be {
+  transform-origin: 30px 72px;
+}
+.mascotinho .masc-bd {
+  transform-origin: 90px 72px;
+}
+.mascotinho .masc-bd-ante {
+  transform-origin: 99px 81px;
+}
+.mascotinho .masc-olhos,
+.mascotinho .masc-pupilas {
+  transform-origin: 60px 46px;
+}
+.mascotinho .masc-faisca {
+  transform-origin: 94px 16.8px;
+}
+
+/* variantes de carinha escondidas por padrao (idle e o estado base) */
+.masc-br-f,
+.masc-br-t,
+.masc-bo-f,
+.masc-bo-t,
+.masc-lagrima,
+.masc-faisca,
+.masc-relogio {
+  display: none;
+}
+
+/* ---------- IDLE: olha pros lados, pisca e da tchauzinho ---------- */
+.mascotinho-idle .masc-corpo {
+  animation: masc-bob 3.6s ease-in-out infinite;
+}
+.mascotinho-idle .masc-olhos {
+  animation: masc-piscar 4.2s infinite;
+}
+.mascotinho-idle .masc-pupilas {
+  animation: masc-olhar 5s ease-in-out infinite;
+}
+.mascotinho-idle .masc-bd {
+  animation: masc-braco-up 5s ease-in-out infinite;
+}
+.mascotinho-idle .masc-bd-ante {
+  animation: masc-tchau 5s ease-in-out infinite;
+}
+
+/* ---------- FELIZ: pula comemorando ---------- */
+.mascotinho-feliz .masc-br-i,
+.mascotinho-feliz .masc-bo-i {
+  display: none;
+}
+.mascotinho-feliz .masc-br-f,
+.mascotinho-feliz .masc-bo-f,
+.mascotinho-feliz .masc-faisca {
+  display: block;
+}
+.mascotinho-feliz .masc-corpo {
+  animation: masc-hop 0.95s ease-in-out infinite;
+}
+.mascotinho-feliz .masc-be {
+  animation: masc-be-fel 0.95s ease-in-out infinite;
+}
+.mascotinho-feliz .masc-bd {
+  animation: masc-bd-fel 0.95s ease-in-out infinite;
+}
+.mascotinho-feliz .masc-vinho {
+  animation: masc-vinho-cel 0.95s ease-in-out infinite;
+}
+.mascotinho-feliz .masc-faisca {
+  animation: masc-faisca 0.95s ease-out infinite;
+}
+
+/* ---------- TRISTE: abaixa a cabeca, lagrima (acolhedor) ---------- */
+.mascotinho-triste .masc-br-i,
+.mascotinho-triste .masc-bo-i {
+  display: none;
+}
+.mascotinho-triste .masc-br-t,
+.mascotinho-triste .masc-bo-t,
+.mascotinho-triste .masc-lagrima {
+  display: block;
+}
+.mascotinho-triste .masc-corpo {
+  animation: masc-slump 0.6s ease-out forwards;
+}
+.mascotinho-triste .masc-be {
+  transform: rotate(-15deg);
+}
+.mascotinho-triste .masc-bd {
+  transform: rotate(15deg);
+}
+.mascotinho-triste .masc-pupilas {
+  transform: translateY(1.8px);
+}
+.mascotinho-triste .masc-olhos {
+  animation: masc-piscar 5s infinite;
+}
+.mascotinho-triste .masc-lagrima {
+  animation: masc-lagrima 1.9s ease-in infinite;
+}
+
+/* ------------------------------- keyframes ------------------------------- */
+@keyframes masc-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes masc-piscar {
+  0%,
+  92%,
+  100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.12);
+  }
+  97.5% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes masc-olhar {
+  0%,
+  12% {
+    transform: translateX(0);
+  }
+  26%,
+  40% {
+    transform: translateX(-2.6px);
+  }
+  54%,
+  68% {
+    transform: translateX(2.6px);
+  }
+  82%,
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* tchauzinho articulado: o braco superior sobe a ~90deg e o ANTEBRACO
+   vira a mao de um lado pro outro (mao acima do cotovelo) e depois abaixa */
+@keyframes masc-braco-up {
+  0%,
+  44% {
+    transform: rotate(0deg);
+  }
+  54%,
+  90% {
+    transform: rotate(-78deg);
+  }
+  96%,
+  100% {
+    transform: rotate(0deg);
+  }
+}
+@keyframes masc-tchau {
+  0%,
+  50% {
+    transform: rotate(0deg);
+  }
+  57% {
+    transform: rotate(-88deg);
+  }
+  63% {
+    transform: rotate(-106deg);
+  }
+  69% {
+    transform: rotate(-70deg);
+  }
+  75% {
+    transform: rotate(-106deg);
+  }
+  81% {
+    transform: rotate(-70deg);
+  }
+  87% {
+    transform: rotate(-92deg);
+  }
+  93%,
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes masc-hop {
+  0% {
+    transform: translateY(0) scale(1, 1);
+  }
+  12% {
+    transform: translateY(3px) scale(1.08, 0.9);
+    animation-timing-function: cubic-bezier(0.34, 0, 0.3, 1);
+  }
+  40% {
+    transform: translateY(-28px) scale(0.93, 1.1);
+  }
+  54% {
+    transform: translateY(-32px) scale(1, 1);
+    animation-timing-function: cubic-bezier(0.5, 0, 0.75, 0.35);
+  }
+  72% {
+    transform: translateY(0) scale(1.13, 0.85);
+    animation-timing-function: cubic-bezier(0.2, 0, 0.2, 1);
+  }
+  84% {
+    transform: translateY(0) scale(0.97, 1.04);
+  }
+  100% {
+    transform: translateY(0) scale(1, 1);
+  }
+}
+
+@keyframes masc-be-fel {
+  0%,
+  12% {
+    transform: rotate(0);
+  }
+  40%,
+  72% {
+    transform: rotate(42deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+
+@keyframes masc-bd-fel {
+  0%,
+  12% {
+    transform: rotate(0);
+  }
+  40%,
+  72% {
+    transform: rotate(-42deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+
+@keyframes masc-vinho-cel {
+  0% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(3px);
+  }
+  72% {
+    transform: translateY(4px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes masc-faisca {
+  0%,
+  20% {
+    transform: scale(0) rotate(0);
+    opacity: 0;
+  }
+  45% {
+    transform: scale(1.2) rotate(35deg);
+    opacity: 1;
+  }
+  70%,
+  100% {
+    transform: scale(0.4) rotate(70deg);
+    opacity: 0;
+  }
+}
+
+@keyframes masc-slump {
+  0% {
+    transform: translateY(0) rotate(0);
+  }
+  60% {
+    transform: translateY(8px) rotate(-5deg);
+  }
+  100% {
+    transform: translateY(6px) rotate(-4deg);
+  }
+}
+
+@keyframes masc-lagrima {
+  0% {
+    transform: translateY(0) scale(0.3);
+    opacity: 0;
+  }
+  22% {
+    opacity: 0.95;
+    transform: translateY(1px) scale(1);
+  }
+  100% {
+    transform: translateY(26px) scale(0.85);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mascotinho .masc-corpo,
+  .mascotinho .masc-be,
+  .mascotinho .masc-bd,
+  .mascotinho .masc-olhos,
+  .mascotinho .masc-pupilas,
+  .mascotinho .masc-vinho,
+  .mascotinho .masc-faisca,
+  .mascotinho .masc-lagrima {
+    animation: none;
+  }
+}

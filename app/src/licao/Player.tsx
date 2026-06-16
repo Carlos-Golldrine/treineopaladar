@@ -28,8 +28,7 @@ import { FichaBolso } from './FichaBolso';
 import { MicroAula } from '../trilha/MicroAula';
 import { microAulasVistas } from '../trilha/microaulas';
 import { Ic } from '../icones/Icones';
-import { TchinObservador } from '../coreografia/Coreografias';
-import { MascoteToast } from '../mascote';
+import { Mascotinho, MascoteToast, type EstadoMascote } from '../mascote';
 import { CenaHabilidade } from '../cenas';
 import { useFtueFlags } from '../onboarding/flags';
 import { tocar } from '../som/som';
@@ -62,6 +61,21 @@ function dicaPara(ex: Exercicio): DicaAplicada | null {
     }
     default:
       return null;
+  }
+}
+
+/** A pergunta que vai no balao do mascote, por tipo de exercicio. */
+function perguntaDoEx(ex: Exercicio): string {
+  switch (ex.tipo) {
+    case 'mc':
+    case 'slider':
+    case 'intruso':
+      return ex.pergunta;
+    case 'ordenar':
+    case 'swipe':
+      return ex.instrucao;
+    case 'duasverdades':
+      return 'Toque na mentira.';
   }
 }
 
@@ -180,19 +194,11 @@ function VistaJogo({
   const errou = fase === 'revelado' && resolucao !== null && !resolucao.correto;
   const { ex } = atual;
 
-  /* Olhar do mascote: ao tocar uma opcao, o Tchin observador mira nela.
-     Lemos o centro do botao .opcao tocado (captura no miolo) e passamos
-     como alvo. Some no proximo exercicio. So afeta o olhar, nada mais. */
-  const [olhar, setOlhar] = useState<{ x: number; y: number } | null>(null);
-  useEffect(() => {
-    setOlhar(null);
-  }, [atual.jogada]);
-  const aoTocarMiolo = (e: React.PointerEvent<HTMLDivElement>) => {
-    const opcao = (e.target as HTMLElement).closest('.opcao');
-    if (!opcao) return;
-    const r = opcao.getBoundingClientRect();
-    setOlhar({ x: r.left + r.width / 2, y: r.top + r.height / 2 });
-  };
+  /* Mascote (Mascotinho) no topo, com o balao da pergunta: idle enquanto
+     pensa, feliz no acerto, triste no erro. */
+  const estadoMascote: EstadoMascote =
+    fase === 'revelado' && resolucao ? (resolucao.correto ? 'feliz' : 'triste') : 'idle';
+  const pergunta = perguntaDoEx(ex);
 
   /* Ficha de bolso (pre-licao) e dica por cristais (max 1 por exercicio) */
   const [fichaAberta, setFichaAberta] = useState(fichaInicial ?? false);
@@ -301,11 +307,11 @@ function VistaJogo({
         </div>
       </header>
 
-      <div
-        className={`player-meio${errou ? ' treme' : ''}`}
-        key={atual.jogada}
-        onPointerDownCapture={aoTocarMiolo}
-      >
+      <div className={`player-meio${errou ? ' treme' : ''}`} key={atual.jogada}>
+        <div className="licao-mascote">
+          <Mascotinho estado={estadoMascote} tamanho={70} />
+          <h2 className="licao-balao">{pergunta}</h2>
+        </div>
         {mostrarHook && <p className="player-hook">{licao.hook}</p>}
         {(atual.repetida || ex.dificuldade === 3) && (
           <div className="player-tags app-chrome">
@@ -354,10 +360,6 @@ function VistaJogo({
         {corpo}
       </div>
 
-      {/* Vazio vertical: o Tchin observa em idle enquanto a pessoa pensa.
-          Ao tocar uma opcao, ele vira o olhar para ela (alvoX/alvoY). */}
-      <TchinObservador visivel={fase === 'respondendo'} alvoX={olhar?.x} alvoY={olhar?.y} />
-
       {fase === 'aguardando' && <PainelCalibrar onEscolher={onCalibrar} />}
       {fase === 'revelado' && resolucao && (
         <PainelReveal
@@ -366,6 +368,7 @@ function VistaJogo({
           licao={licao}
           rotuloContinuar={rotuloContinuar}
           marco={marco}
+          comMascote={false}
           onContinuar={onContinuar}
           entendaInicial={entendaInicial}
         />

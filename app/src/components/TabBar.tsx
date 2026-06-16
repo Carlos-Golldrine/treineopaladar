@@ -3,7 +3,8 @@ import { Ic } from '../icones/Icones';
 import type { NomeIcone } from '../icones/Icones';
 
 const tabs: { to: string; end: boolean; label: string; icone: NomeIcone }[] = [
-  { to: '/', end: true, label: 'Trilha', icone: 'mapa-trilha' },
+  { to: '/', end: true, label: 'Início', icone: 'casa' },
+  { to: '/trilha', end: false, label: 'Trilha', icone: 'mapa-trilha' },
   { to: '/desafio', end: false, label: 'Desafio', icone: 'alvo-desafio' },
   { to: '/mesa', end: false, label: 'Mesa', icone: 'mesa' },
 ];

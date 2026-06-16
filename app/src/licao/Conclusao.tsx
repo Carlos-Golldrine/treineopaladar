@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import type { Licao } from '../engine';
 import type { ResultadoSessao, TipoSessao } from '../engine';
 import { Ic } from '../icones/Icones';
-import { Tchin } from '../mascote';
+import { Mascotinho } from '../mascote';
 import { ChamaStreak, ConfeteFisica, Odometro } from '../coreografia/Coreografias';
 import { tocar } from '../som/som';
 import { track } from '../lib/analytics';
@@ -58,9 +58,9 @@ export function Conclusao({
     <div className="conclusao">
       {perfeita && <ConfeteFisica />}
       <div className="conclusao-rolagem">
-        {/* Mascote vivo: o Tchin celebra brindando (segunda taca entra em cena) */}
+        {/* Mascote vivo: o Mascotinho comemora pulando */}
         <div className="conclusao-mascote" aria-hidden="true">
-          <Tchin estado="celebra" tamanho={92} />
+          <Mascotinho estado="feliz" tamanho={92} />
         </div>
         <header className="conclusao-cabeca app-chrome">
           <p className="conclusao-eyebrow">{tipo === 'revisao' ? 'Revisão concluída' : 'Lição concluída'}</p>

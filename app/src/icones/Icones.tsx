@@ -155,19 +155,21 @@ const ICONES = {
   /** Trilha: caminho em zigue-zague subindo, com paradas e chegada de ouro */
   'mapa-trilha': (
     <>
-      <path {...t} d="M4.6 20 C12.6 20 3.6 11.8 12 11.8 C20.4 11.8 11.4 4 19.4 4" />
-      <circle cx="4.6" cy="20" r="1.8" fill="currentColor" />
-      <circle cx="12" cy="11.8" r="1.5" fill="currentColor" />
-      <circle {...td} cx="19.4" cy="5" r="3" fill={OURO} />
+      <path {...t} d="M3.5 12 L8.5 10.5 L14.5 12.2 L19.5 10.5 V18.5 L14.5 20 L8.5 18.5 L3.5 20 Z" />
+      <path {...td} d="M8.5 10.5 V18.5 M14.5 12.2 V20" />
+      <path {...tf(OURO)} d="M12 2.6 C14.4 2.6 16.3 4.5 16.3 6.9 C16.3 10 12 14.3 12 14.3 C12 14.3 7.7 10 7.7 6.9 C7.7 4.5 9.6 2.6 12 2.6 Z" />
+      <circle cx="12" cy="6.9" r="1.4" fill="currentColor" />
     </>
   ),
 
   /** Alvo do Desafio do Dia */
   'alvo-desafio': (
     <>
-      <circle {...t} cx="12" cy="12" r="8.6" />
-      <circle {...t} cx="12" cy="12" r="4.6" fill={OURO} />
-      <circle cx="12" cy="12" r="1.1" fill="currentColor" />
+      <circle {...t} cx="12" cy="12" r="8.4" />
+      <circle {...t} cx="12" cy="12" r="4.4" fill={OURO} />
+      <path {...tu} d="M19.5 4.5 L12.6 11.4" />
+      <path {...tu} d="M15.5 11.2 L12.6 11.4 L12.8 8.5" />
+      <path {...tu} d="M16.4 4.5 L19.5 4.5 L19.5 7.6" />
     </>
   ),
 

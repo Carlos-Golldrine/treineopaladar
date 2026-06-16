@@ -6,6 +6,7 @@ import {
   alternarTchin,
   assinarMesa,
   carregarFeed,
+  definirPrivacidade,
   garantirMesa,
   postarProvei,
 } from '../lib/mesa';
@@ -36,6 +37,7 @@ export default function Mesa() {
   const [carregando, setCarregando] = useState(true);
   const [indisponivel, setIndisponivel] = useState(false);
   const [compor, setCompor] = useState(false);
+  const [convidando, setConvidando] = useState(false);
   const mesaId = useRef<string | null>(null);
 
   const recarregar = useCallback(async (id: string) => {
@@ -97,13 +99,32 @@ export default function Mesa() {
 
   return (
     <>
-      <header className="screen-header app-chrome">
-        <h1 className="screen-title">Mesa</h1>
-        <p className="screen-sub">
-          {feed
-            ? `${feed.membros} ${feed.membros === 1 ? 'pessoa' : 'pessoas'} nesta semana`
-            : 'Degustação em boa companhia'}
-        </p>
+      <header className="screen-header app-chrome mesa-header">
+        <div className="mesa-header-textos">
+          <h1 className="screen-title">
+            Mesa
+            {feed?.privada && (
+              <span className="mesa-privada-selo" aria-label="Mesa privada">
+                <Ic nome="cadeado" size={13} />
+              </span>
+            )}
+          </h1>
+          <p className="screen-sub">
+            {feed
+              ? `${feed.membros} ${feed.membros === 1 ? 'pessoa' : 'pessoas'} nesta semana`
+              : 'Degustação em boa companhia'}
+          </p>
+        </div>
+        {feed && (
+          <button
+            type="button"
+            className="mesa-convidar-btn tap"
+            aria-label="Convidar para a mesa"
+            onClick={() => setConvidando(true)}
+          >
+            <Ic nome="compartilhar" size={20} />
+          </button>
+        )}
       </header>
 
       {indisponivel ? (
@@ -139,7 +160,83 @@ export default function Mesa() {
       )}
 
       {compor && <ComporProvei onFechar={() => setCompor(false)} onEnviar={enviarProvei} />}
+
+      {convidando && feed && (
+        <ConvidarSheet
+          feed={feed}
+          onFechar={() => {
+            setConvidando(false);
+            if (mesaId.current) void recarregar(mesaId.current);
+          }}
+        />
+      )}
     </>
+  );
+}
+
+/* ------------------------- Convite + privacidade -------------------- */
+
+function ConvidarSheet({ feed, onFechar }: { feed: FeedMesa; onFechar: () => void }) {
+  const [privada, setPrivada] = useState(feed.privada);
+  const [copiado, setCopiado] = useState(false);
+  const link = `${window.location.origin}/mesa/entrar/${feed.codigoConvite}`;
+
+  const copiar = async () => {
+    try {
+      await navigator.clipboard.writeText(link);
+      setCopiado(true);
+      window.setTimeout(() => setCopiado(false), 1800);
+    } catch {
+      /* alguns navegadores bloqueiam o clipboard: o campo continua selecionavel */
+    }
+  };
+
+  const alternarPrivada = async () => {
+    const novo = !privada;
+    setPrivada(novo);
+    const r = await definirPrivacidade(feed.mesaId, novo);
+    if (r === null) setPrivada(!novo);
+  };
+
+  return (
+    <Sheet titulo="Convidar para a mesa" onFechar={onFechar}>
+      <p className="folha-texto">Mande o link para quem você quer na sua mesa desta semana.</p>
+      <div className="mesa-convite-link">
+        <input
+          className="mesa-convite-input"
+          readOnly
+          value={link}
+          aria-label="Link de convite"
+          onFocus={(e) => e.currentTarget.select()}
+        />
+        <button type="button" className="btn btn-primary btn-jogo tap mesa-convite-copiar" onClick={copiar}>
+          <Ic nome="compartilhar" size={16} />
+          {copiado ? 'Copiado' : 'Copiar'}
+        </button>
+      </div>
+
+      <button
+        type="button"
+        className="mesa-privada-toggle tap"
+        role="switch"
+        aria-checked={privada}
+        onClick={alternarPrivada}
+      >
+        <span className="mesa-privada-info">
+          <span className="mesa-privada-titulo">
+            <Ic nome="cadeado" size={16} /> Mesa privada
+          </span>
+          <span className="mesa-privada-sub">
+            {privada
+              ? 'Só entra quem tem o link. Ninguém novo é adicionado sozinho.'
+              : 'Aberta: pessoas no seu ritmo entram automaticamente.'}
+          </span>
+        </span>
+        <span className={`mesa-switch${privada ? ' mesa-switch-on' : ''}`} aria-hidden="true">
+          <span className="mesa-switch-bola" />
+        </span>
+      </button>
+    </Sheet>
   );
 }
 
