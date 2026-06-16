@@ -15,8 +15,8 @@ import { Ic } from '../icones/Icones';
 import { DelayedSkeleton } from '../components/DelayedSkeleton';
 import { Odometro, TchinObservador } from '../coreografia/Coreografias';
 import { tocar } from '../som/som';
-import { RevisarCartas, baralhoDisponivel } from '../pratica/RevisarCartas';
-import { cartasVencidas, lerAgenda } from '../pratica/cartas';
+import { RevisarCartas } from '../pratica/RevisarCartas';
+import { baralhoDisponivel, cartasParaHoje, lerAgenda } from '../pratica/cartas';
 
 import '../licao/player.css';
 import './pratica.css';
@@ -32,6 +32,8 @@ export default function Pratica() {
   const navigate = useNavigate();
   const [params] = useSearchParams();
   const cena = params.get('cena');
+  /* Entrada direta no modo cartas vinda da Trilha (sem rng deterministico). */
+  const irCartas = params.get('ir') === 'cartas';
   const [banco, setBanco] = useState<ItemPratica[] | null>(null);
   const [etapa, setEtapa] = useState<Etapa>({ t: 'carregando' });
   const [rodada, setRodada] = useState<ItemPratica[]>([]);
@@ -55,10 +57,11 @@ export default function Pratica() {
 
   const rng = useMemo(() => (cena ? rngDeterministico(20260611) : Math.random), [cena]);
 
-  /* cena=cartas (screenshot): o modo de cartas nao depende do banco */
+  /* cena=cartas (screenshot) ou ir=cartas (entrada real pela Trilha): o modo
+     de cartas nao depende do banco, entao abre direto sem passar pela rodada. */
   useEffect(() => {
-    if (cena === 'cartas' && etapa.t === 'carregando') setEtapa({ t: 'cartas' });
-  }, [cena, etapa]);
+    if ((cena === 'cartas' || irCartas) && etapa.t === 'carregando') setEtapa({ t: 'cartas' });
+  }, [cena, irCartas, etapa]);
 
   /* Com o banco em maos, monta a rodada da vez */
   useEffect(() => {
@@ -128,7 +131,7 @@ export default function Pratica() {
 
   if (etapa.t === 'pronto') {
     const baralho = baralhoDisponivel();
-    const vencidas = cartasVencidas(baralho, lerAgenda(), Date.now());
+    const paraHoje = cartasParaHoje(baralho, lerAgenda(), Date.now());
     return (
       <div className="player player-vazio">
         <span className="vazio-selo">
@@ -153,7 +156,7 @@ export default function Pratica() {
           >
             <Ic nome="livro-flashcard" size={18} />
             Revisar com cartas
-            {vencidas > 0 && <span className="pratica-vencidas">{vencidas} para hoje</span>}
+            {paraHoje > 0 && <span className="pratica-vencidas">{paraHoje} para hoje</span>}
           </button>
         )}
         <button type="button" className="btn btn-outline btn-cheio tap" onClick={() => navigate('/')}>

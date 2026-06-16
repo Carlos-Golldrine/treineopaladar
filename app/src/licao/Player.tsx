@@ -29,8 +29,15 @@ import { MicroAula } from '../trilha/MicroAula';
 import { microAulasVistas } from '../trilha/microaulas';
 import { Ic } from '../icones/Icones';
 import { TchinObservador } from '../coreografia/Coreografias';
+import { MascoteToast } from '../mascote';
+import { CenaHabilidade } from '../cenas';
+import { useFtueFlags } from '../onboarding/flags';
 import { tocar } from '../som/som';
 import './player.css';
+
+/* Toast unico que aponta a ficha de bolso na 1a licao (copy fora de
+   conteudo.ts por contrato: mascote curto, max 8 palavras). */
+const FALA_APONTA_FICHA = 'Dá uma espiada na ficha antes? Fica aqui.';
 
 /* --------------------------- Dica comprada --------------------------- */
 
@@ -138,6 +145,12 @@ interface VistaProps {
   /** So para cenas de screenshot. */
   dicaInicial?: boolean;
   fichaInicial?: boolean;
+  /** Mostra o toast unico do mascote apontando a ficha de bolso. */
+  apontarFicha?: boolean;
+  /** Chamado quando o toast da ficha e dispensado (grava a flag uma vez). */
+  onFichaApontada?: () => void;
+  /** Hex da cor da unidade: tinge o fundo da cena da habilidade. */
+  corUnidade?: string;
 }
 
 function VistaJogo({
@@ -158,14 +171,39 @@ function VistaJogo({
   entendaInicial,
   dicaInicial,
   fichaInicial,
+  apontarFicha,
+  onFichaApontada,
+  corUnidade,
 }: VistaProps) {
   const [confirmandoSaida, setConfirmandoSaida] = useState(false);
   const { fase, resolucao, calibracao } = fases;
   const errou = fase === 'revelado' && resolucao !== null && !resolucao.correto;
   const { ex } = atual;
 
+  /* Olhar do mascote: ao tocar uma opcao, o Tchin observador mira nela.
+     Lemos o centro do botao .opcao tocado (captura no miolo) e passamos
+     como alvo. Some no proximo exercicio. So afeta o olhar, nada mais. */
+  const [olhar, setOlhar] = useState<{ x: number; y: number } | null>(null);
+  useEffect(() => {
+    setOlhar(null);
+  }, [atual.jogada]);
+  const aoTocarMiolo = (e: React.PointerEvent<HTMLDivElement>) => {
+    const opcao = (e.target as HTMLElement).closest('.opcao');
+    if (!opcao) return;
+    const r = opcao.getBoundingClientRect();
+    setOlhar({ x: r.left + r.width / 2, y: r.top + r.height / 2 });
+  };
+
   /* Ficha de bolso (pre-licao) e dica por cristais (max 1 por exercicio) */
   const [fichaAberta, setFichaAberta] = useState(fichaInicial ?? false);
+  /* Quantas cartas a ficha mostra (os 3 primeiros fatos da ficha canonica). */
+  const fichasNoBolso = Math.min(3, licao.fichaCanonica.length);
+  /* Toast unico do mascote apontando a ficha (some ao abrir ou dispensar). */
+  const [toastFicha, setToastFicha] = useState(apontarFicha ?? false);
+  const dispensarToastFicha = () => {
+    setToastFicha(false);
+    onFichaApontada?.();
+  };
   const [dica, setDica] = useState<DicaAplicada | null>(() => (dicaInicial ? dicaPara(ex) : null));
   const [dicaAviso, setDicaAviso] = useState(false);
 
@@ -191,8 +229,17 @@ function VistaJogo({
     }
   };
 
+  /* Cena da habilidade: arte interativa no vazio entre a pergunta e as
+     opcoes. So enquanto a pessoa responde; some no reveal (a atencao vai
+     para o feedback). CenaHabilidade decide sozinha se aparece (habilidade
+     sensorial + exercicio sem rotulo). */
+  const cena =
+    fase === 'respondendo' ? (
+      <CenaHabilidade habilidade={licao.habilidade} exercicio={ex} corUnidade={corUnidade} />
+    ) : null;
+
   const corpo = (() => {
-    const comum = { fase, onResolver } as const;
+    const comum = { fase, onResolver, cena } as const;
     switch (ex.tipo) {
       case 'mc':
         return (
@@ -254,7 +301,11 @@ function VistaJogo({
         </div>
       </header>
 
-      <div className={`player-meio${errou ? ' treme' : ''}`} key={atual.jogada}>
+      <div
+        className={`player-meio${errou ? ' treme' : ''}`}
+        key={atual.jogada}
+        onPointerDownCapture={aoTocarMiolo}
+      >
         {mostrarHook && <p className="player-hook">{licao.hook}</p>}
         {(atual.repetida || ex.dificuldade === 3) && (
           <div className="player-tags app-chrome">
@@ -265,9 +316,17 @@ function VistaJogo({
         {(mostrarHook || podeDica || dicaAviso) && (
           <div className="player-extras app-chrome">
             {mostrarHook && (
-              <button type="button" className="ficha-chamada tap" onClick={() => setFichaAberta(true)}>
+              <button
+                type="button"
+                className="ficha-chamada tap"
+                aria-label={`Ler a ficha de bolso desta lição, ${fichasNoBolso} ${fichasNoBolso === 1 ? 'carta' : 'cartas'}`}
+                onClick={() => {
+                  dispensarToastFicha();
+                  setFichaAberta(true);
+                }}
+              >
                 <Ic nome="livro-flashcard" size={16} />
-                Dar uma olhada antes
+                Ler antes ({fichasNoBolso} {fichasNoBolso === 1 ? 'carta' : 'cartas'})
               </button>
             )}
             {podeDica && (
@@ -295,8 +354,9 @@ function VistaJogo({
         {corpo}
       </div>
 
-      {/* Vazio vertical: o Tchin observa em idle enquanto a pessoa pensa */}
-      <TchinObservador visivel={fase === 'respondendo'} />
+      {/* Vazio vertical: o Tchin observa em idle enquanto a pessoa pensa.
+          Ao tocar uma opcao, ele vira o olhar para ela (alvoX/alvoY). */}
+      <TchinObservador visivel={fase === 'respondendo'} alvoX={olhar?.x} alvoY={olhar?.y} />
 
       {fase === 'aguardando' && <PainelCalibrar onEscolher={onCalibrar} />}
       {fase === 'revelado' && resolucao && (
@@ -312,6 +372,11 @@ function VistaJogo({
       )}
 
       {fichaAberta && <FichaBolso licao={licao} onFechar={() => setFichaAberta(false)} />}
+
+      {/* Aponta a ficha so enquanto o botao esta na tela (1o exercicio) */}
+      {toastFicha && mostrarHook && !fichaAberta && (
+        <MascoteToast texto={FALA_APONTA_FICHA} estado="ensina" onFechar={dispensarToastFicha} />
+      )}
 
       {confirmandoSaida && (
         <div className="veu" role="dialog" aria-modal="true" aria-label="Sair da lição?">
@@ -361,6 +426,7 @@ function PlayerReal({ licao }: { licao: Licao }) {
   const store = obterStore();
   const { sessao, concluida, iniciar, responder, finalizar, abandonar } = useSessao();
   const { wallet, streakEfetivo, proximaVidaEmMs } = useWallet();
+  const [ftue, marcarFtue] = useFtueFlags();
   const [etapa, setEtapa] = useState<Etapa>({ t: 'carregando' });
   const [tipo, setTipo] = useState<TipoSessao>('nova');
   const [atual, setAtual] = useState<AtualEx | null>(null);
@@ -582,6 +648,9 @@ function PlayerReal({ licao }: { licao: Licao }) {
       onContinuar={onContinuar}
       onSair={sair}
       onUsarDica={() => store.usarDica()}
+      apontarFicha={!ftue.fichaApontada}
+      onFichaApontada={() => marcarFtue({ fichaApontada: true })}
+      corUnidade={unidadeDaLicao(licao.id)?.meta.cor}
     />
   );
 }
@@ -715,6 +784,8 @@ function DemoJogo({ licao, cena, estado }: { licao: Licao; cena: string; estado:
       entendaInicial={estadoErro}
       dicaInicial={estado === 'dica'}
       fichaInicial={estado === 'ficha'}
+      apontarFicha={estado === 'aponta'}
+      corUnidade={unidadeDaLicao(licao.id)?.meta.cor}
     />
   );
 }

@@ -1,0 +1,44 @@
+PASS  (a) seed tp.v1 pos-onboarding abre direto na Trilha (sem splash)
+  shot 01-trilha-6-unidades-seed.png
+  shot 02-trilha-unidades-bloqueadas.png
+PASS  (b) Trilha mostra 6 unidades, com a 2 em diante bloqueadas
+  shot 03-trilha-unidade2-aberta.png
+PASS  (c) unidade 1 completa via progresso injetado abre a unidade 2
+  shot 04-microaula-u2.png
+  shot 05-licao-u2l1-exercicio.png
+  shot 06-licao-u2l1-conclusao.png
+PASS  (d) licao u2-l1 jogada de verdade ate a conclusao
+  shot 07-pratica-pronto.png
+  shot 08-pratica-exercicio-rotulo-real.png
+  shot 09-pratica-resultado.png
+PASS  (e) cartao Pratica livre visivel e rodada de 8 jogada de verdade
+  shot 10-cartas-frente.png
+  shot 11-cartas-verso.png
+PASS  (e2) revisar com cartas (F2.5): flip 3D + autoavaliacao em tp.cartas.v1
+  shot 12-ficha-bolso.png
+  shot 13-dica-aplicada.png
+PASS  (e3) ficha de bolso e dica por cristais (F2.5) na licao u1-l1
+  shot 14-desafio-aberto.png
+  shot 15-desafio-resultado-grade.png
+PASS  (f) Desafio do Dia: 4 perguntas, grade no resultado, XP +30
+  shot 16-desafio-revisita-mesmo-dia.png
+PASS  (f2) 2a visita no dia mostra resultado e nao deixa rejogar
+  wallet final: xpTotal 125 (seed 60), cristais 67 (seed 60)
+  shot 17-trilha-final-apos-reload.png
+PASS  (g) localStorage: xp e cristais subiram, tudo sobrevive ao reload
+PASS  (h) zero erros de console no fluxo inteiro
+
+================= RESUMO E2E F2 =================
+PASS  (a) seed tp.v1 pos-onboarding abre direto na Trilha (sem splash)
+PASS  (b) Trilha mostra 6 unidades, com a 2 em diante bloqueadas
+PASS  (c) unidade 1 completa via progresso injetado abre a unidade 2
+PASS  (d) licao u2-l1 jogada de verdade ate a conclusao
+PASS  (e) cartao Pratica livre visivel e rodada de 8 jogada de verdade
+PASS  (e2) revisar com cartas (F2.5): flip 3D + autoavaliacao em tp.cartas.v1
+PASS  (e3) ficha de bolso e dica por cristais (F2.5) na licao u1-l1
+PASS  (f) Desafio do Dia: 4 perguntas, grade no resultado, XP +30
+PASS  (f2) 2a visita no dia mostra resultado e nao deixa rejogar
+PASS  (g) localStorage: xp e cristais subiram, tudo sobrevive ao reload
+PASS  (h) zero erros de console no fluxo inteiro
+
+Console errors (0):

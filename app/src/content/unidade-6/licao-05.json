@@ -4,7 +4,7 @@
   "ordem": 5,
   "titulo": "Chile e Uruguai: vizinhos de taça",
   "habilidade": "harmonizacao",
-  "hook": "Uma uva que o mundo deu por desaparecida vivia escondida no Chile. E o Uruguai transformou a uva mais tânica do mundo em programa de domingo. Última parada da viagem.",
+  "hook": "Uma uva que o mundo deu por desaparecida vivia escondida no Chile. E o Uruguai transformou uma das uvas mais tânicas do mundo em programa de domingo. Última parada da viagem.",
   "fichaCanonica": [
     "A Carmenère é uma uva de Bordeaux que praticamente sumiu da Europa no século 19 e foi redescoberta no Chile em 1994, onde passava por Merlot havia décadas.",
     "O Chile é protegido por barreiras naturais, com o deserto do Atacama ao norte, os Andes a leste e o oceano Pacífico a oeste, o que ajudou seus vinhedos a escaparem da filoxera, praga que devastou a Europa.",
@@ -68,7 +68,7 @@
         {
           "texto": "Tannat com churrasco gordo",
           "verdade": true,
-          "porque": "A uva mais tânica com a carne mais gorda: gordura ama tanino."
+          "porque": "Uma das uvas mais tânicas com uma das carnes mais gordas: gordura ama tanino."
         },
         {
           "texto": "Tannat com peixe branco delicado",
@@ -139,7 +139,7 @@
       ],
       "correta": 0,
       "okMsg": "Isso. A parrilla e a Tannat são o caso mais famoso da regra na América do Sul.",
-      "erroMsg": "Quase. Carne gorda na brasa pede tanino à altura, e nenhuma uva tem mais tanino que a Tannat.",
+      "erroMsg": "Quase. Carne gorda na brasa pede tanino à altura, e pouquíssimas uvas têm mais tanino que a Tannat.",
       "porque": "Gordura ama tanino: a carne amansa a Tannat e a Tannat limpa a boca, o par perfeito da parrilla."
     },
     {
@@ -158,7 +158,7 @@
     }
   ],
   "aplicacao": "Frutos do mar pedem a costa fria do Chile, churrasco pede a Tannat do Uruguai: dois vizinhos, duas respostas prontas pra sua próxima mesa.",
-  "recap": "O Chile guarda a Carmenère redescoberta e os brancos frescos da costa fria; o Uruguai transformou a Tannat, a uva mais tânica, na rainha da parrilla.",
+  "recap": "O Chile guarda a Carmenère redescoberta e os brancos frescos da costa fria; o Uruguai transformou a Tannat, das uvas mais tânicas do mundo, na rainha da parrilla.",
   "voceAgoraSabe": [
     "Você conta a história da Carmenère, a uva que voltou do desaparecimento no Chile em 1994",
     "Você harmoniza os vizinhos: costa fria com frutos do mar, Tannat com churrasco, Carmenère com massas de molho encorpado"

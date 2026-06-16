@@ -3,6 +3,18 @@ import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
+  build: {
+    rollupOptions: {
+      output: {
+        /* gsap em chunk proprio: so o chunk lazy da MicroAula o importa,
+           e o nome estavel permite exclui-lo do precache do app shell */
+        manualChunks(id) {
+          if (id.includes('node_modules/gsap')) return 'gsap';
+          return undefined;
+        },
+      },
+    },
+  },
   plugins: [
     react(),
     VitePWA({
@@ -41,9 +53,11 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,png,svg,woff2}'],
-        /* Rotulos reais e bancos de conteudo lazy ficam FORA do precache:
-           caem no runtime caching (decisao F2, ~351KB a menos na instalacao) */
-        globIgnores: ['**/rotulos/**', '**/banco-pratica-*.js', '**/desafios-*.js'],
+        /* Rotulos reais, bancos de conteudo lazy e o gsap (motion das
+           micro-aulas) ficam FORA do precache: caem no runtime caching
+           (decisao F2, ~351KB a menos na instalacao; gsap so chega com
+           a primeira micro-aula) */
+        globIgnores: ['**/rotulos/**', '**/banco-pratica-*.js', '**/desafios-*.js', '**/gsap-*.js'],
         navigateFallback: '/index.html',
         runtimeCaching: [
           {
@@ -61,7 +75,7 @@ export default defineConfig({
             /* chunks de conteudo lazy excluidos do precache: ficam offline
                apos o primeiro uso (hash no nome garante invalidacao) */
             urlPattern: ({ url }) =>
-              /\/assets\/(banco-pratica|desafios)-[\w-]+\.js$/.test(url.pathname),
+              /\/assets\/(banco-pratica|desafios|gsap)-[\w-]+\.js$/.test(url.pathname),
             handler: 'CacheFirst',
             options: {
               cacheName: 'conteudo-lazy-v1',

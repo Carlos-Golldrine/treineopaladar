@@ -38,7 +38,7 @@
       ],
       "correta": 0,
       "okMsg": "Exato. Frescor e bolha são a dupla da faxina.",
-      "erroMsg": "Quase. Quem corta gordura é acidez: branco fresco ou espumante, o limão em forma de taça.",
+      "erroMsg": "Quase. Quem faz o papel do limão é a acidez: branco fresco ou espumante. O tanino também limpa gordura, mas esse é o time do churrasco.",
       "porque": "Acidez alta e bolhas limpam a boca a cada gole, devolvendo o apetite pra próxima garfada."
     },
     {
@@ -114,7 +114,7 @@
       "tipo": "mc",
       "dificuldade": 3,
       "calibrar": true,
-      "pergunta": "Jantar com fritura e um vinho de acidez baixa na taça. O que acontece?",
+      "pergunta": "Jantar com fritura e um vinho mole, de acidez baixa e pouco tanino, na taça. O que acontece?",
       "opcoes": [
         "A gordura forra a boca e o vinho não dá conta de limpar",
         "A fritura fica mais crocante",
@@ -123,7 +123,7 @@
       "correta": 0,
       "okMsg": "Diagnóstico preciso. Faltou limão nessa taça.",
       "erroMsg": "Quase. Sem acidez, o vinho não corta a gordura: a boca fica forrada e pesada até o fim do prato.",
-      "porque": "É a acidez que varre a gordura; sem ela, cada garfada empilha peso na boca."
+      "porque": "Na fritura, quem varre a gordura é a acidez; sem ela nem tanino, cada garfada empilha peso na boca."
     },
     {
       "tipo": "intruso",

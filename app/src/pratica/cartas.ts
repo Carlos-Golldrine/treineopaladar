@@ -14,7 +14,8 @@
  */
 
 import type { Habilidade, Licao } from '../engine';
-import { INTERVALOS_REVISAO_DIAS, MS_DIA } from '../engine';
+import { INTERVALOS_REVISAO_DIAS, MS_DIA, obterStore } from '../engine';
+import { todasLicoes } from '../content';
 
 /* --------------------------- Derivacao ------------------------------ */
 
@@ -109,6 +110,17 @@ function escolherChave(fato: string, titulo: string, usadas: Set<string>): strin
     }
   });
   return melhor;
+}
+
+/**
+ * Cards das licoes ja concluidas (as cartas nascem do que foi treinado).
+ * Vive aqui (modulo puro, sem UI) para a Trilha — primeira tela — poder
+ * contar o baralho sem arrastar o chunk do flip 3D de RevisarCartas.
+ */
+export function baralhoDisponivel(): Carta[] {
+  const progresso = obterStore().getEstado().progresso;
+  const concluidas = todasLicoes.filter((l) => (progresso[l.id]?.vezesConcluida ?? 0) > 0);
+  return derivarCartas(concluidas);
 }
 
 /** Deriva os cards de um conjunto de licoes (1 por fato da ficha canonica). */
@@ -213,6 +225,23 @@ function embaralhar<T>(itens: T[], rng: Rng): T[] {
 /** Quantos cards estao vencidos agora (para o convite da Pratica). */
 export function cartasVencidas(cartas: readonly Carta[], agenda: AgendaCartas, agora: number): number {
   return cartas.filter((c) => agenda[c.id] !== undefined && agenda[c.id].proxima <= agora).length;
+}
+
+/**
+ * Quantas cartas cabem na revisao de hoje: as vencidas (ja vistas e no
+ * prazo) mais as nunca vistas (que entram na sessao de hoje), limitado ao
+ * tamanho da sessao. E o numero honesto do chip "N cartas para revisar
+ * hoje" na Trilha, casando com o que montarSessaoCartas de fato serve.
+ */
+export function cartasParaHoje(
+  cartas: readonly Carta[],
+  agenda: AgendaCartas,
+  agora: number,
+  tamanho: number = TAMANHO_SESSAO_CARTAS,
+): number {
+  const vencidas = cartasVencidas(cartas, agenda, agora);
+  const novas = cartas.filter((c) => agenda[c.id] === undefined).length;
+  return Math.min(vencidas + novas, tamanho);
 }
 
 /**

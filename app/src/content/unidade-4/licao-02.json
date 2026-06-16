@@ -86,9 +86,9 @@
       "instrucao": "Verdade ou pegadinha de rótulo? Deslize.",
       "cartas": [
         {
-          "texto": "Seco quer dizer até 4 gramas de açúcar por litro",
+          "texto": "No vinho tranquilo, seco quer dizer até 4 gramas de açúcar por litro",
           "verdade": true,
-          "porque": "É o número da lei brasileira: seco mora coladinho no zero."
+          "porque": "É o número da lei para o vinho tranquilo. No espumante, seco mora bem mais à frente, entre 15 e 20 gramas."
         },
         {
           "texto": "Vinho suave é sempre de qualidade inferior",
@@ -108,7 +108,7 @@
         {
           "texto": "Existe vinho seco leve e vinho seco encorpado",
           "verdade": true,
-          "porque": "Seco fala só de açúcar; o corpo é outra régua, e as duas se combinam livremente."
+          "porque": "Seco fala só de açúcar; o corpo é outra régua, e as duas variam em separado."
         }
       ]
     },

@@ -6,7 +6,7 @@
   "habilidade": "rotulo",
   "hook": "O mesmo vinho pode parecer dois vinhos diferentes, e o segredo é o termômetro. Hoje você aprende o erro mais comum do Brasil e como a geladeira resolve.",
   "fichaCanonica": [
-    "Tintos tendem a mostrar o melhor levemente frescos, em torno de 14 a 18 graus, com os mais leves perto dos 14 e os encorpados perto dos 18; brancos vão bem entre cerca de 8 e 12 graus; espumantes pedem mais frio, por volta de 6 a 8 graus.",
+    "Tintos tendem a mostrar o melhor levemente frescos, em torno de 12 a 18 graus, com os mais leves perto dos 12 a 14 e os encorpados perto dos 18; brancos vão bem entre cerca de 8 e 12 graus, e os leves bem ácidos descem a 7; espumantes pedem mais frio, por volta de 6 a 8 graus.",
     "A velha regra do tinto em temperatura ambiente nasceu na Europa, onde ambiente queria dizer um salão a 16 a 18 graus; num Brasil de 30 graus, segui-la ao pé da letra serve o tinto quente demais.",
     "Servido quente demais, o vinho evapora mais álcool e parece alcoólico e pesado, com a fruta apagada.",
     "Gelado demais, o vinho esconde os aromas: o frio excessivo anestesia o nariz da taça.",
@@ -38,8 +38,8 @@
       ],
       "correta": 0,
       "okMsg": "Exato. O tinto na temperatura da sala brasileira chega quente na taça.",
-      "erroMsg": "Quase. Por aqui o tinto costuma ir pra mesa na temperatura do clima, bem acima da faixa ideal de 14 a 18 graus.",
-      "porque": "A sala brasileira passa fácil dos 25 graus, e o tinto fica melhor levemente fresco, entre 14 e 18."
+      "erroMsg": "Quase. Por aqui o tinto costuma ir pra mesa na temperatura do clima, bem acima da faixa ideal de 12 a 18 graus.",
+      "porque": "A sala brasileira passa fácil dos 25 graus, e o tinto fica melhor levemente fresco, entre 12 e 18, conforme o corpo."
     },
     {
       "tipo": "mc",
@@ -63,7 +63,7 @@
       "labelMax": "dia quente, 30 graus",
       "alvo": 46,
       "tolerancia": 12,
-      "porque": "Levemente fresco, entre 14 e 18 graus: nem gelado de geladeira, nem no calor da sala."
+      "porque": "Levemente fresco, entre 12 e 18 graus: nem gelado de geladeira, nem no calor da sala."
     },
     {
       "tipo": "ordenar",
@@ -86,7 +86,7 @@
         {
           "texto": "Dar 20 a 30 minutos de geladeira pro tinto antes de servir",
           "verdade": true,
-          "porque": "É o truque que traz o tinto do calor brasileiro pra faixa dos 14 a 18 graus."
+          "porque": "É o truque que traz o tinto do calor brasileiro pra faixa dos 12 a 18 graus."
         },
         {
           "texto": "Servir o espumante na temperatura da sala",
@@ -136,7 +136,7 @@
         "Tinto não pode nem chegar perto da geladeira"
       ],
       "mentira": 2,
-      "porque": "No Brasil, a geladeira é a melhor amiga do tinto: 20 a 30 minutos o trazem pra faixa dos 14 a 18 graus."
+      "porque": "No Brasil, a geladeira é a melhor amiga do tinto: 20 a 30 minutos o trazem pra faixa dos 12 a 18 graus."
     },
     {
       "tipo": "mc",
@@ -154,9 +154,9 @@
     }
   ],
   "aplicacao": "Hoje à noite, teste em casa: meia garrafa na temperatura da sala, meia depois de 25 minutos de geladeira. O mesmo vinho vai te contar duas histórias.",
-  "recap": "Tinto levemente fresco entre 14 e 18 graus, branco entre 8 e 12, espumante de 6 a 8, e a geladeira é a ponte entre o calor do Brasil e a taça certa.",
+  "recap": "Tinto levemente fresco entre 12 e 18 graus conforme o corpo, branco entre 8 e 12, espumante de 6 a 8, e a geladeira é a ponte entre o calor do Brasil e a taça certa.",
   "voceAgoraSabe": [
-    "Você sabe as três faixas de serviço: tinto 14 a 18, branco 8 a 12, espumante 6 a 8 graus",
+    "Você sabe as três faixas de serviço: tinto 12 a 18 (leves no lado frio), branco 8 a 12, espumante 6 a 8 graus",
     "Você desmontou a regra da temperatura ambiente: ela foi escrita pra salões europeus frios",
     "Você tem o truque dos 20 a 30 minutos de geladeira pro tinto no clima brasileiro"
   ],

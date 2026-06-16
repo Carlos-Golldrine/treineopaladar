@@ -1,0 +1,26 @@
+Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+KeyError: 'correta'
+===== qual-uva-506e294d76 | tmpl qual-uva | hab acidez | dif 1
+Q: O Partridge Stars Brut, da região de Mendoza, é feito principalmente de qual uva?
+      0 Viognier
+    * 1 Chardonnay
+      2 Sauvignon Blanc
+      3 Sémillon
+PORQUE: A ficha do Partridge Stars Brut traz Chardonnay como uva principal.
+===== de-onde-vem-32cff6adfa | tmpl de-onde-vem | hab rotulo | dif 2
+Q: De qual país vem o Aquarela Moscatel Casa Perini?
+      0 Itália
+    * 1 EUA
+      2 Chile
+      3 Brasil
+PORQUE: A ficha do Aquarela Moscatel Casa Perini marca EUA como país de origem. Os outros três países também aparecem no nosso banco com vinhos de Moscato.
+===== qual-uva-3ad68db7b8 | tmpl qual-uva | hab frutado | dif 2
+Q: O Carmim Terras del Rei Alentejo, de Portugal, é feito principalmente de qual uva?
+      0 Cabernet Franc
+    * 1 Castelão
+      2 Merlot
+      3 Grenache
+PORQUE: A ficha do Carmim Terras del Rei Alentejo traz Castelão como uva principal.
+===== intruso-uva-2729982dfc | tmpl intruso-uva | hab acidez | dif 2
+Q: Três destas uvas dão vinho tinto. Qual é a intrusa?

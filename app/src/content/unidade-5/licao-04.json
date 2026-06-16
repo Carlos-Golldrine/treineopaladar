@@ -141,14 +141,14 @@
     {
       "tipo": "mc",
       "dificuldade": 1,
-      "pergunta": "Pra fechar: a sobremesa nunca pode ser mais doce que...",
+      "pergunta": "Pra fechar: pra sobremesa e vinho brilharem juntos, quem não deve ganhar no açúcar é...",
       "opcoes": [
         "O vinho na taça",
         "O café",
         "O prato principal"
       ],
       "correta": 0,
-      "okMsg": "Fechou. Doce com doce, e a sobremesa nunca por cima.",
+      "okMsg": "Fechou. Doce com doce, e a sobremesa de preferência não passa o vinho.",
       "erroMsg": "Respira: o vinho precisa empatar ou ganhar no açúcar, senão ele azeda na comparação.",
       "porque": "Se a sobremesa supera o vinho em doçura, o vinho parece magro e azedo: o açúcar da taça manda."
     }

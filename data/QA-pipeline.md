@@ -7,20 +7,20 @@
 
 | Passo | Ação | Resultado |
 |---|---|---|
-| 1 | Não-vinhos removidos (termos categóricos sempre; `kit`/`abridor` só com teor ausente ou fora de 4–25) | **103** removidos → `data/excluidos.csv` (11 ambíguos com teor 4–25 mantidos, ex. kits de vinho e o vinho "Abridor") |
+| 1 | Não-vinhos removidos (termos categóricos sempre; `kit`/`abridor` só com teor ausente ou fora de 4–25) | **116** removidos → `data/excluidos.csv` (11 ambíguos com teor 4–25 mantidos, ex. kits de vinho e o vinho "Abridor") |
 | 2 | Monte Paschoal espumante → tinto | **2** corrigidos (5 suspeito(s) extra apenas flagados) |
 | 3 | Tipo normalizado p/ enum | 29 frisante→espumante; `requer_revisao_tipo=true` em **404** linhas (tipo NaN + frisante + suspeitos) |
 | 4 | País normalizado | **226** células alteradas (Australia→Austrália, Estados Unidos→EUA) |
-| 5 | status_moderacao unificado | {'aprovado_auto': 12575, 'pendente': 1925} |
-| 6 | confianca_sensorial → 0–100 | **13136** categóricas convertidas (alto=85, medio=70, baixo=50) |
+| 5 | status_moderacao unificado | {'aprovado_auto': 12562, 'pendente': 1925} |
+| 6 | confianca_sensorial → 0–100 | **13123** categóricas convertidas (alto=85, medio=70, baixo=50) |
 | 7 | preco_valido=false | **415** linhas (343 sem preço + fora de faixa; 11 ícones poupados pela whitelist) |
-| 8 | Dedup (nome+produtor+safra normalizados) | **1903** removidas em 1306 grupos → `data/dedup_removidos.csv` |
-| 9 | view_estrita | **10717** linhas elegíveis (10 kits/packs mantidos no clean mas fora da view) |
+| 8 | Dedup (nome+produtor+safra normalizados) | **1899** removidas em 1304 grupos → `data/dedup_removidos.csv` |
+| 9 | view_estrita | **10708** linhas elegíveis (10 kits/packs mantidos no clean mas fora da view) |
 
 ## Linhas finais
 
-- **Total no clean:** 12597
-- **view_estrita = true:** 10717 (destas, 4758 com imagem externa)
+- **Total no clean:** 12588
+- **view_estrita = true:** 10708 (destas, 4758 com imagem externa)
 - Regra da view: `is_active` ∧ vinho real (não-vinhos removidos no passo 1; kits/packs excluídos da view) ∧ `status_moderacao ∈ (aprovado_auto, aprovado)` ∧ `uva_principal` preenchida ∧ `pais` preenchido
 - Nota: `preco_valido=false` inclui também linhas **sem preço** (343), além das fora de faixa (≤R$15 ou ≥R$10.000 sem whitelist)
 
@@ -30,7 +30,7 @@
 
 | tipo | linhas |
 |---|---|
-| tinto | 7668 |
+| tinto | 7659 |
 | branco | 2559 |
 | espumante | 1049 |
 | rose | 547 |
@@ -46,7 +46,7 @@
 | Cabernet Sauvignon | 1383 |
 | Chardonnay | 1271 |
 | Malbec | 1022 |
-| Blend Tinto | 1018 |
+| Blend Tinto | 1009 |
 | Merlot | 862 |
 | Pinot Noir | 597 |
 | Sauvignon Blanc | 379 |
@@ -58,16 +58,16 @@
 
 | pais | linhas |
 |---|---|
-| Brasil | 2827 |
-| Chile | 1839 |
-| Argentina | 1772 |
+| Brasil | 2906 |
+| Chile | 1834 |
+| Argentina | 1765 |
 | França | 1559 |
-| Outros | 1073 |
 | Itália | 1051 |
-| Portugal | 988 |
+| Outros | 1028 |
+| Portugal | 987 |
 | Espanha | 783 |
-| EUA | 145 |
-| Austrália | 143 |
+| Austrália | 139 |
+| EUA | 120 |
 
 ## Imagens
 
@@ -101,15 +101,16 @@ Arquivos salvos em `data/imagens/` e contam como resume do download completo (`p
 ```
 == Pipeline F0 — lendo fonte (somente leitura) ==
 Fonte: 14603 linhas x 56 colunas
-PASSO 1: removidos 103 nao-vinhos -> data/excluidos.csv (11 ambiguos com teor 4-25 mantidos, ex. kits de vinho e 'Abridor')
+PASSO 1: removidos 116 nao-vinhos -> data/excluidos.csv (11 ambiguos com teor 4-25 mantidos, ex. kits de vinho e 'Abridor')
 PASSO 2: 2 Monte Paschoal espumante -> tinto: ['Vinho Monte Paschoal Reserva Merlot Tinto 750ml', 'Vinho Monte Paschoal Dedicato Cabernet Sauvignon Tinto 750ml']
 PASSO 3: tipo normalizado para enum; 370 NaN mantidos; requer_revisao_tipo=404 (NaN + 29 frisante->espumante + 5 suspeitos)
 PASSO 4: pais normalizado (226 celulas alteradas)
-PASSO 5: status_moderacao -> {'aprovado_auto': 12575, 'pendente': 1925}
-PASSO 6: confianca_sensorial unificada 0-100 (13136 categoricas convertidas)
+PASSO 4b: 100 vinhos brasileiros tinham pais errado -> Brasil
+PASSO 5: status_moderacao -> {'aprovado_auto': 12562, 'pendente': 1925}
+PASSO 6: confianca_sensorial unificada 0-100 (13123 categoricas convertidas)
 PASSO 7: preco_valido=False em 415 linhas (343 sem preco + 72 fora de faixa; 11 icones poupados)
-PASSO 8: dedup removeu 1903 linhas (1306 grupos) -> data/dedup_removidos.csv
-PASSO 9: view_estrita = 10717 linhas (10 kits/packs mantidos no clean mas fora da view)
-SAIDA: vinhos_clean.csv / .jsonl (12597 linhas, 59 colunas)
+PASSO 8: dedup removeu 1899 linhas (1304 grupos) -> data/dedup_removidos.csv
+PASSO 9: view_estrita = 10708 linhas (10 kits/packs mantidos no clean mas fora da view)
+SAIDA: vinhos_clean.csv / .jsonl (12588 linhas, 60 colunas)
 SAIDA: imagens_manifest.csv (5334 URLs unicas; 52 URLs duplicadas removidas)
 ```

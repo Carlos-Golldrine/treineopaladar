@@ -5,7 +5,7 @@
  * pago pelo engine (concluirPratica: 10 com soft cap + vida de revisao).
  */
 import { useMemo, useState } from 'react';
-import { todasLicoes, licoesPorId } from '../content';
+import { licoesPorId } from '../content';
 import { obterStore } from '../engine';
 import type { RespostaPratica, ResultadoPratica } from '../engine';
 import { XP_REVISAO } from '../engine';
@@ -15,7 +15,7 @@ import { tocar } from '../som/som';
 import { vibrar } from '../licao/tipos';
 import {
   avaliarCarta,
-  derivarCartas,
+  baralhoDisponivel,
   lerAgenda,
   gravarAgenda,
   montarSessaoCartas,
@@ -25,12 +25,9 @@ import { rngDeterministico } from './sessao';
 
 import './cartas.css';
 
-/** Cards das licoes ja concluidas (as cartas nascem do que foi treinado). */
-export function baralhoDisponivel(): Carta[] {
-  const progresso = obterStore().getEstado().progresso;
-  const concluidas = todasLicoes.filter((l) => (progresso[l.id]?.vezesConcluida ?? 0) > 0);
-  return derivarCartas(concluidas);
-}
+/* baralhoDisponivel mora em ./cartas (modulo puro); reexportado para os
+   imports existentes (Pratica) nao quebrarem. */
+export { baralhoDisponivel };
 
 interface Props {
   aoVoltar: () => void;
