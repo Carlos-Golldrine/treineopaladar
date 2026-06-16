@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useProgresso } from '../engine';
-import { Tchin } from '../mascote';
+import { Mascotinho } from '../mascote';
 import { LogoTchin } from '../icones/LogoTchin';
 import { Sheet } from '../components/Sheet';
 import { track } from '../lib/analytics';
@@ -16,28 +16,14 @@ import { track } from '../lib/analytics';
 export default function Splash() {
   const navigate = useNavigate();
   const { onboardingCompleto } = useProgresso();
-  const btnRef = useRef<HTMLButtonElement>(null);
-  const [alvo, setAlvo] = useState<{ x: number; y: number } | null>(null);
   const [comoFunciona, setComoFunciona] = useState(false);
-
-  /* O mascote olha para o botao Comecar (alvo do olhar em coords da pagina) */
-  useEffect(() => {
-    const r = btnRef.current?.getBoundingClientRect();
-    if (r) setAlvo({ x: r.left + r.width / 2, y: r.top + r.height / 2 });
-  }, []);
 
   if (onboardingCompleto) return <Navigate to="/" replace />;
 
   return (
     <div className="splash">
       <div className="splash-alto app-chrome">
-        <Tchin
-          estado="idle"
-          tamanho={104}
-          alvoX={alvo?.x}
-          alvoY={alvo?.y}
-          rotulo="Tchin, a taça que treina com você"
-        />
+        <Mascotinho estado="idle" tamanho={104} rotulo="A taça que treina com você" />
         <p className="splash-wordmark">Treine seu Paladar</p>
         <div className="splash-marca">
           <LogoTchin size={15} className="splash-logo" />
@@ -55,7 +41,6 @@ export default function Splash() {
 
       <div className="splash-acao">
         <button
-          ref={btnRef}
           type="button"
           className="btn btn-primary btn-jogo btn-cheio tap"
           onClick={() => {

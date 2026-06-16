@@ -1,6 +1,5 @@
 import { Ic } from '../icones/Icones';
 import type { NomeIcone } from '../icones/Icones';
-import { MascoteBalao } from '../mascote';
 
 /**
  * Interstitials da Licao 1 que parecem jogada: J3 (objetivo) e J6 (nivel).
@@ -21,8 +20,6 @@ interface Props {
   sub?: string;
   cartas: CartaUi[];
   selecionada: string | null;
-  /** Fala do mascote apos a escolha (max 8 palavras). */
-  reacao: string | null;
   /** Grid 2 colunas de cards compactos (J3 com 6 objetivos). */
   emGrade?: boolean;
   onEscolher: (id: string) => void;
@@ -30,7 +27,7 @@ interface Props {
   onContinuar?: () => void;
 }
 
-export function CartasEscolha({ pergunta, sub, cartas, selecionada, reacao, emGrade, onEscolher, onContinuar }: Props) {
+export function CartasEscolha({ pergunta, sub, cartas, selecionada, emGrade, onEscolher, onContinuar }: Props) {
   return (
     <div className="ex">
       <h2 className="ex-pergunta">{pergunta}</h2>
@@ -61,7 +58,6 @@ export function CartasEscolha({ pergunta, sub, cartas, selecionada, reacao, emGr
           </button>
         ))}
       </div>
-      {reacao && <MascoteBalao texto={reacao} estado="feliz" />}
       {onContinuar && selecionada && (
         <div className="ex-rodape">
           <button type="button" className="btn btn-primary btn-jogo btn-cheio tap" onClick={onContinuar}>

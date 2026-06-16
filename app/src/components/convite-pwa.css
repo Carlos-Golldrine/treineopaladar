@@ -1,0 +1,117 @@
+/* Convite PWA: bottom-sheet de "Adicionar a tela inicial", pos-onboarding.
+   Reaproveita os keyframes folha-veu / folha-sobe definidos em app.css. */
+.convite {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+}
+
+.convite-fundo {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  padding: 0;
+  background: rgba(74, 31, 36, 0.42);
+  animation: folha-veu 200ms ease-out both;
+}
+
+.convite-painel {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 480px;
+  padding: var(--space-3) var(--space-5) calc(var(--space-5) + env(safe-area-inset-bottom));
+  border-radius: var(--radius-card) var(--radius-card) 0 0;
+  background: var(--bg);
+  box-shadow: 0 -6px 24px rgba(74, 31, 36, 0.16);
+  animation: folha-sobe 240ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.convite-alca {
+  width: 36px;
+  height: 4px;
+  margin: 0 auto var(--space-4);
+  border-radius: var(--radius-pill);
+  background: var(--neutral-200);
+}
+
+.convite-cabeca {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.convite-icone {
+  flex: none;
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(74, 31, 36, 0.18);
+}
+
+.convite-titulo {
+  font: 600 var(--text-lg) / 1.2 var(--font-display);
+  color: var(--wine-900);
+}
+
+.convite-sub {
+  margin-top: var(--space-1);
+  font-size: var(--text-sm);
+  line-height: 1.45;
+  color: var(--neutral-600);
+}
+
+.convite-passos {
+  list-style: none;
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.convite-passos li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+  line-height: 1.4;
+  color: var(--neutral-700);
+}
+
+.convite-passo-ic {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(114, 47, 55, 0.08);
+  color: var(--wine-700);
+}
+
+.convite-dica {
+  margin-top: var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-card);
+  background: var(--neutral-50);
+  font-size: var(--text-sm);
+  line-height: 1.45;
+  color: var(--neutral-700);
+}
+
+.convite-acoes {
+  margin-top: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .convite-fundo,
+  .convite-painel {
+    animation: none;
+  }
+}

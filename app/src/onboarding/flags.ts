@@ -15,9 +15,16 @@ export interface FtueFlags {
   lojaVista: boolean;
   /** True depois do toast unico que aponta a ficha de bolso (1a licao aberta). */
   fichaApontada: boolean;
+  /** True depois do convite de instalacao (PWA), mostrado uma vez pos-onboarding. */
+  instalacaoVista: boolean;
 }
 
-const PADRAO: FtueFlags = { cristaisColetados: false, lojaVista: false, fichaApontada: false };
+const PADRAO: FtueFlags = {
+  cristaisColetados: false,
+  lojaVista: false,
+  fichaApontada: false,
+  instalacaoVista: false,
+};
 
 function ler(): FtueFlags {
   try {
@@ -28,6 +35,7 @@ function ler(): FtueFlags {
       cristaisColetados: dado.cristaisColetados === true,
       lojaVista: dado.lojaVista === true,
       fichaApontada: dado.fichaApontada === true,
+      instalacaoVista: dado.instalacaoVista === true,
     };
   } catch {
     return PADRAO;

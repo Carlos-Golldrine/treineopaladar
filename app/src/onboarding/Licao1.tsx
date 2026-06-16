@@ -20,8 +20,8 @@ import {
   j5PorObjetivo,
   licaoFtue,
 } from './conteudo';
-import { MascoteToast } from '../mascote';
-import type { EstadoTchin } from '../mascote';
+import { Mascotinho } from '../mascote';
+import type { EstadoMascote } from '../mascote';
 import { ExVisual } from './ExVisual';
 import { CartasEscolha } from './Cartas';
 import type { CartaUi } from './Cartas';
@@ -47,25 +47,21 @@ const cartasObjetivo: CartaUi[] = CARTAS_OBJETIVO.map((c) => ({
 }));
 const cartasNivel: CartaUi[] = CARTAS_NIVEL;
 
-/** Fala do mascote na faixa do FTUE, com a emocao certa para o momento. */
-export interface FalaFtue {
-  texto: string;
-  estado: EstadoTchin;
-}
-
 interface VistaFtueProps {
   progresso: number;
   vidas: number;
   /** Vidas so entram no topo depois do primeiro erro (revelacao progressiva). */
   vidasVisiveis: boolean;
-  toast: FalaFtue | null;
+  /** Pergunta no balao do Mascotinho (null = sem balao). */
+  pergunta: string | null;
+  estadoMascote: EstadoMascote;
   treme: boolean;
   chave: string;
   painel: ReactNode;
   children: ReactNode;
 }
 
-function VistaFtue({ progresso, vidas, vidasVisiveis, toast, treme, chave, painel, children }: VistaFtueProps) {
+function VistaFtue({ progresso, vidas, vidasVisiveis, pergunta, estadoMascote, treme, chave, painel, children }: VistaFtueProps) {
   return (
     <div className="player">
       <header className="player-topo app-chrome">
@@ -92,12 +88,13 @@ function VistaFtue({ progresso, vidas, vidasVisiveis, toast, treme, chave, paine
         )}
       </header>
 
-      {/* Faixa do mascote: espaco reservado, o toast nunca cobre conteudo */}
-      <div className="ftue-faixa app-chrome">
-        {toast && <MascoteToast texto={toast.texto} estado={toast.estado} inline />}
-      </div>
-
       <div className={`player-meio${treme ? ' treme' : ''}`} key={chave}>
+        {pergunta && (
+          <div className="licao-mascote">
+            <Mascotinho estado={estadoMascote} tamanho={70} />
+            <h2 className="licao-balao">{pergunta}</h2>
+          </div>
+        )}
         {children}
       </div>
 
@@ -123,7 +120,6 @@ function LicaoUmReal() {
   const [passo, setPasso] = useState<Passo>({ t: 'carregando' });
   const [fase, setFase] = useState<FaseExercicio>('respondendo');
   const [resolucao, setResolucao] = useState<ResolucaoExercicio | null>(null);
-  const [toast, setToast] = useState<FalaFtue | null>(null);
   const [vidasVisiveis, setVidasVisiveis] = useState(false);
   const [objetivoSel, setObjetivoSel] = useState<Objetivo | null>(null);
   const errouAlguma = useRef(false);
@@ -132,7 +128,6 @@ function LicaoUmReal() {
 
   /** Decide o proximo passo olhando a fila do engine e os interstitials. */
   const irParaProxima = useCallback(() => {
-    setToast(null);
     const ativa = store.getSessao();
     if (!ativa || sessaoConcluida(ativa.sessao)) {
       const resultado = store.finalizarLicao();
@@ -175,9 +170,6 @@ function LicaoUmReal() {
     }
     store.iniciarLicao(licaoFtue, 'nova');
     irParaProxima();
-    /* Framing da J1: o Tchin ensina com a pergunta JA visivel
-       (sem tela extra, sem atraso) */
-    setToast({ texto: FALAS.abertura, estado: 'ensina' });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -197,15 +189,9 @@ function LicaoUmReal() {
     tocar(r.correto ? 'acerto' : 'erro');
     setFase('revelado');
     if (!r.correto && !errouAlguma.current) {
-      /* Primeiro erro: o unico tooltip de vidas, mascote lamenta gentil */
+      /* Primeiro erro: o tooltip de vidas entra (revelacao progressiva) */
       errouAlguma.current = true;
       setVidasVisiveis(true);
-      setToast({ texto: FALAS.vidas, estado: 'lamenta' });
-    } else if (r.correto && passo.indice === 0 && passo.jogada === 0) {
-      /* J1 certa: o mascote celebra o primeiro acerto */
-      setToast({ texto: FALAS.celebraJ1, estado: 'feliz' });
-    } else {
-      setToast(null);
     }
   };
 
@@ -260,12 +246,26 @@ function LicaoUmReal() {
   const concluiu = !ativa || sessaoConcluida(ativa.sessao);
   const errou = fase === 'revelado' && resolucao !== null && !resolucao.correto;
 
+  /* Pergunta no balao do Mascotinho + emocao conforme o momento */
+  let perguntaBalao: string | null = null;
+  let estadoMascote: EstadoMascote = 'idle';
+  if (passo.t === 'jogada') {
+    perguntaBalao = exercicioDe(passo.indice).pergunta;
+    estadoMascote = fase === 'revelado' && resolucao ? (resolucao.correto ? 'feliz' : 'triste') : 'idle';
+  } else if (passo.t === 'objetivo') {
+    perguntaBalao = objetivoSel ? FALAS.objetivo[objetivoSel] : 'Onde você mais quer mandar bem?';
+    estadoMascote = objetivoSel ? 'feliz' : 'idle';
+  } else if (passo.t === 'nivel') {
+    perguntaBalao = 'Quanto você já conhece de vinho?';
+  }
+
   return (
     <VistaFtue
       progresso={progressoMax.current}
       vidas={wallet.vidas}
       vidasVisiveis={vidasVisiveis}
-      toast={toast}
+      pergunta={perguntaBalao}
+      estadoMascote={estadoMascote}
       treme={errou}
       chave={passo.t === 'jogada' ? `j-${passo.jogada}` : passo.t}
       painel={
@@ -276,7 +276,7 @@ function LicaoUmReal() {
             licao={licaoFtue}
             rotuloContinuar={concluiu ? 'Ver resultado' : 'Continuar'}
             marco={concluiu}
-            comMascote={toast === null}
+            comMascote={false}
             onContinuar={irParaProxima}
           />
         ) : null
@@ -288,7 +288,6 @@ function LicaoUmReal() {
           sub="Sua escolha muda a próxima jogada."
           cartas={cartasObjetivo}
           selecionada={objetivoSel}
-          reacao={objetivoSel ? FALAS.objetivo[objetivoSel] : null}
           emGrade
           onEscolher={escolherObjetivo}
           onContinuar={objetivoSel ? irParaProxima : undefined}
@@ -300,7 +299,6 @@ function LicaoUmReal() {
           sub="Isso ajusta o ritmo da trilha."
           cartas={cartasNivel}
           selecionada={null}
-          reacao={null}
           onEscolher={escolherNivel}
         />
       )}
@@ -336,13 +334,12 @@ function LicaoUmDemo({ cena }: { cena: string }) {
   }
   if (cena === 'j3') {
     return (
-      <VistaFtue progresso={3 / 8} vidas={5} vidasVisiveis={false} toast={null} treme={false} chave="demo-j3" painel={null}>
+      <VistaFtue progresso={3 / 8} vidas={5} vidasVisiveis={false} pergunta={FALAS.objetivo.mercado} estadoMascote="feliz" treme={false} chave="demo-j3" painel={null}>
         <CartasEscolha
           pergunta="Onde você mais quer mandar bem?"
           sub="Sua escolha muda a próxima jogada."
           cartas={cartasObjetivo}
           selecionada="mercado"
-          reacao={FALAS.objetivo.mercado}
           emGrade
           onEscolher={nada}
           onContinuar={nada}
@@ -357,7 +354,8 @@ function LicaoUmDemo({ cena }: { cena: string }) {
         progresso={4 / 8}
         vidas={5}
         vidasVisiveis
-        toast={{ texto: FALAS.vidas, estado: 'lamenta' }}
+        pergunta={ex.pergunta}
+        estadoMascote="triste"
         treme={false}
         chave="demo-erro"
         painel={
@@ -381,14 +379,16 @@ function LicaoUmDemo({ cena }: { cena: string }) {
 function DemoJ1() {
   const [fase, setFase] = useState<FaseExercicio>('respondendo');
   const [resolucao, setResolucao] = useState<ResolucaoExercicio | null>(null);
-  const [toast, setToast] = useState<FalaFtue | null>({ texto: FALAS.abertura, estado: 'ensina' });
   const ex = licaoFtue.exercicios[0] as ExercicioMC;
+  const estadoMascote: EstadoMascote =
+    fase === 'revelado' && resolucao ? (resolucao.correto ? 'feliz' : 'triste') : 'idle';
   return (
     <VistaFtue
       progresso={0.04}
       vidas={5}
       vidasVisiveis={false}
-      toast={toast}
+      pergunta={ex.pergunta}
+      estadoMascote={estadoMascote}
       treme={false}
       chave="demo-j1"
       painel={
@@ -398,7 +398,7 @@ function DemoJ1() {
             calibracao={null}
             licao={licaoFtue}
             rotuloContinuar="Continuar"
-            comMascote={toast === null}
+            comMascote={false}
             onContinuar={nada}
           />
         ) : null
@@ -411,7 +411,6 @@ function DemoJ1() {
           setResolucao(r);
           setFase('revelado');
           tocar(r.correto ? 'acerto' : 'erro');
-          setToast(r.correto ? { texto: FALAS.celebraJ1, estado: 'feliz' } : null);
         }}
       />
     </VistaFtue>

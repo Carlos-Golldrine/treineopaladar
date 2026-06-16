@@ -248,11 +248,53 @@
 
 /* --------------------- Conclusao da Licao 1 (aha) --------------------- */
 
+/* Conclusao 1: celebra no topo, decide na base (sem area branca no fim) */
+.c1 .conclusao-rolagem {
+  display: flex;
+  flex-direction: column;
+}
+
 .c1-mascote {
+  position: relative;
   display: flex;
   justify-content: center;
-  margin-top: var(--space-5);
+  margin-top: auto;
   animation: mascote-pop 360ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+/* Halo morno: o mascote vira o astro da festa (o confete completa) */
+.c1-mascote::before {
+  content: '';
+  position: absolute;
+  top: 52%;
+  left: 50%;
+  width: 230px;
+  height: 230px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212, 165, 116, 0.26) 0%, rgba(212, 165, 116, 0.09) 45%, transparent 70%);
+  z-index: -1;
+  pointer-events: none;
+  animation: c1-halo 2.8s ease-in-out infinite;
+}
+
+@keyframes c1-halo {
+  0%,
+  100% {
+    opacity: 0.65;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.07);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .c1-mascote::before {
+    animation: none;
+  }
 }
 
 @keyframes mascote-pop {
@@ -328,7 +370,8 @@
 }
 
 .c1-meta {
-  margin-top: var(--space-6);
+  margin-top: auto;
+  padding-top: var(--space-6);
   padding-bottom: var(--space-5);
 }
 

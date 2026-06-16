@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Tchin } from '../mascote';
-import { ChamaStreak, Odometro } from '../coreografia/Coreografias';
+import { Mascotinho } from '../mascote';
+import { ChamaStreak, ConfeteFisica, Odometro } from '../coreografia/Coreografias';
 import { tocar } from '../som/som';
 import { track } from '../lib/analytics';
 
@@ -37,9 +37,10 @@ export function Conclusao1({ xp, streak, onMeta }: Props) {
 
   return (
     <div className="conclusao c1">
+      <ConfeteFisica duracaoMs={2600} maxPecas={70} />
       <div className="conclusao-rolagem">
         <div className="c1-mascote" aria-hidden="true">
-          <Tchin estado="celebra" tamanho={104} />
+          <Mascotinho estado="feliz" tamanho={104} />
         </div>
         <header className="conclusao-cabeca app-chrome">
           <p className="conclusao-eyebrow">Lição 1 concluída</p>

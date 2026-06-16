@@ -26,6 +26,8 @@ import { PortaoOnboarding } from './onboarding/Portao';
 import { nuvemConfigurada } from './lib/supabase';
 import { iniciarNuvem } from './lib/cloud';
 import { iniciarTelemetria } from './lib/analytics';
+/* Captura do beforeinstallprompt o quanto antes (efeito colateral no import) */
+import './lib/pwa';
 
 /* Code-splitting por rota: cada aba carrega sob demanda */
 const Inicio = lazy(() => import('./routes/Inicio'));
