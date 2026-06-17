@@ -136,6 +136,17 @@ export async function postarProvei(mesaId: string, chips: string[]): Promise<voi
   await sb.from('mesa_posts').insert({ mesa_id: mesaId, user_id: uid, tipo: 'provei', payload: { chips } });
 }
 
+/** Publica o resultado do Desafio do Dia na mesa (grade sem spoiler, estilo Wordle). */
+export async function postarDesafioResultado(mesaId: string, grade: string, acertos: number): Promise<void> {
+  const sb = getSupabase();
+  if (!sb) return;
+  const uid = (await sb.auth.getUser()).data.user?.id;
+  if (!uid) return;
+  await sb
+    .from('mesa_posts')
+    .insert({ mesa_id: mesaId, user_id: uid, tipo: 'desafio_resultado', payload: { grade, acertos } });
+}
+
 /** Assina mudancas da mesa (posts e tchins) em realtime. Retorna o cancelador. */
 export function assinarMesa(mesaId: string, aoMudar: () => void): () => void {
   const sb = getSupabase();

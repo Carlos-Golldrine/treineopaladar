@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { track } from '../lib/analytics';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { obterStore } from '../engine';
 import type { ExercicioMC } from '../engine';
 import { ExMC } from '../licao/ExMC';
@@ -12,9 +12,29 @@ import type { NomeIcone } from '../icones/Icones';
 import { DelayedSkeleton } from '../components/DelayedSkeleton';
 import { TchinObservador } from '../coreografia/Coreografias';
 import { tocar } from '../som/som';
+import { garantirMesa, postarDesafioResultado } from '../lib/mesa';
+import { nuvemConfigurada } from '../lib/supabase';
 
 import '../licao/player.css';
 import './desafio.css';
+
+/* Idempotencia: posta o resultado na mesa no maximo 1x por dia (cliques repetidos
+   so renavegam para A Mesa, sem duplicar o post). */
+const CHAVE_DESAFIO_MESA = 'tp.desafio.mesa.v1';
+function jaPostouNaMesa(dia: string): boolean {
+  try {
+    return localStorage.getItem(CHAVE_DESAFIO_MESA) === dia;
+  } catch {
+    return false;
+  }
+}
+function marcarPostadoNaMesa(dia: string): void {
+  try {
+    localStorage.setItem(CHAVE_DESAFIO_MESA, dia);
+  } catch {
+    /* modo privado/quota: segue sem memorizar */
+  }
+}
 
 /* ------------------------------ Dados -------------------------------- */
 
@@ -364,6 +384,7 @@ function ResultadoHoje({
   tentativa: TentativaDia;
   xpGanho: number | null;
 }) {
+  const navigate = useNavigate();
   const [restante, setRestante] = useState(() => msAteMeiaNoiteBrasilia(Date.now()));
   const [copiado, setCopiado] = useState(false);
 
@@ -379,6 +400,25 @@ function ResultadoHoje({
   }, [copiado]);
 
   const compartilhar = async () => {
+    // Caminho principal (regra de produto, DECISOES-PRODUTO-V2): publicar o resultado
+    // no feed da Mesa e abrir A Mesa (in-app), nao um share externo.
+    if (nuvemConfigurada()) {
+      try {
+        const mesaId = await garantirMesa();
+        if (mesaId) {
+          if (!jaPostouNaMesa(dia)) {
+            await postarDesafioResultado(mesaId, tentativa.grade, tentativa.acertos);
+            marcarPostadoNaMesa(dia);
+          }
+          track('desafio_compartilhado', { destino: 'mesa' });
+          navigate('/mesa');
+          return;
+        }
+      } catch {
+        /* sem sessao/rede: cai no fallback externo abaixo */
+      }
+    }
+    // Fallback gracioso (sem nuvem): share nativo / copiar a grade estilo Wordle.
     const texto = `Desafio do Dia ${diaCurto(dia)}, Treine seu Paladar\n${tentativa.grade} ${tentativa.acertos} de 4`;
     try {
       if (navigator.share) {
