@@ -1,21 +1,33 @@
 import { useEffect, useReducer, useState } from 'react';
-import { useProgresso } from '../engine';
-import { useFtueFlags } from '../onboarding/flags';
 import { track } from '../lib/analytics';
 import { assinarInstalacao, ehIos, estaInstalado, instalarNativo } from '../lib/pwa';
 import './convite-pwa.css';
 
 /**
- * Convite "Adicionar a tela inicial" (PWA), uma unica vez logo depois do
- * onboarding. Dois caminhos conforme a plataforma:
- *  - Android/Chromium: o botao "Instalar" dispara o prompt nativo de verdade.
- *  - iPhone/Safari: a Apple nao deixa instalar por codigo, entao mostramos o
- *    passo a passo (Compartilhar -> Adicionar a Tela de Inicio).
- * Some sozinho quando o app ja roda instalado (standalone).
+ * Convite "Adicionar a tela inicial" (PWA). Aparece para QUEM ESTA NO NAVEGADOR
+ * (fora do app instalado) e NUNCA dentro do app ja baixado (standalone/webview).
+ * A dispensa vale so para a SESSAO atual (reaparece numa proxima visita), para que
+ * quem desinstalou consiga reinstalar mesmo ja tendo passado pelo onboarding.
+ * Dois caminhos: Android dispara o prompt nativo; iPhone mostra o passo a passo.
  */
+const CHAVE_DISPENSADO = 'tp.pwa.dispensado';
+
+function dispensadoNaSessao(): boolean {
+  try {
+    return sessionStorage.getItem(CHAVE_DISPENSADO) === '1';
+  } catch {
+    return false;
+  }
+}
+function marcarDispensado(): void {
+  try {
+    sessionStorage.setItem(CHAVE_DISPENSADO, '1');
+  } catch {
+    /* modo privado/quota: segue sem memorizar */
+  }
+}
+
 export function ConvitePwa() {
-  const { onboardingCompleto } = useProgresso();
-  const [ftue, marcarFtue] = useFtueFlags();
   const [, rerender] = useReducer((n: number) => n + 1, 0);
   const [aberto, setAberto] = useState(false);
   const [instalando, setInstalando] = useState(false);
@@ -26,16 +38,22 @@ export function ConvitePwa() {
   /* Reage quando o prompt nativo fica disponivel ou o app e instalado */
   useEffect(() => assinarInstalacao(rerender), []);
 
-  /* Abre uma vez, so depois do onboarding e fora do modo instalado */
+  /* Abre para quem esta no NAVEGADOR (nao standalone) e nao dispensou nesta sessao */
   useEffect(() => {
-    if (!onboardingCompleto || ftue.instalacaoVista) return;
-    if (estaInstalado()) {
-      marcarFtue({ instalacaoVista: true });
-      return;
-    }
-    const t = window.setTimeout(() => setAberto(true), 850);
+    if (estaInstalado() || dispensadoNaSessao()) return;
+    const t = window.setTimeout(() => setAberto(true), 2500);
     return () => window.clearTimeout(t);
-  }, [onboardingCompleto, ftue.instalacaoVista, marcarFtue]);
+  }, []);
+
+  /* Se o app for instalado com o convite aberto, fecha e nao reabre nesta sessao */
+  useEffect(() => {
+    const quandoInstalado = () => {
+      marcarDispensado();
+      setAberto(false);
+    };
+    window.addEventListener('appinstalled', quandoInstalado);
+    return () => window.removeEventListener('appinstalled', quandoInstalado);
+  }, []);
 
   /* Telemetria: convite visto */
   useEffect(() => {
@@ -45,7 +63,7 @@ export function ConvitePwa() {
   if (!aberto) return null;
 
   const fechar = (motivo: 'instalado' | 'depois') => {
-    marcarFtue({ instalacaoVista: true });
+    marcarDispensado();
     setAberto(false);
     if (motivo === 'depois') track('pwa_convite_dispensado');
   };

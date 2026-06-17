@@ -16,6 +16,7 @@ import './design/base.css';
 import './app.css';
 
 import { Shell } from './components/Shell';
+import { ConvitePwa } from './components/ConvitePwa';
 
 /* Onboarding FTUE no bundle principal: do toque em "Começar" à primeira
    pergunta da Lição 1 em menos de 10s, mesmo em rede ruim */
@@ -117,5 +118,7 @@ if (nuvemConfigurada()) {
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <RouterProvider router={router} />
+    {/* Convite de instalacao (PWA): global, so para quem esta no navegador */}
+    <ConvitePwa />
   </React.StrictMode>,
 );

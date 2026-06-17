@@ -2,7 +2,6 @@ import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import { TabBar } from './TabBar';
 import { DelayedSkeleton } from './DelayedSkeleton';
-import { ConvitePwa } from './ConvitePwa';
 
 export function Shell() {
   return (
@@ -13,8 +12,6 @@ export function Shell() {
         </Suspense>
       </main>
       <TabBar />
-      {/* Convite "Adicionar a tela inicial" (PWA), uma vez pos-onboarding */}
-      <ConvitePwa />
     </div>
   );
 }
