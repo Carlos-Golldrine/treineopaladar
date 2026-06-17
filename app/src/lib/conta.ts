@@ -5,7 +5,7 @@
  */
 import { useEffect, useState } from 'react';
 import { getSupabase } from './supabase';
-import { CHAVE_STORE } from '../engine/store';
+import { flushSincronizacao, pararSincronizacao } from './cloud';
 
 /** Google so aparece quando o OAuth client estiver configurado (Google Cloud + Supabase). */
 export const GOOGLE_PRONTO = true;
@@ -98,8 +98,14 @@ export async function entrarComEmail(email: string, senha: string): Promise<Resu
   return { ok: true };
 }
 
-/** Sai da conta: encerra a sessao, limpa o estado local e recomeca como visitante. */
+/**
+ * Sai da conta: sobe o ultimo estado, encerra a sessao e recomeca como visitante
+ * anonimo. MANTEM o progresso local (incl. o onboarding ja visto) — sem re-fazer o
+ * tutorial; ao logar de novo, o estado e mesclado, nada se perde.
+ */
 export async function sairDaConta(): Promise<void> {
+  await flushSincronizacao(); // garante que o ultimo estado subiu para a conta atual
+  pararSincronizacao(); // para o write-through e esquece o uid antes do signOut
   const sb = getSupabase();
   if (sb) {
     try {
@@ -107,11 +113,6 @@ export async function sairDaConta(): Promise<void> {
     } catch {
       /* ignore */
     }
-  }
-  try {
-    localStorage.removeItem(CHAVE_STORE);
-  } catch {
-    /* ambiente sem localStorage */
   }
   window.location.assign('/');
 }

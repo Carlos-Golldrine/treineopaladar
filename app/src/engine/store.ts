@@ -33,6 +33,7 @@ import {
 import type { ItemLoja } from './economia';
 import { VIDAS_MAX, ganhar, perder, podeIniciar, proximaVidaEmMs, regenerar } from './vidas';
 import { registrarDiaConcluido, streakEfetivo, streakEmRisco } from './streak';
+import { mesclarEstado } from './merge';
 import { proximaRevisaoTs, revisoesVencidas } from './revisao';
 import {
   PALADAR_GANHO,
@@ -293,12 +294,14 @@ export class TPStore {
   }
 
   /**
-   * Substitui o estado local pelo vindo da nuvem (hidratacao da F3).
-   * Persiste e notifica os ouvintes (a UI re-renderiza). Usado no boot quando o
-   * estado local esta intocado e a nuvem ja tem progresso.
+   * Mescla o estado local com o vindo da nuvem (hidratacao da F3), preservando o
+   * melhor dos dois: onboardingCompleto nunca regride, progresso/XP/streak nunca
+   * se perdem e a moeda nao infla. Apos o merge, sincronizar() aplica o rollover
+   * de dia e a regen de vidas sobre o estado ja combinado.
    */
   hidratar(estado: EstadoV1): void {
-    this.commit(estado);
+    this.commit(mesclarEstado(this.estado, estado, this.agora()));
+    this.sincronizar();
   }
 
   /* ------------------------- Sessao --------------------------- */
