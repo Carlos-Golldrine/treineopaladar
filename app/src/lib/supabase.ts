@@ -8,10 +8,10 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 // Credenciais publicas (vao no bundle do client de qualquer forma; protegidas por RLS).
 // A env var tem prioridade; o fallback garante o deploy mesmo sem env configurada.
 const url =
-  (import.meta.env.VITE_SUPABASE_URL as string | undefined) ?? 'https://obmjvftaycwxnkscpqzu.supabase.co';
+  (import.meta.env.VITE_SUPABASE_URL as string | undefined) ?? 'https://vgalezyjhnddvemowgdp.supabase.co';
 const key =
   (import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string | undefined) ??
-  'sb_publishable_hY04Lp-YFJMFqmwQCFhcGg_cpvSsOQt';
+  'sb_publishable_I6VRM3kU8p0ZAWsKFKfkEw_dzPNqF8w';
 
 let cliente: SupabaseClient | null = null;
 
