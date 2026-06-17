@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useProgresso } from '../engine';
 import { Mascotinho } from '../mascote';
+import { AberturaApp } from './AberturaApp';
 import { LogoTchin } from '../icones/LogoTchin';
 import { Sheet } from '../components/Sheet';
 import { track } from '../lib/analytics';
@@ -22,6 +23,7 @@ export default function Splash() {
 
   return (
     <div className="splash">
+      <AberturaApp />
       <div className="splash-alto app-chrome">
         <Mascotinho estado="idle" tamanho={104} rotulo="A taça que treina com você" />
         <p className="splash-wordmark">Treine seu Paladar</p>
