@@ -29,6 +29,23 @@ export function iniciarTelemetria(): void {
     persistence: 'localStorage',
   });
   ligado = true;
+  posthog.register({ id_sessao: idSessao() });
+}
+
+/* Id de sessao (uma vez por aba): super-propriedade em todo evento, para ligar
+   o funil/jornada de uma mesma visita. */
+function idSessao(): string {
+  try {
+    const chave = 'tp.sessao';
+    let s = sessionStorage.getItem(chave);
+    if (!s) {
+      s = globalThis.crypto?.randomUUID?.() ?? `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
+      sessionStorage.setItem(chave, s);
+    }
+    return s;
+  } catch {
+    return 'sem-sessao';
+  }
 }
 
 /** Registra um evento nomeado. No-op se a telemetria nao estiver ligada. */
@@ -41,6 +58,14 @@ export function track(evento: string, props?: Record<string, unknown>): void {
 export function identificar(userId: string, props?: Record<string, unknown>): void {
   if (!ligado) return;
   posthog.identify(userId, props);
+  // `anonimo` vira super-propriedade: acompanha todo evento, nao so o perfil.
+  if (props && 'anonimo' in props) posthog.register({ anonimo: Boolean(props.anonimo) });
+}
+
+/** Marca a visita de uma tela (jornada/drop-off entre as abas). */
+export function telaVista(rota: string): void {
+  if (!ligado) return;
+  posthog.capture('tela_vista', { rota });
 }
 
 /** Desassocia (ex.: logout). No-op se desligada. */

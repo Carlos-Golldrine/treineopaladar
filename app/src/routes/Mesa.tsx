@@ -3,6 +3,7 @@ import { Ic } from '../icones/Icones';
 import { Sheet } from '../components/Sheet';
 import { Avatar } from '../components/Avatar';
 import { nuvemConfigurada } from '../lib/supabase';
+import { track } from '../lib/analytics';
 import {
   alternarTchin,
   assinarMesa,
@@ -66,6 +67,7 @@ export default function Mesa() {
       await recarregar(id);
       if (!vivo) return;
       setCarregando(false);
+      track('mesa_aberta', { mesa_id: id });
       limpar = assinarMesa(id, () => void recarregar(id));
     })();
     return () => {

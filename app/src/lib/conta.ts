@@ -6,6 +6,7 @@
 import { useEffect, useState } from 'react';
 import { getSupabase } from './supabase';
 import { flushSincronizacao, pararSincronizacao } from './cloud';
+import { track, resetTelemetria } from './analytics';
 
 /** Google so aparece quando o OAuth client estiver configurado (Google Cloud + Supabase). */
 export const GOOGLE_PRONTO = true;
@@ -105,6 +106,10 @@ export async function entrarComEmail(email: string, senha: string): Promise<Resu
  */
 export async function sairDaConta(): Promise<void> {
   await flushSincronizacao(); // garante que o ultimo estado subiu para a conta atual
+  track('logout');
+  // Limpa a identidade do PostHog: o proximo anonimo no aparelho NAO herda o
+  // distinct_id da conta anterior (evita misturar dados entre usuarios).
+  resetTelemetria();
   pararSincronizacao(); // para o write-through e esquece o uid antes do signOut
   const sb = getSupabase();
   if (sb) {

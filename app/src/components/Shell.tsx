@@ -1,9 +1,16 @@
-import { Suspense } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Suspense, useEffect } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
 import { TabBar } from './TabBar';
 import { DelayedSkeleton } from './DelayedSkeleton';
+import { telaVista } from '../lib/analytics';
 
 export function Shell() {
+  const { pathname } = useLocation();
+  /* Jornada: marca cada troca de aba (Inicio/Trilha/Desafio/Mesa/Perfil). */
+  useEffect(() => {
+    telaVista(pathname);
+  }, [pathname]);
+
   return (
     <div className="shell">
       <main className="screen">

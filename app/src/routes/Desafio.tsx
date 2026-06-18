@@ -229,7 +229,16 @@ export default function Desafio() {
   }
 
   if (etapa.t === 'jogando') {
-    return <DesafioJogo desafio={desafio} onConcluir={concluir} onSair={() => setEtapa({ t: 'aberto' })} />;
+    return (
+      <DesafioJogo
+        desafio={desafio}
+        onConcluir={concluir}
+        onSair={() => {
+          track('desafio_abandonado', { dia });
+          setEtapa({ t: 'aberto' });
+        }}
+      />
+    );
   }
 
   return (
@@ -240,7 +249,14 @@ export default function Desafio() {
       </header>
 
       {etapa.t === 'aberto' ? (
-        <AbertoHoje dia={dia} desafio={desafio} onJogar={() => setEtapa({ t: 'jogando' })} />
+        <AbertoHoje
+          dia={dia}
+          desafio={desafio}
+          onJogar={() => {
+            track('desafio_iniciado', { dia });
+            setEtapa({ t: 'jogando' });
+          }}
+        />
       ) : (
         <ResultadoHoje dia={dia} desafio={desafio} tentativa={etapa.tentativa} xpGanho={etapa.xpGanho} />
       )}

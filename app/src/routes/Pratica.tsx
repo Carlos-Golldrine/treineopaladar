@@ -17,6 +17,7 @@ import { Odometro, TchinObservador } from '../coreografia/Coreografias';
 import { tocar } from '../som/som';
 import { RevisarCartas } from '../pratica/RevisarCartas';
 import { baralhoDisponivel, cartasParaHoje, lerAgenda } from '../pratica/cartas';
+import { track } from '../lib/analytics';
 
 import '../licao/player.css';
 import './pratica.css';
@@ -84,6 +85,7 @@ export default function Pratica() {
     setFase('respondendo');
     setResolucao(null);
     setEtapa({ t: 'jogando' });
+    track('pratica_iniciada', { exercicios: rodada.length });
   };
 
   const maisUma = () => {
@@ -109,6 +111,7 @@ export default function Pratica() {
     if (posicao + 1 >= rodada.length) {
       const resultado = obterStore().concluirPratica(respostas);
       marcarVistos(rodada.map((e) => e.id));
+      track('pratica_concluida', { acertos: resultado.acertos, erros: resultado.erros, xp: resultado.xp });
       setEtapa({ t: 'resultado', resultado });
       return;
     }

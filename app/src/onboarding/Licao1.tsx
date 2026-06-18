@@ -10,6 +10,7 @@ import { PainelReveal } from '../licao/Feedback';
 import { Ic } from '../icones/Icones';
 import { ICONE_OBJETIVO } from '../trilha/objetivo';
 import { tocar } from '../som/som';
+import { track } from '../lib/analytics';
 import {
   CARTAS_NIVEL,
   CARTAS_OBJETIVO,
@@ -126,6 +127,11 @@ function LicaoUmReal() {
   const nivelResolvido = useRef(false);
   const progressoMax = useRef(0.04);
 
+  /* Funil do onboarding: marca cada passo alcancado (o drop-off e o ultimo). */
+  useEffect(() => {
+    if (passo.t !== 'carregando') track('ftue_passo', { passo: passo.t });
+  }, [passo.t]);
+
   /** Decide o proximo passo olhando a fila do engine e os interstitials. */
   const irParaProxima = useCallback(() => {
     const ativa = store.getSessao();
@@ -199,10 +205,12 @@ function LicaoUmReal() {
     const objetivo = id as Objetivo;
     setObjetivoSel(objetivo);
     store.definirObjetivo(objetivo);
+    track('ftue_objetivo', { objetivo });
   };
 
   const escolherNivel = (id: string) => {
     store.definirNivel(id as Nivel);
+    track('ftue_nivel', { nivel: id });
     nivelResolvido.current = true;
     irParaProxima();
   };

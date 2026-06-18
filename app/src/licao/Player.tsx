@@ -32,6 +32,7 @@ import { Mascotinho, MascoteToast, type EstadoMascote } from '../mascote';
 import { CenaHabilidade } from '../cenas';
 import { useFtueFlags } from '../onboarding/flags';
 import { tocar } from '../som/som';
+import { track } from '../lib/analytics';
 import './player.css';
 
 /* Toast unico que aponta a ficha de bolso na 1a licao (copy fora de
@@ -446,6 +447,7 @@ function PlayerReal({ licao }: { licao: Licao }) {
       fases.reset();
       setAtual(null);
       setEtapa({ t: 'jogando' });
+      track('licao_iniciada', { licao_id: licao.id, unidade: unidadeDaLicao(licao.id)?.meta.id, tipo: t });
     },
     [iniciar, licao, fases],
   );
@@ -559,6 +561,10 @@ function PlayerReal({ licao }: { licao: Licao }) {
   };
 
   const sair = () => {
+    // Drop-off: abandonou a licao no meio (concluida vai pro resultado, nao por aqui).
+    if (!concluida) {
+      track('licao_abandonada', { licao_id: licao.id, unidade: unidadeDaLicao(licao.id)?.meta.id });
+    }
     abandonar();
     navigate('/');
   };
