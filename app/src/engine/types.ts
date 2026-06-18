@@ -105,6 +105,12 @@ export interface EstadoV1 {
   objetivo: Objetivo | null;
   nivelDeclarado: Nivel | null;
   onboardingCompleto: boolean;
+  /** Nome de exibicao (perfil + Mesa). null = ainda nao escolhido. */
+  nome: string | null;
+  /** Id do avatar-preset escolhido (ver components/Avatar). null = inicial. */
+  avatar: string | null;
+  /** Instante (ms) da ultima edicao de nome/avatar (merge: mais recente vence). */
+  perfilTs: number;
 }
 
 export const HABILIDADES: readonly Habilidade[] = [

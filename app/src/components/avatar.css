@@ -1,0 +1,16 @@
+/* Avatar-preset: circulo de cor da marca + icone proprio. Ver Avatar.tsx. */
+.avatar {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  line-height: 1;
+}
+
+.avatar-inicial {
+  background: var(--wine-700);
+  color: var(--bg);
+  font-family: var(--font-display);
+  font-weight: 600;
+}

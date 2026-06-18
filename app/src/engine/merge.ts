@@ -129,6 +129,12 @@ export function mesclarEstado(local: EstadoV1, remoto: EstadoV1, agora: number):
   /* Empate de objetivo/nivel: decide o lado de maior atividade (dataHoje). */
   const ladoAtivo = local.wallet.dataHoje >= remoto.wallet.dataHoje ? local : remoto;
 
+  /* Perfil (nome/avatar): vence a edicao mais recente (perfilTs); se o lado
+     vencedor nao definiu o campo, cai no outro. */
+  const perfilLocalNovo = local.perfilTs >= remoto.perfilTs;
+  const nome = perfilLocalNovo ? (local.nome ?? remoto.nome) : (remoto.nome ?? local.nome);
+  const avatar = perfilLocalNovo ? (local.avatar ?? remoto.avatar) : (remoto.avatar ?? local.avatar);
+
   return {
     versao: 1,
     wallet,
@@ -141,5 +147,8 @@ export function mesclarEstado(local: EstadoV1, remoto: EstadoV1, agora: number):
     objetivo: escolherNaoNulo(local.objetivo, remoto.objetivo, ladoAtivo.objetivo),
     nivelDeclarado: escolherNaoNulo(local.nivelDeclarado, remoto.nivelDeclarado, ladoAtivo.nivelDeclarado),
     onboardingCompleto: local.onboardingCompleto || remoto.onboardingCompleto,
+    nome,
+    avatar,
+    perfilTs: max(local.perfilTs, remoto.perfilTs),
   };
 }

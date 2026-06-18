@@ -36,6 +36,9 @@ export async function salvarNaNuvem(sb: SupabaseClient, userId: string, e: Estad
         objetivo: e.objetivo,
         nivel_declarado: e.nivelDeclarado,
         onboarding_completo: e.onboardingCompleto,
+        nome: e.nome,
+        avatar: e.avatar,
+        perfil_ts: e.perfilTs,
       },
       { onConflict: 'id' },
     ),
@@ -192,5 +195,8 @@ export async function carregarDaNuvem(sb: SupabaseClient, userId: string): Promi
     objetivo: prof.data?.objetivo ?? null,
     nivelDeclarado: prof.data?.nivel_declarado ?? null,
     onboardingCompleto: prof.data?.onboarding_completo ?? false,
+    nome: prof.data?.nome ?? null,
+    avatar: prof.data?.avatar ?? null,
+    perfilTs: Number(prof.data?.perfil_ts ?? 0),
   };
 }

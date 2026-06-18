@@ -7,6 +7,7 @@ import type { Habilidade, Objetivo } from '../engine';
 import { ICONE_OBJETIVO, ROTULO_OBJETIVO } from '../trilha/objetivo';
 import { Sheet } from '../components/Sheet';
 import { ContaSheet } from '../components/ContaSheet';
+import { Avatar, AVATARES, AVATAR_IDS } from '../components/Avatar';
 import { useConta, sairDaConta } from '../lib/conta';
 
 import './perfil.css';
@@ -30,9 +31,23 @@ export default function Perfil() {
   const [som, setSom] = useState(somLigado);
   const [trocandoObjetivo, setTrocandoObjetivo] = useState(false);
   const { wallet, streakEfetivo } = useWallet();
-  const { scorePaladar, objetivo } = useProgresso();
+  const { scorePaladar, objetivo, nome, avatar } = useProgresso();
   const conta = useConta();
   const [criandoConta, setCriandoConta] = useState(false);
+  const [editando, setEditando] = useState(false);
+  const [nomeRascunho, setNomeRascunho] = useState('');
+  const [avatarRascunho, setAvatarRascunho] = useState<string | null>(null);
+
+  const abrirEdicao = () => {
+    setNomeRascunho(nome ?? '');
+    setAvatarRascunho(avatar);
+    setEditando(true);
+  };
+  const salvarPerfil = () => {
+    obterStore().definirNome(nomeRascunho);
+    if (avatarRascunho) obterStore().definirAvatar(avatarRascunho);
+    setEditando(false);
+  };
 
   const alternarSom = () => {
     const novo = !som;
@@ -50,11 +65,21 @@ export default function Perfil() {
   return (
     <>
       <header className="profile-head app-chrome">
-        <div className="profile-avatar" aria-hidden="true">
-          {conta.email ? conta.email[0]!.toUpperCase() : 'V'}
-        </div>
-        <h1 className="profile-name">{conta.anonimo || !conta.email ? 'Visitante' : 'Sua conta'}</h1>
+        <button
+          type="button"
+          className="profile-avatar-btn tap"
+          onClick={abrirEdicao}
+          aria-label="Editar nome e avatar"
+        >
+          <Avatar id={avatar} nome={nome} size={88} />
+        </button>
+        <h1 className="profile-name">
+          {nome ?? (conta.anonimo || !conta.email ? 'Visitante' : 'Sua conta')}
+        </h1>
         <p className="profile-sub">{conta.email ?? desdeQuando(wallet.criadoEm)}</p>
+        <button type="button" className="profile-editar tap" onClick={abrirEdicao}>
+          {nome ? 'Editar perfil' : 'Escolher nome e avatar'}
+        </button>
         <div className="profile-marca" aria-label="Parte do ecossistema Tchin Tchin, versão beta">
           <LogoTchin size={14} className="profile-logo" />
           <span className="profile-by">by Tchin Tchin</span>
@@ -178,6 +203,43 @@ export default function Perfil() {
               </button>
             ))}
           </div>
+        </Sheet>
+      )}
+
+      {editando && (
+        <Sheet titulo="Editar perfil" onFechar={() => setEditando(false)}>
+          <label className="campo-rotulo" htmlFor="perfil-nome">
+            Como você quer ser chamado
+          </label>
+          <input
+            id="perfil-nome"
+            className="campo-texto"
+            type="text"
+            maxLength={30}
+            value={nomeRascunho}
+            onChange={(e) => setNomeRascunho(e.target.value)}
+            placeholder="Seu nome ou apelido"
+            autoComplete="off"
+          />
+          <p className="folha-texto">Esse nome aparece pra você e pra galera da sua Mesa.</p>
+          <p className="campo-rotulo">Escolha um avatar</p>
+          <div className="avatar-grade" role="group" aria-label="Avatares">
+            {AVATAR_IDS.map((aid) => (
+              <button
+                key={aid}
+                type="button"
+                className={`avatar-opcao tap${aid === avatarRascunho ? ' avatar-opcao-sel' : ''}`}
+                aria-pressed={aid === avatarRascunho}
+                aria-label={AVATARES[aid].rotulo}
+                onClick={() => setAvatarRascunho(aid)}
+              >
+                <Avatar id={aid} size={48} />
+              </button>
+            ))}
+          </div>
+          <button type="button" className="btn btn-primary btn-cheio tap" onClick={salvarPerfil}>
+            Salvar
+          </button>
         </Sheet>
       )}
 

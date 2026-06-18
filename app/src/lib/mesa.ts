@@ -16,6 +16,9 @@ export interface PostMesa {
   tchins: number;
   meuTchin: boolean;
   meu: boolean;
+  /** Nome/avatar do autor (do perfil, ao vivo). null = ainda sem nome. */
+  nomeAutor: string | null;
+  avatarAutor: string | null;
 }
 
 export interface RankItem {
@@ -23,6 +26,9 @@ export interface RankItem {
   pontos: number;
   posicao: number;
   eu: boolean;
+  /** Nome/avatar do membro (do perfil, ao vivo). null = ainda sem nome. */
+  nome: string | null;
+  avatar: string | null;
 }
 
 export interface FeedMesa {
@@ -63,22 +69,43 @@ export async function carregarFeed(mesaId: string): Promise<FeedMesa | null> {
   ]);
 
   const ranking: RankItem[] = (
-    (rankRes.data ?? []) as Array<{ user_id: string; pontos: number; posicao: number }>
-  ).map((r) => ({ userId: r.user_id, pontos: r.pontos, posicao: r.posicao, eu: r.user_id === uid }));
+    (rankRes.data ?? []) as Array<{
+      user_id: string;
+      pontos: number;
+      posicao: number;
+      nome: string | null;
+      avatar: string | null;
+    }>
+  ).map((r) => ({
+    userId: r.user_id,
+    pontos: r.pontos,
+    posicao: r.posicao,
+    eu: r.user_id === uid,
+    nome: r.nome,
+    avatar: r.avatar,
+  }));
+
+  /* Diretorio de membros (uid -> nome/avatar) a partir do ranking, que ja lista
+     todos os membros: nomeia os autores dos posts AO VIVO (sem copia velha). */
+  const diretorio = new Map(ranking.map((r) => [r.userId, { nome: r.nome, avatar: r.avatar }]));
 
   const tchins = (tchinsRes.data ?? []) as Array<{ post_id: string; user_id: string }>;
   const posts: PostMesa[] = ((postsRes.data ?? []) as Array<Record<string, unknown>>).map((p) => {
     const id = p.id as string;
     const doPost = tchins.filter((t) => t.post_id === id);
+    const autorId = (p.user_id as string | null) ?? null;
+    const info = autorId ? diretorio.get(autorId) : undefined;
     return {
       id,
-      userId: (p.user_id as string | null) ?? null,
+      userId: autorId,
       tipo: p.tipo as TipoPost,
       payload: (p.payload as Record<string, unknown>) ?? {},
       criadoEm: p.created_at as string,
       tchins: doPost.length,
       meuTchin: doPost.some((t) => t.user_id === uid),
-      meu: (p.user_id as string | null) === uid,
+      meu: autorId === uid,
+      nomeAutor: info?.nome ?? null,
+      avatarAutor: info?.avatar ?? null,
     };
   });
 

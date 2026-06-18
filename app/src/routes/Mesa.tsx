@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Ic } from '../icones/Icones';
 import { Sheet } from '../components/Sheet';
+import { Avatar } from '../components/Avatar';
 import { nuvemConfigurada } from '../lib/supabase';
 import {
   alternarTchin,
@@ -257,7 +258,8 @@ function LigaCard({ feed }: { feed: FeedMesa }) {
         {feed.ranking.slice(0, 5).map((r) => (
           <li key={r.userId} className={r.eu ? 'liga-linha liga-eu' : 'liga-linha'}>
             <span className="liga-rank">{r.posicao}</span>
-            <span className="liga-nome">{r.eu ? 'Você' : 'Alguém da mesa'}</span>
+            <Avatar id={r.avatar} nome={r.nome} size={26} className="liga-avatar" />
+            <span className="liga-nome">{r.eu ? 'Você' : r.nome ?? 'Alguém da mesa'}</span>
             <span className="liga-pts">{r.pontos} XP</span>
           </li>
         ))}
@@ -269,12 +271,22 @@ function LigaCard({ feed }: { feed: FeedMesa }) {
 /* ------------------------------ Cartas ------------------------------ */
 
 function CartaPost({ post, onTchin }: { post: PostMesa; onTchin: () => void }) {
-  const autor = post.userId === null ? 'Degustação da Semana' : post.meu ? 'Você' : 'Alguém da mesa';
+  const ehSistema = post.userId === null;
+  const autor = ehSistema
+    ? 'Degustação da Semana'
+    : post.meu
+      ? 'Você'
+      : post.nomeAutor ?? 'Alguém da mesa';
 
   return (
     <article className={`mesa-card mesa-card-${post.tipo} app-chrome`}>
       <div className="mesa-card-topo">
-        <span className="mesa-autor">{autor}</span>
+        <span className="mesa-autor-grupo">
+          {!ehSistema && (
+            <Avatar id={post.avatarAutor} nome={post.nomeAutor} size={28} className="mesa-avatar" />
+          )}
+          <span className="mesa-autor">{autor}</span>
+        </span>
         <span className="mesa-tempo">{tempoRelativo(post.criadoEm)}</span>
       </div>
 

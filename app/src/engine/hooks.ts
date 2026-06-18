@@ -53,6 +53,8 @@ export interface UseProgresso {
   objetivo: EstadoV1['objetivo'];
   nivelDeclarado: EstadoV1['nivelDeclarado'];
   onboardingCompleto: boolean;
+  nome: string | null;
+  avatar: string | null;
 }
 
 /** Progresso por licao, score de paladar (com decaimento) e revisoes vencidas. */
@@ -68,6 +70,8 @@ export function useProgresso(): UseProgresso {
       objetivo: estado.objetivo,
       nivelDeclarado: estado.nivelDeclarado,
       onboardingCompleto: estado.onboardingCompleto,
+      nome: estado.nome,
+      avatar: estado.avatar,
     }),
     [store, estado],
   );

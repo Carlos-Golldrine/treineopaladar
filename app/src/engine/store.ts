@@ -102,6 +102,9 @@ export function estadoInicial(agora: number): EstadoV1 {
     objetivo: null,
     nivelDeclarado: null,
     onboardingCompleto: false,
+    nome: null,
+    avatar: null,
+    perfilTs: 0,
   };
 }
 
@@ -157,6 +160,9 @@ export function migrar(bruto: unknown, agora: number): EstadoV1 {
     objetivo: migrarObjetivo(dado.objetivo),
     nivelDeclarado: (dado.nivelDeclarado as Nivel | undefined) ?? null,
     onboardingCompleto: dado.onboardingCompleto === true,
+    nome: typeof dado.nome === 'string' ? dado.nome : null,
+    avatar: typeof dado.avatar === 'string' ? dado.avatar : null,
+    perfilTs: typeof dado.perfilTs === 'number' ? dado.perfilTs : 0,
   };
 }
 
@@ -588,6 +594,17 @@ export class TPStore {
 
   definirMetaDiaria(metaDiaria: number): void {
     this.commit({ ...this.estado, wallet: { ...this.estado.wallet, metaDiaria } });
+  }
+
+  /** Nome de exibicao (perfil + Mesa). String vazia limpa o nome. */
+  definirNome(nome: string): void {
+    const limpo = nome.trim().slice(0, 30);
+    this.commit({ ...this.estado, nome: limpo.length ? limpo : null, perfilTs: this.agora() });
+  }
+
+  /** Avatar-preset escolhido (id curto). */
+  definirAvatar(avatar: string): void {
+    this.commit({ ...this.estado, avatar, perfilTs: this.agora() });
   }
 
   concluirOnboarding(): void {
