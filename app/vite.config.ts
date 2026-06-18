@@ -57,7 +57,7 @@ export default defineConfig({
            micro-aulas) ficam FORA do precache: caem no runtime caching
            (decisao F2, ~351KB a menos na instalacao; gsap so chega com
            a primeira micro-aula) */
-        globIgnores: ['**/rotulos/**', '**/banco-pratica-*.js', '**/desafios-*.js', '**/gsap-*.js'],
+        globIgnores: ['**/rotulos/**', '**/avatars/**', '**/banco-pratica-*.js', '**/desafios-*.js', '**/gsap-*.js'],
         navigateFallback: '/index.html',
         runtimeCaching: [
           {
@@ -67,6 +67,19 @@ export default defineConfig({
               cacheName: 'rotulos-v1',
               expiration: {
                 maxEntries: 60,
+                maxAgeSeconds: 60 * 24 * 60 * 60,
+              },
+            },
+          },
+          {
+            /* avatares-preset (fora do precache): chegam sob demanda e ficam
+               offline apos o primeiro uso */
+            urlPattern: ({ url }) => url.pathname.startsWith('/avatars/'),
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'avatares-v1',
+              expiration: {
+                maxEntries: 20,
                 maxAgeSeconds: 60 * 24 * 60 * 60,
               },
             },

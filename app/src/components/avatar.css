@@ -8,6 +8,14 @@
   line-height: 1;
 }
 
+/* SVG inline (personagem): o viewBox ja esta rente a moldura, entao preenche
+   o circulo sem scale. */
+.avatar-svg svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .avatar-inicial {
   background: var(--wine-700);
   color: var(--bg);

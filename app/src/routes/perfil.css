@@ -37,7 +37,6 @@
   border: none;
   background: none;
   border-radius: var(--radius-pill);
-  box-shadow: var(--shadow-sm);
   cursor: pointer;
 }
 
