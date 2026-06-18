@@ -127,6 +127,9 @@ function CenaTanino({ className }: CenaProps) {
           strokeLinecap="round"
         />
         <path d="M36 74 h52" stroke="var(--wine-900)" strokeWidth="3" strokeLinecap="round" opacity="0.4" />
+        {/* etiqueta do saquinho de cha pendurada: deixa claro que e cha (a referencia do tanino) */}
+        <path d="M70 41 q3 8 4 15" fill="none" stroke="var(--wine-900)" strokeWidth="1.6" strokeLinecap="round" />
+        <rect x="69.5" y="56" width="9" height="9" rx="1.6" fill="var(--gold-500)" stroke="var(--wine-900)" strokeWidth="1.8" />
       </g>
     </Cena>
   );
@@ -191,13 +194,18 @@ function CenaAcidez({ className }: CenaProps) {
         <circle data-parte="gota-2" cx="70" cy="56" r="2.6" opacity="0" />
       </g>
       <g data-parte="limao" style={{ transformBox: 'view-box', transformOrigin: '60px 44px' }}>
-        <circle cx="60" cy="44" r="20" fill="var(--gold-500)" stroke="var(--wine-900)" strokeWidth="3" />
-        <circle cx="60" cy="44" r="13.5" fill="var(--bg)" opacity="0.55" />
-        <g stroke="var(--gold-700)" strokeWidth="2.4" strokeLinecap="round">
+        {/* casca verde do limao (no Brasil limao e verde) */}
+        <circle cx="60" cy="44" r="20" fill="var(--ok-700)" stroke="var(--wine-900)" strokeWidth="3" />
+        {/* polpa clara */}
+        <circle cx="60" cy="44" r="14" fill="var(--ok-100)" />
+        {/* gomos */}
+        <g stroke="var(--ok-700)" strokeWidth="2.4" strokeLinecap="round">
           <line x1="60" y1="32" x2="60" y2="56" />
           <line x1="50" y1="38" x2="70" y2="50" />
           <line x1="50" y1="50" x2="70" y2="38" />
         </g>
+        <circle cx="60" cy="44" r="2.2" fill="var(--ok-700)" />
+        {/* folha */}
         <path
           d="M67 20 q7 -8 15 -5 q-2 8 -12 9 Z"
           fill="var(--ok-700)"
@@ -221,7 +229,7 @@ const cfgCorpo: ConfigCena = {
     if (!el) return [];
     return [
       el.animate(
-        [{ transform: 'rotate(-2.5deg)' }, { transform: 'rotate(2.5deg)' }],
+        [{ transform: 'rotate(2deg)' }, { transform: 'rotate(5.5deg)' }],
         { duration: 3000, ...VAIVEM },
       ),
     ];
@@ -229,7 +237,7 @@ const cfgCorpo: ConfigCena = {
   reagir: (svg) => {
     const braco = parte(svg, 'braco');
     if (!braco) return [];
-    const { kfs, duracao } = molaKeyframes(13, 0, MOLA_GENTIL, (v) => ({
+    const { kfs, duracao } = molaKeyframes(13, 3.5, MOLA_GENTIL, (v) => ({
       transform: `rotate(${v}deg)`,
     }));
     return [braco.animate(kfs, { duration: duracao, easing: 'linear' })];
@@ -263,40 +271,48 @@ function CenaCorpo({ className }: CenaProps) {
 }
 
 /* ====================================================================== */
-/* DOCURA: cubo de acucar sobre uma colmeia. Idle: o cubo flutua de leve. */
-/* Toque: o cubo afunda, dissolve (some) e tres bolhas-doces sobem.       */
+/* DOCURA: pote de mel (no Brasil le mais doce que cubo de acucar). Idle:  */
+/* a gota na ponta do pegador incha de leve. Toque: a gota escorre e cai,  */
+/* o pegador da um giro de "mexer" e tres bolhinhas doces sobem do pote.   */
 /* ====================================================================== */
 
 const cfgDocura: ConfigCena = {
   idle: (svg) => {
-    const el = parte(svg, 'cubo');
-    if (!el) return [];
+    const gota = parte(svg, 'gota');
+    if (!gota) return [];
     return [
-      el.animate(
-        [{ transform: 'translateY(0)' }, { transform: 'translateY(-3px)' }],
-        { duration: 2200, ...VAIVEM },
+      gota.animate(
+        [{ transform: 'scale(1)' }, { transform: 'scale(1.16)' }],
+        { duration: 1600, ...VAIVEM },
       ),
     ];
   },
   reagir: (svg) => {
     const anims: Animation[] = [];
-    const cubo = parte(svg, 'cubo');
-    if (cubo) {
+    const gota = parte(svg, 'gota');
+    if (gota) {
       anims.push(
-        cubo.animate(
+        gota.animate(
           [
-            { transform: 'translateY(-3px) scale(1)', opacity: 1 },
-            { transform: 'translateY(6px) scale(0.96)', opacity: 1, offset: 0.4, easing: 'ease-in' },
-            { transform: 'translateY(10px) scale(0.5)', opacity: 0 },
-            { transform: 'translateY(-3px) scale(1)', opacity: 1, offset: 0.99 },
-            { transform: 'translateY(-3px) scale(1)', opacity: 1 },
+            { transform: 'translateY(0) scale(1)', opacity: 1, easing: 'ease-in' },
+            { transform: 'translateY(7px) scale(1.15)', opacity: 1, offset: 0.45 },
+            { transform: 'translateY(22px) scale(0.6)', opacity: 0 },
+            { transform: 'translateY(0) scale(1)', opacity: 1, offset: 0.99 },
+            { transform: 'translateY(0) scale(1)', opacity: 1 },
           ],
-          { duration: 1500, easing: 'ease-out' },
+          { duration: 1300, easing: 'ease-out' },
         ),
       );
     }
+    const pegador = parte(svg, 'pegador');
+    if (pegador) {
+      const { kfs, duracao } = molaKeyframes(7, 0, MOLA_GENTIL, (v) => ({
+        transform: `rotate(${v}deg)`,
+      }));
+      anims.push(pegador.animate(kfs, { duration: duracao, easing: 'linear' }));
+    }
     partes(svg, 'bolha').forEach((b, i) => {
-      const dx = [-9, 4, 11][i % 3];
+      const dx = [-9, 5, 10][i % 3];
       anims.push(
         b.animate(
           [
@@ -304,7 +320,7 @@ const cfgDocura: ConfigCena = {
             { transform: `translate(${dx * 0.5}px,-8px) scale(1)`, opacity: 0.85, offset: 0.45, easing: 'ease-out' },
             { transform: `translate(${dx}px,-22px) scale(0.6)`, opacity: 0 },
           ],
-          { duration: 1000, delay: 260 + i * 90, easing: 'ease-out' },
+          { duration: 1000, delay: 240 + i * 90, easing: 'ease-out' },
         ),
       );
     });
@@ -315,24 +331,64 @@ const cfgDocura: ConfigCena = {
 function CenaDocura({ className }: CenaProps) {
   return (
     <Cena config={cfgDocura} className={className}>
-      {/* colmeia: tres favos dourados */}
-      <g fill="var(--gold-500)" stroke="var(--wine-900)" strokeWidth="2.6" strokeLinejoin="round">
-        <path d="M40 58 l6 -3 l6 3 v7 l-6 3 l-6 -3 Z" />
-        <path d="M54 58 l6 -3 l6 3 v7 l-6 3 l-6 -3 Z" />
-        <path d="M68 58 l6 -3 l6 3 v7 l-6 3 l-6 -3 Z" />
-        <path d="M47 66 l6 -3 l6 3 v7 l-6 3 l-6 -3 Z" />
-        <path d="M61 66 l6 -3 l6 3 v7 l-6 3 l-6 -3 Z" />
+      <defs>
+        <clipPath id="cena-pote-clip">
+          <path d="M40 40 Q40 35 45 35 L75 35 Q80 35 80 40 L80 66 Q80 76 70 76 L50 76 Q40 76 40 66 Z" />
+        </clipPath>
+      </defs>
+      {/* corpo do pote */}
+      <path
+        d="M40 40 Q40 35 45 35 L75 35 Q80 35 80 40 L80 66 Q80 76 70 76 L50 76 Q40 76 40 66 Z"
+        fill="var(--gold-500)"
+        stroke="var(--wine-900)"
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+      {/* mel dentro (nivel mais escuro) + linha do nivel */}
+      <g clipPath="url(#cena-pote-clip)">
+        <path d="M40 52 Q52 48 60 52 Q70 57 80 52 L80 76 L40 76 Z" fill="var(--gold-700)" />
+        <path d="M40 52 Q52 48 60 52 Q70 57 80 52" fill="none" stroke="var(--wine-900)" strokeWidth="2.2" strokeLinecap="round" />
       </g>
-      {/* bolhas-doces (sobem do mel) */}
-      <g fill="var(--gold-700)">
-        <circle data-parte="bolha-0" cx="54" cy="52" r="2.2" opacity="0" />
-        <circle data-parte="bolha-1" cx="60" cy="52" r="2.6" opacity="0" />
-        <circle data-parte="bolha-2" cx="66" cy="52" r="2.2" opacity="0" />
+      {/* rotulo claro */}
+      <rect x="48" y="59" width="24" height="11" rx="3" fill="var(--bg)" stroke="var(--wine-900)" strokeWidth="2.4" />
+      <line x1="53" y1="64.5" x2="67" y2="64.5" stroke="var(--gold-700)" strokeWidth="2" strokeLinecap="round" />
+      {/* tampa / colar do pote */}
+      <path
+        d="M36 35 Q36 30 41 30 L79 30 Q84 30 84 35 L84 37 Q84 39 82 39 L38 39 Q36 39 36 37 Z"
+        fill="var(--wine-700)"
+        stroke="var(--wine-900)"
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+      <line x1="40" y1="34.5" x2="80" y2="34.5" stroke="var(--gold-500)" strokeWidth="2" strokeLinecap="round" />
+      {/* pegador de mel apoiado na borda: gira de leve (idle e toque) */}
+      <g data-parte="pegador" style={{ transformBox: 'view-box', transformOrigin: '67px 44px' }}>
+        <line x1="86" y1="14" x2="70" y2="40" stroke="var(--wine-900)" strokeWidth="3" strokeLinecap="round" />
+        <circle cx="87" cy="13" r="3.4" fill="var(--gold-500)" stroke="var(--wine-900)" strokeWidth="2.4" />
+        <ellipse cx="67" cy="44" rx="6.5" ry="8.5" fill="var(--gold-500)" stroke="var(--wine-900)" strokeWidth="3" transform="rotate(-32 67 44)" />
+        <g stroke="var(--wine-900)" strokeWidth="1.8" strokeLinecap="round">
+          <line x1="63.5" y1="41" x2="70" y2="44" />
+          <line x1="62.5" y1="45" x2="69.5" y2="48" />
+          <line x1="62.5" y1="49" x2="68.5" y2="51.5" />
+        </g>
       </g>
-      {/* cubo de acucar */}
-      <g data-parte="cubo" style={{ transformBox: 'view-box', transformOrigin: '60px 32px' }}>
-        <rect x="49" y="20" width="22" height="22" rx="4" fill="var(--bg)" stroke="var(--wine-900)" strokeWidth="3" />
-        <path d="M49 26 l22 -4 M49 33 l22 -4 M49 40 l22 -4" stroke="var(--neutral-200)" strokeWidth="2" strokeLinecap="round" />
+      {/* fio + gota de mel na ponta do pegador (incha no idle, cai no toque) */}
+      <path d="M68.5 49.5 Q69.2 51.5 70 53" fill="none" stroke="var(--gold-700)" strokeWidth="2" strokeLinecap="round" />
+      <circle
+        data-parte="gota"
+        cx="70"
+        cy="54.5"
+        r="2.7"
+        fill="var(--gold-700)"
+        stroke="var(--wine-900)"
+        strokeWidth="1.6"
+        style={{ transformBox: 'view-box', transformOrigin: '70px 52px' }}
+      />
+      {/* bolhinhas doces que sobem do pote no toque */}
+      <g fill="var(--gold-500)">
+        <circle data-parte="bolha-0" cx="52" cy="34" r="2.2" opacity="0" />
+        <circle data-parte="bolha-1" cx="60" cy="32" r="2.6" opacity="0" />
+        <circle data-parte="bolha-2" cx="68" cy="34" r="2.2" opacity="0" />
       </g>
     </Cena>
   );
@@ -388,6 +444,8 @@ function CenaFrutado({ className }: CenaProps) {
       {/* galho preso no topo */}
       <path d="M60 14 q1 -5 7 -7" stroke="var(--wine-900)" strokeWidth="3" strokeLinecap="round" />
       <path d="M67 7 q8 -2 13 4 q-6 5 -13 1 Z" fill="var(--ok-700)" stroke="var(--wine-900)" strokeWidth="2.4" strokeLinejoin="round" />
+      {/* gavinha da vinha (curva pra ler como uva, nao cereja) */}
+      <path d="M58 13 q-6 -1 -5 -6 q0.8 -4 4 -2.5" fill="none" stroke="var(--wine-900)" strokeWidth="2" strokeLinecap="round" />
       {/* cacho que balanca pelo galho */}
       <g data-parte="cacho" style={{ transformBox: 'view-box', transformOrigin: '60px 16px' }}>
         <path d="M60 16 v6" stroke="var(--wine-900)" strokeWidth="3" strokeLinecap="round" />
@@ -442,23 +500,24 @@ const cfgRotulo: ConfigCena = {
 function CenaRotulo({ className }: CenaProps) {
   return (
     <Cena config={cfgRotulo} className={className}>
-      {/* garrafa */}
+      {/* garrafa de vinho: gargalo longo, ombro inclinado, corpo esguio */}
       <path
-        d="M53 12 h14 v12 c0 6 8 9 8 19 V70 a5 5 0 0 1 -5 5 H50 a5 5 0 0 1 -5 -5 V43 c0 -10 8 -13 8 -19 Z"
+        d="M55 10 H65 V28 C65 32 74 34 74 44 V72 Q74 76 70 76 H50 Q46 76 46 72 V44 C46 34 55 32 55 28 Z"
         fill="var(--wine-700)"
         stroke="var(--wine-900)"
         strokeWidth="3"
         strokeLinejoin="round"
       />
-      <rect x="52" y="8" width="16" height="6" rx="2" fill="var(--wine-900)" />
+      {/* capsula no topo do gargalo */}
+      <rect x="54" y="6" width="12" height="9" rx="2" fill="var(--wine-900)" />
       {/* etiqueta que descola uma pontinha */}
-      <g data-parte="etiqueta" style={{ transformBox: 'view-box', transformOrigin: '47px 60px' }}>
-        <rect x="47" y="48" width="26" height="20" rx="2.5" fill="var(--gold-500)" stroke="var(--wine-900)" strokeWidth="2.4" />
-        <line x1="51" y1="54" x2="69" y2="54" stroke="var(--wine-900)" strokeWidth="2" strokeLinecap="round" opacity="0.6" />
-        <line x1="51" y1="59" x2="65" y2="59" stroke="var(--wine-900)" strokeWidth="2" strokeLinecap="round" opacity="0.4" />
-        <line x1="51" y1="63.5" x2="67" y2="63.5" stroke="var(--wine-900)" strokeWidth="2" strokeLinecap="round" opacity="0.4" />
+      <g data-parte="etiqueta" style={{ transformBox: 'view-box', transformOrigin: '49px 70px' }}>
+        <rect x="49" y="50" width="22" height="20" rx="2.5" fill="var(--gold-500)" stroke="var(--wine-900)" strokeWidth="2.4" />
+        <line x1="53" y1="56" x2="67" y2="56" stroke="var(--wine-900)" strokeWidth="2" strokeLinecap="round" opacity="0.6" />
+        <line x1="53" y1="61" x2="63" y2="61" stroke="var(--wine-900)" strokeWidth="2" strokeLinecap="round" opacity="0.4" />
+        <line x1="53" y1="65.5" x2="65" y2="65.5" stroke="var(--wine-900)" strokeWidth="2" strokeLinecap="round" opacity="0.4" />
         {/* brilho que desliza pela etiqueta */}
-        <rect data-parte="brilho" x="56" y="48" width="6" height="20" rx="2.5" fill="var(--bg)" opacity="0" />
+        <rect data-parte="brilho" x="57" y="50" width="6" height="20" rx="2.5" fill="var(--bg)" opacity="0" />
       </g>
     </Cena>
   );
@@ -544,7 +603,8 @@ function CenaHarmonizacaoCena({ className }: CenaProps) {
         </g>
         <path d="M64 28 c0 13 5 21 13 24 c8 -3 13 -11 13 -24 Z" stroke="var(--wine-900)" strokeWidth="3" strokeLinejoin="round" />
         <line x1="77" y1="52" x2="77" y2="70" stroke="var(--wine-900)" strokeWidth="3" strokeLinecap="round" />
-        <path d="M68 73 q9 -4 18 0" stroke="var(--wine-900)" strokeWidth="3" strokeLinecap="round" />
+        {/* pe chato (disco da base), em vez do arco que parecia sorriso */}
+        <ellipse cx="77" cy="73" rx="11" ry="2.8" fill="var(--bg)" stroke="var(--wine-900)" strokeWidth="2.6" />
       </g>
       {/* garfo (esquerda) que encosta na taca */}
       <g data-parte="garfo" style={{ transformBox: 'view-box', transformOrigin: '40px 50px' }}>
