@@ -9,10 +9,16 @@ import {
   assinarMesa,
   carregarFeed,
   definirPrivacidade,
+  entrarNaMesa,
+  expulsarMembro,
   garantirMesa,
+  listarMesasPublicas,
+  minhaMesaAtual,
+  passarLideranca,
   postarProvei,
+  sairDaMesa,
 } from '../lib/mesa';
-import type { FeedMesa, PostMesa } from '../lib/mesa';
+import type { FeedMesa, MesaPublica, PostMesa, RankItem } from '../lib/mesa';
 
 import './mesa.css';
 
@@ -24,6 +30,24 @@ const DIMS: Array<{ k: string; nome: string }> = [
   { k: 'frutado', nome: 'Frutado' },
   { k: 'docura', nome: 'Doçura' },
 ];
+
+/* Flag local: depois de sair, NAO auto-entra de novo (senao a mesa "puxa" a
+   pessoa de volta na proxima abertura). Volta a 'on' quando ela entra numa mesa. */
+const LS_AUTO = 'tp.mesa.auto';
+function autoEntrar(): boolean {
+  try {
+    return localStorage.getItem(LS_AUTO) !== '0';
+  } catch {
+    return true;
+  }
+}
+function marcarAuto(ligado: boolean): void {
+  try {
+    localStorage.setItem(LS_AUTO, ligado ? '1' : '0');
+  } catch {
+    /* modo privado pode bloquear o storage: tudo bem, cai no padrao */
+  }
+}
 
 function tempoRelativo(iso: string): string {
   const min = Math.max(0, Math.floor((Date.now() - new Date(iso).getTime()) / 60000));
@@ -38,17 +62,51 @@ export default function Mesa() {
   const [feed, setFeed] = useState<FeedMesa | null>(null);
   const [carregando, setCarregando] = useState(true);
   const [indisponivel, setIndisponivel] = useState(false);
+  const [semMesa, setSemMesa] = useState(false);
   const [compor, setCompor] = useState(false);
   const [convidando, setConvidando] = useState(false);
+  const [membrosAberto, setMembrosAberto] = useState(false);
+  const [mesasAberto, setMesasAberto] = useState(false);
   const mesaId = useRef<string | null>(null);
+  const limparRef = useRef<() => void>(() => {});
 
+  /* Recarrega o feed. Como o ranking so e visivel para membros, se eu nao
+     apareco nele confirmo com o servidor: se nao sou mais membro desta mesa
+     (sai noutra aba ou fui expulso), caio no estado "sem mesa". Confirmar
+     evita falso-positivo de um erro de rede transitorio (ranking vazio). */
   const recarregar = useCallback(async (id: string) => {
     const f = await carregarFeed(id);
-    if (f) setFeed(f);
+    if (!f) return;
+    if (f.ranking.some((r) => r.eu)) {
+      setFeed(f);
+      return;
+    }
+    const atual = await minhaMesaAtual();
+    if (atual === id) {
+      setFeed(f);
+      return;
+    }
+    limparRef.current();
+    limparRef.current = () => {};
+    mesaId.current = null;
+    setFeed(null);
+    setMembrosAberto(false);
+    setSemMesa(true);
   }, []);
 
+  /* Liga numa mesa: solta a assinatura anterior, carrega e reassina. */
+  const montar = useCallback(
+    async (id: string) => {
+      limparRef.current();
+      mesaId.current = id;
+      setSemMesa(false);
+      await recarregar(id);
+      limparRef.current = assinarMesa(id, () => void recarregar(id));
+    },
+    [recarregar],
+  );
+
   useEffect(() => {
-    let limpar = () => {};
     let vivo = true;
     void (async () => {
       if (!nuvemConfigurada()) {
@@ -56,25 +114,29 @@ export default function Mesa() {
         setCarregando(false);
         return;
       }
-      const id = await garantirMesa();
+      let id = await minhaMesaAtual();
+      if (!vivo) return;
+      if (!id && autoEntrar()) {
+        id = await garantirMesa();
+        if (id) marcarAuto(true);
+      }
       if (!vivo) return;
       if (!id) {
-        setIndisponivel(true);
+        /* Sem mesa e sem auto-entrar (sai antes): mostra o "encontrar mesas". */
+        setSemMesa(true);
         setCarregando(false);
         return;
       }
-      mesaId.current = id;
-      await recarregar(id);
+      await montar(id);
       if (!vivo) return;
       setCarregando(false);
       track('mesa_aberta', { mesa_id: id });
-      limpar = assinarMesa(id, () => void recarregar(id));
     })();
     return () => {
       vivo = false;
-      limpar();
+      limparRef.current();
     };
-  }, [recarregar]);
+  }, [montar]);
 
   const tchin = async (p: PostMesa) => {
     setFeed((f) =>
@@ -100,6 +162,66 @@ export default function Mesa() {
     }
   };
 
+  /* Entrar numa mesa publica escolhida na lista. */
+  const entrarEm = async (id: string) => {
+    setMesasAberto(false);
+    setCarregando(true);
+    const novo = await entrarNaMesa(id);
+    if (novo) {
+      marcarAuto(true);
+      await montar(novo);
+      track('mesa_entrou', { mesa_id: novo, origem: 'lista' });
+    }
+    setCarregando(false);
+  };
+
+  /* Entrar numa mesa do meu ritmo (auto-pareamento). */
+  const entrarAuto = async () => {
+    setCarregando(true);
+    const id = await garantirMesa();
+    if (id) {
+      marcarAuto(true);
+      await montar(id);
+      track('mesa_entrou', { mesa_id: id, origem: 'auto' });
+    }
+    setCarregando(false);
+  };
+
+  /* Sair da mesa atual. Nao auto-entra de novo ate a pessoa escolher. */
+  const sair = async () => {
+    const id = mesaId.current;
+    if (!id) return;
+    setMembrosAberto(false);
+    await sairDaMesa(id);
+    marcarAuto(false);
+    limparRef.current();
+    limparRef.current = () => {};
+    mesaId.current = null;
+    setFeed(null);
+    setSemMesa(true);
+    track('mesa_saiu', { mesa_id: id });
+    setMesasAberto(true);
+  };
+
+  const expulsar = async (alvo: string) => {
+    const id = mesaId.current;
+    if (!id) return;
+    await expulsarMembro(id, alvo);
+    await recarregar(id);
+    track('mesa_expulsou', { mesa_id: id });
+  };
+
+  const passar = async (novo: string) => {
+    const id = mesaId.current;
+    if (!id) return;
+    await passarLideranca(id, novo);
+    await recarregar(id);
+    track('mesa_lideranca_passada', { mesa_id: id });
+  };
+
+  const meuRank = feed?.ranking.find((r) => r.eu) ?? null;
+  const souAnfitriao = !!(meuRank && feed?.anfitriao && meuRank.userId === feed.anfitriao);
+
   return (
     <>
       <header className="screen-header app-chrome mesa-header">
@@ -119,14 +241,24 @@ export default function Mesa() {
           </p>
         </div>
         {feed && (
-          <button
-            type="button"
-            className="mesa-convidar-btn tap"
-            aria-label="Convidar para a mesa"
-            onClick={() => setConvidando(true)}
-          >
-            <Ic nome="compartilhar" size={20} />
-          </button>
+          <div className="mesa-header-acoes">
+            <button
+              type="button"
+              className="mesa-convidar-btn tap"
+              aria-label="Encontrar outras mesas"
+              onClick={() => setMesasAberto(true)}
+            >
+              <Ic nome="mesa" size={20} />
+            </button>
+            <button
+              type="button"
+              className="mesa-convidar-btn tap"
+              aria-label="Convidar para a mesa"
+              onClick={() => setConvidando(true)}
+            >
+              <Ic nome="compartilhar" size={20} />
+            </button>
+          </div>
         )}
       </header>
 
@@ -143,9 +275,28 @@ export default function Mesa() {
           <div className="mesa-skel" />
           <div className="mesa-skel" />
         </section>
+      ) : semMesa ? (
+        <section className="mesa-empty" aria-label="Sem mesa">
+          <div className="mesa-art">
+            <Ic nome="mesa" size={44} />
+          </div>
+          <h2 className="mesa-title">Você não está em nenhuma mesa</h2>
+          <p className="mesa-copy">Escolha uma mesa para sentar ou entre numa do seu ritmo.</p>
+          <button
+            type="button"
+            className="btn btn-primary btn-jogo tap mesa-empty-btn"
+            onClick={() => setMesasAberto(true)}
+          >
+            <Ic nome="mesa" size={18} />
+            Encontrar mesas
+          </button>
+          <button type="button" className="btn btn-outline tap mesa-empty-btn" onClick={() => void entrarAuto()}>
+            Entrar numa do meu ritmo
+          </button>
+        </section>
       ) : (
         <section className="mesa-feed" aria-label="Feed da mesa">
-          {feed && <LigaCard feed={feed} />}
+          {feed && <LigaCard feed={feed} onAbrirMembros={() => setMembrosAberto(true)} />}
           {feed?.posts.length === 0 && (
             <p className="mesa-vazio">Sua mesa está montada. Seja o primeiro a brindar.</p>
           )}
@@ -155,7 +306,7 @@ export default function Mesa() {
         </section>
       )}
 
-      {!indisponivel && !carregando && (
+      {!indisponivel && !carregando && !semMesa && (
         <button type="button" className="mesa-provei btn btn-primary btn-jogo tap" onClick={() => setCompor(true)}>
           <Ic nome="taca" size={18} />
           Provei um vinho
@@ -171,6 +322,25 @@ export default function Mesa() {
             setConvidando(false);
             if (mesaId.current) void recarregar(mesaId.current);
           }}
+        />
+      )}
+
+      {membrosAberto && feed && (
+        <MembrosSheet
+          feed={feed}
+          souAnfitriao={souAnfitriao}
+          onExpulsar={(id) => void expulsar(id)}
+          onPassar={(id) => void passar(id)}
+          onSair={() => void sair()}
+          onFechar={() => setMembrosAberto(false)}
+        />
+      )}
+
+      {mesasAberto && (
+        <MesasSheet
+          mesaAtual={mesaId.current}
+          onEntrar={(id) => void entrarEm(id)}
+          onFechar={() => setMesasAberto(false)}
         />
       )}
     </>
@@ -243,11 +413,211 @@ function ConvidarSheet({ feed, onFechar }: { feed: FeedMesa; onFechar: () => voi
   );
 }
 
+/* ----------------------------- Membros ------------------------------ */
+
+function MembrosSheet({
+  feed,
+  souAnfitriao,
+  onExpulsar,
+  onPassar,
+  onSair,
+  onFechar,
+}: {
+  feed: FeedMesa;
+  souAnfitriao: boolean;
+  onExpulsar: (userId: string) => void;
+  onPassar: (userId: string) => void;
+  onSair: () => void;
+  onFechar: () => void;
+}) {
+  /* Confirmacao em dois toques (sem confirm() do navegador). */
+  const [expulsarId, setExpulsarId] = useState<string | null>(null);
+  const [passarId, setPassarId] = useState<string | null>(null);
+  const [confirmandoSair, setConfirmandoSair] = useState(false);
+
+  return (
+    <Sheet titulo="Membros da mesa" onFechar={onFechar}>
+      <p className="folha-texto">
+        {souAnfitriao
+          ? 'Você é o anfitrião. Pode passar a coroa ou remover quem não combina com a mesa.'
+          : 'Quem está sentado na mesa desta semana.'}
+      </p>
+      <ul className="mesa-membros">
+        {feed.ranking.map((r) => {
+          const ehAnfitriao = r.userId === feed.anfitriao;
+          const mostrarAcoes = souAnfitriao && !r.eu;
+          return (
+            <li key={r.userId} className="mesa-membro">
+              <Avatar id={r.avatar} nome={r.nome} size={36} className="mesa-membro-avatar" />
+              <span className="mesa-membro-nome">
+                {r.eu ? 'Você' : r.nome ?? 'Alguém da mesa'}
+                {ehAnfitriao && (
+                  <span className="mesa-anfitriao-selo">
+                    <Ic nome="coroa" size={14} /> Anfitrião
+                  </span>
+                )}
+              </span>
+              {mostrarAcoes && (
+                <span className="mesa-membro-acoes">
+                  {passarId === r.userId ? (
+                    <button
+                      type="button"
+                      className="mesa-membro-btn mesa-membro-btn-ouro tap"
+                      onClick={() => {
+                        onPassar(r.userId);
+                        setPassarId(null);
+                      }}
+                    >
+                      Confirmar coroa
+                    </button>
+                  ) : expulsarId === r.userId ? (
+                    <button
+                      type="button"
+                      className="mesa-membro-btn mesa-membro-btn-perigo tap"
+                      onClick={() => {
+                        onExpulsar(r.userId);
+                        setExpulsarId(null);
+                      }}
+                    >
+                      Confirmar
+                    </button>
+                  ) : (
+                    <>
+                      <button
+                        type="button"
+                        className="mesa-membro-btn tap"
+                        aria-label={`Passar a liderança para ${r.nome ?? 'este membro'}`}
+                        onClick={() => {
+                          setPassarId(r.userId);
+                          setExpulsarId(null);
+                        }}
+                      >
+                        <Ic nome="coroa" size={16} />
+                      </button>
+                      <button
+                        type="button"
+                        className="mesa-membro-btn tap"
+                        aria-label={`Remover ${r.nome ?? 'este membro'} da mesa`}
+                        onClick={() => {
+                          setExpulsarId(r.userId);
+                          setPassarId(null);
+                        }}
+                      >
+                        <Ic nome="x-fechar" size={16} />
+                      </button>
+                    </>
+                  )}
+                </span>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+
+      {confirmandoSair ? (
+        <button type="button" className="btn mesa-sair-btn mesa-sair-confirma tap" onClick={onSair}>
+          Confirmar saída da mesa
+        </button>
+      ) : (
+        <button type="button" className="btn mesa-sair-btn tap" onClick={() => setConfirmandoSair(true)}>
+          <Ic nome="seta-voltar" size={16} />
+          Sair desta mesa
+        </button>
+      )}
+    </Sheet>
+  );
+}
+
+/* ------------------------- Encontrar mesas -------------------------- */
+
+function MesasSheet({
+  mesaAtual,
+  onEntrar,
+  onFechar,
+}: {
+  mesaAtual: string | null;
+  onEntrar: (id: string) => void;
+  onFechar: () => void;
+}) {
+  const [mesas, setMesas] = useState<MesaPublica[] | null>(null);
+
+  useEffect(() => {
+    let vivo = true;
+    void listarMesasPublicas().then((lista) => {
+      if (vivo) setMesas(lista);
+    });
+    return () => {
+      vivo = false;
+    };
+  }, []);
+
+  return (
+    <Sheet titulo="Encontrar mesas" onFechar={onFechar}>
+      <p className="folha-texto">Mesas abertas desta semana. Entrar numa sai da sua atual.</p>
+      {mesas === null ? (
+        <div className="mesa-carregando mesa-carregando-folha">
+          <div className="mesa-skel" />
+          <div className="mesa-skel" />
+        </div>
+      ) : mesas.length === 0 ? (
+        <p className="mesa-vazio">Nenhuma mesa aberta agora. Que tal abrir a sua?</p>
+      ) : (
+        <ul className="mesa-lista-publica">
+          {mesas.map((m) => {
+            const atual = m.id === mesaAtual;
+            return (
+              <li key={m.id} className="mesa-publica">
+                <span className="mesa-publica-art" aria-hidden="true">
+                  <Ic nome="mesa" size={22} />
+                </span>
+                <span className="mesa-publica-info">
+                  <span className="mesa-publica-nome">
+                    Mesa de {m.anfitriaoNome ?? 'alguém da liga'}
+                  </span>
+                  <span className="mesa-publica-sub">
+                    {m.membros} {m.membros === 1 ? 'pessoa' : 'pessoas'}
+                  </span>
+                </span>
+                {atual ? (
+                  <span className="mesa-publica-aqui">
+                    <Ic nome="check" size={14} /> Você aqui
+                  </span>
+                ) : (
+                  <button
+                    type="button"
+                    className="btn btn-outline mesa-publica-btn tap"
+                    onClick={() => onEntrar(m.id)}
+                  >
+                    Entrar
+                  </button>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </Sheet>
+  );
+}
+
 /* -------------------------------- Liga ------------------------------ */
 
-function LigaCard({ feed }: { feed: FeedMesa }) {
+function LigaCard({ feed, onAbrirMembros }: { feed: FeedMesa; onAbrirMembros: () => void }) {
   const minha = feed.ranking.find((r) => r.eu);
   const nomeDiv = feed.divisao.charAt(0).toUpperCase() + feed.divisao.slice(1);
+  const linha = (r: RankItem) => (
+    <li key={r.userId} className={r.eu ? 'liga-linha liga-eu' : 'liga-linha'}>
+      <span className="liga-rank">{r.posicao}</span>
+      <Avatar id={r.avatar} nome={r.nome} size={26} className="liga-avatar" />
+      <span className="liga-nome">
+        {r.eu ? 'Você' : r.nome ?? 'Alguém da mesa'}
+        {r.userId === feed.anfitriao && (
+          <Ic nome="coroa" size={14} className="liga-coroa" label="Anfitrião" />
+        )}
+      </span>
+      <span className="liga-pts">{r.pontos} XP</span>
+    </li>
+  );
   return (
     <section className="liga-card app-chrome" aria-label="Liga da semana">
       <div className="liga-topo">
@@ -256,16 +626,11 @@ function LigaCard({ feed }: { feed: FeedMesa }) {
           {minha ? `Você em ${minha.posicao}º de ${feed.ranking.length}` : `${feed.ranking.length} na mesa`}
         </span>
       </div>
-      <ol className="liga-lista">
-        {feed.ranking.slice(0, 5).map((r) => (
-          <li key={r.userId} className={r.eu ? 'liga-linha liga-eu' : 'liga-linha'}>
-            <span className="liga-rank">{r.posicao}</span>
-            <Avatar id={r.avatar} nome={r.nome} size={26} className="liga-avatar" />
-            <span className="liga-nome">{r.eu ? 'Você' : r.nome ?? 'Alguém da mesa'}</span>
-            <span className="liga-pts">{r.pontos} XP</span>
-          </li>
-        ))}
-      </ol>
+      <ol className="liga-lista">{feed.ranking.slice(0, 5).map(linha)}</ol>
+      <button type="button" className="liga-membros-btn tap" onClick={onAbrirMembros}>
+        Ver membros e gerenciar
+        <Ic nome="seta-direita" size={16} />
+      </button>
     </section>
   );
 }

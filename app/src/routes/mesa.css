@@ -22,6 +22,12 @@
   color: var(--wine-700);
 }
 
+.mesa-header-acoes {
+  flex: none;
+  display: flex;
+  gap: var(--space-2);
+}
+
 .mesa-convidar-btn {
   flex: none;
   width: 44px;
@@ -496,4 +502,236 @@
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   color: rgba(250, 250, 248, 0.8);
+}
+
+.liga-nome {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.liga-coroa {
+  color: var(--gold-500);
+}
+
+.liga-membros-btn {
+  margin-top: var(--space-3);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px;
+  border: none;
+  border-radius: var(--radius-control);
+  background: rgba(250, 250, 248, 0.1);
+  color: var(--bg);
+  font: 600 var(--text-sm) / 1 var(--font-ui);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (hover: hover) {
+  .liga-membros-btn:hover {
+    background: rgba(250, 250, 248, 0.18);
+  }
+}
+
+/* ---------- Estado sem mesa (acoes) ---------- */
+.mesa-empty-btn {
+  margin-top: var(--space-4);
+  width: 100%;
+  max-width: 22rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+.mesa-empty-btn + .mesa-empty-btn {
+  margin-top: var(--space-2);
+}
+
+/* ---------- Folha: membros e gerenciamento ---------- */
+.mesa-membros {
+  list-style: none;
+  margin: var(--space-3) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mesa-membro {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 8px 6px;
+  border-radius: var(--radius-control);
+}
+
+.mesa-membro-nome {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  font: 600 var(--text-sm) / 1.2 var(--font-ui);
+  color: var(--wine-900);
+}
+
+.mesa-anfitriao-selo {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  background: rgba(212, 165, 116, 0.18);
+  color: var(--gold-700);
+  font: 600 var(--text-xs) / 1 var(--font-ui);
+}
+
+.mesa-anfitriao-selo .ic {
+  color: var(--gold-500);
+}
+
+.mesa-membro-acoes {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mesa-membro-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 36px;
+  min-width: 36px;
+  padding: 0 10px;
+  border: 1.5px solid var(--neutral-300);
+  border-radius: var(--radius-pill);
+  background: var(--bg);
+  color: var(--wine-700);
+  font: 600 var(--text-xs) / 1 var(--font-ui);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mesa-membro-btn-perigo {
+  background: var(--wine-700);
+  border-color: var(--wine-700);
+  color: var(--bg);
+}
+
+.mesa-membro-btn-ouro {
+  background: var(--gold-500);
+  border-color: var(--gold-500);
+  color: var(--wine-900);
+}
+
+.mesa-sair-btn {
+  margin-top: var(--space-4);
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 48px;
+  border: 1.5px solid var(--neutral-300);
+  border-radius: var(--radius-control);
+  background: var(--bg);
+  color: var(--wine-700);
+  font: 600 var(--text-sm) / 1 var(--font-ui);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mesa-sair-confirma {
+  background: var(--wine-700);
+  border-color: var(--wine-700);
+  color: var(--bg);
+}
+
+/* ---------- Folha: encontrar mesas ---------- */
+.mesa-carregando-folha {
+  padding: var(--space-3) 0 0;
+}
+
+.mesa-carregando-folha .mesa-skel {
+  height: 64px;
+}
+
+.mesa-lista-publica {
+  list-style: none;
+  margin: var(--space-3) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.mesa-publica {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2);
+  border: 1.5px solid var(--neutral-200);
+  border-radius: var(--radius-card);
+}
+
+.mesa-publica-art {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-pill);
+  background: rgba(114, 47, 55, 0.08);
+  color: var(--wine-700);
+}
+
+.mesa-publica-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mesa-publica-nome {
+  font: 600 var(--text-sm) / 1.2 var(--font-display);
+  color: var(--wine-900);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mesa-publica-sub {
+  font-size: var(--text-xs);
+  color: var(--neutral-500);
+}
+
+.mesa-publica-btn {
+  flex: none;
+  width: auto;
+  height: 40px;
+  padding: 0 var(--space-4);
+}
+
+.mesa-publica-aqui {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 var(--space-3);
+  color: var(--gold-700);
+  font: 600 var(--text-xs) / 1 var(--font-ui);
+}
+
+.mesa-publica-aqui .ic {
+  color: var(--gold-500);
 }

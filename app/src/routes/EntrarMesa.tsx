@@ -34,7 +34,15 @@ export default function EntrarMesa() {
           });
           uid = (await sb.auth.getUser()).data.user?.id;
         }
-        if (uid) await entrarPorConvite(codigo);
+        if (uid) {
+          await entrarPorConvite(codigo);
+          /* entrou de propria vontade: a Mesa pode auto-recolocar se um dia sair */
+          try {
+            localStorage.setItem('tp.mesa.auto', '1');
+          } catch {
+            /* storage bloqueado: ignora */
+          }
+        }
       }
       if (vivo) navigate('/mesa', { replace: true });
     })();

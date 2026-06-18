@@ -38,8 +38,19 @@ export interface FeedMesa {
   divisao: string;
   privada: boolean;
   codigoConvite: string;
+  /** uid do anfitriao (lider) da mesa. null = mesa sem anfitriao. */
+  anfitriao: string | null;
   ranking: RankItem[];
   posts: PostMesa[];
+}
+
+/** Uma mesa publica na lista de "encontrar mesas". */
+export interface MesaPublica {
+  id: string;
+  membros: number;
+  anfitriaoNome: string | null;
+  /** true se eu ja participo desta mesa. */
+  eu: boolean;
 }
 
 /** Entra (ou cria) na mesa da semana corrente. Retorna o id, ou null sem nuvem. */
@@ -58,7 +69,7 @@ export async function carregarFeed(mesaId: string): Promise<FeedMesa | null> {
   const uid = (await sb.auth.getUser()).data.user?.id ?? null;
 
   const [mesaRes, membrosRes, postsRes, tchinsRes, divRes, rankRes] = await Promise.all([
-    sb.from('mesas').select('semana_iso, codigo_convite, privada').eq('id', mesaId).maybeSingle(),
+    sb.from('mesas').select('semana_iso, codigo_convite, privada, anfitriao').eq('id', mesaId).maybeSingle(),
     sb.from('mesa_membros').select('user_id', { count: 'exact', head: true }).eq('mesa_id', mesaId),
     sb.from('mesa_posts').select('*').eq('mesa_id', mesaId).order('created_at', { ascending: false }),
     sb.from('mesa_tchins').select('post_id, user_id'),
@@ -116,9 +127,63 @@ export async function carregarFeed(mesaId: string): Promise<FeedMesa | null> {
     divisao: (divRes.data?.divisao as string) ?? 'bronze',
     privada: (mesaRes.data?.privada as boolean) ?? false,
     codigoConvite: (mesaRes.data?.codigo_convite as string) ?? '',
+    anfitriao: (mesaRes.data?.anfitriao as string | null) ?? null,
     ranking,
     posts,
   };
+}
+
+/** Minha mesa da semana, SEM criar nada (null se ainda nao estou em nenhuma). */
+export async function minhaMesaAtual(): Promise<string | null> {
+  const sb = getSupabase();
+  if (!sb) return null;
+  const { data, error } = await sb.rpc('minha_mesa_semana');
+  if (error) return null;
+  return (data as string) ?? null;
+}
+
+/** Lista as mesas publicas da semana (para "encontrar mesas"). */
+export async function listarMesasPublicas(): Promise<MesaPublica[]> {
+  const sb = getSupabase();
+  if (!sb) return [];
+  const { data, error } = await sb.rpc('listar_mesas_publicas');
+  if (error) return [];
+  return (
+    (data ?? []) as Array<{ id: string; membros: number; anfitriao_nome: string | null; eu: boolean }>
+  ).map((m) => ({ id: m.id, membros: m.membros, anfitriaoNome: m.anfitriao_nome, eu: m.eu }));
+}
+
+/** Entra numa mesa publica pelo id (sai das outras da semana). Retorna o id ou null. */
+export async function entrarNaMesa(mesaId: string): Promise<string | null> {
+  const sb = getSupabase();
+  if (!sb) return null;
+  const { data, error } = await sb.rpc('entrar_na_mesa', { p_mesa: mesaId });
+  if (error) return null;
+  return (data as string) ?? null;
+}
+
+/** Sai da mesa. Se eu era anfitriao, a coroa passa para o membro mais antigo. */
+export async function sairDaMesa(mesaId: string): Promise<boolean> {
+  const sb = getSupabase();
+  if (!sb) return false;
+  const { error } = await sb.rpc('sair_da_mesa', { p_mesa: mesaId });
+  return !error;
+}
+
+/** Expulsa um membro (so o anfitriao consegue; o servidor valida). */
+export async function expulsarMembro(mesaId: string, alvo: string): Promise<boolean> {
+  const sb = getSupabase();
+  if (!sb) return false;
+  const { error } = await sb.rpc('expulsar_membro', { p_mesa: mesaId, p_alvo: alvo });
+  return !error;
+}
+
+/** Passa a lideranca da mesa para outro membro (so o anfitriao). */
+export async function passarLideranca(mesaId: string, novo: string): Promise<boolean> {
+  const sb = getSupabase();
+  if (!sb) return false;
+  const { error } = await sb.rpc('passar_lideranca', { p_mesa: mesaId, p_novo: novo });
+  return !error;
 }
 
 /** Liga/desliga a privacidade da mesa (so membros). Retorna o novo estado. */
@@ -182,6 +247,8 @@ export function assinarMesa(mesaId: string, aoMudar: () => void): () => void {
     .channel(`mesa-${mesaId}`)
     .on('postgres_changes', { event: '*', schema: 'public', table: 'mesa_posts', filter: `mesa_id=eq.${mesaId}` }, aoMudar)
     .on('postgres_changes', { event: '*', schema: 'public', table: 'mesa_tchins' }, aoMudar)
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'mesa_membros', filter: `mesa_id=eq.${mesaId}` }, aoMudar)
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'mesas', filter: `id=eq.${mesaId}` }, aoMudar)
     .subscribe();
   return () => {
     void sb.removeChannel(canal);
