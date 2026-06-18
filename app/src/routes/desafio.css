@@ -140,14 +140,28 @@
   width: 100%;
 }
 
-/* Durante as perguntas o rotulo ocupa menos: sobra ar para as opcoes */
+/* Durante as perguntas o rotulo ocupa menos, mas da pra ler (e toca pra ampliar) */
 .desafio-meio .rotulo-figura {
-  min-height: 110px;
-  max-height: 26vh;
+  min-height: 130px;
+  max-height: 34vh;
 }
 
 .desafio-meio .rotulo-img {
-  max-height: calc(26vh - 2 * var(--space-3));
+  max-height: calc(34vh - 2 * var(--space-3));
+}
+
+/* Abertura do desafio: a garrafa grande pra olhar com calma antes de comecar */
+.daily-card .rotulo-figura {
+  width: auto;
+  max-width: 300px;
+  margin: var(--space-5) auto var(--space-2);
+  min-height: 210px;
+  max-height: 42vh;
+}
+
+.daily-card .rotulo-img {
+  max-width: 90%;
+  max-height: calc(42vh - 2 * var(--space-3));
 }
 
 /* ---------- Grade compartilhavel (sem emoji: quadrados proprios) ---------- */

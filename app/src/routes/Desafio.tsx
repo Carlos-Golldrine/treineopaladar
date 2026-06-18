@@ -4,6 +4,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { obterStore } from '../engine';
 import type { ExercicioMC } from '../engine';
 import { ExMC } from '../licao/ExMC';
+import { RotuloFigura } from '../licao/RotuloFigura';
 import { PainelReveal } from '../licao/Feedback';
 import type { FaseExercicio, ResolucaoExercicio } from '../licao/tipos';
 import { vibrar } from '../licao/tipos';
@@ -273,11 +274,9 @@ function AbertoHoje({
   return (
     <section className="daily-card" aria-label="Desafio de hoje">
       <p className="daily-data">Rótulo de {diaCurto(dia)}</p>
-      <div className="daily-rotulo">
-        <img src={desafio.imagem} alt="Rótulo misterioso de hoje" loading="lazy" decoding="async" />
-      </div>
+      <RotuloFigura src={desafio.imagem} alt="Rótulo misterioso de hoje" />
       <h2 className="daily-title">Olhe com calma. O rótulo entrega muito.</h2>
-      <p className="daily-copy">Quatro perguntas sobre esta garrafa. Uma chance por dia, sem vidas em jogo.</p>
+      <p className="daily-copy">Toque na garrafa para ver de perto. Quatro perguntas sobre ela, uma chance por dia, sem vidas em jogo.</p>
       <button type="button" className="btn btn-gold btn-jogo btn-cheio tap" onClick={onJogar}>
         Aceitar o desafio
       </button>

@@ -245,17 +245,20 @@
 /* ---------------- Rotulo real acima da pergunta ---------------- */
 
 .rotulo-figura {
+  position: relative;
   display: grid;
   place-items: center;
+  width: 100%;
   margin: 0 0 var(--space-4);
-  min-height: 140px;
-  max-height: 40vh;
+  min-height: 150px;
+  max-height: 44vh;
   padding: var(--space-3);
   border-radius: var(--radius-card);
   /* Excecao consciente ao bg quente: as fotos de rotulo vem compostas
      sobre branco; o container branco evita a emenda visivel */
   background: #fff;
   border: 1px solid var(--neutral-100);
+  cursor: zoom-in;
   overflow: hidden;
 }
 
@@ -264,8 +267,8 @@
 }
 
 .rotulo-img {
-  max-width: min(60%, 220px);
-  max-height: calc(40vh - 2 * var(--space-3));
+  max-width: min(82%, 300px);
+  max-height: calc(44vh - 2 * var(--space-3));
   object-fit: contain;
   opacity: 0;
 }
@@ -273,6 +276,83 @@
 .rotulo-img-pronta {
   opacity: 1;
   transition: opacity 200ms ease-out;
+}
+
+/* Selo "ampliar" no canto: sinaliza que o rotulo e tocavel */
+.rotulo-zoom {
+  position: absolute;
+  right: var(--space-2);
+  bottom: var(--space-2);
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-pill);
+  background: rgba(74, 31, 36, 0.72);
+  color: #fff;
+  pointer-events: none;
+}
+
+/* Lightbox: rotulo em tela cheia sobre fundo escuro */
+.rotulo-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  display: grid;
+  place-items: center;
+  padding: max(env(safe-area-inset-top), 16px) var(--space-4) max(env(safe-area-inset-bottom), 16px);
+  background: rgba(20, 8, 10, 0.92);
+  animation: folha-veu 180ms ease-out both;
+}
+
+.rotulo-lightbox-img {
+  max-width: 94vw;
+  max-height: 84vh;
+  object-fit: contain;
+  border-radius: var(--radius-card);
+  animation: rotulo-amplia 220ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes rotulo-amplia {
+  from {
+    transform: scale(0.92);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.rotulo-lightbox-fechar {
+  position: absolute;
+  top: max(env(safe-area-inset-top), 12px);
+  right: 12px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: rgba(250, 250, 248, 0.16);
+  color: #fff;
+}
+
+.rotulo-lightbox-dica {
+  position: absolute;
+  bottom: max(env(safe-area-inset-bottom), 16px);
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: var(--text-xs);
+  color: rgba(250, 250, 248, 0.6);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rotulo-lightbox,
+  .rotulo-lightbox-img {
+    animation: none;
+  }
 }
 
 .ex-dica {
@@ -953,6 +1033,16 @@
   line-height: 1.5;
   color: var(--neutral-700);
   animation: entra 200ms ease-out both;
+}
+
+.entenda-fato {
+  margin: 0;
+}
+
+.entenda-fato + .entenda-fato {
+  margin-top: var(--space-2);
+  padding-top: var(--space-2);
+  border-top: 1px solid rgba(74, 31, 36, 0.1);
 }
 
 .painel-reveal .btn-cheio {

@@ -39,19 +39,26 @@ function normalizar(texto: string): string[] {
   );
 }
 
-/** Trecho da ficha canonica mais proximo do "porque" do exercicio. */
-export function trechoFicha(licao: Licao, porque: string): string {
+/**
+ * Trechos da ficha canonica mais proximos do "porque" do exercicio.
+ * Devolve ate `max` frases (ranqueadas por sobreposicao de palavras),
+ * mas na ordem original da ficha — leitura mais natural. Nunca repete a
+ * propria frase do `porque`. So ficha canonica: a IA nunca inventa fato.
+ */
+export function trechosFicha(licao: Licao, porque: string, max = 2): string[] {
   const chaves = new Set(normalizar(porque));
-  let melhor = licao.fichaCanonica[0] ?? '';
-  let melhorPts = -1;
-  for (const frase of licao.fichaCanonica) {
-    const pts = normalizar(frase).filter((t) => chaves.has(t)).length;
-    if (pts > melhorPts) {
-      melhorPts = pts;
-      melhor = frase;
-    }
-  }
-  return melhor;
+  const alvo = porque.trim().toLowerCase();
+  const ranqueadas = licao.fichaCanonica
+    .map((frase, i) => ({
+      frase,
+      i,
+      pts: normalizar(frase).filter((t) => chaves.has(t)).length,
+    }))
+    .filter((x) => x.frase.trim().toLowerCase() !== alvo);
+  ranqueadas.sort((a, b) => b.pts - a.pts || a.i - b.i);
+  const escolhidas = ranqueadas.slice(0, Math.max(1, max));
+  escolhidas.sort((a, b) => a.i - b.i);
+  return escolhidas.map((x) => x.frase);
 }
 
 interface PainelRevealProps {
@@ -112,7 +119,7 @@ export function PainelReveal({
       </div>
       <p className="reveal-porque">{porque}</p>
       {nota && <p className="reveal-nota">{nota}</p>}
-      {!correto && licao && (
+      {licao && (
         <div className="entenda">
           <button
             type="button"
@@ -120,10 +127,18 @@ export function PainelReveal({
             aria-expanded={entenda}
             onClick={() => setEntenda(!entenda)}
           >
-            Entenda melhor
+            {correto ? 'Saiba mais' : 'Entenda melhor'}
             <Ic nome="seta-baixo" size={16} className={entenda ? 'entenda-seta entenda-seta-aberta' : 'entenda-seta'} />
           </button>
-          {entenda && <p className="entenda-texto">{trechoFicha(licao, porque)}</p>}
+          {entenda && (
+            <div className="entenda-texto">
+              {trechosFicha(licao, porque).map((frase, i) => (
+                <p key={i} className="entenda-fato">
+                  {frase}
+                </p>
+              ))}
+            </div>
+          )}
         </div>
       )}
       <button
