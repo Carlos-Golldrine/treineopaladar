@@ -2,7 +2,9 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { Ic } from '../icones/Icones';
 import { Sheet } from '../components/Sheet';
 import { Avatar } from '../components/Avatar';
+import { ContaSheet } from '../components/ContaSheet';
 import { nuvemConfigurada } from '../lib/supabase';
+import { useConta } from '../lib/conta';
 import { track } from '../lib/analytics';
 import {
   alternarTchin,
@@ -59,14 +61,17 @@ function tempoRelativo(iso: string): string {
 }
 
 export default function Mesa() {
+  const { anonimo, carregando: contaCarregando } = useConta();
   const [feed, setFeed] = useState<FeedMesa | null>(null);
   const [carregando, setCarregando] = useState(true);
   const [indisponivel, setIndisponivel] = useState(false);
+  const [semConta, setSemConta] = useState(false);
   const [semMesa, setSemMesa] = useState(false);
   const [compor, setCompor] = useState(false);
   const [convidando, setConvidando] = useState(false);
   const [membrosAberto, setMembrosAberto] = useState(false);
   const [mesasAberto, setMesasAberto] = useState(false);
+  const [contaAberta, setContaAberta] = useState(false);
   const mesaId = useRef<string | null>(null);
   const limparRef = useRef<() => void>(() => {});
 
@@ -107,13 +112,22 @@ export default function Mesa() {
   );
 
   useEffect(() => {
+    if (contaCarregando) return; // espera saber se e anonimo antes de decidir
     let vivo = true;
+    setCarregando(true);
     void (async () => {
       if (!nuvemConfigurada()) {
         setIndisponivel(true);
         setCarregando(false);
         return;
       }
+      /* A Mesa e so para contas reais: anonimo ve o convite a criar conta. */
+      if (anonimo) {
+        setSemConta(true);
+        setCarregando(false);
+        return;
+      }
+      setSemConta(false);
       let id = await minhaMesaAtual();
       if (!vivo) return;
       if (!id && autoEntrar()) {
@@ -136,7 +150,7 @@ export default function Mesa() {
       vivo = false;
       limparRef.current();
     };
-  }, [montar]);
+  }, [montar, anonimo, contaCarregando]);
 
   const tchin = async (p: PostMesa) => {
     setFeed((f) =>
@@ -275,6 +289,25 @@ export default function Mesa() {
           <div className="mesa-skel" />
           <div className="mesa-skel" />
         </section>
+      ) : semConta ? (
+        <section className="mesa-empty" aria-label="Conta necessária">
+          <div className="mesa-art">
+            <Ic nome="mesa" size={44} />
+          </div>
+          <h2 className="mesa-title">A Mesa é para quem tem conta</h2>
+          <p className="mesa-copy">
+            Crie sua conta (ou entre) para sentar com a galera, aparecer no ranking e brindar. É
+            rápido, e seu progresso fica salvo no mesmo lugar.
+          </p>
+          <button
+            type="button"
+            className="btn btn-primary btn-jogo tap mesa-empty-btn"
+            onClick={() => setContaAberta(true)}
+          >
+            <Ic nome="taca" size={18} />
+            Criar conta ou entrar
+          </button>
+        </section>
       ) : semMesa ? (
         <section className="mesa-empty" aria-label="Sem mesa">
           <div className="mesa-art">
@@ -306,11 +339,15 @@ export default function Mesa() {
         </section>
       )}
 
-      {!indisponivel && !carregando && !semMesa && (
+      {!indisponivel && !carregando && !semMesa && !semConta && (
         <button type="button" className="mesa-provei btn btn-primary btn-jogo tap" onClick={() => setCompor(true)}>
           <Ic nome="taca" size={18} />
           Provei um vinho
         </button>
+      )}
+
+      {contaAberta && (
+        <ContaSheet onFechar={() => setContaAberta(false)} onSucesso={() => setContaAberta(false)} />
       )}
 
       {compor && <ComporProvei onFechar={() => setCompor(false)} onEnviar={enviarProvei} />}
