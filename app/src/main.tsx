@@ -103,6 +103,18 @@ const router = createBrowserRouter([
     : []),
 ]);
 
+/* Pos-deploy: uma aba/instalacao antiga ainda aponta para chunks com hash
+   velho que sumiram do CDN -> "Failed to fetch dynamically imported module"
+   ao abrir uma rota lazy (Desafio, Pratica...). Recarrega uma vez para pegar
+   o index.html e os chunks novos. Guarda de 10s evita loop se persistir. */
+window.addEventListener('vite:preloadError', () => {
+  const agora = Date.now();
+  const ultimo = Number(sessionStorage.getItem('tp.chunk.reload') ?? '0');
+  if (agora - ultimo < 10_000) return;
+  sessionStorage.setItem('tp.chunk.reload', String(agora));
+  window.location.reload();
+});
+
 registerSW({ immediate: true });
 
 /* F3: telemetria (PostHog). No-op quando nao ha chave configurada. */
