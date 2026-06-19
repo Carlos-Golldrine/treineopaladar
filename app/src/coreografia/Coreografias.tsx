@@ -13,7 +13,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
 import { Ic } from '../icones/Icones';
-import { Tchin } from '../mascote';
+import { Mascotinho } from '../mascote';
 import './coreografia.css';
 
 function reduzMotion(): boolean {
@@ -258,24 +258,19 @@ interface ObservadorProps {
   visivel: boolean;
   tamanho?: number;
   estilo?: CSSProperties;
-  /** Alvo do olhar (clientX/clientY): o Tchin olha a opcao recem-tocada. */
-  alvoX?: number;
-  alvoY?: number;
 }
 
 /**
- * Tchin pequeno em idle no rodape da tela de exercicio: respira, pisca
- * e segue o toque. Fica ATRAS do conteudo (z-index negativo) e nunca
- * captura toques: presenca sem atrapalhar o polegar.
- *
- * Quando o Player passa alvoX/alvoY (opcao tocada), o olhar mira ali em
- * vez de seguir o toque generico: o mascote reage a selecao.
+ * Mascotinho pequeno em idle no rodape da tela de exercicio: respira, pisca
+ * e da um tchauzinho. Fica ATRAS do conteudo (z-index negativo) e nunca
+ * captura toques: presenca sem atrapalhar o polegar. (Mascote vigente; o
+ * Tchin antigo foi aposentado no redesign.)
  */
-export function TchinObservador({ visivel, tamanho = 54, estilo, alvoX, alvoY }: ObservadorProps) {
+export function TchinObservador({ visivel, tamanho = 54, estilo }: ObservadorProps) {
   if (!visivel) return null;
   return (
     <div className="tchin-observa" style={estilo} aria-hidden="true">
-      <Tchin estado="idle" tamanho={tamanho} alvoX={alvoX} alvoY={alvoY} />
+      <Mascotinho estado="idle" tamanho={tamanho} />
     </div>
   );
 }

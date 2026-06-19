@@ -341,7 +341,7 @@ function DesafioJogo({
 
   return (
     <div className="desafio-veu">
-      <div className="player">
+      <div className="player desafio-rodada">
         <header className="player-topo app-chrome">
           <button type="button" className="player-fechar tap" aria-label="Sair do desafio" onClick={onSair}>
             <Ic nome="x-fechar" size={22} />

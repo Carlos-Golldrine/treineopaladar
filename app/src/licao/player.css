@@ -200,9 +200,18 @@
 
 /* -------- Mascote + balao da pergunta no topo (estilo referencia) -------- */
 
-/* A pergunta agora vive no balao do mascote */
+/* Na licao a pergunta vive no balao do mascote, entao a .ex-pergunta some. */
 .player .ex-pergunta {
   display: none;
+}
+
+/* Pratica e Desafio NAO tem o balao do mascote: mostram a pergunta inline
+   (sem isso a tela ficava so com as opcoes, sem pergunta). */
+.player.pratica-rodada .ex-pergunta,
+.player.desafio-rodada .ex-pergunta {
+  display: block;
+  margin-bottom: var(--space-4);
+  text-align: center;
 }
 
 .licao-mascote {
