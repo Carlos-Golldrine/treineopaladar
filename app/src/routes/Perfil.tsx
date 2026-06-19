@@ -9,6 +9,8 @@ import { Sheet } from '../components/Sheet';
 import { ContaSheet } from '../components/ContaSheet';
 import { Avatar, AVATARES, AVATAR_IDS } from '../components/Avatar';
 import { useConta, sairDaConta } from '../lib/conta';
+import { aceitarLembretes, permissaoAtual, pushAtivado, suportaPush } from '../notificacoes/push';
+import type { EstadoPermissao } from '../notificacoes/push';
 
 import './perfil.css';
 
@@ -169,6 +171,8 @@ export default function Perfil() {
           </span>
         </button>
 
+        <LembretesAjuste />
+
         {objetivo && (
           <button
             type="button"
@@ -270,5 +274,53 @@ export default function Perfil() {
 
       {criandoConta && <ContaSheet onFechar={() => setCriandoConta(false)} />}
     </>
+  );
+}
+
+/* Controle de notificacoes nos Ajustes: liga os lembretes a qualquer momento,
+   sem depender do primer (que so aparece 1x e com varias condicoes). Some quando
+   o navegador nao suporta push (ex.: iPhone sem o app instalado na tela inicial). */
+function LembretesAjuste() {
+  const [perm, setPerm] = useState<EstadoPermissao>(() => permissaoAtual());
+
+  if (!suportaPush()) return null;
+
+  const disponivel = pushAtivado();
+  const ligado = perm === 'granted';
+  const bloqueado = perm === 'denied';
+
+  const ativar = async () => {
+    if (ligado || bloqueado || !disponivel) return;
+    await aceitarLembretes();
+    setPerm(permissaoAtual());
+  };
+
+  const sub = !disponivel
+    ? 'Em breve'
+    : ligado
+      ? 'Ligados, um toque no fim da tarde'
+      : bloqueado
+        ? 'Bloqueado no navegador. Libere nas configurações do site.'
+        : 'Toque para ativar o lembrete da ofensiva';
+
+  return (
+    <button
+      type="button"
+      className="ajuste-som tap app-chrome"
+      aria-pressed={ligado}
+      disabled={!disponivel || bloqueado}
+      onClick={() => void ativar()}
+    >
+      <span className="ajuste-icone">
+        <Ic nome="sino" size={22} />
+      </span>
+      <span className="ajuste-textos">
+        <span className="ajuste-titulo">Lembretes do treino</span>
+        <span className="ajuste-sub">{sub}</span>
+      </span>
+      <span className={`ajuste-estado${ligado ? ' ajuste-estado-on' : ''}`}>
+        {ligado ? 'on' : bloqueado ? '—' : 'off'}
+      </span>
+    </button>
   );
 }
