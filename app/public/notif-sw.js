@@ -27,7 +27,7 @@ self.addEventListener('push', (event) => {
     dados = { body: event.data && event.data.text ? event.data.text() : '' };
   }
 
-  const titulo = dados.title || 'Tchin';
+  const titulo = dados.title || 'Paladar';
   const opcoes = {
     body: dados.body || '',
     icon: dados.icon || '/icons/icon-192.png',

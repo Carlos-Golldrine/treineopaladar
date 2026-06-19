@@ -30,6 +30,16 @@ export function suportaPush(): boolean {
   );
 }
 
+/**
+ * True quando o backend de push ja existe (chave VAPID publica configurada).
+ * Enquanto a VAPID e a Edge Function de cron nao sobem, isto e false e o primer
+ * fica DORMENTE: nao faz sentido pedir permissao que ninguem vai entregar (e
+ * pedir cedo, sem entregar, queima o canal). Ligar = setar VITE_VAPID_PUBLIC_KEY.
+ */
+export function pushAtivado(): boolean {
+  return Boolean(import.meta.env.VITE_VAPID_PUBLIC_KEY);
+}
+
 /** Marca localmente que a pessoa QUER receber lembretes (intencao). */
 function gravarIntencao(): void {
   try {
