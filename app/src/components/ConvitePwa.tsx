@@ -169,7 +169,7 @@ export function ConvitePwa() {
 }
 
 /* Glifo de "compartilhar" do iOS (caixa com seta pra cima): desenho proprio */
-function IconeCompartilhar() {
+export function IconeCompartilhar() {
   return (
     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true">
       <path
@@ -198,7 +198,7 @@ function IconeCompartilhar() {
 }
 
 /* Glifo de "adicionar" (mais dentro de quadrado arredondado): desenho proprio */
-function IconeAdicionar() {
+export function IconeAdicionar() {
   return (
     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true">
       <rect x="4" y="4" width="16" height="16" rx="3.5" stroke="currentColor" strokeWidth="1.8" />

@@ -11,6 +11,8 @@ import { Avatar, AVATARES, AVATAR_IDS } from '../components/Avatar';
 import { useConta, sairDaConta } from '../lib/conta';
 import { aceitarLembretes, permissaoAtual, pushAtivado, suportaPush } from '../notificacoes/push';
 import type { EstadoPermissao } from '../notificacoes/push';
+import { ehIos, estaInstalado } from '../lib/pwa';
+import { IconeCompartilhar, IconeAdicionar } from '../components/ConvitePwa';
 
 import './perfil.css';
 
@@ -173,6 +175,8 @@ export default function Perfil() {
 
         <LembretesAjuste />
 
+        <InstalarAjuste />
+
         {objetivo && (
           <button
             type="button"
@@ -322,5 +326,61 @@ function LembretesAjuste() {
         {ligado ? 'on' : bloqueado ? '—' : 'off'}
       </span>
     </button>
+  );
+}
+
+/* Atalho de instalacao no iPhone: no iOS nao ha prompt automatico de instalar,
+   entao mostramos um passo a passo aqui (e o ConvitePwa ja nudga sozinho). Some
+   no Android (la o convite tem prompt nativo) e quando o app ja esta instalado. */
+function InstalarAjuste() {
+  const [aberto, setAberto] = useState(false);
+
+  if (!ehIos() || estaInstalado()) return null;
+
+  return (
+    <>
+      <button
+        type="button"
+        className="ajuste-som tap app-chrome"
+        onClick={() => setAberto(true)}
+        aria-label="Adicionar à tela inicial"
+      >
+        <span className="ajuste-icone">
+          <IconeAdicionar />
+        </span>
+        <span className="ajuste-textos">
+          <span className="ajuste-titulo">Adicionar à tela inicial</span>
+          <span className="ajuste-sub">Abre como app e recebe lembretes no iPhone</span>
+        </span>
+        <span className="ajuste-estado">instalar</span>
+      </button>
+
+      {aberto && (
+        <Sheet titulo="Adicionar à tela inicial" onFechar={() => setAberto(false)}>
+          <p className="folha-texto">
+            No iPhone, adicionando à tela inicial o app abre em tela cheia e passa a receber
+            notificações, igual a um app baixado. São dois toques:
+          </p>
+          <ol className="convite-passos">
+            <li>
+              <span className="convite-passo-ic" aria-hidden="true">
+                <IconeCompartilhar />
+              </span>
+              <span>
+                Toque em <strong>Compartilhar</strong> na barra do Safari.
+              </span>
+            </li>
+            <li>
+              <span className="convite-passo-ic" aria-hidden="true">
+                <IconeAdicionar />
+              </span>
+              <span>
+                Escolha <strong>Adicionar à Tela de Início</strong>.
+              </span>
+            </li>
+          </ol>
+        </Sheet>
+      )}
+    </>
   );
 }
