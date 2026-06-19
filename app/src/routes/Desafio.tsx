@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { track } from '../lib/analytics';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { obterStore } from '../engine';
+import { obterStore, XP_DESAFIO_DIA } from '../engine';
 import type { ExercicioMC } from '../engine';
 import { ExMC } from '../licao/ExMC';
 import { RotuloFigura } from '../licao/RotuloFigura';
@@ -456,16 +456,45 @@ function ResultadoHoje({
       <section className="daily-card" aria-label="Seu resultado de hoje">
         <p className="daily-data">Desafio de {diaCurto(dia)}</p>
         <div className="grade" aria-label={`${tentativa.acertos} acertos em 4 perguntas`}>
-          {tentativa.grade.split('').map((c, i) => (
-            <span key={i} className={`grade-quadro${c === '■' ? ' grade-certo' : ''}`} aria-hidden="true" />
-          ))}
+          {tentativa.grade.split('').map((c, i) => {
+            const certo = c === '■';
+            return (
+              <span
+                key={i}
+                className={`grade-quadro${certo ? ' grade-certo' : ' grade-errado'}`}
+                aria-label={certo ? `Pergunta ${i + 1}: acertou` : `Pergunta ${i + 1}: errou`}
+              >
+                <Ic nome={certo ? 'check' : 'x-fechar'} size={24} />
+              </span>
+            );
+          })}
         </div>
         <h2 className="daily-title">
           {tentativa.acertos === 4
             ? 'Quatro de quatro. Que taça.'
             : `${tentativa.acertos} de 4. ${tentativa.acertos >= 2 ? 'Bonito olho.' : 'Amanhã tem revanche.'}`}
         </h2>
-        {xpGanho !== null && <p className="daily-xp">+{xpGanho} XP</p>}
+        <div
+          className="daily-placar"
+          aria-label={`${tentativa.acertos} de 4 certas, ${xpGanho !== null ? 'mais ' : ''}${XP_DESAFIO_DIA} XP`}
+        >
+          <div className="daily-stat">
+            <span className="daily-stat-num">
+              {tentativa.acertos}
+              <span className="daily-stat-de"> / 4</span>
+            </span>
+            <span className="daily-stat-rotulo">certas</span>
+          </div>
+          <span className="daily-placar-sep" aria-hidden="true" />
+          <div className="daily-stat">
+            <span className="daily-stat-num daily-stat-xp">
+              {xpGanho !== null ? '+' : ''}
+              {XP_DESAFIO_DIA}
+              <span className="daily-stat-unid"> XP</span>
+            </span>
+            <span className="daily-stat-rotulo">{xpGanho !== null ? 'ganho agora' : 'somados hoje'}</span>
+          </div>
+        </div>
         <button type="button" className="btn btn-gold btn-jogo btn-cheio tap" onClick={compartilhar}>
           <Ic nome="compartilhar" size={18} />
           Compartilhar com a mesa

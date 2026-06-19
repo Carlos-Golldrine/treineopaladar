@@ -5,6 +5,7 @@ import { Mascotinho } from '../mascote';
 import { AberturaApp } from './AberturaApp';
 import { LogoTchin } from '../icones/LogoTchin';
 import { Sheet } from '../components/Sheet';
+import { ContaSheet } from '../components/ContaSheet';
 import { track } from '../lib/analytics';
 
 /**
@@ -18,6 +19,7 @@ export default function Splash() {
   const navigate = useNavigate();
   const { onboardingCompleto } = useProgresso();
   const [comoFunciona, setComoFunciona] = useState(false);
+  const [entrando, setEntrando] = useState(false);
 
   if (onboardingCompleto) return <Navigate to="/" replace />;
 
@@ -55,6 +57,9 @@ export default function Splash() {
         <button type="button" className="splash-como tap" onClick={() => setComoFunciona(true)}>
           como funciona
         </button>
+        <button type="button" className="splash-entrar tap" onClick={() => setEntrando(true)}>
+          Já tem conta? <strong>Entrar</strong>
+        </button>
       </div>
 
       <footer className="splash-footer app-chrome">
@@ -70,6 +75,17 @@ export default function Splash() {
           <p className="folha-texto">Você ganha XP, mantém a sequência acesa e abre novas unidades.</p>
           <p className="folha-texto">Tudo com vinhos reais, das prateleiras daqui.</p>
         </Sheet>
+      )}
+
+      {entrando && (
+        <ContaSheet
+          modoInicial="entrar"
+          onFechar={() => setEntrando(false)}
+          onSucesso={() => {
+            setEntrando(false);
+            navigate('/', { replace: true });
+          }}
+        />
       )}
     </div>
   );

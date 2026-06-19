@@ -187,7 +187,7 @@ export function ExOrdenar({ ex, fase, onResolver, cena }: Props) {
           return (
             <li
               key={ex.itens[item]}
-              className={`ordenar-linha entra${extra}${seguro ? ' linha-arrasto' : ''}`}
+              className={`ordenar-linha ordenar-entra${extra}${seguro ? ' linha-arrasto' : ''}`}
               style={estilo(i)}
               onPointerDown={(e) => onPointerDown(e, i)}
               onPointerMove={onPointerMove}

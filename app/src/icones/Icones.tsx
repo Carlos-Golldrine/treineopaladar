@@ -211,6 +211,14 @@ const ICONES = {
 
   'seta-baixo': <path {...tu} d="M5.4 9.4 L12 16.2 L18.6 9.4" />,
 
+  /** Lapis de editar: corpo inclinado, ponta no canto, faixa perto da borracha */
+  lapis: (
+    <>
+      <path {...t} d="M15.6 4.4 L19.6 8.4 L8.8 19.2 L4.4 20 L5.2 15.6 Z" />
+      <path {...td} d="M13.4 6.6 L17.4 10.6" />
+    </>
+  ),
+
   /** Compartilhar: o no de origem e de ouro (a descoberta sai de voce) */
   compartilhar: (
     <>

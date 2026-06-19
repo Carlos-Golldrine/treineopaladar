@@ -49,14 +49,38 @@
 }
 
 /* ---------- Tab bar ---------- */
-.tabbar {
+.tabbar-wrap {
   position: sticky;
   bottom: 0;
   z-index: 10;
-  display: flex;
   background: var(--bg);
   border-top: 1px solid var(--neutral-100);
-  padding: 6px var(--space-2) max(env(safe-area-inset-bottom), 8px);
+  padding-bottom: max(env(safe-area-inset-bottom), 0px);
+}
+
+.tabbar-marca {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 5px 0 1px;
+  font: 600 10px / 1 var(--font-ui);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--neutral-500);
+}
+
+.tabbar-beta {
+  padding: 1px 5px;
+  border-radius: var(--radius-control);
+  border: 1px solid var(--gold-700);
+  color: var(--gold-700);
+  letter-spacing: 0.06em;
+}
+
+.tabbar {
+  display: flex;
+  padding: 4px var(--space-2) 6px;
 }
 
 .tab {

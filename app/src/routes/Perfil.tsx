@@ -71,7 +71,12 @@ export default function Perfil() {
           onClick={abrirEdicao}
           aria-label="Editar nome e avatar"
         >
-          <Avatar id={avatar} nome={nome} size={88} />
+          <span className="profile-avatar-anel">
+            <Avatar id={avatar} nome={nome} size={88} />
+          </span>
+          <span className="profile-avatar-lapis" aria-hidden="true">
+            <Ic nome="lapis" size={16} />
+          </span>
         </button>
         <h1 className="profile-name">
           {nome ?? (conta.anonimo || !conta.email ? 'Visitante' : 'Sua conta')}

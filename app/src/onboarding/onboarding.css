@@ -93,6 +93,23 @@
   text-decoration-color: var(--neutral-300);
 }
 
+/* Entrada para quem ja tem conta (retornantes): discreta mas clara */
+.splash-entrar {
+  align-self: center;
+  min-height: 44px;
+  padding: 0 var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--neutral-600);
+}
+
+.splash-entrar strong {
+  color: var(--wine-700);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--gold-500);
+}
+
 .splash-footer {
   display: flex;
   align-items: flex-start;

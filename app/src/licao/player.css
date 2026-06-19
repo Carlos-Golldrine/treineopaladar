@@ -802,6 +802,21 @@
   will-change: transform;
 }
 
+/* Entrada SO de opacidade: a .entra global anima transform com fill:both, o que
+   travaria o transform e mataria o arraste (card nao acompanha o dedo). */
+.ordenar-entra {
+  animation: ordenar-entra 200ms ease-out both;
+}
+
+@keyframes ordenar-entra {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .ordenar-pos {
   flex: none;
   width: 26px;

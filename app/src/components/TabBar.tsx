@@ -11,25 +11,30 @@ const tabs: { to: string; end: boolean; label: string; icone: NomeIcone }[] = [
 
 export function TabBar() {
   return (
-    <nav className="tabbar app-chrome" aria-label="Navegação principal">
-      {tabs.map((tab) => (
+    <div className="tabbar-wrap">
+      <p className="tabbar-marca" aria-label="Parte do ecossistema Tchin Tchin, versão beta">
+        by Tchin Tchin <span className="tabbar-beta">Beta</span>
+      </p>
+      <nav className="tabbar app-chrome" aria-label="Navegação principal">
+        {tabs.map((tab) => (
+          <NavLink
+            key={tab.to}
+            to={tab.to}
+            end={tab.end}
+            className={({ isActive }) => `tab tap${isActive ? ' tab-active' : ''}`}
+          >
+            <Ic nome={tab.icone} size={26} />
+            <span>{tab.label}</span>
+          </NavLink>
+        ))}
         <NavLink
-          key={tab.to}
-          to={tab.to}
-          end={tab.end}
+          to="/perfil"
           className={({ isActive }) => `tab tap${isActive ? ' tab-active' : ''}`}
         >
-          <Ic nome={tab.icone} size={26} />
-          <span>{tab.label}</span>
+          <Ic nome="perfil-taca" size={26} />
+          <span>Perfil</span>
         </NavLink>
-      ))}
-      <NavLink
-        to="/perfil"
-        className={({ isActive }) => `tab tap${isActive ? ' tab-active' : ''}`}
-      >
-        <Ic nome="perfil-taca" size={26} />
-        <span>Perfil</span>
-      </NavLink>
-    </nav>
+      </nav>
+    </div>
   );
 }

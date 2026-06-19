@@ -13,10 +13,12 @@ interface Props {
   onFechar: () => void;
   /** Chamado depois de criar conta ou entrar com sucesso. */
   onSucesso?: () => void;
+  /** Abre direto em "criar" (padrao) ou "entrar" (ex.: "Ja tem conta? Entrar"). */
+  modoInicial?: 'criar' | 'entrar';
 }
 
-export function ContaSheet({ onFechar, onSucesso }: Props) {
-  const [modo, setModo] = useState<'criar' | 'entrar'>('criar');
+export function ContaSheet({ onFechar, onSucesso, modoInicial }: Props) {
+  const [modo, setModo] = useState<'criar' | 'entrar'>(modoInicial ?? 'criar');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [carregando, setCarregando] = useState(false);

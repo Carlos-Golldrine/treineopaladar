@@ -326,29 +326,76 @@
   color: var(--wine-900);
 }
 
-.mesa-grade {
+/* Resultado do Desafio compartilhado: tiles ✓/✗ (mesmo visual do resultado) */
+.mesa-desafio-eyebrow {
+  font: 600 var(--text-xs) / 1 var(--font-ui);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--gold-700);
+  margin-bottom: var(--space-2);
+}
+
+.mesa-desafio-grade {
   display: flex;
-  align-items: center;
-  gap: var(--space-3);
+  gap: 6px;
 }
 
-.mesa-grade-mono {
-  font-family: var(--font-mono);
-  font-size: var(--text-lg);
-  letter-spacing: 3px;
-  color: var(--wine-700);
+.mesa-desafio-quadro {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-control);
+  display: grid;
+  place-items: center;
 }
 
-.mesa-grade-num {
+.mesa-q-certo {
+  background: var(--gold-500);
+  color: var(--wine-900);
+}
+
+.mesa-q-errado {
+  background: var(--warm-700);
+  color: var(--bg);
+}
+
+.mesa-desafio-num {
+  margin-top: var(--space-2);
   font-size: var(--text-sm);
   color: var(--neutral-600);
 }
 
 /* Provei + chips */
+.mesa-provei-cabeca {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.mesa-provei-selo {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-pill);
+  background: rgba(212, 165, 116, 0.2);
+  color: var(--gold-700);
+}
+
 .mesa-provei-titulo {
-  font-size: var(--text-sm);
+  font: 600 var(--text-sm) / 1.2 var(--font-display);
   color: var(--wine-900);
-  margin-bottom: var(--space-2);
+}
+
+/* Texto livre que a pessoa escreveu no provei */
+.mesa-provei-texto {
+  margin-bottom: var(--space-3);
+  font-size: var(--text-sm);
+  line-height: 1.45;
+  color: var(--wine-900);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 
 .mesa-chips {
@@ -363,6 +410,14 @@
   background: rgba(114, 47, 55, 0.08);
   border-radius: var(--radius-pill);
   padding: 6px 12px;
+}
+
+/* Chips de nota sensorial no post: mais firmes que o chip base */
+.mesa-chip-nota {
+  font-weight: 600;
+  background: var(--bg);
+  border: 1.5px solid rgba(114, 47, 55, 0.22);
+  padding: 7px 13px;
 }
 
 .mesa-chips-escolha {
@@ -380,6 +435,107 @@
   background: var(--wine-700);
   color: var(--bg);
   border-color: var(--wine-700);
+}
+
+/* ---------- Compositor "Provei um vinho" (folha) ---------- */
+.provei-cabeca {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.provei-selo {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-pill);
+  background: rgba(212, 165, 116, 0.2);
+  color: var(--gold-700);
+}
+
+.provei-intro {
+  margin: 0;
+}
+
+.provei-grade {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: var(--space-4) 0;
+}
+
+.provei-token {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 42px;
+  padding: 0 16px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--neutral-300);
+  background: var(--bg);
+  color: var(--wine-700);
+  font: 600 var(--text-sm) / 1 var(--font-ui);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 0.1s ease-out,
+    background 0.12s ease,
+    border-color 0.12s ease,
+    color 0.12s ease;
+}
+
+.provei-token:active {
+  transform: scale(0.95);
+}
+
+.provei-token-on {
+  background: var(--wine-700);
+  border-color: var(--wine-700);
+  color: var(--bg);
+}
+
+.provei-token-on .ic {
+  color: var(--gold-500);
+}
+
+.provei-texto-campo {
+  width: 100%;
+  margin-bottom: var(--space-3);
+  padding: var(--space-3);
+  border: 1.5px solid var(--neutral-300);
+  border-radius: var(--radius-control);
+  background: var(--neutral-50);
+  color: var(--wine-900);
+  font: 400 var(--text-sm) / 1.45 var(--font-ui);
+  resize: none;
+}
+
+.provei-texto-campo::placeholder {
+  color: var(--neutral-500);
+}
+
+.provei-texto-campo:focus {
+  outline: none;
+  border-color: var(--wine-700);
+  background: var(--bg);
+}
+
+.provei-enviar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+/* Vazio nao fica cinza-morto: vira um convite dourado suave */
+.btn.provei-enviar:disabled {
+  opacity: 1;
+  background: rgba(212, 165, 116, 0.16);
+  color: var(--gold-700);
+  box-shadow: none;
+  cursor: default;
 }
 
 /* Tchin! */

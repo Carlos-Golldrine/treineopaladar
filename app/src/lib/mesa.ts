@@ -219,13 +219,19 @@ export async function alternarTchin(postId: string, ligar: boolean): Promise<voi
   }
 }
 
-/** Publica um "Provei" (chips sensoriais estruturados, sem texto livre obrigatorio). */
-export async function postarProvei(mesaId: string, chips: string[]): Promise<void> {
+/**
+ * Publica um "Provei" (chips sensoriais + texto livre opcional).
+ * Insere UMA linha, SO na mesa passada (mesa_id) — nunca em varias mesas.
+ */
+export async function postarProvei(mesaId: string, chips: string[], texto?: string): Promise<void> {
   const sb = getSupabase();
   if (!sb) return;
   const uid = (await sb.auth.getUser()).data.user?.id;
   if (!uid) return;
-  await sb.from('mesa_posts').insert({ mesa_id: mesaId, user_id: uid, tipo: 'provei', payload: { chips } });
+  const payload: Record<string, unknown> = { chips };
+  const t = (texto ?? '').trim();
+  if (t) payload.texto = t.slice(0, 280);
+  await sb.from('mesa_posts').insert({ mesa_id: mesaId, user_id: uid, tipo: 'provei', payload });
 }
 
 /** Publica o resultado do Desafio do Dia na mesa (grade sem spoiler, estilo Wordle). */

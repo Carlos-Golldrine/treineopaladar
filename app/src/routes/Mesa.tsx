@@ -168,10 +168,11 @@ export default function Mesa() {
     await alternarTchin(p.id, !p.meuTchin);
   };
 
-  const enviarProvei = async (chips: string[]) => {
+  const enviarProvei = async (chips: string[], texto: string) => {
     setCompor(false);
+    /* Posta SO na mesa atual (mesaId.current), nunca em varias. */
     if (mesaId.current) {
-      await postarProvei(mesaId.current, chips);
+      await postarProvei(mesaId.current, chips, texto);
       await recarregar(mesaId.current);
     }
   };
@@ -700,12 +701,7 @@ function CartaPost({ post, onTchin }: { post: PostMesa; onTchin: () => void }) {
           <Ic nome="bandeira-meta" size={18} /> {String(post.payload.texto ?? 'Conquista nova')}
         </p>
       )}
-      {post.tipo === 'desafio_resultado' && (
-        <p className="mesa-grade">
-          <span className="mesa-grade-mono">{String(post.payload.grade ?? '')}</span>
-          <span className="mesa-grade-num">{String(post.payload.acertos ?? '')} no Desafio de hoje</span>
-        </p>
-      )}
+      {post.tipo === 'desafio_resultado' && <CorpoDesafio payload={post.payload} />}
       {post.tipo === 'provei' && <CorpoProvei payload={post.payload} />}
 
       <button
@@ -747,18 +743,55 @@ function CorpoDegustacao({ payload }: { payload: Record<string, unknown> }) {
   );
 }
 
+function CorpoDesafio({ payload }: { payload: Record<string, unknown> }) {
+  const grade = typeof payload.grade === 'string' ? payload.grade : '';
+  const total = grade.length || 4;
+  const acertos = Number(payload.acertos ?? grade.split('').filter((c) => c === '■').length);
+  return (
+    <div className="mesa-desafio">
+      <p className="mesa-desafio-eyebrow">Desafio do Dia</p>
+      <div className="mesa-desafio-grade" aria-label={`${acertos} de ${total} no desafio`}>
+        {grade.split('').map((c, i) => {
+          const certo = c === '■';
+          return (
+            <span
+              key={i}
+              className={`mesa-desafio-quadro${certo ? ' mesa-q-certo' : ' mesa-q-errado'}`}
+              aria-hidden="true"
+            >
+              <Ic nome={certo ? 'check' : 'x-fechar'} size={16} />
+            </span>
+          );
+        })}
+      </div>
+      <p className="mesa-desafio-num">
+        {acertos} de {total} certas
+      </p>
+    </div>
+  );
+}
+
 function CorpoProvei({ payload }: { payload: Record<string, unknown> }) {
   const chips = Array.isArray(payload.chips) ? (payload.chips as string[]) : [];
+  const texto = typeof payload.texto === 'string' ? payload.texto : '';
   return (
     <div className="mesa-provei-corpo">
-      <p className="mesa-provei-titulo">Provei um vinho hoje</p>
-      <div className="mesa-chips">
-        {chips.map((c) => (
-          <span className="mesa-chip" key={c}>
-            {c}
-          </span>
-        ))}
+      <div className="mesa-provei-cabeca">
+        <span className="mesa-provei-selo" aria-hidden="true">
+          <Ic nome="taca" size={16} />
+        </span>
+        <span className="mesa-provei-titulo">Provei um vinho hoje</span>
       </div>
+      {texto && <p className="mesa-provei-texto">{texto}</p>}
+      {chips.length > 0 && (
+        <div className="mesa-chips mesa-chips-nota">
+          {chips.map((c) => (
+            <span className="mesa-chip mesa-chip-nota" key={c}>
+              {c}
+            </span>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
@@ -770,35 +803,60 @@ function ComporProvei({
   onEnviar,
 }: {
   onFechar: () => void;
-  onEnviar: (chips: string[]) => void;
+  onEnviar: (chips: string[], texto: string) => void;
 }) {
   const [sel, setSel] = useState<string[]>([]);
+  const [texto, setTexto] = useState('');
   const alternar = (c: string) =>
     setSel((s) => (s.includes(c) ? s.filter((x) => x !== c) : [...s, c]));
+  const vazio = sel.length === 0 && texto.trim() === '';
 
   return (
     <Sheet titulo="Provei um vinho" onFechar={onFechar}>
-      <p className="folha-texto">Marque o que você sentiu. Sem nota, sem cerimônia.</p>
-      <div className="mesa-chips mesa-chips-escolha">
-        {CHIPS.map((c) => (
-          <button
-            key={c}
-            type="button"
-            className={`mesa-chip mesa-chip-btn tap${sel.includes(c) ? ' mesa-chip-on' : ''}`}
-            aria-pressed={sel.includes(c)}
-            onClick={() => alternar(c)}
-          >
-            {c}
-          </button>
-        ))}
+      <div className="provei-cabeca">
+        <span className="provei-selo" aria-hidden="true">
+          <Ic nome="taca" size={22} />
+        </span>
+        <p className="folha-texto provei-intro">Marque o que você sentiu. Sem nota, sem cerimônia.</p>
       </div>
+      <div className="provei-grade">
+        {CHIPS.map((c) => {
+          const on = sel.includes(c);
+          return (
+            <button
+              key={c}
+              type="button"
+              className={`provei-token tap${on ? ' provei-token-on' : ''}`}
+              aria-pressed={on}
+              onClick={() => alternar(c)}
+            >
+              {on && <Ic nome="check" size={15} />}
+              {c}
+            </button>
+          );
+        })}
+      </div>
+      <textarea
+        className="provei-texto-campo"
+        value={texto}
+        onChange={(e) => setTexto(e.target.value)}
+        placeholder="Quer dizer algo do vinho? (opcional)"
+        maxLength={280}
+        rows={2}
+        aria-label="Escreva algo sobre o vinho (opcional)"
+      />
       <button
         type="button"
-        className="btn btn-primary btn-jogo btn-cheio tap"
-        disabled={sel.length === 0}
-        onClick={() => onEnviar(sel)}
+        className="btn btn-primary btn-jogo btn-cheio tap provei-enviar"
+        disabled={vazio}
+        onClick={() => onEnviar(sel, texto.trim())}
       >
-        Compartilhar na mesa
+        <Ic nome="taca" size={18} />
+        {vazio
+          ? 'Marque ou escreva algo'
+          : sel.length > 1
+            ? `Compartilhar na mesa · ${sel.length}`
+            : 'Compartilhar na mesa'}
       </button>
     </Sheet>
   );
