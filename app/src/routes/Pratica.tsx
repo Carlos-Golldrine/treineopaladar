@@ -137,39 +137,35 @@ export default function Pratica() {
     const baralho = baralhoDisponivel();
     const paraHoje = cartasParaHoje(baralho, lerAgenda(), Date.now());
     return (
-      <div className="player pratica-intro">
-        <Mascotinho estado="idle" tamanho={108} className="pratica-masc" />
-        <h1 className="pratica-intro-titulo">Prática livre</h1>
-        <p className="pratica-intro-sub">
-          Oito perguntas com vinhos de verdade, das prateleiras daqui.
+      <div className="player player-vazio">
+        <div className="pratica-masc-balanca" aria-hidden="true">
+          <Mascotinho estado="idle" tamanho={96} />
+        </div>
+        <h1 className="vazio-titulo">Prática livre</h1>
+        <p className="vazio-texto">
+          Oito perguntas com vinhos de verdade, das prateleiras daqui. Esta rodada puxa mais{' '}
+          {NOME_HABILIDADE[etapa.foco]}, seu próximo ponto forte.
         </p>
-        <span className="pratica-foco">
-          <Ic nome="bandeira-meta" size={16} />
-          Hoje puxa mais <strong>{NOME_HABILIDADE[etapa.foco]}</strong>
-        </span>
-        <p className="pratica-intro-nota">
-          <Ic nome="coracao-vida" size={14} />
+        <p className="vazio-texto pratica-nota">
           Aqui não se gasta vida. Concluir a rodada recupera 1.
         </p>
-        <div className="pratica-intro-acoes">
-          <button type="button" className="btn btn-primary btn-jogo btn-cheio tap" onClick={comecar}>
-            Começar a rodada
+        <button type="button" className="btn btn-primary btn-jogo btn-cheio tap" onClick={comecar}>
+          Começar a rodada
+        </button>
+        {baralho.length > 0 && (
+          <button
+            type="button"
+            className="btn btn-outline btn-cheio tap"
+            onClick={() => setEtapa({ t: 'cartas' })}
+          >
+            <Ic nome="livro-flashcard" size={18} />
+            Revisar com cartas
+            {paraHoje > 0 && <span className="pratica-vencidas">{paraHoje} para hoje</span>}
           </button>
-          {baralho.length > 0 && (
-            <button
-              type="button"
-              className="btn btn-outline btn-cheio tap"
-              onClick={() => setEtapa({ t: 'cartas' })}
-            >
-              <Ic nome="livro-flashcard" size={18} />
-              Revisar com cartas
-              {paraHoje > 0 && <span className="pratica-vencidas">{paraHoje} para hoje</span>}
-            </button>
-          )}
-          <button type="button" className="pratica-voltar tap" onClick={() => navigate('/')}>
-            Voltar à trilha
-          </button>
-        </div>
+        )}
+        <button type="button" className="btn btn-outline btn-cheio tap" onClick={() => navigate('/')}>
+          Voltar à trilha
+        </button>
       </div>
     );
   }
@@ -177,16 +173,14 @@ export default function Pratica() {
   if (etapa.t === 'resultado') {
     const { resultado } = etapa;
     return (
-      <div className="player pratica-intro">
-        <Mascotinho
-          estado={resultado.erros === 0 ? 'feliz' : 'idle'}
-          tamanho={108}
-          className="pratica-masc"
-        />
-        <h1 className="pratica-intro-titulo">
+      <div className="player player-vazio">
+        <div className="pratica-masc" aria-hidden="true">
+          <Mascotinho estado={resultado.erros === 0 ? 'feliz' : 'idle'} tamanho={96} />
+        </div>
+        <h1 className="vazio-titulo">
           {resultado.erros === 0 ? 'Rodada impecável.' : 'Rodada concluída.'}
         </h1>
-        <p className="pratica-intro-sub">
+        <p className="vazio-texto">
           {resultado.acertos} de {resultado.acertos + resultado.erros} certas.
           {resultado.erros > 0 ? ' Os tropeços de hoje voltam mais fáceis amanhã.' : ' Paladar afiado.'}
         </p>
@@ -202,16 +196,14 @@ export default function Pratica() {
           )}
         </div>
         {resultado.xp < XP_REVISAO && (
-          <p className="pratica-intro-nota">XP de prática reduzido pelo ritmo de hoje. Amanhã volta cheio.</p>
+          <p className="vazio-texto pratica-nota">XP de prática reduzido pelo ritmo de hoje. Amanhã volta cheio.</p>
         )}
-        <div className="pratica-intro-acoes">
-          <button type="button" className="btn btn-primary btn-jogo btn-cheio tap" onClick={maisUma}>
-            Mais uma rodada
-          </button>
-          <button type="button" className="pratica-voltar tap" onClick={() => navigate('/')}>
-            Voltar à trilha
-          </button>
-        </div>
+        <button type="button" className="btn btn-primary btn-jogo btn-cheio tap" onClick={maisUma}>
+          Mais uma rodada
+        </button>
+        <button type="button" className="btn btn-outline btn-cheio tap" onClick={() => navigate('/')}>
+          Voltar à trilha
+        </button>
       </div>
     );
   }

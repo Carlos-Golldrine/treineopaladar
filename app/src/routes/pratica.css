@@ -52,82 +52,45 @@
   font: 600 var(--text-xs) / 1.4 var(--font-mono);
 }
 
-/* ---------- Intro / resultado da Pratica livre (Mascotinho) ---------- */
-.pratica-intro {
-  justify-content: center;
-  align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-6) var(--space-5) calc(var(--space-6) + var(--space-4));
-  text-align: center;
-}
-
+/* Mascotinho no lugar do selo (mesmo padrao .player-vazio das outras telas) */
 .pratica-masc {
+  display: inline-block;
   margin-bottom: var(--space-1);
 }
 
-.pratica-intro-titulo {
-  font: 600 var(--text-xl) / 1.2 var(--font-display);
-  color: var(--wine-900);
+/* Mascotinho balancando na borda da taca: gira no proprio pe, como um copo
+   bambeando antes de assentar. So transform (60fps) e respeita reduce-motion. */
+.pratica-masc-balanca {
+  display: inline-block;
+  margin-bottom: var(--space-1);
+  transform-origin: 50% 90%;
+  animation: pratica-taca-balanca 3s ease-in-out infinite;
+  will-change: transform;
 }
 
-.pratica-intro-sub {
-  max-width: 30ch;
-  font-size: var(--text-sm);
-  line-height: 1.5;
-  color: var(--neutral-600);
+@keyframes pratica-taca-balanca {
+  0% {
+    transform: rotate(0deg);
+  }
+  18% {
+    transform: rotate(-9deg);
+  }
+  42% {
+    transform: rotate(7deg);
+  }
+  64% {
+    transform: rotate(-5deg);
+  }
+  84% {
+    transform: rotate(3deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
-/* Chip do foco da rodada (a habilidade que vai ser mais treinada) */
-.pratica-foco {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: var(--space-1);
-  padding: 8px 14px;
-  border-radius: var(--radius-pill);
-  background: rgba(212, 165, 116, 0.16);
-  color: var(--wine-900);
-  font: 500 var(--text-sm) / 1 var(--font-ui);
-}
-
-.pratica-foco strong {
-  font-weight: 700;
-}
-
-.pratica-foco .ic {
-  color: var(--gold-700);
-}
-
-.pratica-intro-nota {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  max-width: 34ch;
-  font-size: var(--text-xs);
-  line-height: 1.4;
-  color: var(--neutral-500);
-}
-
-.pratica-intro-nota .ic {
-  flex: none;
-  color: var(--wine-700);
-}
-
-.pratica-intro-acoes {
-  align-self: stretch;
-  margin-top: var(--space-4);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-}
-
-/* "Voltar à trilha": ação terciária, discreta */
-.pratica-voltar {
-  min-height: 44px;
-  border: none;
-  background: none;
-  color: var(--neutral-500);
-  font: 500 var(--text-sm) / 1 var(--font-ui);
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
+@media (prefers-reduced-motion: reduce) {
+  .pratica-masc-balanca {
+    animation: none;
+  }
 }
