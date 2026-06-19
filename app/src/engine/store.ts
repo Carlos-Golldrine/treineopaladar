@@ -310,6 +310,16 @@ export class TPStore {
     this.sincronizar();
   }
 
+  /**
+   * Substitui o estado local SEM merge. Usado ao TROCAR de identidade (login em
+   * outra conta, anonimo novo apos logout): o estado da conta anterior nao pode
+   * vazar para a nova. Apos repor, sincronizar() aplica rollover de dia e regen.
+   */
+  repor(estado: EstadoV1): void {
+    this.commit(estado);
+    this.sincronizar();
+  }
+
   /* ------------------------- Sessao --------------------------- */
 
   /**

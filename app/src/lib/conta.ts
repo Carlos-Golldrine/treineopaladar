@@ -100,9 +100,11 @@ export async function entrarComEmail(email: string, senha: string): Promise<Resu
 }
 
 /**
- * Sai da conta: sobe o ultimo estado, encerra a sessao e recomeca como visitante
- * anonimo. MANTEM o progresso local (incl. o onboarding ja visto) — sem re-fazer o
- * tutorial; ao logar de novo, o estado e mesclado, nada se perde.
+ * Sai da conta: sobe o ultimo estado para a conta atual, encerra a sessao e
+ * recomeca como visitante anonimo LIMPO. O progresso de cada conta vive na nuvem
+ * sob o uid dela — ao logar de novo ele volta inteiro (a reconciliacao em cloud.ts
+ * substitui o estado local pelo da conta). NAO se carrega o estado da conta antiga
+ * para o anonimo novo: isso e o que vazava XP entre contas no mesmo aparelho.
  */
 export async function sairDaConta(): Promise<void> {
   await flushSincronizacao(); // garante que o ultimo estado subiu para a conta atual

@@ -73,6 +73,44 @@ describe('migracao do store', () => {
   });
 });
 
+describe('isolamento entre contas (repor x hidratar)', () => {
+  it('repor SUBSTITUI o estado, sem mesclar: o XP da conta anterior nao vaza', () => {
+    const r = relogio(T0);
+    const store = criarStore({ storage: memStorage(), agora: r.agora });
+    // conta A acumula progresso no aparelho
+    store.iniciarLicao(licaoFixture(), 'nova');
+    jogarLicaoInteira(store);
+    store.finalizarLicao();
+    expect(store.getEstado().wallet.xpTotal).toBe(25);
+
+    // troca para a conta B (estado da nuvem dela, mais "pobre"): repor adota B
+    // INTEIRA. Se mesclasse (bug), o XP ficaria max(25, 5) = 25.
+    const contaB = estadoInicial(T0);
+    contaB.wallet.xpTotal = 5;
+    contaB.nome = 'conta B';
+    store.repor(contaB);
+
+    const e = store.getEstado();
+    expect(e.wallet.xpTotal).toBe(5); // adotou B, nao o max
+    expect(e.nome).toBe('conta B');
+    expect(e.progresso['u1-l1']).toBeUndefined(); // progresso de A nao vazou
+  });
+
+  it('hidratar MESCLA (so seguro na MESMA conta): preserva o melhor dos dois', () => {
+    const r = relogio(T0);
+    const store = criarStore({ storage: memStorage(), agora: r.agora });
+    store.iniciarLicao(licaoFixture(), 'nova');
+    jogarLicaoInteira(store);
+    store.finalizarLicao();
+
+    const nuvem = estadoInicial(T0);
+    nuvem.wallet.xpTotal = 5;
+    store.hidratar(nuvem);
+    // merge monotonico: o XP local (25) prevalece sobre o remoto (5)
+    expect(store.getEstado().wallet.xpTotal).toBe(25);
+  });
+});
+
 describe('fluxo de licao no store', () => {
   it('licao perfeita: XP, cristais, streak, coroa, agenda D+1 e paladar', () => {
     const r = relogio(T0);
