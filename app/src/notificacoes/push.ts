@@ -10,6 +10,8 @@
  * (iOS sem instalar, navegador velho, etc.).
  */
 
+import { getSupabase } from '../lib/supabase';
+
 const CHAVE_INTENCAO = 'tp.push.intencao.v1';
 
 export type EstadoPermissao = 'default' | 'granted' | 'denied' | 'indisponivel';
@@ -99,27 +101,63 @@ export async function aceitarLembretes(): Promise<ResultadoPrimer> {
   return { permissao, intencaoRegistrada: true };
 }
 
+/** Converte a chave VAPID publica (base64url) no Uint8Array que o
+ *  pushManager.subscribe espera como applicationServerKey. */
+function chaveParaBytes(base64: string): Uint8Array {
+  const pad = '='.repeat((4 - (base64.length % 4)) % 4);
+  const b64 = (base64 + pad).replace(/-/g, '+').replace(/_/g, '/');
+  const cru = atob(b64);
+  const bytes = new Uint8Array(cru.length);
+  for (let i = 0; i < cru.length; i++) bytes[i] = cru.charCodeAt(i);
+  return bytes;
+}
+
+/** Plataforma best-effort para segmentar envios (iOS exige PWA instalado). */
+function plataforma(): string {
+  const ua = navigator.userAgent;
+  if (/android/i.test(ua)) return 'android';
+  if (/iphone|ipad|ipod/i.test(ua)) return 'ios';
+  return 'desktop';
+}
+
+/** Salva (upsert por endpoint) a subscription no Supabase, ligada ao usuario. */
+async function salvarSubscription(sub: PushSubscription): Promise<void> {
+  const sb = getSupabase();
+  if (!sb) return;
+  const uid = (await sb.auth.getUser()).data.user?.id;
+  if (!uid) return;
+  const keys = sub.toJSON().keys ?? {};
+  if (!keys.p256dh || !keys.auth) return;
+  await sb.from('push_subscriptions').upsert(
+    {
+      endpoint: sub.endpoint,
+      user_id: uid,
+      p256dh: keys.p256dh,
+      auth: keys.auth,
+      plataforma: plataforma(),
+      visto_em: new Date().toISOString(),
+    },
+    { onConflict: 'endpoint' },
+  );
+}
+
 /**
- * STUB de subscricao Web Push. Pega o registration do SW e, quando a
- * VAPID existir, chama pushManager.subscribe e salva no Supabase.
- * Por ora so confirma que o pipe esta vivo e deixa o ponto de extensao.
+ * Subscreve no Web Push (reaproveitando a subscription do navegador, se houver)
+ * e salva no Supabase. Sem VAPID (pushAtivado false) nao faz nada — o primer nem
+ * chega aqui, mas a guarda evita subscrever sem para onde enviar.
  */
 async function tentarSubscrever(): Promise<void> {
-  if (!suportaPush()) return;
+  if (!suportaPush() || !pushAtivado()) return;
   try {
     const reg = await navigator.serviceWorker.ready;
-    /* Se ja existe uma subscription (sessao anterior), nada a fazer aqui. */
     const existente = await reg.pushManager.getSubscription();
-    if (existente) return;
-
-    // TODO F3-backend: subscrever com VAPID e salvar no Supabase.
-    //   const sub = await reg.pushManager.subscribe({
-    //     userVisibleOnly: true,
-    //     applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY),
-    //   });
-    //   await fetch('/api/push/subscribe', { method: 'POST', body: JSON.stringify(sub) });
-    // Enquanto a chave VAPID e a Edge Function nao existem, paramos aqui:
-    // a intencao ja esta gravada e o backend assume quando subir.
+    const sub =
+      existente ??
+      (await reg.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: chaveParaBytes(import.meta.env.VITE_VAPID_PUBLIC_KEY as string),
+      }));
+    await salvarSubscription(sub);
   } catch {
     /* SW nao pronto ou push bloqueado: a intencao guardada basta por ora */
   }
