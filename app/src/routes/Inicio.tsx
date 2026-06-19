@@ -11,6 +11,7 @@ import { useDesbloqueios } from '../trilha/desbloqueios';
 import { Ic } from '../icones/Icones';
 import { Mascotinho } from '../mascote';
 import { GatePrimer, sincronizarBadge } from '../notificacoes';
+import { RodapeTchin } from '../components/RodapeTchin';
 import './inicio.css';
 
 function saudacao(): string {
@@ -193,6 +194,8 @@ export default function Inicio() {
           </p>
         </div>
       </section>
+
+      <RodapeTchin />
 
       {/* Primer de notificacao (1x, pos-onboarding, so onde push faz sentido) */}
       <GatePrimer />

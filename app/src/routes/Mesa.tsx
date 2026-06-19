@@ -21,6 +21,7 @@ import {
   sairDaMesa,
 } from '../lib/mesa';
 import type { FeedMesa, MesaPublica, PostMesa, RankItem } from '../lib/mesa';
+import { RodapeTchin } from '../components/RodapeTchin';
 
 import './mesa.css';
 
@@ -346,6 +347,8 @@ export default function Mesa() {
           Provei um vinho
         </button>
       )}
+
+      <RodapeTchin />
 
       {contaAberta && (
         <ContaSheet onFechar={() => setContaAberta(false)} onSucesso={() => setContaAberta(false)} />

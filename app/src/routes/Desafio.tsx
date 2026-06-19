@@ -15,6 +15,7 @@ import { Mascotinho } from '../mascote';
 import { tocar } from '../som/som';
 import { garantirMesa, postarDesafioResultado } from '../lib/mesa';
 import { nuvemConfigurada } from '../lib/supabase';
+import { RodapeTchin } from '../components/RodapeTchin';
 
 import '../licao/player.css';
 import './desafio.css';
@@ -272,6 +273,8 @@ export default function Desafio() {
           </div>
         ))}
       </section>
+
+      <RodapeTchin />
     </>
   );
 }

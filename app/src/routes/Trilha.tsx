@@ -22,6 +22,7 @@ import { FALAS } from '../onboarding/conteudo';
 import { consumirAnimTrilha } from '../licao/tipos';
 import { tocar } from '../som/som';
 import { baralhoDisponivel, cartasParaHoje, lerAgenda } from '../pratica/cartas';
+import { RodapeTchin } from '../components/RodapeTchin';
 
 import './trilha.css';
 
@@ -422,6 +423,8 @@ export default function Trilha() {
           </section>
         );
       })}
+
+      <RodapeTchin />
 
       {aba === 'streak' && (
         <Sheet titulo="Sua sequência" onFechar={() => setAba(null)}>

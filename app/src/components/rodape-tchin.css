@@ -1,0 +1,25 @@
+/* Rodape da marca-mae: link discreto no fim de cada secao. Centrado, com folga
+   generosa acima (longe do conteudo tocavel) para nao virar clique acidental. */
+.rodape-tchin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: fit-content;
+  margin: var(--space-6) auto var(--space-5);
+  padding: var(--space-4);
+  border-radius: var(--radius-pill);
+  color: var(--neutral-500);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.rodape-tchin:active {
+  opacity: 0.6;
+}
+
+.rodape-tchin-logo {
+  color: var(--gold-700);
+}

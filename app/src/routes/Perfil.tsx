@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Ic } from '../icones/Icones';
-import { LogoTchin } from '../icones/LogoTchin';
+import { RodapeTchin } from '../components/RodapeTchin';
 import { definirSom, somLigado } from '../som/som';
 import { OBJETIVOS, obterStore, useProgresso, useWallet } from '../engine';
 import type { Habilidade, Objetivo } from '../engine';
@@ -89,11 +89,6 @@ export default function Perfil() {
         <button type="button" className="profile-editar tap" onClick={abrirEdicao}>
           {nome ? 'Editar perfil' : 'Escolher nome e avatar'}
         </button>
-        <div className="profile-marca" aria-label="Parte do ecossistema Tchin Tchin, versão beta">
-          <LogoTchin size={14} className="profile-logo" />
-          <span className="profile-by">by Tchin Tchin</span>
-          <span className="chip-beta">Beta</span>
-        </div>
         <div className="profile-stats">
           <div
             className="stat-chip"
@@ -277,6 +272,8 @@ export default function Perfil() {
       )}
 
       {criandoConta && <ContaSheet onFechar={() => setCriandoConta(false)} />}
+
+      <RodapeTchin />
     </>
   );
 }

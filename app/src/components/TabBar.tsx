@@ -12,9 +12,6 @@ const tabs: { to: string; end: boolean; label: string; icone: NomeIcone }[] = [
 export function TabBar() {
   return (
     <div className="tabbar-wrap">
-      <p className="tabbar-marca" aria-label="Parte do ecossistema Tchin Tchin, versão beta">
-        by Tchin Tchin <span className="tabbar-beta">Beta</span>
-      </p>
       <nav className="tabbar app-chrome" aria-label="Navegação principal">
         {tabs.map((tab) => (
           <NavLink
