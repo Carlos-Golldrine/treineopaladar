@@ -15,20 +15,19 @@
  */
 import { useEffect, useState } from 'react';
 import { PrimerNotificacao } from './PrimerNotificacao';
-import { permissaoAtual, pushAtivado, suportaPush } from './push';
-import { useFtueFlags } from '../onboarding/flags';
+import { permissaoAtual, primerAdiado, pushAtivado, suportaPush } from './push';
 
 /** Atraso antes de abrir o primer, pra dar espaco ao convite de instalacao. */
 const ATRASO_MS = 6000;
 
 export function GatePrimer() {
-  const [flags] = useFtueFlags();
   const [mostrar, setMostrar] = useState(false);
 
   /* pushAtivado(): so mostra o primer quando o backend de push existe (VAPID).
-     Sem isso, pedir permissao nao entrega nada e queima o canal. */
+     primerAdiado(): respeita o "Agora nao" (re-pergunta dias depois, nao some
+     pra sempre). So onde push faz sentido e a permissao ainda nao foi decidida. */
   const elegivel =
-    pushAtivado() && suportaPush() && permissaoAtual() === 'default' && !flags.primerNotifRespondido;
+    pushAtivado() && suportaPush() && permissaoAtual() === 'default' && !primerAdiado();
 
   useEffect(() => {
     if (!elegivel) return;

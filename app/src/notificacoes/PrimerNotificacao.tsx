@@ -10,35 +10,35 @@
 
 import { Ic } from '../icones/Icones';
 import { Mascotinho } from '../mascote';
-import { aceitarLembretes } from './push';
-import { useFtueFlags } from '../onboarding/flags';
+import { aceitarLembretes, adiarPrimer } from './push';
 import './notificacoes.css';
 
 interface Props {
-  /** Chamado depois que a pessoa responde (sim ou nao): grava a flag 1x. */
+  /** Chamado depois que a pessoa responde (sim ou nao). */
   onResolvido?: () => void;
 }
 
 export function PrimerNotificacao({ onResolvido }: Props) {
-  const [, marcar] = useFtueFlags();
-
-  const responder = () => {
-    marcar({ primerNotifRespondido: true });
+  /* "Agora nao" adia poucos dias (re-pergunta, em vez de sumir pra sempre). */
+  const recusar = () => {
+    adiarPrimer(3);
     onResolvido?.();
   };
 
   /* Fecha o primer NA HORA e pede a permissao/inscreve em segundo plano.
      requestPermission ainda roda dentro do gesto (a 1a chamada e sincrona),
      entao o dialog nativo aparece; mas o primer nao fica preso esperando o
-     subscribe (que pode travar no serviceWorker.ready). */
+     subscribe (que pode travar no serviceWorker.ready). Prazo longo: quem
+     aceita nao e re-perguntado (e a permissao concedida ja barra o primer). */
   const aceitar = () => {
-    responder();
+    adiarPrimer(30);
+    onResolvido?.();
     void aceitarLembretes();
   };
 
   return (
     <div className="primer" role="dialog" aria-modal="true" aria-label="Quer que a gente te lembre da ofensiva?">
-      <button type="button" className="primer-fundo" aria-label="Agora não" onClick={responder} />
+      <button type="button" className="primer-fundo" aria-label="Agora não" onClick={recusar} />
       <div className="primer-painel app-chrome">
         <div className="primer-mascote" aria-hidden="true">
           <Mascotinho estado="idle" tamanho={84} />
@@ -55,7 +55,7 @@ export function PrimerNotificacao({ onResolvido }: Props) {
           <button type="button" className="btn btn-primary btn-jogo btn-cheio tap" onClick={aceitar}>
             Pode lembrar
           </button>
-          <button type="button" className="btn btn-outline btn-cheio tap" onClick={responder}>
+          <button type="button" className="btn btn-outline btn-cheio tap" onClick={recusar}>
             Agora não
           </button>
         </div>

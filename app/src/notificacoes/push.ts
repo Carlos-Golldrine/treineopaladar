@@ -42,6 +42,28 @@ export function pushAtivado(): boolean {
   return Boolean(import.meta.env.VITE_VAPID_PUBLIC_KEY);
 }
 
+const CHAVE_ADIADO = 'tp.notif.adiado.v1';
+
+/** True quando o primer foi adiado e a espera ainda nao venceu. */
+export function primerAdiado(): boolean {
+  try {
+    const v = Number(localStorage.getItem(CHAVE_ADIADO) ?? 0);
+    return Number.isFinite(v) && Date.now() < v;
+  } catch {
+    return false;
+  }
+}
+
+/** Adia o primer por N dias. Em vez de "uma vez pra sempre", re-pergunta depois
+ *  (alcanca quem tocou "Agora nao"). Quem aceita ganha um prazo longo. */
+export function adiarPrimer(dias: number): void {
+  try {
+    localStorage.setItem(CHAVE_ADIADO, String(Date.now() + dias * 86400000));
+  } catch {
+    /* storage bloqueado: o primer pode reaparecer antes, tudo bem */
+  }
+}
+
 /** Marca localmente que a pessoa QUER receber lembretes (intencao). */
 function gravarIntencao(): void {
   try {
