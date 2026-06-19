@@ -109,6 +109,22 @@
   color: var(--neutral-500);
 }
 
+/* Nota para quem NAO e anfitriao: so o anfitriao controla a privacidade. */
+.mesa-privada-nota {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: var(--space-4);
+  font-size: var(--text-xs);
+  line-height: 1.4;
+  color: var(--neutral-500);
+}
+
+.mesa-privada-nota .ic {
+  flex: none;
+  color: var(--wine-700);
+}
+
 .mesa-switch {
   flex: none;
   width: 48px;

@@ -356,6 +356,7 @@ export default function Mesa() {
       {convidando && feed && (
         <ConvidarSheet
           feed={feed}
+          souAnfitriao={souAnfitriao}
           onFechar={() => {
             setConvidando(false);
             if (mesaId.current) void recarregar(mesaId.current);
@@ -387,7 +388,15 @@ export default function Mesa() {
 
 /* ------------------------- Convite + privacidade -------------------- */
 
-function ConvidarSheet({ feed, onFechar }: { feed: FeedMesa; onFechar: () => void }) {
+function ConvidarSheet({
+  feed,
+  souAnfitriao,
+  onFechar,
+}: {
+  feed: FeedMesa;
+  souAnfitriao: boolean;
+  onFechar: () => void;
+}) {
   const [privada, setPrivada] = useState(feed.privada);
   const [copiado, setCopiado] = useState(false);
   const link = `${window.location.origin}/mesa/entrar/${feed.codigoConvite}`;
@@ -426,27 +435,35 @@ function ConvidarSheet({ feed, onFechar }: { feed: FeedMesa; onFechar: () => voi
         </button>
       </div>
 
-      <button
-        type="button"
-        className="mesa-privada-toggle tap"
-        role="switch"
-        aria-checked={privada}
-        onClick={alternarPrivada}
-      >
-        <span className="mesa-privada-info">
-          <span className="mesa-privada-titulo">
-            <Ic nome="cadeado" size={16} /> Mesa privada
+      {souAnfitriao ? (
+        <button
+          type="button"
+          className="mesa-privada-toggle tap"
+          role="switch"
+          aria-checked={privada}
+          onClick={alternarPrivada}
+        >
+          <span className="mesa-privada-info">
+            <span className="mesa-privada-titulo">
+              <Ic nome="cadeado" size={16} /> Mesa privada
+            </span>
+            <span className="mesa-privada-sub">
+              {privada
+                ? 'Só entra quem tem o link. Ninguém novo é adicionado sozinho.'
+                : 'Aberta: pessoas no seu ritmo entram automaticamente.'}
+            </span>
           </span>
-          <span className="mesa-privada-sub">
-            {privada
-              ? 'Só entra quem tem o link. Ninguém novo é adicionado sozinho.'
-              : 'Aberta: pessoas no seu ritmo entram automaticamente.'}
+          <span className={`mesa-switch${privada ? ' mesa-switch-on' : ''}`} aria-hidden="true">
+            <span className="mesa-switch-bola" />
           </span>
-        </span>
-        <span className={`mesa-switch${privada ? ' mesa-switch-on' : ''}`} aria-hidden="true">
-          <span className="mesa-switch-bola" />
-        </span>
-      </button>
+        </button>
+      ) : (
+        privada && (
+          <p className="mesa-privada-nota">
+            <Ic nome="cadeado" size={14} /> Mesa privada — só o anfitrião pode abrir ou fechar.
+          </p>
+        )
+      )}
     </Sheet>
   );
 }
