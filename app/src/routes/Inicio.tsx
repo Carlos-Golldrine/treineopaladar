@@ -3,13 +3,14 @@
  * Junta o foco do Duolingo (contexto da unidade + 1 acao principal) com a
  * clareza do Uber (atalhos descobriveis em cards). Reusa os dados do engine.
  */
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useProgresso, useWallet } from '../engine';
 import { unidadesDoObjetivo } from '../trilha/ordem';
 import { useDesbloqueios } from '../trilha/desbloqueios';
 import { Ic } from '../icones/Icones';
 import { Mascotinho } from '../mascote';
+import { GatePrimer, sincronizarBadge } from '../notificacoes';
 import './inicio.css';
 
 function saudacao(): string {
@@ -26,6 +27,12 @@ export default function Inicio() {
   const desbloqueios = useDesbloqueios();
 
   const unidades = useMemo(() => unidadesDoObjetivo(objetivo), [objetivo]);
+
+  /* Badge no icone do app (PWA instalado): acende o "1" quando a ofensiva
+     entra em risco, apaga quando esta em dia. No-op fora de PWA instalado. */
+  useEffect(() => {
+    void sincronizarBadge(streakEmRisco);
+  }, [streakEmRisco]);
 
   /* Unidade atual = 1a aberta e incompleta; proxima licao = 1a pendente dela */
   const atual = useMemo(() => {
@@ -186,6 +193,9 @@ export default function Inicio() {
           </p>
         </div>
       </section>
+
+      {/* Primer de notificacao (1x, pos-onboarding, so onde push faz sentido) */}
+      <GatePrimer />
     </>
   );
 }

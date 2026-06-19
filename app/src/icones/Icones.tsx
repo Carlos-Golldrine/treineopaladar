@@ -427,6 +427,19 @@ const ICONES = {
       <circle cx="14.7" cy="17.6" r="1.45" fill="currentColor" />
     </>
   ),
+
+  /** Sino do primer de notificacao: badalo de ouro (o lembrete que chega) */
+  sino: (
+    <>
+      <path
+        {...t}
+        d="M6.4 16.4 C6.4 16.4 7.6 15.2 7.6 11.6 C7.6 8.3 9.6 5.8 12 5.8 C14.4 5.8 16.4 8.3 16.4 11.6 C16.4 15.2 17.6 16.4 17.6 16.4 Z"
+      />
+      <path {...td} d="M4.8 16.4 H19.2" />
+      <path {...tf(OURO)} d="M10.2 18.4 H13.8 C13.8 19.9 12.9 20.8 12 20.8 C11.1 20.8 10.2 19.9 10.2 18.4 Z" />
+      <path {...td} d="M12 5.8 V3.8" />
+    </>
+  ),
 };
 
 export type NomeIcone = keyof typeof ICONES;

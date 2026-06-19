@@ -17,6 +17,8 @@ export interface FtueFlags {
   fichaApontada: boolean;
   /** True depois do convite de instalacao (PWA), mostrado uma vez pos-onboarding. */
   instalacaoVista: boolean;
+  /** True depois do primer de notificacao ter sido respondido (sim ou nao), 1x (F3). */
+  primerNotifRespondido: boolean;
 }
 
 const PADRAO: FtueFlags = {
@@ -24,6 +26,7 @@ const PADRAO: FtueFlags = {
   lojaVista: false,
   fichaApontada: false,
   instalacaoVista: false,
+  primerNotifRespondido: false,
 };
 
 function ler(): FtueFlags {
@@ -36,6 +39,7 @@ function ler(): FtueFlags {
       lojaVista: dado.lojaVista === true,
       fichaApontada: dado.fichaApontada === true,
       instalacaoVista: dado.instalacaoVista === true,
+      primerNotifRespondido: dado.primerNotifRespondido === true,
     };
   } catch {
     return PADRAO;

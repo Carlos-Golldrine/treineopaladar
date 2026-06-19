@@ -58,6 +58,12 @@ export default defineConfig({
            (decisao F2, ~351KB a menos na instalacao; gsap so chega com
            a primeira micro-aula) */
         globIgnores: ['**/rotulos/**', '**/avatars/**', '**/banco-pratica-*.js', '**/desafios-*.js', '**/gsap-*.js'],
+        /* F3 push: o generateSW gerado importa este script no topo, que
+           adiciona os handlers de 'push' e 'notificationclick'. Mantemos a
+           estrategia generateSW (e todo o runtime caching tunado acima)
+           intacta; o push entra por cima, sem migrar para injectManifest.
+           O notif-sw.js fica em /public e e servido na raiz. */
+        importScripts: ['/notif-sw.js'],
         navigateFallback: '/index.html',
         runtimeCaching: [
           {

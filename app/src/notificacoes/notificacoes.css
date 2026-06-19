@@ -1,0 +1,122 @@
+/* ============================================================
+   Primer de notificacao (F3). Folha central acolhedora, mascote
+   apresentando o sino. Tokens do brief; so transform/opacity.
+   ============================================================ */
+
+.primer {
+  position: fixed;
+  inset: 0;
+  z-index: 45;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+}
+
+.primer-fundo {
+  position: absolute;
+  inset: 0;
+  background: rgba(74, 31, 36, 0.42);
+  animation: primer-veu 200ms ease-out both;
+}
+
+@keyframes primer-veu {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.primer-painel {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  padding: var(--space-5) var(--space-4) var(--space-4);
+  border-radius: var(--radius-card);
+  background: var(--bg);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+  animation: primer-sobe 240ms ease-out both;
+}
+
+@keyframes primer-sobe {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.primer-mascote {
+  position: relative;
+  display: inline-flex;
+  margin-bottom: var(--space-2);
+}
+
+/* O sino pendura no ombro do mascote, em tile de ouro suave */
+.primer-sino {
+  position: absolute;
+  right: -6px;
+  bottom: 2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-pill);
+  background: var(--bg);
+  border: 1px solid var(--neutral-100);
+  box-shadow: var(--shadow-sm);
+  color: var(--wine-900);
+  animation: primer-sino-toca 2.4s ease-in-out 0.4s infinite;
+  transform-origin: 50% 20%;
+}
+
+@keyframes primer-sino-toca {
+  0%,
+  88%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  92% {
+    transform: rotate(-9deg);
+  }
+
+  96% {
+    transform: rotate(7deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primer-sino {
+    animation: none;
+  }
+}
+
+.primer-titulo {
+  margin-top: var(--space-1);
+  font: 600 var(--text-lg) / 1.2 var(--font-display);
+  color: var(--wine-900);
+}
+
+.primer-texto {
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--neutral-600);
+}
+
+.primer-acoes {
+  margin-top: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
