@@ -76,7 +76,7 @@ for (const n of NOTIFS) {
   for (const s of q.rows) {
     const sub = { endpoint: s.endpoint, keys: { p256dh: s.p256dh, auth: s.auth } };
     try {
-      await webpush.sendNotification(sub, payload);
+      await webpush.sendNotification(sub, payload, { urgency: 'high', TTL: 86400 });
       ok++;
     } catch (e) {
       const code = e.statusCode;

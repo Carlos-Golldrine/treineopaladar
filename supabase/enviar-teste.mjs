@@ -61,7 +61,7 @@ let mortos = 0;
 for (const s of q.rows) {
   const sub = { endpoint: s.endpoint, keys: { p256dh: s.p256dh, auth: s.auth } };
   try {
-    await webpush.sendNotification(sub, payload);
+    await webpush.sendNotification(sub, payload, { urgency: 'high', TTL: 86400 });
     ok++;
     console.log('  ok   ', (s.plataforma || '?').padEnd(8), s.endpoint.slice(0, 48) + '...');
   } catch (e) {
