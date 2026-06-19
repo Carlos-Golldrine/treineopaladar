@@ -799,6 +799,7 @@
   -webkit-user-select: none;
   user-select: none;
   cursor: grab;
+  will-change: transform;
 }
 
 .ordenar-pos {
@@ -829,9 +830,15 @@
 }
 
 .linha-arrasto {
-  z-index: 2;
-  box-shadow: var(--shadow-md);
+  z-index: 3;
+  /* sombra forte + leve halo wine pra deixar claro que o card foi "levantado" */
+  box-shadow: 0 14px 30px rgba(74, 31, 36, 0.24), 0 0 0 1.5px var(--wine-700);
   border-color: var(--wine-700);
+  cursor: grabbing;
+}
+
+.linha-arrasto .ordenar-pega {
+  color: var(--wine-700);
 }
 
 .linha-certa {
