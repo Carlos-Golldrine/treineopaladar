@@ -6,12 +6,23 @@
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 
 // Credenciais publicas (vao no bundle do client de qualquer forma; protegidas por RLS).
-// A env var tem prioridade; o fallback garante o deploy mesmo sem env configurada.
-const url =
-  (import.meta.env.VITE_SUPABASE_URL as string | undefined) ?? 'https://vgalezyjhnddvemowgdp.supabase.co';
-const key =
-  (import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string | undefined) ??
-  'sb_publishable_I6VRM3kU8p0ZAWsKFKfkEw_dzPNqF8w';
+// A env var tem prioridade, MAS so se tiver formato valido: se o painel do Cloudflare
+// tiver lixo no campo (ex.: texto colado por engano), o ?? nao salvaria (valor != null),
+// entao validamos o formato e caimos no fallback conhecido se nao bater.
+function envValido(v: string | undefined, ok: (s: string) => boolean, fallback: string): string {
+  const t = (v ?? '').trim();
+  return ok(t) ? t : fallback;
+}
+const url = envValido(
+  import.meta.env.VITE_SUPABASE_URL as string | undefined,
+  (s) => /^https:\/\/[a-z0-9-]+\.supabase\.(co|in)\/?$/i.test(s),
+  'https://vgalezyjhnddvemowgdp.supabase.co',
+);
+const key = envValido(
+  import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string | undefined,
+  (s) => /^(sb_|eyJ)/.test(s) && !/\s/.test(s),
+  'sb_publishable_I6VRM3kU8p0ZAWsKFKfkEw_dzPNqF8w',
+);
 
 let cliente: SupabaseClient | null = null;
 
