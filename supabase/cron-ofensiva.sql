@@ -1,9 +1,13 @@
 -- cron-ofensiva.sql — Agenda o streak-saver para rodar 1x/dia as 20h de Brasilia.
--- RODAR DEPOIS de fazer o deploy da Edge Function `enviar-push` e setar os secrets.
--- NAO faz parte do migrate (tem segredo + URL de funcao). Rode no SQL Editor do
--- Supabase (ou via psql) trocando os dois placeholders:
---   <CRON_SECRET>  = o mesmo valor passado em `supabase secrets set CRON_SECRET=...`
---   <PROJECT_REF>  = vgalezyjhnddvemowgdp (projeto de producao)
+-- RODAR DEPOIS de fazer o deploy da Edge Function `enviar-push` e setar os secrets
+-- VAPID. Rode no SQL Editor do Supabase, trocando o placeholder:
+--   <PROJECT_REF> = vgalezyjhnddvemowgdp (projeto de producao)
+--
+-- A chamada usa a service_role key como Bearer (a funcao so roda com ela). Em vez
+-- de colar a key aqui, guardamos no Vault e o cron a lê de la (nao fica exposta
+-- na cron.job). Rode UMA vez, com a sua service_role key (Project Settings ->
+-- API -> service_role), o comando abaixo:
+--   select vault.create_secret('SUA_SERVICE_ROLE_KEY', 'service_role_key');
 --
 -- Brasil nao tem horario de verao desde 2019: America/Sao_Paulo = UTC-3 fixo,
 -- entao 20:00 Brasilia = 23:00 UTC. Se o DST voltar, ajustar a hora do cron.
@@ -23,7 +27,7 @@ select cron.schedule(
     url := 'https://<PROJECT_REF>.supabase.co/functions/v1/enviar-push',
     headers := jsonb_build_object(
       'Content-Type', 'application/json',
-      'Authorization', 'Bearer <CRON_SECRET>'
+      'Authorization', 'Bearer ' || (select decrypted_secret from vault.decrypted_secrets where name = 'service_role_key')
     ),
     body := '{}'::jsonb,
     timeout_milliseconds := 30000
@@ -38,6 +42,8 @@ select cron.schedule(
 --     where jobid = (select jobid from cron.job where jobname='streak-saver-ofensiva')
 --     order by start_time desc limit 5;
 -- Disparar manualmente uma vez para testar (mesma chamada do cron):
---   select net.http_post(url:='https://<PROJECT_REF>.supabase.co/functions/v1/enviar-push',
---     headers:=jsonb_build_object('Content-Type','application/json','Authorization','Bearer <CRON_SECRET>'),
---     body:='{}'::jsonb);
+--   select net.http_post(
+--     url := 'https://<PROJECT_REF>.supabase.co/functions/v1/enviar-push',
+--     headers := jsonb_build_object('Content-Type','application/json',
+--       'Authorization','Bearer ' || (select decrypted_secret from vault.decrypted_secrets where name='service_role_key')),
+--     body := '{}'::jsonb);

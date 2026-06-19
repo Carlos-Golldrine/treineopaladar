@@ -10,8 +10,10 @@
 // (404/410) e removida.
 //
 // Acionada por pg_cron (via pg_net http_post) 1x/dia as 23:00 UTC = 20:00 Brasilia.
-// Deploy: `supabase functions deploy enviar-push --no-verify-jwt`
-//         `supabase secrets set VAPID_PUBLIC_KEY=... VAPID_PRIVATE_KEY=... VAPID_SUBJECT=mailto:... CRON_SECRET=...`
+// Deploy (CLI ou Dashboard). Pode deixar o verify_jwt LIGADO: o gate exige a
+// service_role key no Authorization (que e um JWT valido e so o cron tem).
+// Secrets necessarios: VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY, VAPID_SUBJECT.
+// (SUPABASE_URL e SUPABASE_SERVICE_ROLE_KEY ja vem injetados nas Edge Functions.)
 import webpush from 'npm:web-push@3.6.7';
 import { createClient } from 'npm:@supabase/supabase-js@2';
 
@@ -20,7 +22,6 @@ const SERVICE_ROLE = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
 const VAPID_PUBLIC = Deno.env.get('VAPID_PUBLIC_KEY')!;
 const VAPID_PRIVATE = Deno.env.get('VAPID_PRIVATE_KEY')!;
 const VAPID_SUBJECT = Deno.env.get('VAPID_SUBJECT') ?? 'mailto:contato@treineseupaladar.app';
-const CRON_SECRET = Deno.env.get('CRON_SECRET') ?? '';
 
 /* Espelha COPY_NOTIF.ofensiva_risco de app/src/notificacoes/copy.ts (variantes
    estaveis; mantenha em sincronia se a copy mudar). {N} = dias de streak. */
@@ -43,9 +44,10 @@ interface Alvo {
 }
 
 Deno.serve(async (req) => {
-  // Gate: so o cron (que conhece o CRON_SECRET) dispara. Sem verify_jwt no deploy.
+  // Gate: so chamadas com a SERVICE ROLE key (o cron) rodam. A service_role key e
+  // um JWT valido, entao passa pelo verify_jwt do gateway e ainda confere aqui.
   const bearer = req.headers.get('Authorization')?.replace(/^Bearer\s+/i, '') ?? '';
-  if (!CRON_SECRET || bearer !== CRON_SECRET) {
+  if (!SERVICE_ROLE || bearer !== SERVICE_ROLE) {
     return json({ erro: 'nao autorizado' }, 401);
   }
   if (!VAPID_PUBLIC || !VAPID_PRIVATE) {
