@@ -31,7 +31,9 @@ self.addEventListener('push', (event) => {
   const opcoes = {
     body: dados.body || '',
     icon: dados.icon || '/icons/icon-192.png',
-    badge: dados.badge || '/icons/icon-192.png',
+    // badge = icone pequeno da barra de status (Android): tem que ser monocromatico
+    // (branco + transparente), senao o icone colorido vira um quadrado branco.
+    badge: dados.badge || '/icons/badge-mono.png',
     tag: dados.tag,
     data: { url: dados.url || '/' },
   };
