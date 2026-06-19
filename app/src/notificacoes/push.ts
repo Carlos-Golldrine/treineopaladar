@@ -33,13 +33,18 @@ export function suportaPush(): boolean {
 }
 
 /**
- * True quando o backend de push ja existe (chave VAPID publica configurada).
- * Enquanto a VAPID e a Edge Function de cron nao sobem, isto e false e o primer
- * fica DORMENTE: nao faz sentido pedir permissao que ninguem vai entregar (e
- * pedir cedo, sem entregar, queima o canal). Ligar = setar VITE_VAPID_PUBLIC_KEY.
+ * Chave VAPID PUBLICA. E segura no client (a privada NUNCA vem pro client),
+ * igual a publishable key do Supabase e a do PostHog. A env var tem prioridade,
+ * mas o fallback garante que o push funciona mesmo se o Cloudflare nao injetar a
+ * variavel no build (sem isso aparecia "Em breve"). Par da privada em supabase/.env.
  */
+export const VAPID_PUBLICA =
+  (import.meta.env.VITE_VAPID_PUBLIC_KEY as string | undefined) ??
+  'BEgxReOXsfSVXOrssV2Laa464vmPM8xeIbPFc8Qqt0Xt78VpjG4v2ZVo9Lkf5srWekLDUGuWR3y0vcEq5BlH7PQ';
+
+/** True quando ha chave VAPID (sempre, agora que ha fallback). */
 export function pushAtivado(): boolean {
-  return Boolean(import.meta.env.VITE_VAPID_PUBLIC_KEY);
+  return Boolean(VAPID_PUBLICA);
 }
 
 const CHAVE_ADIADO = 'tp.notif.adiado.v1';
@@ -177,7 +182,7 @@ async function tentarSubscrever(): Promise<void> {
       existente ??
       (await reg.pushManager.subscribe({
         userVisibleOnly: true,
-        applicationServerKey: chaveParaBytes(import.meta.env.VITE_VAPID_PUBLIC_KEY as string),
+        applicationServerKey: chaveParaBytes(VAPID_PUBLICA),
       }));
     await salvarSubscription(sub);
   } catch {
