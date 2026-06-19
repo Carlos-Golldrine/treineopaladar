@@ -11,7 +11,7 @@ import { vibrar } from '../licao/tipos';
 import { Ic } from '../icones/Icones';
 import type { NomeIcone } from '../icones/Icones';
 import { DelayedSkeleton } from '../components/DelayedSkeleton';
-import { TchinObservador } from '../coreografia/Coreografias';
+import { Mascotinho } from '../mascote';
 import { tocar } from '../som/som';
 import { garantirMesa, postarDesafioResultado } from '../lib/mesa';
 import { nuvemConfigurada } from '../lib/supabase';
@@ -341,7 +341,7 @@ function DesafioJogo({
 
   return (
     <div className="desafio-veu">
-      <div className="player desafio-rodada">
+      <div className="player">
         <header className="player-topo app-chrome">
           <button type="button" className="player-fechar tap" aria-label="Sair do desafio" onClick={onSair}>
             <Ic nome="x-fechar" size={22} />
@@ -367,10 +367,15 @@ function DesafioJogo({
         </header>
 
         <div className="player-meio desafio-meio" key={posicao}>
+          <div className="licao-mascote">
+            <Mascotinho
+              estado={fase === 'revelado' ? (resolucao?.correto ? 'feliz' : 'triste') : 'idle'}
+              tamanho={70}
+            />
+            <h2 className="licao-balao">{pergunta.pergunta}</h2>
+          </div>
           <ExMC ex={pergunta} fase={fase} onResolver={onResolver} />
         </div>
-
-        <TchinObservador visivel={fase === 'respondendo'} />
 
         {fase === 'revelado' && resolucao && (
           <PainelReveal
@@ -378,6 +383,7 @@ function DesafioJogo({
             calibracao={null}
             rotuloContinuar={posicao + 1 >= desafio.perguntas.length ? 'Ver resultado' : 'Continuar'}
             marco={posicao + 1 >= desafio.perguntas.length}
+            comMascote={false}
             onContinuar={onContinuar}
           />
         )}

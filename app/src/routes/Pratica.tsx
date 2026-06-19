@@ -13,7 +13,7 @@ import type { FaseExercicio, ResolucaoExercicio } from '../licao/tipos';
 import { vibrar } from '../licao/tipos';
 import { Ic } from '../icones/Icones';
 import { DelayedSkeleton } from '../components/DelayedSkeleton';
-import { Odometro, TchinObservador } from '../coreografia/Coreografias';
+import { Odometro } from '../coreografia/Coreografias';
 import { Mascotinho } from '../mascote';
 import { tocar } from '../som/som';
 import { RevisarCartas } from '../pratica/RevisarCartas';
@@ -218,7 +218,7 @@ export default function Pratica() {
   }
 
   return (
-    <div className="player pratica-rodada">
+    <div className="player">
       <header className="player-topo app-chrome">
         <button
           type="button"
@@ -249,6 +249,13 @@ export default function Pratica() {
       </header>
 
       <div className="player-meio" key={posicao}>
+        <div className="licao-mascote">
+          <Mascotinho
+            estado={fase === 'revelado' ? (resolucao?.correto ? 'feliz' : 'triste') : 'idle'}
+            tamanho={70}
+          />
+          <h2 className="licao-balao">{atual.pergunta}</h2>
+        </div>
         {atual.tipo === 'mc' ? (
           <ExMC ex={atual} fase={fase} onResolver={onResolver} />
         ) : (
@@ -256,14 +263,13 @@ export default function Pratica() {
         )}
       </div>
 
-      <TchinObservador visivel={fase === 'respondendo'} />
-
       {fase === 'revelado' && resolucao && (
         <PainelReveal
           resolucao={resolucao}
           calibracao={null}
           rotuloContinuar={posicao + 1 >= rodada.length ? 'Ver resultado' : 'Continuar'}
           marco={posicao + 1 >= rodada.length}
+          comMascote={false}
           onContinuar={onContinuar}
         />
       )}
