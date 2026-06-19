@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Ic } from '../icones/Icones';
 import { LogoTchin } from '../icones/LogoTchin';
 import { ContaSheet } from '../components/ContaSheet';
+import { useConta } from '../lib/conta';
 
 /**
  * Soft wall de cadastro (fase 3 do blueprint): so depois do aha.
@@ -16,12 +17,18 @@ interface Props {
 
 export function SoftWall({ xp, onTrilha }: Props) {
   const [conta, setConta] = useState(false);
+  const { anonimo, email } = useConta();
+  // Quem chegou aqui ja com conta (entrou por "Ja tenho conta" e a gente criou
+  // na hora) nao deve ser convidado a criar de novo — so segue pra trilha. Usa o
+  // e-mail como sinal tambem: apos criar, o is_anonymous pode demorar a virar
+  // false (confirmacao de e-mail pendente), mas o e-mail ja fica na sessao.
+  const temConta = !anonimo || !!email;
 
   return (
     <div className="player wall">
       <div className="wall-conteudo">
         <p className="conclusao-eyebrow">Seu primeiro dia</p>
-        <h1 className="wall-titulo">Salve seu progresso</h1>
+        <h1 className="wall-titulo">{temConta ? 'Tudo salvo na sua conta' : 'Salve seu progresso'}</h1>
         <p className="wall-sub">Olha o que você já construiu hoje:</p>
         <ul className="wall-lista">
           <li>
@@ -54,12 +61,20 @@ export function SoftWall({ xp, onTrilha }: Props) {
       </div>
 
       <footer className="wall-acoes">
-        <button type="button" className="btn btn-primary btn-jogo btn-cheio tap" onClick={() => setConta(true)}>
-          Criar conta
-        </button>
-        <button type="button" className="btn btn-depois tap" onClick={onTrilha}>
-          Depois
-        </button>
+        {temConta ? (
+          <button type="button" className="btn btn-primary btn-jogo btn-cheio tap" onClick={onTrilha}>
+            Continuar
+          </button>
+        ) : (
+          <>
+            <button type="button" className="btn btn-primary btn-jogo btn-cheio tap" onClick={() => setConta(true)}>
+              Criar conta
+            </button>
+            <button type="button" className="btn btn-depois tap" onClick={onTrilha}>
+              Depois
+            </button>
+          </>
+        )}
       </footer>
 
       {conta && <ContaSheet onFechar={() => setConta(false)} onSucesso={onTrilha} />}

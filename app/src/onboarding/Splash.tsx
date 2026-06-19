@@ -81,9 +81,11 @@ export default function Splash() {
         <ContaSheet
           modoInicial="entrar"
           onFechar={() => setEntrando(false)}
-          onSucesso={() => {
+          onSucesso={(info) => {
             setEntrando(false);
-            navigate('/', { replace: true });
+            // Conta recem-criada (e-mail novo) ainda nao fez onboarding -> vai pra
+            // Licao 1. Conta existente vai pro app (o Portao decide se ja onboardou).
+            navigate(info?.criado ? '/licao-1' : '/', { replace: true });
           }}
         />
       )}

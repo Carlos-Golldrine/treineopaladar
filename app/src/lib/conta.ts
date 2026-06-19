@@ -53,6 +53,8 @@ export interface ResultadoConta {
   erro?: string;
   /** True quando o e-mail ainda precisa ser confirmado (config do projeto). */
   confirmarEmail?: boolean;
+  /** True quando a conta foi CRIADA agora (e-mail novo), nao apenas logada. */
+  criado?: boolean;
 }
 
 /** Anexa e-mail+senha ao usuario anonimo corrente (mesmo user_id, progresso intacto). */
@@ -96,7 +98,46 @@ export async function entrarComEmail(email: string, senha: string): Promise<Resu
   if (!sb) return { ok: false, erro: 'Sincronização indisponível agora.' };
   const { error } = await sb.auth.signInWithPassword({ email, password: senha });
   if (error) return { ok: false, erro: traduzErro(error.message) };
-  return { ok: true };
+  return { ok: true, criado: false };
+}
+
+/**
+ * "Já tenho conta": tenta entrar; se o e-mail ainda nao tem conta, CRIA na hora
+ * (anexa ao anonimo atual) e segue — sem becos sem saida. Retorna `criado: true`
+ * quando a conta foi criada agora (o chamador manda pro onboarding).
+ *
+ * O Supabase nao distingue "e-mail inexistente" de "senha errada" (ambos viram
+ * 'invalid login credentials', de proposito). Entao, no erro de credencial e SO
+ * com sessao anonima, tentamos criar: se o e-mail era novo, a criacao passa; se
+ * ja existia, ela falha com "ja registrado" -> era senha errada (avisamos isso).
+ */
+export async function entrarOuCriar(email: string, senha: string): Promise<ResultadoConta> {
+  const sb = getSupabase();
+  if (!sb) return { ok: false, erro: 'Sincronização indisponível agora.' };
+  const conta = email.trim();
+
+  const login = await sb.auth.signInWithPassword({ email: conta, password: senha });
+  if (!login.error) return { ok: true, criado: false };
+
+  const credInvalida = login.error.message.toLowerCase().includes('invalid login credentials');
+  if (credInvalida) {
+    const { data } = await sb.auth.getUser();
+    // So cria por cima de uma sessao ANONIMA: um updateUser numa conta ja logada
+    // trocaria o e-mail dela (nunca queremos isso aqui).
+    if (data.user?.is_anonymous) {
+      const criar = await sb.auth.updateUser({ email: conta, password: senha });
+      if (!criar.error) {
+        return { ok: true, criado: true, confirmarEmail: !criar.data.user?.email_confirmed_at };
+      }
+      const cm = criar.error.message.toLowerCase();
+      if (cm.includes('already') || cm.includes('registered') || cm.includes('exists')) {
+        // o e-mail existe de verdade -> o login falhou por senha errada
+        return { ok: false, erro: 'Esse e-mail já tem conta. Confira a senha.' };
+      }
+      return { ok: false, erro: traduzErro(criar.error.message) };
+    }
+  }
+  return { ok: false, erro: traduzErro(login.error.message) };
 }
 
 /**
