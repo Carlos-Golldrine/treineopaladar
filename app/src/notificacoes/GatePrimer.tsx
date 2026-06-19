@@ -23,17 +23,22 @@ const ATRASO_MS = 6000;
 export function GatePrimer() {
   const [mostrar, setMostrar] = useState(false);
 
+  /* Modo de teste: abrir a home com ?primer=1 força o primer na hora,
+     ignorando permissao/adiamento (so para conferir o visual e o fluxo). */
+  const forcar =
+    typeof window !== 'undefined' && new URLSearchParams(window.location.search).has('primer');
+
   /* pushAtivado(): so mostra o primer quando o backend de push existe (VAPID).
      primerAdiado(): respeita o "Agora nao" (re-pergunta dias depois, nao some
      pra sempre). So onde push faz sentido e a permissao ainda nao foi decidida. */
   const elegivel =
-    pushAtivado() && suportaPush() && permissaoAtual() === 'default' && !primerAdiado();
+    forcar || (pushAtivado() && suportaPush() && permissaoAtual() === 'default' && !primerAdiado());
 
   useEffect(() => {
     if (!elegivel) return;
-    const t = window.setTimeout(() => setMostrar(true), ATRASO_MS);
+    const t = window.setTimeout(() => setMostrar(true), forcar ? 0 : ATRASO_MS);
     return () => window.clearTimeout(t);
-  }, [elegivel]);
+  }, [elegivel, forcar]);
 
   if (!elegivel || !mostrar) return null;
   return <PrimerNotificacao onResolvido={() => setMostrar(false)} />;
