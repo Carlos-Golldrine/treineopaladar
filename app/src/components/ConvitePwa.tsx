@@ -1,6 +1,7 @@
 import { useEffect, useReducer, useState } from 'react';
 import { track } from '../lib/analytics';
 import { assinarInstalacao, ehIos, estaInstalado, instalarNativo } from '../lib/pwa';
+import { useFtueFlags } from '../onboarding/flags';
 import './convite-pwa.css';
 
 /**
@@ -32,18 +33,21 @@ export function ConvitePwa() {
   const [aberto, setAberto] = useState(false);
   const [instalando, setInstalando] = useState(false);
   const [dicaManual, setDicaManual] = useState(false);
+  const [flags] = useFtueFlags();
 
   const ios = ehIos();
 
   /* Reage quando o prompt nativo fica disponivel ou o app e instalado */
   useEffect(() => assinarInstalacao(rerender), []);
 
-  /* Abre para quem esta no NAVEGADOR (nao standalone) e nao dispensou nesta sessao */
+  /* Abre para quem esta no NAVEGADOR (nao standalone), nao dispensou nesta sessao,
+     e SO depois do tour guiado (tourFeito) — pra nao competir com ele nem com o
+     onboarding ("nunca antes do aha"). Brand-new: aparece na proxima sessao. */
   useEffect(() => {
-    if (estaInstalado() || dispensadoNaSessao()) return;
+    if (estaInstalado() || dispensadoNaSessao() || !flags.tourFeito) return;
     const t = window.setTimeout(() => setAberto(true), 2500);
     return () => window.clearTimeout(t);
-  }, []);
+  }, [flags.tourFeito]);
 
   /* Se o app for instalado com o convite aberto, fecha e nao reabre nesta sessao */
   useEffect(() => {

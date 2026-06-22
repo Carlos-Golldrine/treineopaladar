@@ -16,12 +16,14 @@
 import { useEffect, useState } from 'react';
 import { PrimerNotificacao } from './PrimerNotificacao';
 import { permissaoAtual, primerAdiado, pushAtivado, suportaPush, temInscricaoAtiva } from './push';
+import { useFtueFlags } from '../onboarding/flags';
 
 /** Atraso antes de abrir o primer, pra dar espaco ao convite de instalacao. */
 const ATRASO_MS = 6000;
 
 export function GatePrimer() {
   const [mostrar, setMostrar] = useState(false);
+  const [flags] = useFtueFlags();
 
   /* Modo de teste: abrir a home com ?primer=1 força o primer na hora,
      ignorando permissao/adiamento (so para conferir o visual e o fluxo). */
@@ -33,6 +35,10 @@ export function GatePrimer() {
       setMostrar(true);
       return;
     }
+    /* Sequencia: so depois do tour guiado (senao competem na 1a abertura). O Inicio
+       remonta a cada navegacao (key=pathname no Shell), entao ao voltar pra home
+       depois do tour este gate ja le tourFeito=true. */
+    if (!flags.tourFeito) return;
     /* Pre-condicoes sincronas: backend de push existe (VAPID), ambiente suporta,
        nao foi adiado, e a permissao nao foi NEGADA (negada nao reabre por prompt;
        o caminho dela e o ajuste no Perfil + configuracoes do navegador). */
@@ -55,7 +61,7 @@ export function GatePrimer() {
       vivo = false;
       if (timer) window.clearTimeout(timer);
     };
-  }, [forcar]);
+  }, [forcar, flags.tourFeito]);
 
   if (!mostrar) return null;
   return <PrimerNotificacao onResolvido={() => setMostrar(false)} />;
