@@ -3,11 +3,15 @@
 -- VAPID. Rode no SQL Editor do Supabase, trocando o placeholder:
 --   <PROJECT_REF> = vgalezyjhnddvemowgdp (projeto de producao)
 --
--- A chamada usa a service_role key como Bearer (a funcao so roda com ela). Em vez
--- de colar a key aqui, guardamos no Vault e o cron a lê de la (nao fica exposta
--- na cron.job). Rode UMA vez, com a sua service_role key (Project Settings ->
--- API -> service_role), o comando abaixo:
---   select vault.create_secret('SUA_SERVICE_ROLE_KEY', 'service_role_key');
+-- A funcao foi deployada com o nome `smart-responder` (nome padrao do template);
+-- o codigo-fonte vive em supabase/functions/enviar-push/index.ts.
+--
+-- A chamada usa a service_role key como Bearer (a funcao so roda com ela). Use a
+-- key LEGADA service_role (um JWT que comeca com `eyJ...`, em Project Settings ->
+-- API -> Legacy keys / service_role) — e a que a funcao recebe injetada. Em vez de
+-- colar a key aqui, guardamos no Vault e o cron a lê de la (nao fica exposta na
+-- cron.job). Rode UMA vez:
+--   select vault.create_secret('SUA_SERVICE_ROLE_KEY_eyJ...', 'service_role_key');
 --
 -- Brasil nao tem horario de verao desde 2019: America/Sao_Paulo = UTC-3 fixo,
 -- entao 20:00 Brasilia = 23:00 UTC. Se o DST voltar, ajustar a hora do cron.
@@ -24,7 +28,7 @@ select cron.schedule(
   '0 23 * * *',  -- 23:00 UTC = 20:00 America/Sao_Paulo
   $cron$
   select net.http_post(
-    url := 'https://<PROJECT_REF>.supabase.co/functions/v1/enviar-push',
+    url := 'https://<PROJECT_REF>.supabase.co/functions/v1/smart-responder',
     headers := jsonb_build_object(
       'Content-Type', 'application/json',
       'Authorization', 'Bearer ' || (select decrypted_secret from vault.decrypted_secrets where name = 'service_role_key')
@@ -43,7 +47,7 @@ select cron.schedule(
 --     order by start_time desc limit 5;
 -- Disparar manualmente uma vez para testar (mesma chamada do cron):
 --   select net.http_post(
---     url := 'https://<PROJECT_REF>.supabase.co/functions/v1/enviar-push',
+--     url := 'https://<PROJECT_REF>.supabase.co/functions/v1/smart-responder',
 --     headers := jsonb_build_object('Content-Type','application/json',
 --       'Authorization','Bearer ' || (select decrypted_secret from vault.decrypted_secrets where name='service_role_key')),
 --     body := '{}'::jsonb);
