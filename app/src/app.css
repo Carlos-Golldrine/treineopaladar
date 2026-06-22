@@ -30,6 +30,40 @@
   flex: 1 0 auto;
   display: flex;
   flex-direction: column;
+  /* clip (nao 'hidden') evita scroll horizontal durante o deslize sem virar
+     container de rolagem vertical (a rolagem segue no nivel do shell/janela). */
+  overflow-x: clip;
+}
+
+/* Deslize entre telas: a nova tela entra deslizando (direcao pela ordem das abas).
+   key=pathname no Shell remonta isto a cada troca, disparando a animacao. Mantem
+   o mesmo flex do .screen pra nao mexer no layout das telas. */
+.tela-anim {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.tela-dir {
+  --tela-de: 18px;
+}
+.tela-esq {
+  --tela-de: -18px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .tela-anim {
+    animation: tela-entra 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+}
+@keyframes tela-entra {
+  from {
+    opacity: 0;
+    transform: translateX(var(--tela-de, 18px));
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 /* Cabecalho padrao de tela (respeita notch) */
