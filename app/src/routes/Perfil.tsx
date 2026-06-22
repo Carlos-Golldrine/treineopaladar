@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Ic } from '../icones/Icones';
 import { RodapeTchin } from '../components/RodapeTchin';
 import { definirSom, somLigado } from '../som/som';
@@ -55,6 +56,19 @@ export default function Perfil() {
     setAvatarRascunho(avatar);
     setEditando(true);
   };
+
+  /* Abre a edicao quando chega com ?editar=1 (o tour guiado termina aqui, pra o
+     novo usuario ja sair com o perfil editado). Limpa o param depois. */
+  const [params, setParams] = useSearchParams();
+  useEffect(() => {
+    if (params.get('editar') !== '1') return;
+    setNomeRascunho(nome ?? '');
+    setAvatarRascunho(avatar);
+    setEditando(true);
+    setParams({}, { replace: true }); // limpa pra refresh nao reabrir
+    // reage a CHEGADA do param (o tour navega /perfil -> /perfil?editar=1 sem remmontar)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params]);
   const salvarPerfil = () => {
     obterStore().definirNome(nomeRascunho);
     if (avatarRascunho) obterStore().definirAvatar(avatarRascunho);
@@ -197,6 +211,22 @@ export default function Perfil() {
             <span className="ajuste-estado">trocar</span>
           </button>
         )}
+
+        <button
+          type="button"
+          className="ajuste-som tap app-chrome"
+          onClick={() => window.location.assign('/?tour=1')}
+          aria-label="Rever o tour de ajuda do app"
+        >
+          <span className="ajuste-icone">
+            <Ic nome="play" size={22} />
+          </span>
+          <span className="ajuste-textos">
+            <span className="ajuste-titulo">Rever o tour</span>
+            <span className="ajuste-sub">O Mascotinho explica o app de novo</span>
+          </span>
+          <span className="ajuste-estado">abrir</span>
+        </button>
       </section>
 
       {trocandoObjetivo && (

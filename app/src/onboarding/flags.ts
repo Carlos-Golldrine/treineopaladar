@@ -19,6 +19,8 @@ export interface FtueFlags {
   instalacaoVista: boolean;
   /** True depois do primer de notificacao ter sido respondido (sim ou nao), 1x (F3). */
   primerNotifRespondido: boolean;
+  /** True depois do tour guiado de primeiro acesso (mascote explica as abas), 1x. */
+  tourFeito: boolean;
 }
 
 const PADRAO: FtueFlags = {
@@ -27,6 +29,7 @@ const PADRAO: FtueFlags = {
   fichaApontada: false,
   instalacaoVista: false,
   primerNotifRespondido: false,
+  tourFeito: false,
 };
 
 function ler(): FtueFlags {
@@ -40,6 +43,7 @@ function ler(): FtueFlags {
       fichaApontada: dado.fichaApontada === true,
       instalacaoVista: dado.instalacaoVista === true,
       primerNotifRespondido: dado.primerNotifRespondido === true,
+      tourFeito: dado.tourFeito === true,
     };
   } catch {
     return PADRAO;

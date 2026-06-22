@@ -1,6 +1,7 @@
 import { Suspense, useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { TabBar } from './TabBar';
+import { TourGuiado } from './TourGuiado';
 import { DelayedSkeleton } from './DelayedSkeleton';
 import { telaVista } from '../lib/analytics';
 
@@ -19,6 +20,7 @@ export function Shell() {
         </Suspense>
       </main>
       <TabBar />
+      <TourGuiado />
     </div>
   );
 }

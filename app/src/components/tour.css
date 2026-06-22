@@ -1,0 +1,156 @@
+/* ---------- Tour guiado de primeiro acesso ----------
+   Camadas (z no contexto raiz; .tour nao e posicionado, os filhos fixos sobem):
+     conteudo < scrim (40) < tab bar durante o tour (45) < card (50).
+   So transform/opacity/filter; tudo desligado em prefers-reduced-motion. */
+
+.tour {
+  /* wrapper logico (role=dialog); sem posicao pra nao criar stacking context */
+}
+
+.tour-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: rgba(34, 18, 20, 0.55);
+  animation: tour-fade 0.3s ease-out both;
+}
+
+/* A aba da vez fica VISIVEL acima do scrim e PULSA; a barra nao e tocavel
+   (quem navega e o tour). */
+body.tour-ativo .tabbar-wrap {
+  z-index: 45;
+}
+body.tour-ativo .tabbar {
+  pointer-events: none;
+}
+body.tour-ativo .tab-active {
+  animation: tour-tab 1.5s ease-in-out infinite;
+}
+
+.tour-card {
+  position: fixed;
+  left: 50%;
+  bottom: calc(80px + env(safe-area-inset-bottom));
+  z-index: 50;
+  width: min(440px, calc(100% - 32px));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-1);
+  padding: var(--space-4);
+  background: var(--bg);
+  border: 1.5px solid var(--neutral-200);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-md);
+  transform: translateX(-50%);
+  animation: tour-sobe 0.42s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.tour-masc {
+  margin-top: -66px;
+  will-change: transform;
+  animation:
+    tour-masc-entra 0.55s cubic-bezier(0.16, 1, 0.3, 1) both,
+    tour-masc-flutua 3.4s ease-in-out 0.55s infinite;
+}
+/* aponta: bob pra baixo + leve inclinacao, indicando a aba la embaixo */
+.tour-masc-aponta {
+  animation:
+    tour-masc-entra 0.55s cubic-bezier(0.16, 1, 0.3, 1) both,
+    tour-masc-aponta-mov 2.6s ease-in-out 0.55s infinite;
+}
+
+.tour-eyebrow {
+  font: 600 var(--text-xs) / 1 var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold-700);
+}
+
+.tour-titulo {
+  font: 600 var(--text-xl) / 1.15 var(--font-display);
+  color: var(--wine-900);
+}
+
+.tour-texto {
+  margin-top: 2px;
+  font-size: var(--text-md);
+  line-height: 1.45;
+  color: var(--neutral-700, #4a3b36);
+  max-width: 34ch;
+}
+
+.tour-pontos {
+  display: flex;
+  gap: 6px;
+  margin: var(--space-3) 0;
+}
+.tour-ponto {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--neutral-200);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.tour-ponto-on {
+  background: var(--wine-700);
+  transform: scale(1.35);
+}
+
+.tour-card .btn {
+  margin-top: var(--space-1);
+}
+
+.tour-pular {
+  margin-top: var(--space-2);
+  padding: 6px 12px;
+  background: none;
+  border: none;
+  font-size: var(--text-sm);
+  color: var(--neutral-500);
+}
+
+/* ------------------------------ keyframes ------------------------------ */
+
+@keyframes tour-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes tour-sobe {
+  from { transform: translate(-50%, 26px); opacity: 0; }
+  to { transform: translate(-50%, 0); opacity: 1; }
+}
+
+@keyframes tour-masc-entra {
+  0% { transform: translateY(22px) scale(0.4); opacity: 0; }
+  60% { transform: translateY(-7px) scale(1.08); opacity: 1; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+@keyframes tour-masc-flutua {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes tour-masc-aponta-mov {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(4px) rotate(3deg); }
+}
+
+@keyframes tour-tab {
+  0%, 100% { transform: translateY(0); filter: none; }
+  50% { transform: translateY(-4px); filter: drop-shadow(0 3px 7px rgba(212, 165, 116, 0.65)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tour-scrim,
+  .tour-card,
+  .tour-masc,
+  .tour-masc-aponta,
+  body.tour-ativo .tab-active {
+    animation: none;
+  }
+  .tour-card { transform: translateX(-50%); }
+}
