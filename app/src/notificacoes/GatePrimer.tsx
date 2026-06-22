@@ -15,7 +15,7 @@
  */
 import { useEffect, useState } from 'react';
 import { PrimerNotificacao } from './PrimerNotificacao';
-import { permissaoAtual, primerAdiado, pushAtivado, suportaPush } from './push';
+import { permissaoAtual, primerAdiado, pushAtivado, suportaPush, temInscricaoAtiva } from './push';
 
 /** Atraso antes de abrir o primer, pra dar espaco ao convite de instalacao. */
 const ATRASO_MS = 6000;
@@ -28,18 +28,35 @@ export function GatePrimer() {
   const forcar =
     typeof window !== 'undefined' && new URLSearchParams(window.location.search).has('primer');
 
-  /* pushAtivado(): so mostra o primer quando o backend de push existe (VAPID).
-     primerAdiado(): respeita o "Agora nao" (re-pergunta dias depois, nao some
-     pra sempre). So onde push faz sentido e a permissao ainda nao foi decidida. */
-  const elegivel =
-    forcar || (pushAtivado() && suportaPush() && permissaoAtual() === 'default' && !primerAdiado());
-
   useEffect(() => {
-    if (!elegivel) return;
-    const t = window.setTimeout(() => setMostrar(true), forcar ? 0 : ATRASO_MS);
-    return () => window.clearTimeout(t);
-  }, [elegivel, forcar]);
+    if (forcar) {
+      setMostrar(true);
+      return;
+    }
+    /* Pre-condicoes sincronas: backend de push existe (VAPID), ambiente suporta,
+       nao foi adiado, e a permissao nao foi NEGADA (negada nao reabre por prompt;
+       o caminho dela e o ajuste no Perfil + configuracoes do navegador). */
+    if (!pushAtivado() || !suportaPush() || primerAdiado()) return;
+    const perm = permissaoAtual();
+    if (perm === 'denied' || perm === 'indisponivel') return;
 
-  if (!elegivel || !mostrar) return null;
+    /* Mostra pra quem NAO esta inscrito: cobre 'default' (nunca ativou) E
+       'granted' sem inscricao viva (ex.: expirou/foi limpa) — antes so 'default'
+       via, entao quem desativou nunca era reconvidado. */
+    let vivo = true;
+    let timer: number | undefined;
+    void temInscricaoAtiva().then((inscrito) => {
+      if (!vivo || inscrito) return;
+      timer = window.setTimeout(() => {
+        if (vivo) setMostrar(true);
+      }, ATRASO_MS);
+    });
+    return () => {
+      vivo = false;
+      if (timer) window.clearTimeout(timer);
+    };
+  }, [forcar]);
+
+  if (!mostrar) return null;
   return <PrimerNotificacao onResolvido={() => setMostrar(false)} />;
 }

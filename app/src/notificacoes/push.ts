@@ -189,3 +189,19 @@ async function tentarSubscrever(): Promise<void> {
     /* SW nao pronto ou push bloqueado: a intencao guardada basta por ora */
   }
 }
+
+/**
+ * True quando existe uma subscription de Web Push VIVA neste navegador. O primer
+ * usa isso pra reaparecer pra quem NAO esta inscrito — inclui quem ja concedeu a
+ * permissao ('granted') mas teve a inscricao expirada/limpa, nao so quem nunca
+ * decidiu ('default').
+ */
+export async function temInscricaoAtiva(): Promise<boolean> {
+  if (!suportaPush()) return false;
+  try {
+    const reg = await navigator.serviceWorker.ready;
+    return Boolean(await reg.pushManager.getSubscription());
+  } catch {
+    return false;
+  }
+}
