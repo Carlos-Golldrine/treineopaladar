@@ -205,3 +205,28 @@ export async function temInscricaoAtiva(): Promise<boolean> {
     return false;
   }
 }
+
+/**
+ * Desliga os lembretes: cancela a subscription do navegador e a remove do banco
+ * (RLS: o dono apaga a propria). A PERMISSAO do navegador segue 'granted' (so o
+ * usuario revoga isso nas configuracoes), mas sem subscription nao chega mais push.
+ */
+export async function desativarLembretes(): Promise<void> {
+  if (!suportaPush()) return;
+  try {
+    const reg = await navigator.serviceWorker.ready;
+    const sub = await reg.pushManager.getSubscription();
+    if (sub) {
+      const sb = getSupabase();
+      if (sb) await sb.from('push_subscriptions').delete().eq('endpoint', sub.endpoint);
+      await sub.unsubscribe();
+    }
+  } catch {
+    /* SW indisponivel ou erro de rede: melhor esforco */
+  }
+  try {
+    localStorage.removeItem(CHAVE_INTENCAO);
+  } catch {
+    /* ignore */
+  }
+}

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Ic } from '../icones/Icones';
 import { RodapeTchin } from '../components/RodapeTchin';
 import { definirSom, somLigado } from '../som/som';
@@ -9,7 +9,15 @@ import { Sheet } from '../components/Sheet';
 import { ContaSheet } from '../components/ContaSheet';
 import { Avatar, AVATARES, AVATAR_IDS } from '../components/Avatar';
 import { useConta, sairDaConta } from '../lib/conta';
-import { aceitarLembretes, permissaoAtual, pushAtivado, suportaPush } from '../notificacoes/push';
+import {
+  aceitarLembretes,
+  adiarPrimer,
+  desativarLembretes,
+  permissaoAtual,
+  pushAtivado,
+  suportaPush,
+  temInscricaoAtiva,
+} from '../notificacoes/push';
 import type { EstadoPermissao } from '../notificacoes/push';
 import { ehIos, estaInstalado } from '../lib/pwa';
 import { IconeCompartilhar, IconeAdicionar } from '../components/ConvitePwa';
@@ -283,34 +291,61 @@ export default function Perfil() {
    o navegador nao suporta push (ex.: iPhone sem o app instalado na tela inicial). */
 function LembretesAjuste() {
   const [perm, setPerm] = useState<EstadoPermissao>(() => permissaoAtual());
+  const [ativo, setAtivo] = useState(false);
+  const [ocupado, setOcupado] = useState(false);
+
+  /* Estado real = existe inscricao VIVA (nao so a permissao concedida): cobre o
+     caso de permissao 'granted' mas inscricao expirada/limpa. */
+  useEffect(() => {
+    let vivo = true;
+    void temInscricaoAtiva().then((a) => {
+      if (vivo) setAtivo(a);
+    });
+    return () => {
+      vivo = false;
+    };
+  }, []);
 
   if (!suportaPush()) return null;
 
   const disponivel = pushAtivado();
-  const ligado = perm === 'granted';
   const bloqueado = perm === 'denied';
 
-  const ativar = async () => {
-    if (ligado || bloqueado || !disponivel) return;
-    await aceitarLembretes();
-    setPerm(permissaoAtual());
+  /* Toggle de verdade: liga (pede permissao + inscreve) ou DESLIGA (cancela a
+     inscricao + remove do banco). Antes so ligava — desligar nao fazia nada. */
+  const alternar = async () => {
+    if (!disponivel || bloqueado || ocupado) return;
+    setOcupado(true);
+    try {
+      if (ativo) {
+        await desativarLembretes();
+        adiarPrimer(30); // desligou de proposito: nao reconvidar tao cedo na home
+        setAtivo(false);
+      } else {
+        await aceitarLembretes();
+        setPerm(permissaoAtual());
+        setAtivo(await temInscricaoAtiva());
+      }
+    } finally {
+      setOcupado(false);
+    }
   };
 
   const sub = !disponivel
     ? 'Em breve'
-    : ligado
-      ? 'Ligados, um toque no fim da tarde'
-      : bloqueado
-        ? 'Bloqueado no navegador. Libere nas configurações do site.'
+    : bloqueado
+      ? 'Bloqueado no navegador. Libere nas configurações do site.'
+      : ativo
+        ? 'Ligados, um toque no fim da tarde. Toque para desligar.'
         : 'Toque para ativar o lembrete da ofensiva';
 
   return (
     <button
       type="button"
       className="ajuste-som tap app-chrome"
-      aria-pressed={ligado}
-      disabled={!disponivel || bloqueado}
-      onClick={() => void ativar()}
+      aria-pressed={ativo}
+      disabled={!disponivel || bloqueado || ocupado}
+      onClick={() => void alternar()}
     >
       <span className="ajuste-icone">
         <Ic nome="sino" size={22} />
@@ -319,8 +354,8 @@ function LembretesAjuste() {
         <span className="ajuste-titulo">Lembretes do treino</span>
         <span className="ajuste-sub">{sub}</span>
       </span>
-      <span className={`ajuste-estado${ligado ? ' ajuste-estado-on' : ''}`}>
-        {ligado ? 'on' : bloqueado ? '—' : 'off'}
+      <span className={`ajuste-estado${ativo ? ' ajuste-estado-on' : ''}`}>
+        {ativo ? 'on' : bloqueado ? '—' : 'off'}
       </span>
     </button>
   );
