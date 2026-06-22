@@ -69,6 +69,16 @@ export function adiarPrimer(dias: number): void {
   }
 }
 
+/** Limpa o adiamento: o primer volta a poder aparecer na home imediatamente.
+ *  Usado ao DESATIVAR no Perfil, pra a home reoferecer o convite na hora. */
+export function limparAdiamentoPrimer(): void {
+  try {
+    localStorage.removeItem(CHAVE_ADIADO);
+  } catch {
+    /* ignore */
+  }
+}
+
 /** Marca localmente que a pessoa QUER receber lembretes (intencao). */
 function gravarIntencao(): void {
   try {

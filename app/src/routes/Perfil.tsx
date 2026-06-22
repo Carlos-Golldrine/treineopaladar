@@ -11,8 +11,8 @@ import { Avatar, AVATARES, AVATAR_IDS } from '../components/Avatar';
 import { useConta, sairDaConta } from '../lib/conta';
 import {
   aceitarLembretes,
-  adiarPrimer,
   desativarLembretes,
+  limparAdiamentoPrimer,
   permissaoAtual,
   pushAtivado,
   suportaPush,
@@ -319,7 +319,7 @@ function LembretesAjuste() {
     try {
       if (ativo) {
         await desativarLembretes();
-        adiarPrimer(30); // desligou de proposito: nao reconvidar tao cedo na home
+        limparAdiamentoPrimer(); // volta a oferecer o convite na home imediatamente
         setAtivo(false);
       } else {
         await aceitarLembretes();
