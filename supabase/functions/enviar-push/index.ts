@@ -22,7 +22,12 @@ const SUPABASE_URL = Deno.env.get('SUPABASE_URL')!;
 const SERVICE_ROLE = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
 const VAPID_PUBLIC = Deno.env.get('VAPID_PUBLIC_KEY')!;
 const VAPID_PRIVATE = Deno.env.get('VAPID_PRIVATE_KEY')!;
-const VAPID_SUBJECT = Deno.env.get('VAPID_SUBJECT') ?? 'mailto:contato@treineseupaladar.app';
+/* VAPID subject precisa ser uma URL (mailto: ou https:). Se vier so o e-mail,
+   prefixamos mailto: — evita "Vapid subject is not a valid URL". */
+const VAPID_SUBJECT_RAW = Deno.env.get('VAPID_SUBJECT') ?? 'mailto:mkt@lapm.com.br';
+const VAPID_SUBJECT = /^(mailto:|https?:)/i.test(VAPID_SUBJECT_RAW)
+  ? VAPID_SUBJECT_RAW
+  : `mailto:${VAPID_SUBJECT_RAW}`;
 
 /* Espelha COPY_NOTIF.ofensiva_risco de app/src/notificacoes/copy.ts (variantes
    estaveis; mantenha em sincronia se a copy mudar). {N} = dias de streak. */
