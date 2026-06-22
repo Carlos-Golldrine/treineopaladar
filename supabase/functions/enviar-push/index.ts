@@ -10,8 +10,9 @@
 // (404/410) e removida.
 //
 // Acionada por pg_cron (via pg_net http_post) 1x/dia as 23:00 UTC = 20:00 Brasilia.
-// Deploy (CLI ou Dashboard). Pode deixar o verify_jwt LIGADO: o gate exige a
-// service_role key no Authorization (que e um JWT valido e so o cron tem).
+// Deploy (CLI ou Dashboard) com o "Verify JWT" LIGADO: o gateway verifica a
+// assinatura do token e o gate aqui exige role 'service_role' (a anon nao passa).
+// Independe do valor exato da key injetada (compat com o modelo novo de API keys).
 // Secrets necessarios: VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY, VAPID_SUBJECT.
 // (SUPABASE_URL e SUPABASE_SERVICE_ROLE_KEY ja vem injetados nas Edge Functions.)
 import webpush from 'npm:web-push@3.6.7';
@@ -43,12 +44,31 @@ interface Alvo {
   auth: string;
 }
 
+/** Le o claim `role` do JWT do Authorization (sem verificar assinatura — o
+ *  "Verify JWT" do gateway ja faz isso). So pra distinguir service_role de anon. */
+function roleDoToken(req: Request): string | null {
+  const tok = req.headers.get('Authorization')?.replace(/^Bearer\s+/i, '') ?? '';
+  const partes = tok.split('.');
+  if (partes.length < 2) return null;
+  try {
+    let b = partes[1].replace(/-/g, '+').replace(/_/g, '/');
+    while (b.length % 4) b += '=';
+    const payload = JSON.parse(atob(b)) as { role?: string };
+    return typeof payload.role === 'string' ? payload.role : null;
+  } catch {
+    return null;
+  }
+}
+
 Deno.serve(async (req) => {
-  // Gate: so chamadas com a SERVICE ROLE key (o cron) rodam. A service_role key e
-  // um JWT valido, entao passa pelo verify_jwt do gateway e ainda confere aqui.
-  const bearer = req.headers.get('Authorization')?.replace(/^Bearer\s+/i, '') ?? '';
-  if (!SERVICE_ROLE || bearer !== SERVICE_ROLE) {
+  // Gate: exige um JWT com role 'service_role' (o cron). Com o "Verify JWT" LIGADO,
+  // o gateway ja garantiu a assinatura; aqui so barramos quem nao for service_role
+  // (a anon, mesmo valida, nao passa). Independe do valor exato injetado.
+  if (roleDoToken(req) !== 'service_role') {
     return json({ erro: 'nao autorizado' }, 401);
+  }
+  if (!SERVICE_ROLE) {
+    return json({ erro: 'service key ausente no ambiente' }, 500);
   }
   if (!VAPID_PUBLIC || !VAPID_PRIVATE) {
     return json({ erro: 'VAPID nao configurada' }, 500);
