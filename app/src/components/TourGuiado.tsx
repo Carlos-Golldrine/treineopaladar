@@ -52,7 +52,7 @@ const PASSOS: Passo[] = [
   {
     rota: '/mesa',
     titulo: 'A Mesa',
-    texto: 'Toda semana você senta com gente do seu ritmo. Sem conversa, só brindes.',
+    texto: 'Toda semana você entra numa mesa com gente do seu ritmo. Treine mais que a turma e suba no ranking.',
     estado: 'idle',
     aponta: true,
   },
