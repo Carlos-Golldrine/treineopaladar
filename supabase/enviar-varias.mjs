@@ -6,7 +6,7 @@
  *
  * Uso:
  *   node --env-file=.env enviar-varias.mjs                 # todos os inscritos
- *   node --env-file=.env enviar-varias.mjs golldrinetech@gmail.com
+ *   node --env-file=.env enviar-varias.mjs voce@exemplo.com
  *   node --env-file=.env enviar-varias.mjs <uid>
  *
  * Le VAPID_* e DATABASE_URL do supabase/.env.

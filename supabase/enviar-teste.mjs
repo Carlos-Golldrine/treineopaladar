@@ -6,7 +6,7 @@
  *
  * Uso:
  *   node --env-file=.env enviar-teste.mjs                      # todos os inscritos
- *   node --env-file=.env enviar-teste.mjs golldrinetech@gmail.com
+ *   node --env-file=.env enviar-teste.mjs voce@exemplo.com
  *   node --env-file=.env enviar-teste.mjs <user_uid>
  *   node --env-file=.env enviar-teste.mjs <alvo> "Titulo" "Corpo da notificacao"
  *
