@@ -51,8 +51,12 @@
   --tela-de: -18px;
 }
 @media (prefers-reduced-motion: no-preference) {
+  /* fill 'backwards' (nao 'both'): aplica o estado inicial antes de comecar, mas
+     NAO mantem o transform depois. Com 'both', o transform residual viraria
+     containing block e quebraria position:fixed dos filhos (ex.: o veu tela-cheia
+     do Desafio cobrindo a tab bar). Backwards desliza igual e libera o fixed. */
   .tela-anim {
-    animation: tela-entra 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation: tela-entra 0.28s cubic-bezier(0.16, 1, 0.3, 1) backwards;
   }
 }
 @keyframes tela-entra {
