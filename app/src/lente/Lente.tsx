@@ -2,16 +2,15 @@
  * A Lente (teste): tela cheia, fora do Shell.
  *
  * Fluxo:
- *  1. inicio    -> a pessoa fotografa o rotulo.
- *  2. analisando-> ate 4s: Mascotinho com tablet+caneta "analisando", mensagens
- *     girando e barra enchendo. Em paralelo: cria sessao, manda a foto pro n8n
- *     (OCR -> identifica -> gera quiz) e faz polling no Supabase.
- *  3. quiz      -> responde as perguntas em sequencia. NAO mostra acerto/erro a
- *     cada uma; so registra (validacao server-side via responder_quiz).
- *  4. fim       -> placar + revisao (o que acertou/errou em cada pergunta).
+ *  1. inicio    -> a pessoa fotografa o rotulo (camera com moldura).
+ *  2. analisando-> ate 8s: mascote animado, mensagens girando, barra. Em paralelo:
+ *     cria sessao, manda a foto pro n8n e faz polling no Supabase.
+ *  3. briefing  -> explica o quiz e a pessoa escolhe o tempo (Facil/Dificil/Hard).
+ *     Serve de buffer: enquanto le e escolhe, o n8n termina de gerar as perguntas.
+ *  4. quiz      -> responde as 9 perguntas com cronometro. Sem reveal por pergunta.
+ *  5. fim       -> placar + revisao (acertos/erros + explicacao).
  *
- * A Q1 e generica (o tipo do vinho), validada contra a ordem 1 do n8n mapeando
- * a escolha pelo texto. UI no padrao do app (Mascotinho, barra, cards).
+ * A Q1 e generica (o tipo do vinho), validada contra a ordem 1 do n8n.
  */
 import { useEffect, useRef, useState, type ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -30,7 +29,7 @@ import {
 } from './api';
 import './lente.css';
 
-type Fase = 'inicio' | 'camera' | 'analisando' | 'quiz' | 'fim' | 'erro';
+type Fase = 'inicio' | 'camera' | 'analisando' | 'briefing' | 'quiz' | 'fim' | 'erro';
 
 interface ResultadoPergunta {
   pergunta: string;
@@ -42,7 +41,7 @@ interface ResultadoPergunta {
 
 const TIPOS = ['Tinto', 'Branco', 'Rosé', 'Espumante'];
 
-/* Duracao da tela de analise (cobre o processamento do n8n). */
+/* Duracao da tela de analise (cobre parte do processamento do n8n). */
 const DURACAO_ANALISE = 8000;
 
 const MENSAGENS = [
@@ -52,6 +51,15 @@ const MENSAGENS = [
   'Criando perguntas sobre esse vinho',
   'Já vai começar',
 ];
+
+/* Dificuldade = tempo no relogio pra responder as 9 perguntas. */
+const DIFICULDADES = [
+  { id: 'facil', nome: 'Fácil', tempo: '4 min', seg: 240 },
+  { id: 'dificil', nome: 'Difícil', tempo: '3 min', seg: 180 },
+  { id: 'hard', nome: 'Hard', tempo: '1 min', seg: 60 },
+] as const;
+
+const formatTempo = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
 
 const norm = (s: string) =>
   (s || '')
@@ -71,6 +79,9 @@ export default function Lente() {
   const [enviando, setEnviando] = useState(false);
   const [erroMsg, setErroMsg] = useState('');
   const [msgIdx, setMsgIdx] = useState(0);
+  const [difSel, setDifSel] = useState(240);
+  const [tempoRestante, setTempoRestante] = useState(0);
+  const [tempoEsgotado, setTempoEsgotado] = useState(false);
 
   const quizIdRef = useRef<string | null>(null);
   const perguntasRef = useRef<PerguntaQuiz[] | null>(null);
@@ -89,7 +100,7 @@ export default function Lente() {
   const progresso = total > 0 ? (idx + 1) / total : 0;
   const acertos = respostas.filter((r) => r.acertou).length;
 
-  /* Fase analisando: gira as mensagens e, em ate 4s, cai no quiz. */
+  /* Fase analisando: gira as mensagens e, apos DURACAO_ANALISE, cai no briefing. */
   useEffect(() => {
     if (fase !== 'analisando') return;
     setMsgIdx(0);
@@ -98,13 +109,28 @@ export default function Lente() {
       Math.floor(DURACAO_ANALISE / MENSAGENS.length),
     );
     const t = window.setTimeout(() => {
-      if (!cancelado.current && !erroRef.current) setFase('quiz');
+      if (!cancelado.current && !erroRef.current) setFase('briefing');
     }, DURACAO_ANALISE);
     return () => {
       window.clearInterval(msgIv);
       window.clearTimeout(t);
     };
   }, [fase]);
+
+  /* Cronometro do quiz: conta pra baixo enquanto estiver no quiz. */
+  useEffect(() => {
+    if (fase !== 'quiz') return;
+    const iv = window.setInterval(() => setTempoRestante((t) => Math.max(0, t - 1)), 1000);
+    return () => window.clearInterval(iv);
+  }, [fase]);
+
+  /* Tempo esgotado -> resultado. */
+  useEffect(() => {
+    if (fase === 'quiz' && tempoRestante === 0) {
+      setTempoEsgotado(true);
+      setFase('fim');
+    }
+  }, [fase, tempoRestante]);
 
   const sair = () => {
     cancelado.current = true;
@@ -121,6 +147,7 @@ export default function Lente() {
     setSel(null);
     setRespostas([]);
     setErroMsg('');
+    setTempoEsgotado(false);
     setFase('analisando');
     const id = await criarSessaoQuiz();
     if (!id) {
@@ -140,6 +167,15 @@ export default function Lente() {
     const file = e.target.files?.[0];
     e.target.value = '';
     if (file) void processarFoto(file);
+  };
+
+  const comecarQuiz = (seg: number) => {
+    setTempoRestante(seg);
+    setTempoEsgotado(false);
+    setIdx(0);
+    setSel(null);
+    setRespostas([]);
+    setFase('quiz');
   };
 
   const pollar = (id: string) => {
@@ -253,23 +289,30 @@ export default function Lente() {
           <Ic nome="x-fechar" size={22} />
         </button>
         {fase === 'quiz' ? (
-          <div
-            className="lente-barra"
-            role="progressbar"
-            aria-valuemin={0}
-            aria-valuemax={100}
-            aria-valuenow={Math.round(progresso * 100)}
-            aria-label="Progresso do quiz"
-          >
+          <>
             <div
-              className="lente-barra-fill"
-              style={{ transform: `translateX(${(Math.max(0.04, Math.min(1, progresso)) - 1) * 100}%)` }}
-            />
-          </div>
+              className="lente-barra"
+              role="progressbar"
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-valuenow={Math.round(progresso * 100)}
+              aria-label="Progresso do quiz"
+            >
+              <div
+                className="lente-barra-fill"
+                style={{ transform: `translateX(${(Math.max(0.04, Math.min(1, progresso)) - 1) * 100}%)` }}
+              />
+            </div>
+            <span className={`lente-timer${tempoRestante <= 20 ? ' lente-timer-urgente' : ''}`}>
+              {formatTempo(tempoRestante)}
+            </span>
+          </>
         ) : (
-          <span className="lente-titulo">A Lente</span>
+          <>
+            <span className="lente-titulo">A Lente</span>
+            <span className="chip-beta">Teste</span>
+          </>
         )}
-        <span className="chip-beta">Teste</span>
       </header>
 
       {fase === 'inicio' && (
@@ -305,6 +348,44 @@ export default function Lente() {
               className="lente-analise-barra-fill"
               style={{ animationDuration: `${DURACAO_ANALISE}ms` }}
             />
+          </div>
+        </div>
+      )}
+
+      {fase === 'briefing' && (
+        <div className="lente-fim">
+          <div className="lente-fim-rolagem">
+            <Mascotinho estado="feliz" tamanho={88} />
+            <h1 className="lente-h1">{vinho?.nome ? vinho.nome : 'Seu quiz está pronto'}</h1>
+            <p className="lente-sub">
+              São 9 perguntas sobre {vinho?.nome ? 'esse vinho' : 'o seu vinho'}: o tipo, a uva, a
+              região e como ele costuma se mostrar na taça (corpo, acidez, taninos e aromas).
+            </p>
+            <p className="lente-brief-label">Escolha o tempo no relógio</p>
+            <div className="lente-dificuldades">
+              {DIFICULDADES.map((d) => (
+                <button
+                  key={d.id}
+                  type="button"
+                  className={`lente-dif tap${difSel === d.seg ? ' lente-dif-sel' : ''}`}
+                  aria-pressed={difSel === d.seg}
+                  onClick={() => setDifSel(d.seg)}
+                >
+                  <span className="lente-dif-nome">{d.nome}</span>
+                  <span className="lente-dif-tempo">{d.tempo}</span>
+                </button>
+              ))}
+            </div>
+            <p className="lente-brief-dica">Menos tempo no relógio, mais desafio.</p>
+          </div>
+          <div className="lente-fim-acoes">
+            <button
+              type="button"
+              className="btn btn-primary btn-jogo btn-cheio tap"
+              onClick={() => comecarQuiz(difSel)}
+            >
+              Começar
+            </button>
           </div>
         </div>
       )}
@@ -351,12 +432,14 @@ export default function Lente() {
       {fase === 'fim' && (
         <div className="lente-fim">
           <div className="lente-fim-rolagem">
-            <Mascotinho estado={acertos * 2 >= respostas.length ? 'feliz' : 'triste'} tamanho={96} />
+            <Mascotinho estado={acertos * 2 >= total ? 'feliz' : 'triste'} tamanho={96} />
             <p className="lente-placar">
               <span className="lente-placar-num">{acertos}</span>
-              <span className="lente-placar-de">de {respostas.length}</span>
+              <span className="lente-placar-de">de {total}</span>
             </p>
-            <h1 className="lente-h1">{acertos * 2 >= respostas.length ? 'Mandou bem!' : 'Treino é isso aí'}</h1>
+            <h1 className="lente-h1">
+              {tempoEsgotado ? 'Tempo esgotado' : acertos * 2 >= total ? 'Mandou bem!' : 'Treino é isso aí'}
+            </h1>
             {vinho?.nome && <p className="lente-sub">Vinho: {vinho.nome}</p>}
 
             <ul className="lente-revisao">

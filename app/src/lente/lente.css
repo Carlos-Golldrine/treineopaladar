@@ -386,3 +386,80 @@
 .lente-fim-acoes .lente-cta {
   width: 100%;
 }
+
+/* ---------- Cronometro no topo do quiz ---------- */
+.lente-timer {
+  flex: none;
+  min-width: 3.2em;
+  text-align: right;
+  font: 600 var(--text-md) / 1 var(--font-mono);
+  color: var(--wine-700);
+  font-variant-numeric: tabular-nums;
+}
+
+.lente-timer-urgente {
+  color: var(--warm-700);
+  animation: lente-pisca-timer 1s steps(2, start) infinite;
+}
+
+@keyframes lente-pisca-timer {
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* ---------- Briefing: explicacao + dificuldade ---------- */
+.lente-brief-label {
+  margin-top: var(--space-3);
+  font: 600 var(--text-sm) / 1.2 var(--font-ui);
+  color: var(--wine-900);
+}
+
+.lente-dificuldades {
+  width: 100%;
+  margin-top: var(--space-2);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+}
+
+.lente-dif {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: var(--space-3) var(--space-2);
+  border-radius: var(--radius-card);
+  border: 2px solid var(--neutral-200);
+  background: var(--bg);
+  transition:
+    border-color 120ms ease-out,
+    background 120ms ease-out;
+}
+
+.lente-dif-sel {
+  border-color: var(--wine-700);
+  background: rgba(114, 47, 55, 0.06);
+}
+
+.lente-dif-nome {
+  font: 600 var(--text-sm) / 1.1 var(--font-display);
+  color: var(--wine-900);
+}
+
+.lente-dif-tempo {
+  font: 500 var(--text-xs) / 1 var(--font-mono);
+  color: var(--neutral-600);
+}
+
+.lente-brief-dica {
+  margin-top: var(--space-3);
+  font-size: var(--text-xs);
+  color: var(--neutral-500);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lente-timer-urgente {
+    animation: none;
+  }
+}
