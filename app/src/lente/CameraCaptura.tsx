@@ -1,13 +1,14 @@
 /**
  * CameraCaptura: camera no app (getUserMedia) com MOLDURA central e VERIFICACAO de
  * qualidade em tempo real. A cada ~160ms a gente analisa SO a regiao da moldura num
- * canvas minusculo e mede sinais baratos: luz (claridade media + reflexo), nitidez
- * (variancia do laplaciano) e densidade de bordas (tem rotulo no quadro?). Quando
- * ficam bons por N frames CONSECUTIVOS (~0,8s), dispara sozinho (auto-shutter, estilo
- * scanner de documento); o botao manual continua disponivel. Mensagem ao vivo orienta
- * (mais luz, segure firme, aproxime). Lanterna (torch) onde o navegador suporta
- * (Android; iOS Safari nao deixa via web). Ao capturar, recorta EXATAMENTE a moldura e
- * reduz (max 1280px) -> OCR recebe so o rotulo, menor e mais rapido. Precisa HTTPS.
+ * canvas minusculo e mede sinais baratos: luz (claridade + reflexo), nitidez
+ * (variancia do laplaciano), densidade de bordas (tem rotulo no quadro?) e MOVIMENTO
+ * (diferenca entre frames). So dispara sozinho quando esta bom E PARADO por N frames
+ * consecutivos (~1,3s) e SO depois de um atraso de armamento (da tempo de mirar) —
+ * estilo scanner de documento. O botao manual continua disponivel. Mensagem ao vivo
+ * orienta (mais luz, segure firme, aproxime). Lanterna (torch) onde o navegador
+ * suporta (Android; iOS Safari nao deixa via web). Ao capturar, recorta EXATAMENTE a
+ * moldura e reduz (max 1280px) -> OCR recebe so o rotulo. Precisa HTTPS.
  */
 import { useEffect, useRef, useState, type ChangeEvent } from 'react';
 import './camera.css';
@@ -17,23 +18,28 @@ const MAX_LADO = 1280;
 /* ---- Verificacao de qualidade (constantes TUNAVEIS; calibrar no celular real) ---- */
 const ANALISE_LARGURA = 132; // largura do canvas de analise (mantem proporcao da moldura)
 const ANALISE_INTERVALO_MS = 160; // ~6 leituras por segundo
-const ESTABILIDADE_TICKS = 5; // frames "bom" CONSECUTIVOS pra disparar (~0,8s; casa com .cam-mira-anel)
+const ESTABILIDADE_TICKS = 8; // frames bons E PARADOS consecutivos pra disparar (~1,3s; casa com .cam-mira-anel)
+const ARMAR_APOS_MS = 1500; // nao dispara nesse 1o intervalo: da tempo de apontar pro vinho
+const MOVIMENTO_MAX = 10; // diferenca media de luma entre frames; acima disso = celular se movendo
 const LUMA_ESCURO = 55; // claridade media abaixo disso = escuro
 const LUMA_CLAROU = 222; // claridade media acima disso = estourado
 const SATURACAO_MAX = 0.03; // fracao de pixels saturados (reflexo especular) que reprova
-const NITIDEZ_MIN = 60; // variancia do laplaciano minima (foco)
-const BORDA_MIN = 0.035; // fracao minima de pixels com borda forte (proxy de "tem rotulo")
+const NITIDEZ_MIN = 85; // variancia do laplaciano minima (foco) — exige foco de verdade
+const BORDA_MIN = 0.05; // fracao minima de pixels com borda forte — superficie lisa nao passa como "tem rotulo"
 const BORDA_FORTE = 22; // |laplaciano| acima disso conta como borda
 const PRONTA_TIMEOUT_MS = 4000; // se o video nao "acordar" ate aqui, cai no fallback de galeria
 
 type Qualidade = 'escuro' | 'clarao' | 'sem_rotulo' | 'borrado' | 'bom';
+/* O que a UI mostra: as qualidades ruins + 'segurar' (bom mas mexendo/cedo) + 'travando' (bom e parado, contando). */
+type Etapa = 'escuro' | 'clarao' | 'sem_rotulo' | 'borrado' | 'segurar' | 'travando';
 
-const MENSAGEM: Record<Qualidade, string> = {
+const MENSAGEM: Record<Etapa, string> = {
   escuro: 'Procure um lugar mais iluminado',
   clarao: 'Muita luz, evite o reflexo',
   sem_rotulo: 'Aproxime o rótulo na moldura',
   borrado: 'Segure firme pra focar',
-  bom: 'Isso, segure assim',
+  segurar: 'Segure firme no rótulo',
+  travando: 'Isso, segurando...',
 };
 
 /* torch nao esta nos tipos padrao do lib.dom; estendemos pontualmente. */
@@ -89,8 +95,14 @@ function regiaoMolduraNativa(v: HTMLVideoElement, m: HTMLElement) {
   return { nx, ny, nw, nh };
 }
 
-/* Mede a qualidade do conteudo no canvas de analise (luz, reflexo, nitidez, bordas). */
-function medirQualidade(ctx: CanvasRenderingContext2D, w: number, h: number): Qualidade {
+/* Analisa um frame: devolve a qualidade, a luma (pra comparar movimento no proximo)
+   e se esta PARADO em relacao ao frame anterior. */
+function analisarFrame(
+  ctx: CanvasRenderingContext2D,
+  w: number,
+  h: number,
+  prevLuma: Float32Array | null,
+): { q: Qualidade; luma: Float32Array; estavel: boolean } {
   const { data } = ctx.getImageData(0, 0, w, h);
   const total = w * h;
   const luma = new Float32Array(total);
@@ -102,35 +114,46 @@ function medirQualidade(ctx: CanvasRenderingContext2D, w: number, h: number): Qu
     somaLuma += y;
     if (y > 250) saturados++;
   }
-  const media = somaLuma / total;
-  if (media < LUMA_ESCURO) return 'escuro';
-  if (media > LUMA_CLAROU || saturados / total > SATURACAO_MAX) return 'clarao';
 
-  let soma = 0;
-  let soma2 = 0;
-  let n = 0;
-  let bordas = 0;
-  for (let y = 1; y < h - 1; y++) {
-    for (let x = 1; x < w - 1; x++) {
-      const p = y * w + x;
-      const lap = 4 * luma[p] - luma[p - 1] - luma[p + 1] - luma[p - w] - luma[p + w];
-      soma += lap;
-      soma2 += lap * lap;
-      n++;
-      if (lap > BORDA_FORTE || lap < -BORDA_FORTE) bordas++;
-    }
+  // movimento: diferenca media de luma vs frame anterior (mesmo tamanho)
+  let estavel = false;
+  if (prevLuma && prevLuma.length === total) {
+    let dif = 0;
+    for (let p = 0; p < total; p++) dif += Math.abs(luma[p] - prevLuma[p]);
+    estavel = dif / total < MOVIMENTO_MAX;
   }
-  if (n === 0) return 'sem_rotulo';
-  const variancia = Math.max(0, soma2 / n - (soma / n) ** 2); // max(0,...) evita ruido de Float32
-  if (bordas / n < BORDA_MIN) return 'sem_rotulo';
-  if (variancia < NITIDEZ_MIN) return 'borrado';
-  return 'bom';
+
+  const media = somaLuma / total;
+  let q: Qualidade;
+  if (media < LUMA_ESCURO) q = 'escuro';
+  else if (media > LUMA_CLAROU || saturados / total > SATURACAO_MAX) q = 'clarao';
+  else {
+    let soma = 0;
+    let soma2 = 0;
+    let n = 0;
+    let bordas = 0;
+    for (let y = 1; y < h - 1; y++) {
+      for (let x = 1; x < w - 1; x++) {
+        const p = y * w + x;
+        const lap = 4 * luma[p] - luma[p - 1] - luma[p + 1] - luma[p - w] - luma[p + w];
+        soma += lap;
+        soma2 += lap * lap;
+        n++;
+        if (lap > BORDA_FORTE || lap < -BORDA_FORTE) bordas++;
+      }
+    }
+    const variancia = n === 0 ? 0 : Math.max(0, soma2 / n - (soma / n) ** 2);
+    if (n === 0 || bordas / n < BORDA_MIN) q = 'sem_rotulo';
+    else if (variancia < NITIDEZ_MIN) q = 'borrado';
+    else q = 'bom';
+  }
+  return { q, luma, estavel };
 }
 
-function textoDica(q: Qualidade | null, torchOk: boolean, torchOn: boolean): string {
-  if (q == null) return 'Centralize o rótulo na moldura';
-  if (q === 'escuro' && torchOk && !torchOn) return 'Ambiente escuro: toque na luz';
-  return MENSAGEM[q];
+function textoDica(e: Etapa | null, torchOk: boolean, torchOn: boolean): string {
+  if (e == null) return 'Centralize o rótulo na moldura';
+  if (e === 'escuro' && torchOk && !torchOn) return 'Ambiente escuro: toque na luz';
+  return MENSAGEM[e];
 }
 
 export function CameraCaptura({
@@ -147,6 +170,8 @@ export function CameraCaptura({
   const analiseRef = useRef<HTMLCanvasElement | null>(null);
   const intervaloRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const bomConsecutivoRef = useRef(0);
+  const prevLumaRef = useRef<Float32Array | null>(null);
+  const analiseDesdeRef = useRef(0); // instante em que a analise (re)comecou — base do armamento
   /* vivoRef: o componente ainda esta montado/ativo? Re-checado apos CADA await pra
      nao criar timer orfao nem chamar onCapturar de uma camera ja fechada. */
   const vivoRef = useRef(true);
@@ -158,15 +183,25 @@ export function CameraCaptura({
 
   const [pronta, setPronta] = useState(false);
   const [erro, setErro] = useState(false);
-  const [qualidade, setQualidade] = useState<Qualidade | null>(null);
+  const [etapa, setEtapa] = useState<Etapa | null>(null);
   const [torchSuportado, setTorchSuportado] = useState(false);
   const [torchLigado, setTorchLigado] = useState(false);
+  /* Foto tirada aguardando confirmacao ("Quer usar essa foto?"). Null = camera ao vivo. */
+  const [revisao, setRevisao] = useState<{ file: File; url: string } | null>(null);
 
   const pararAnalise = () => {
     if (intervaloRef.current) {
       clearInterval(intervaloRef.current);
       intervaloRef.current = null;
     }
+  };
+
+  const iniciarAnalise = () => {
+    if (intervaloRef.current) return;
+    bomConsecutivoRef.current = 0;
+    prevLumaRef.current = null;
+    analiseDesdeRef.current = performance.now();
+    intervaloRef.current = setInterval(() => tickRef.current(), ANALISE_INTERVALO_MS);
   };
 
   const pararStream = () => {
@@ -190,10 +225,11 @@ export function CameraCaptura({
       bomConsecutivoRef.current = 0;
       return;
     }
+    // Nao envia ainda: mostra "Quer usar essa foto?". O stream fica congelado
+    // (track.enabled=false) pra "Tirar outra" voltar instantaneo, sem reabrir a camera.
     pararAnalise();
-    pararStream();
-    vivoRef.current = false; // nada mais dispara depois daqui
-    onCapturarRef.current(file);
+    if (trackRef.current) trackRef.current.enabled = false;
+    setRevisao({ file, url: URL.createObjectURL(file) });
   };
 
   /* tick recriado a cada render (closures frescas); o intervalo chama a versao atual. */
@@ -216,14 +252,23 @@ export function CameraCaptura({
     if (cv.width !== cw || cv.height !== ch) {
       cv.width = cw;
       cv.height = ch;
+      prevLumaRef.current = null; // tamanho mudou: zera a base de movimento
     }
     const ctx = cv.getContext('2d', { willReadFrequently: true });
     if (!ctx) return;
     ctx.drawImage(v, nx, ny, nw, nh, 0, 0, cw, ch);
-    const q = medirQualidade(ctx, cw, ch);
-    setQualidade((prev) => (prev === q ? prev : q));
 
-    if (q === 'bom') {
+    const { q, luma, estavel } = analisarFrame(ctx, cw, ch, prevLumaRef.current);
+    prevLumaRef.current = luma;
+    const armado = performance.now() - analiseDesdeRef.current > ARMAR_APOS_MS;
+
+    let proxima: Etapa;
+    if (q !== 'bom') proxima = q; // escuro / clarao / sem_rotulo / borrado
+    else if (!estavel || !armado) proxima = 'segurar'; // bom, mas mexendo ou cedo demais
+    else proxima = 'travando'; // bom, parado e armado: comeca a travar
+    setEtapa((prev) => (prev === proxima ? prev : proxima));
+
+    if (proxima === 'travando') {
       bomConsecutivoRef.current += 1;
       if (bomConsecutivoRef.current >= ESTABILIDADE_TICKS) void capturar();
     } else {
@@ -284,7 +329,7 @@ export function CameraCaptura({
         v.addEventListener('loadeddata', marcarPronta, { once: true });
         v.addEventListener('playing', marcarPronta, { once: true });
       }
-      intervaloRef.current = setInterval(() => tickRef.current(), ANALISE_INTERVALO_MS);
+      iniciarAnalise();
       fallback = setTimeout(() => {
         if (vivoRef.current && !prontaRef.current) {
           pararAnalise();
@@ -302,18 +347,16 @@ export function CameraCaptura({
   }, []);
 
   /* Background: para a analise e desliga o sensor (track.enabled=false apaga o LED)
-     pra nao drenar bateria com o app fora de foco; religa ao voltar. */
+     pra nao drenar bateria com o app fora de foco; religa ao voltar (re-armando). */
   useEffect(() => {
     const aoMudarVisibilidade = () => {
       const track = trackRef.current;
       if (document.hidden) {
         pararAnalise();
         if (track) track.enabled = false;
-      } else if (vivoRef.current && !capturandoRef.current) {
+      } else if (vivoRef.current && !capturandoRef.current && streamRef.current) {
         if (track) track.enabled = true;
-        if (streamRef.current && !intervaloRef.current) {
-          intervaloRef.current = setInterval(() => tickRef.current(), ANALISE_INTERVALO_MS);
-        }
+        iniciarAnalise();
       }
     };
     document.addEventListener('visibilitychange', aoMudarVisibilidade);
@@ -365,7 +408,30 @@ export function CameraCaptura({
     onCancelar();
   };
 
-  const molduraOk = qualidade === 'bom';
+  /* Confirma a foto da revisao: envia pro processamento (OCR -> quiz). */
+  const usarFoto = () => {
+    if (!revisao) return;
+    pararStream();
+    vivoRef.current = false;
+    onCapturarRef.current(revisao.file);
+  };
+
+  /* "Tirar outra": descarta a revisao e volta pra camera ao vivo (re-arma a analise). */
+  const tirarOutra = () => {
+    setRevisao(null);
+    capturandoRef.current = false;
+    if (trackRef.current) trackRef.current.enabled = true;
+    iniciarAnalise();
+  };
+
+  /* Revoga o Object URL da foto revisada ao trocar/desmontar (evita vazamento). */
+  useEffect(() => {
+    return () => {
+      if (revisao) URL.revokeObjectURL(revisao.url);
+    };
+  }, [revisao]);
+
+  const molduraOk = etapa === 'travando';
 
   return (
     <div className="cam">
@@ -380,7 +446,7 @@ export function CameraCaptura({
           {molduraOk && <span className="cam-mira-anel" />}
         </div>
         <p className="cam-dica" aria-live="polite">
-          {erro ? '' : textoDica(qualidade, torchSuportado, torchLigado)}
+          {erro ? '' : textoDica(etapa, torchSuportado, torchLigado)}
         </p>
       </div>
 
@@ -401,7 +467,7 @@ export function CameraCaptura({
           <button
             type="button"
             className={`cam-torch tap${torchLigado ? ' cam-torch-ativo' : ''}${
-              qualidade === 'escuro' && !torchLigado ? ' cam-torch-sugerir' : ''
+              etapa === 'escuro' && !torchLigado ? ' cam-torch-sugerir' : ''
             }`}
             onClick={() => void alternarTorch()}
             aria-label={torchLigado ? 'Desligar a luz' : 'Ligar a luz'}
@@ -434,6 +500,23 @@ export function CameraCaptura({
 
         <span className="cam-espaco" />
       </div>
+
+      {revisao && (
+        <div className="cam-revisao">
+          <img className="cam-revisao-img" src={revisao.url} alt="Foto do rótulo" />
+          <div className="cam-revisao-barra">
+            <p className="cam-revisao-msg">Quer usar essa foto?</p>
+            <div className="cam-revisao-acoes">
+              <button type="button" className="cam-revisao-sim tap" onClick={usarFoto}>
+                Usar essa foto
+              </button>
+              <button type="button" className="cam-revisao-outra tap" onClick={tirarOutra}>
+                Tirar outra
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
