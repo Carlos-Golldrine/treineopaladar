@@ -18,6 +18,7 @@ import { useNavigate } from 'react-router-dom';
 import { Ic } from '../icones/Icones';
 import { Mascotinho } from '../mascote';
 import { MascoteAnalisa } from './MascoteAnalisa';
+import { CameraCaptura } from './CameraCaptura';
 import {
   criarSessaoQuiz,
   enviarFotoParaN8n,
@@ -29,7 +30,7 @@ import {
 } from './api';
 import './lente.css';
 
-type Fase = 'inicio' | 'analisando' | 'quiz' | 'fim' | 'erro';
+type Fase = 'inicio' | 'camera' | 'analisando' | 'quiz' | 'fim' | 'erro';
 
 interface ResultadoPergunta {
   pergunta: string;
@@ -41,10 +42,14 @@ interface ResultadoPergunta {
 
 const TIPOS = ['Tinto', 'Branco', 'Rosé', 'Espumante'];
 
+/* Duracao da tela de analise (cobre o processamento do n8n). */
+const DURACAO_ANALISE = 7000;
+
 const MENSAGENS = [
-  'Estou analisando seu vinho',
-  'Lendo o rótulo com calma',
-  'Criando as melhores perguntas',
+  'Lendo o rótulo',
+  'Analisando todas as notas do vinho',
+  'Conhecendo a uva e a região',
+  'Criando perguntas sobre esse vinho',
   'Já vai começar',
 ];
 
@@ -90,11 +95,11 @@ export default function Lente() {
     setMsgIdx(0);
     const msgIv = window.setInterval(
       () => setMsgIdx((i) => Math.min(i + 1, MENSAGENS.length - 1)),
-      1000,
+      Math.floor(DURACAO_ANALISE / MENSAGENS.length),
     );
     const t = window.setTimeout(() => {
       if (!cancelado.current && !erroRef.current) setFase('quiz');
-    }, 4000);
+    }, DURACAO_ANALISE);
     return () => {
       window.clearInterval(msgIv);
       window.clearTimeout(t);
@@ -106,10 +111,7 @@ export default function Lente() {
     navigate('/');
   };
 
-  const aoEscolherFoto = async (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    e.target.value = '';
-    if (!file) return;
+  const processarFoto = async (file: File) => {
     cancelado.current = false;
     perguntasRef.current = null;
     erroRef.current = null;
@@ -130,6 +132,14 @@ export default function Lente() {
     quizIdRef.current = id;
     void enviarFotoParaN8n(id, file);
     pollar(id);
+  };
+
+  const abrirCamera = () => setFase('camera');
+
+  const aoEscolherFoto = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = '';
+    if (file) void processarFoto(file);
   };
 
   const pollar = (id: string) => {
@@ -227,6 +237,15 @@ export default function Lente() {
     setSel(null);
   };
 
+  if (fase === 'camera') {
+    return (
+      <CameraCaptura
+        onCapturar={(f) => void processarFoto(f)}
+        onCancelar={() => setFase('inicio')}
+      />
+    );
+  }
+
   return (
     <div className="lente">
       <header className="lente-topo app-chrome">
@@ -260,10 +279,17 @@ export default function Lente() {
           <p className="lente-sub">
             Tire uma foto do rótulo. A gente analisa o vinho e monta um quiz rápido sobre ele.
           </p>
-          <label className="btn btn-primary btn-jogo btn-cheio tap lente-cta">
+          <button
+            type="button"
+            className="btn btn-primary btn-jogo btn-cheio tap lente-cta"
+            onClick={abrirCamera}
+          >
             <Ic nome="taca" size={20} />
             Fotografar o rótulo
-            <input type="file" accept="image/*" capture="environment" onChange={aoEscolherFoto} hidden />
+          </button>
+          <label className="lente-link tap">
+            ou escolher da galeria
+            <input type="file" accept="image/*" onChange={aoEscolherFoto} hidden />
           </label>
         </div>
       )}
@@ -275,7 +301,10 @@ export default function Lente() {
             {MENSAGENS[msgIdx]}
           </p>
           <div className="lente-analise-barra" role="progressbar" aria-label="Analisando">
-            <div className="lente-analise-barra-fill" />
+            <div
+              className="lente-analise-barra-fill"
+              style={{ animationDuration: `${DURACAO_ANALISE}ms` }}
+            />
           </div>
         </div>
       )}
@@ -351,11 +380,14 @@ export default function Lente() {
           </div>
 
           <div className="lente-fim-acoes">
-            <label className="btn btn-primary btn-jogo btn-cheio tap lente-cta">
+            <button
+              type="button"
+              className="btn btn-primary btn-jogo btn-cheio tap lente-cta"
+              onClick={abrirCamera}
+            >
               <Ic nome="taca" size={20} />
               Escanear outro
-              <input type="file" accept="image/*" capture="environment" onChange={aoEscolherFoto} hidden />
-            </label>
+            </button>
             <button type="button" className="lente-link tap" onClick={sair}>
               Voltar ao início
             </button>
@@ -368,11 +400,14 @@ export default function Lente() {
           <Mascotinho estado="triste" tamanho={104} />
           <h1 className="lente-h1">Ops</h1>
           <p className="lente-sub">{erroMsg}</p>
-          <label className="btn btn-primary btn-jogo btn-cheio tap lente-cta">
+          <button
+            type="button"
+            className="btn btn-primary btn-jogo btn-cheio tap lente-cta"
+            onClick={abrirCamera}
+          >
             <Ic nome="taca" size={20} />
             Tentar de novo
-            <input type="file" accept="image/*" capture="environment" onChange={aoEscolherFoto} hidden />
-          </label>
+          </button>
           <button type="button" className="lente-link tap" onClick={sair}>
             Voltar ao início
           </button>

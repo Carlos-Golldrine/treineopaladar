@@ -1,0 +1,158 @@
+/* CameraCaptura: tela cheia, video de fundo, moldura central e botoes. */
+.cam {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: #000;
+  overflow: hidden;
+}
+
+.cam-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Camada da moldura (nao bloqueia toque) */
+.cam-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+/* Moldura central: a sombra gigante escurece tudo em volta. */
+.cam-moldura {
+  position: relative;
+  width: 74%;
+  max-width: 360px;
+  aspect-ratio: 3 / 4;
+  border-radius: 18px;
+  box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.5);
+}
+
+.cam-canto {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border: 3px solid #fff;
+}
+
+.cam-canto-tl {
+  top: -2px;
+  left: -2px;
+  border-right: none;
+  border-bottom: none;
+  border-top-left-radius: 16px;
+}
+.cam-canto-tr {
+  top: -2px;
+  right: -2px;
+  border-left: none;
+  border-bottom: none;
+  border-top-right-radius: 16px;
+}
+.cam-canto-bl {
+  bottom: -2px;
+  left: -2px;
+  border-right: none;
+  border-top: none;
+  border-bottom-left-radius: 16px;
+}
+.cam-canto-br {
+  bottom: -2px;
+  right: -2px;
+  border-left: none;
+  border-top: none;
+  border-bottom-right-radius: 16px;
+}
+
+.cam-dica {
+  position: absolute;
+  bottom: 16%;
+  font: 600 var(--text-sm) / 1.3 var(--font-ui);
+  color: #fff;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+  padding: 6px 14px;
+}
+
+.cam-erro {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: var(--space-6);
+  color: #fff;
+  font-size: var(--text-sm);
+}
+
+/* Topo: fechar */
+.cam-topo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: max(env(safe-area-inset-top), 12px) var(--space-4) 0;
+}
+
+.cam-x {
+  width: 44px;
+  height: 44px;
+  margin-left: -8px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-pill);
+  color: #fff;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+/* Acoes inferiores: galeria + obturador */
+.cam-acoes {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-5) var(--space-6) calc(var(--space-6) + env(safe-area-inset-bottom));
+}
+
+.cam-galeria,
+.cam-espaco {
+  width: 48px;
+  height: 48px;
+  flex: none;
+}
+
+.cam-galeria {
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-control);
+  color: #fff;
+  background: rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+}
+
+.cam-shutter {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.45);
+  transition: transform 120ms ease-out;
+}
+
+.cam-shutter:active:not(:disabled) {
+  transform: scale(0.92);
+}
+
+.cam-shutter:disabled {
+  opacity: 0.5;
+}
