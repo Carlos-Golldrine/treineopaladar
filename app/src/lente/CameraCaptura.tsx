@@ -1,10 +1,41 @@
 /**
- * CameraCaptura: camera dentro do app (getUserMedia) com uma MOLDURA central pra
- * a pessoa centralizar o rotulo. Ao capturar, recorta a regiao central (3:4) ->
- * File JPEG. Reserva: escolher da galeria. Precisa de HTTPS (ou localhost).
+ * CameraCaptura: camera no app (getUserMedia) com MOLDURA central. Ao capturar,
+ * recorta EXATAMENTE a regiao da moldura (mapeando o object-fit: cover do video
+ * pras coordenadas nativas) e reduz a imagem (max 1280px) -> o OCR recebe so o
+ * rotulo, menor e mais rapido. Reserva: galeria (tambem reduzida). Precisa HTTPS.
  */
 import { useEffect, useRef, useState, type ChangeEvent } from 'react';
 import './camera.css';
+
+const MAX_LADO = 1280;
+
+/* Desenha um recorte da fonte (video/imagem) num canvas reduzido (max MAX_LADO). */
+function recortarReduzido(
+  source: CanvasImageSource,
+  sx: number,
+  sy: number,
+  sw: number,
+  sh: number,
+): HTMLCanvasElement {
+  const escala = Math.min(1, MAX_LADO / Math.max(sw, sh));
+  const canvas = document.createElement('canvas');
+  canvas.width = Math.max(1, Math.round(sw * escala));
+  canvas.height = Math.max(1, Math.round(sh * escala));
+  const ctx = canvas.getContext('2d')!;
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = 'high';
+  ctx.drawImage(source, sx, sy, sw, sh, 0, 0, canvas.width, canvas.height);
+  return canvas;
+}
+
+const canvasParaArquivo = (canvas: HTMLCanvasElement): Promise<File | null> =>
+  new Promise((resolve) =>
+    canvas.toBlob(
+      (blob) => resolve(blob ? new File([blob], 'rotulo.jpg', { type: 'image/jpeg' }) : null),
+      'image/jpeg',
+      0.85,
+    ),
+  );
 
 export function CameraCaptura({
   onCapturar,
@@ -14,6 +45,7 @@ export function CameraCaptura({
   onCancelar: () => void;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const molduraRef = useRef<HTMLDivElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const [pronta, setPronta] = useState(false);
   const [erro, setErro] = useState(false);
@@ -51,42 +83,51 @@ export function CameraCaptura({
     };
   }, []);
 
-  const capturar = () => {
+  const capturar = async () => {
     const v = videoRef.current;
-    if (!v || !v.videoWidth) return;
+    const m = molduraRef.current;
+    if (!v || !v.videoWidth || !m) return;
     const vw = v.videoWidth;
     const vh = v.videoHeight;
-    /* Recorte central com a proporcao da moldura (3:4). */
-    const aspect = 3 / 4;
-    let ch = vh * 0.86;
-    let cw = ch * aspect;
-    if (cw > vw * 0.92) {
-      cw = vw * 0.92;
-      ch = cw / aspect;
-    }
-    const cx = (vw - cw) / 2;
-    const cy = (vh - ch) / 2;
-    const canvas = document.createElement('canvas');
-    canvas.width = Math.round(cw);
-    canvas.height = Math.round(ch);
-    canvas.getContext('2d')!.drawImage(v, cx, cy, cw, ch, 0, 0, canvas.width, canvas.height);
-    canvas.toBlob(
-      (blob) => {
-        if (!blob) return;
-        pararStream();
-        onCapturar(new File([blob], 'rotulo.jpg', { type: 'image/jpeg' }));
-      },
-      'image/jpeg',
-      0.92,
-    );
-  };
-
-  const aoGaleria = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    e.target.value = '';
+    const vr = v.getBoundingClientRect();
+    const fr = m.getBoundingClientRect();
+    /* object-fit: cover -> o video e escalado e centralizado, sobra cortada. */
+    const escala = Math.max(vr.width / vw, vr.height / vh);
+    const offX = (vr.width - vw * escala) / 2;
+    const offY = (vr.height - vh * escala) / 2;
+    /* moldura (tela) -> coordenadas nativas do video. */
+    let nx = (fr.left - vr.left - offX) / escala;
+    let ny = (fr.top - vr.top - offY) / escala;
+    let nw = fr.width / escala;
+    let nh = fr.height / escala;
+    nx = Math.max(0, Math.min(nx, vw));
+    ny = Math.max(0, Math.min(ny, vh));
+    nw = Math.min(nw, vw - nx);
+    nh = Math.min(nh, vh - ny);
+    const file = await canvasParaArquivo(recortarReduzido(v, nx, ny, nw, nh));
     if (!file) return;
     pararStream();
     onCapturar(file);
+  };
+
+  const aoGaleria = async (e: ChangeEvent<HTMLInputElement>) => {
+    const original = e.target.files?.[0];
+    e.target.value = '';
+    if (!original) return;
+    pararStream();
+    /* Da galeria nao ha moldura: so reduz (sem recortar) pra acelerar o OCR. */
+    try {
+      const img = new Image();
+      img.src = URL.createObjectURL(original);
+      await img.decode();
+      const file = await canvasParaArquivo(
+        recortarReduzido(img, 0, 0, img.naturalWidth, img.naturalHeight),
+      );
+      URL.revokeObjectURL(img.src);
+      onCapturar(file ?? original);
+    } catch {
+      onCapturar(original);
+    }
   };
 
   const cancelar = () => {
@@ -99,7 +140,7 @@ export function CameraCaptura({
       {!erro && <video ref={videoRef} className="cam-video" playsInline muted />}
 
       <div className="cam-overlay" aria-hidden="true">
-        <div className="cam-moldura">
+        <div className="cam-moldura" ref={molduraRef}>
           <span className="cam-canto cam-canto-tl" />
           <span className="cam-canto cam-canto-tr" />
           <span className="cam-canto cam-canto-bl" />
