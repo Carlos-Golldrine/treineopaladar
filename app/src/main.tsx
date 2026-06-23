@@ -92,6 +92,11 @@ const router = createBrowserRouter([
       </Suspense>
     ),
   },
+  {
+    /* A Lente (teste): scanner de vinho -> quiz. Tela cheia, fora do Shell. */
+    path: '/lente',
+    lazy: async () => ({ Component: (await import('./lente/Lente')).default }),
+  },
   /* Laboratorio do mascote, so no dev server */
   ...(import.meta.env.DEV
     ? [

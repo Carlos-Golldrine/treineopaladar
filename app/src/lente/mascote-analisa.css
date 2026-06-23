@@ -1,0 +1,6 @@
+/* MascoteAnalisa: video do mascote animado. O fundo branco do video mescla com
+   o bg claro do app, entao nao precisa de transparencia. */
+.masc-analisa {
+  display: block;
+  object-fit: contain;
+}

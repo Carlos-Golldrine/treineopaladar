@@ -1,0 +1,388 @@
+/* A Lente (teste): tela cheia, coluna mobile-first. No padrao visual do app. */
+.lente {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background: var(--bg);
+}
+
+@media (min-width: 520px) {
+  .lente {
+    max-width: 480px;
+    margin-inline: auto;
+    box-shadow: var(--shadow-md);
+  }
+}
+
+/* ---------- Topo: voltar + barra de progresso / titulo ---------- */
+.lente-topo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: max(env(safe-area-inset-top), 12px) var(--space-4) var(--space-3);
+}
+
+.lente-voltar {
+  width: 44px;
+  height: 44px;
+  margin-left: -10px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-pill);
+  color: var(--neutral-400);
+}
+
+@media (hover: hover) {
+  .lente-voltar:hover {
+    color: var(--wine-700);
+  }
+}
+
+.lente-titulo {
+  flex: 1;
+  font: 600 var(--text-lg) / 1.2 var(--font-display);
+  color: var(--wine-900);
+}
+
+.lente-barra {
+  flex: 1;
+  height: 12px;
+  border-radius: var(--radius-pill);
+  background: var(--neutral-100);
+  overflow: hidden;
+}
+
+.lente-barra-fill {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: var(--wine-700);
+  transition: transform 250ms ease-out;
+  will-change: transform;
+}
+
+/* ---------- Corpo do quiz ---------- */
+.lente-meio {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: var(--space-2) var(--space-4) var(--space-4);
+}
+
+/* Vinho identificado (eyebrow). Enquanto analisa, pulsa de leve (nao bloqueia). */
+.lente-vinho {
+  font: 600 var(--text-xs) / 1.3 var(--font-ui);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--wine-700);
+  margin-bottom: var(--space-3);
+  min-height: 1.1em;
+}
+
+.lente-vinho-buscando {
+  color: var(--neutral-400);
+  animation: lente-pulsar 1.3s ease-in-out infinite;
+}
+
+@keyframes lente-pulsar {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+/* Mascote + balao de fala */
+.lente-mascote {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.lente-balao {
+  position: relative;
+  flex: 1;
+  margin: 0;
+  background: var(--neutral-50);
+  border: 1.5px solid var(--neutral-200);
+  border-radius: var(--radius-card);
+  padding: var(--space-3) var(--space-4);
+  font: 600 var(--text-md) / 1.3 var(--font-display);
+  color: var(--wine-900);
+}
+
+.lente-balao::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 50%;
+  width: 13px;
+  height: 13px;
+  transform: translateY(-50%) rotate(45deg);
+  background: var(--neutral-50);
+  border-left: 1.5px solid var(--neutral-200);
+  border-bottom: 1.5px solid var(--neutral-200);
+}
+
+/* Opcoes */
+.lente-opcoes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.lente-opcao {
+  min-height: 54px;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-card);
+  border: 2px solid var(--neutral-200);
+  background: var(--bg);
+  color: var(--wine-900);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  text-align: left;
+  transition:
+    border-color 120ms ease-out,
+    background 120ms ease-out,
+    transform 120ms ease-out;
+}
+
+.lente-opcao.entra {
+  animation: lente-opcao-entra 260ms ease-out backwards;
+}
+
+@keyframes lente-opcao-entra {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.lente-opcao-sel {
+  border-color: var(--wine-700);
+  background: rgba(114, 47, 55, 0.06);
+}
+
+/* Rodape com o botao de avancar */
+.lente-rodape {
+  padding: var(--space-3) var(--space-4) calc(var(--space-3) + env(safe-area-inset-bottom));
+}
+
+/* ---------- Estados centrais (inicio / analisando / erro) ---------- */
+.lente-centro {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-4) calc(var(--space-5) + env(safe-area-inset-bottom));
+}
+
+.lente-h1 {
+  font: 600 var(--text-xl) / 1.2 var(--font-display);
+  color: var(--wine-900);
+}
+
+.lente-sub {
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--neutral-600);
+  max-width: 32ch;
+}
+
+.lente-cta {
+  margin-top: var(--space-2);
+  cursor: pointer;
+}
+
+.lente-link {
+  font-size: var(--text-sm);
+  color: var(--neutral-500);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  padding: var(--space-2);
+}
+
+/* ---------- Fase analisando ---------- */
+.lente-analise-msg {
+  font: 600 var(--text-md) / 1.35 var(--font-display);
+  color: var(--wine-900);
+  min-height: 2.6em;
+  max-width: 24ch;
+  animation: lente-msg-entra 300ms ease-out;
+}
+
+@keyframes lente-msg-entra {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.lente-analise-barra {
+  width: min(260px, 70%);
+  height: 10px;
+  border-radius: var(--radius-pill);
+  background: var(--neutral-100);
+  overflow: hidden;
+}
+
+.lente-analise-barra-fill {
+  height: 100%;
+  width: 0;
+  border-radius: var(--radius-pill);
+  background: var(--wine-700);
+  animation: lente-analise-enche 4s linear forwards;
+}
+
+@keyframes lente-analise-enche {
+  from {
+    width: 4%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lente-analise-barra-fill {
+    animation-duration: 4s;
+  }
+  .lente-opcao.entra,
+  .lente-analise-msg {
+    animation: none;
+  }
+}
+
+/* ---------- Tela de fim (placar + revisao) ---------- */
+.lente-fim {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.lente-fim-rolagem {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-4) var(--space-2);
+}
+
+.lente-placar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+  margin-top: var(--space-1);
+}
+
+.lente-placar-num {
+  font: 600 56px / 1 var(--font-display);
+  color: var(--wine-700);
+}
+
+.lente-placar-de {
+  margin-top: var(--space-1);
+  font-size: var(--text-sm);
+  color: var(--neutral-500);
+}
+
+.lente-revisao {
+  width: 100%;
+  margin-top: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  list-style: none;
+}
+
+.lente-rev {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-card);
+  text-align: left;
+}
+
+.lente-rev-ok {
+  background: var(--ok-100);
+}
+
+.lente-rev-erro {
+  background: var(--warm-100);
+}
+
+.lente-selo {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-pill);
+  display: grid;
+  place-items: center;
+  color: var(--bg);
+}
+
+.lente-selo-ok {
+  background: var(--ok-700);
+}
+
+.lente-selo-erro {
+  background: var(--warm-700);
+}
+
+.lente-rev-txt {
+  flex: 1;
+  min-width: 0;
+}
+
+.lente-rev-perg {
+  font: 600 var(--text-sm) / 1.3 var(--font-ui);
+  color: var(--wine-900);
+}
+
+.lente-rev-det {
+  margin-top: 2px;
+  font-size: var(--text-xs);
+  color: var(--neutral-600);
+}
+
+.lente-rev-exp {
+  margin-top: 4px;
+  font-size: var(--text-xs);
+  line-height: 1.5;
+  color: var(--neutral-700);
+}
+
+.lente-fim-acoes {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-4) calc(var(--space-3) + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--neutral-100);
+}
+
+.lente-fim-acoes .lente-cta {
+  width: 100%;
+}

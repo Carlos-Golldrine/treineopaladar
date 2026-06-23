@@ -195,6 +195,11 @@ export default function Inicio() {
         </div>
       </section>
 
+      {/* TESTE: entrada discreta da Lente (scanner de vinho -> quiz). Provisorio. */}
+      <button type="button" className="inicio-lente-teste tap" onClick={() => navigate('/lente')}>
+        Escanear um rótulo (teste)
+      </button>
+
       <RodapeTchin />
 
       {/* Primer de notificacao (1x, pos-onboarding, so onde push faz sentido) */}
