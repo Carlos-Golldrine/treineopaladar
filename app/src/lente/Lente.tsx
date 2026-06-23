@@ -43,7 +43,7 @@ interface ResultadoPergunta {
 const TIPOS = ['Tinto', 'Branco', 'Rosé', 'Espumante'];
 
 /* Duracao da tela de analise (cobre o processamento do n8n). */
-const DURACAO_ANALISE = 7000;
+const DURACAO_ANALISE = 8000;
 
 const MENSAGENS = [
   'Lendo o rótulo',
