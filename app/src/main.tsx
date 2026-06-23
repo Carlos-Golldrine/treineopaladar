@@ -17,6 +17,8 @@ import './app.css';
 
 import { Shell } from './components/Shell';
 import { ConvitePwa } from './components/ConvitePwa';
+import ErroRota from './components/ErroRota';
+import { recuperarChunk } from './lib/recuperarChunk';
 
 /* Onboarding FTUE no bundle principal: do toque em "Começar" à primeira
    pergunta da Lição 1 em menos de 10s, mesmo em rede ruim */
@@ -48,6 +50,7 @@ const router = createBrowserRouter([
         <Shell />
       </PortaoOnboarding>
     ),
+    errorElement: <ErroRota />,
     children: [
       { index: true, element: <Inicio /> },
       { path: 'trilha', element: <Trilha /> },
@@ -73,6 +76,7 @@ const router = createBrowserRouter([
        pronta (morph do circulo), nunca um fallback vazio. */
     path: '/licao/:id',
     lazy: async () => ({ Component: (await import('./licao/Player')).default }),
+    errorElement: <ErroRota />,
   },
   {
     /* Pratica livre em tela cheia: drill do banco da fabrica, sem vidas */
@@ -82,6 +86,7 @@ const router = createBrowserRouter([
         <Pratica />
       </Suspense>
     ),
+    errorElement: <ErroRota />,
   },
   {
     /* Link de convite da Mesa: entra na mesa do codigo e abre a Mesa */
@@ -91,11 +96,13 @@ const router = createBrowserRouter([
         <EntrarMesa />
       </Suspense>
     ),
+    errorElement: <ErroRota />,
   },
   {
     /* A Lente (teste): scanner de vinho -> quiz. Tela cheia, fora do Shell. */
     path: '/lente',
     lazy: async () => ({ Component: (await import('./lente/Lente')).default }),
+    errorElement: <ErroRota />,
   },
   /* Laboratorio do mascote, so no dev server */
   ...(import.meta.env.DEV
@@ -108,16 +115,13 @@ const router = createBrowserRouter([
     : []),
 ]);
 
-/* Pos-deploy: uma aba/instalacao antiga ainda aponta para chunks com hash
-   velho que sumiram do CDN -> "Failed to fetch dynamically imported module"
-   ao abrir uma rota lazy (Desafio, Pratica...). Recarrega uma vez para pegar
-   o index.html e os chunks novos. Guarda de 10s evita loop se persistir. */
+/* Pos-deploy: uma instalacao antiga (PWA) aponta para chunks com hash velho que
+   sumiram do servidor -> "Failed to fetch dynamically imported module" ao abrir
+   uma rota lazy (Trilha, Desafio, Lente...). recuperarChunk limpa o cache do PWA,
+   atualiza o SW (sem desregistrar -> preserva o push) e recarrega pra pegar o
+   index/chunks novos. O errorElement das rotas faz o mesmo com uma tela amigavel. */
 window.addEventListener('vite:preloadError', () => {
-  const agora = Date.now();
-  const ultimo = Number(sessionStorage.getItem('tp.chunk.reload') ?? '0');
-  if (agora - ultimo < 10_000) return;
-  sessionStorage.setItem('tp.chunk.reload', String(agora));
-  window.location.reload();
+  void recuperarChunk();
 });
 
 registerSW({ immediate: true });
