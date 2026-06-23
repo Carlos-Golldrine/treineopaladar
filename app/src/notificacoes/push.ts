@@ -157,25 +157,41 @@ function plataforma(): string {
   return 'desktop';
 }
 
-/** Salva (upsert por endpoint) a subscription no Supabase, ligada ao usuario. */
+/**
+ * Salva/reivindica a subscription no Supabase, ligada ao usuario LOGADO agora.
+ * Via RPC reassociar_push (SECURITY DEFINER): alem do primeiro salvamento, isso
+ * RE-APONTA uma inscricao que ficou presa no uid antigo quando a conta anonima
+ * virou real (o RLS sozinho barraria o novo dono de atualizar a linha alheia).
+ * A funcao usa auth.uid() no servidor, entao nao precisamos passar o uid.
+ */
 async function salvarSubscription(sub: PushSubscription): Promise<void> {
   const sb = getSupabase();
   if (!sb) return;
-  const uid = (await sb.auth.getUser()).data.user?.id;
-  if (!uid) return;
   const keys = sub.toJSON().keys ?? {};
   if (!keys.p256dh || !keys.auth) return;
-  await sb.from('push_subscriptions').upsert(
-    {
-      endpoint: sub.endpoint,
-      user_id: uid,
-      p256dh: keys.p256dh,
-      auth: keys.auth,
-      plataforma: plataforma(),
-      visto_em: new Date().toISOString(),
-    },
-    { onConflict: 'endpoint' },
-  );
+  await sb.rpc('reassociar_push', {
+    p_endpoint: sub.endpoint,
+    p_p256dh: keys.p256dh,
+    p_auth: keys.auth,
+    p_plataforma: plataforma(),
+  });
+}
+
+/**
+ * Re-aponta a inscricao Web Push DESTE navegador para a conta logada agora.
+ * Cura a inscricao orfa quando a conta anonima vira real (ou troca de conta):
+ * sem isso a sub fica presa no uid antigo e o push nunca chega na conta atual.
+ * Chamado no boot/login (cloud.ts). Best-effort: sem sub viva, no-op.
+ */
+export async function reassociarPushAtual(): Promise<void> {
+  if (!suportaPush() || !pushAtivado()) return;
+  try {
+    const reg = await navigator.serviceWorker.ready;
+    const sub = await reg.pushManager.getSubscription();
+    if (sub) await salvarSubscription(sub);
+  } catch {
+    /* SW nao pronto: re-tenta no proximo evento de auth */
+  }
 }
 
 /**

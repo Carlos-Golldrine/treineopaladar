@@ -7,6 +7,7 @@ import type { AuthChangeEvent, Session } from '@supabase/supabase-js';
 import { getSupabase } from './supabase';
 import { carregarDaNuvem, salvarNaNuvem } from './sync';
 import { identificar } from './analytics';
+import { reassociarPushAtual } from '../notificacoes/push';
 import { estadoInicial, obterStore } from '../engine/store';
 import type { EstadoV1 } from '../engine/types';
 
@@ -100,6 +101,12 @@ export async function iniciarNuvem(): Promise<void> {
   // async do supabase de dentro do callback (recomendacao do supabase-js).
   sb.auth.onAuthStateChange((event, session) => {
     setTimeout(() => void reconciliar(event, session), 0);
+    // Re-aponta a inscricao Web Push deste device para a conta atual (cura a sub
+    // orfa da troca anonima->real; sem isso o push fica preso no uid antigo).
+    // Independe da reconciliacao: o RPC usa a sessao corrente (auth.uid()).
+    if (session?.user && (event === 'INITIAL_SESSION' || event === 'SIGNED_IN' || event === 'USER_UPDATED')) {
+      setTimeout(() => void reassociarPushAtual(), 0);
+    }
   });
 
   // Garante uma sessao no boot: anonima se nao houver. O onAuthStateChange
