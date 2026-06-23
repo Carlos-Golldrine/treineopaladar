@@ -214,6 +214,13 @@
 }
 
 /* ---------- Fase analisando ---------- */
+.lente-analise-vinho {
+  font: 600 var(--text-lg) / 1.25 var(--font-display);
+  color: var(--wine-700);
+  max-width: 26ch;
+  animation: lente-msg-entra 320ms ease-out;
+}
+
 .lente-analise-msg {
   font: 600 var(--text-md) / 1.35 var(--font-display);
   color: var(--wine-900);

@@ -41,14 +41,19 @@ interface ResultadoPergunta {
 
 const TIPOS = ['Tinto', 'Branco', 'Rosé', 'Espumante'];
 
-/* Duracao da tela de analise (cobre parte do processamento do n8n). */
-const DURACAO_ANALISE = 8000;
+/* A tela de analise segura o usuario enquanto o n8n trabalha (~15-20s no total).
+   Fica no MINIMO ANALISE_MIN_MS; some assim que o quiz fica pronto; com teto em
+   ANALISE_MAX_MS pra nunca prender (o briefing + a Q1 generica cobrem o resto). */
+const ANALISE_MIN_MS = 9000;
+const ANALISE_MAX_MS = 16000;
 
 const MENSAGENS = [
   'Lendo o rótulo',
-  'Analisando todas as notas do vinho',
+  'Reconhecendo o vinho',
+  'Analisando as notas e os aromas',
   'Conhecendo a uva e a região',
-  'Criando perguntas sobre esse vinho',
+  'Montando as perguntas',
+  'Caprichando nas alternativas',
   'Já vai começar',
 ];
 
@@ -100,20 +105,27 @@ export default function Lente() {
   const progresso = total > 0 ? (idx + 1) / total : 0;
   const acertos = respostas.filter((r) => r.acertou).length;
 
-  /* Fase analisando: gira as mensagens e, apos DURACAO_ANALISE, cai no briefing. */
+  /* Fase analisando: gira as mensagens e cai no briefing quando o quiz fica pronto
+     (depois do minimo), ou no teto — o que vier primeiro. Cobre a espera do n8n. */
   useEffect(() => {
     if (fase !== 'analisando') return;
     setMsgIdx(0);
+    const inicio = Date.now();
     const msgIv = window.setInterval(
       () => setMsgIdx((i) => Math.min(i + 1, MENSAGENS.length - 1)),
-      Math.floor(DURACAO_ANALISE / MENSAGENS.length),
+      Math.floor(ANALISE_MAX_MS / MENSAGENS.length),
     );
-    const t = window.setTimeout(() => {
-      if (!cancelado.current && !erroRef.current) setFase('briefing');
-    }, DURACAO_ANALISE);
+    const checagem = window.setInterval(() => {
+      if (cancelado.current || erroRef.current) return; // erro/cancela tem caminho proprio
+      const passado = Date.now() - inicio;
+      const pronto = !!perguntasRef.current;
+      if (passado >= ANALISE_MAX_MS || (passado >= ANALISE_MIN_MS && pronto)) {
+        setFase('briefing');
+      }
+    }, 400);
     return () => {
       window.clearInterval(msgIv);
-      window.clearTimeout(t);
+      window.clearInterval(checagem);
     };
   }, [fase]);
 
@@ -184,6 +196,7 @@ export default function Lente() {
       if (cancelado.current) return;
       const s = await lerStatusSessao(id);
       if (cancelado.current) return;
+      if (s?.vinho) setVinho(s.vinho); // mostra o vinho assim que o n8n identifica (antes do quiz)
       if (s?.status === 'pronto') {
         const ps = await lerPerguntas(id);
         if (cancelado.current) return;
@@ -340,13 +353,14 @@ export default function Lente() {
       {fase === 'analisando' && (
         <div className="lente-centro lente-analise">
           <MascoteAnalisa tamanho={150} ativo />
+          {vinho?.nome && <p className="lente-analise-vinho">Encontramos: {vinho.nome}</p>}
           <p className="lente-analise-msg" key={msgIdx}>
             {MENSAGENS[msgIdx]}
           </p>
           <div className="lente-analise-barra" role="progressbar" aria-label="Analisando">
             <div
               className="lente-analise-barra-fill"
-              style={{ animationDuration: `${DURACAO_ANALISE}ms` }}
+              style={{ animationDuration: `${ANALISE_MAX_MS}ms` }}
             />
           </div>
         </div>
@@ -423,7 +437,13 @@ export default function Lente() {
               disabled={sel === null || enviando}
               onClick={responderEavancar}
             >
-              {enviando ? 'Salvando…' : idx + 1 >= total ? 'Ver resultado' : 'Próxima'}
+              {enviando
+                ? idx === 0 && !perguntas
+                  ? 'Preparando o quiz…'
+                  : 'Salvando…'
+                : idx + 1 >= total
+                  ? 'Ver resultado'
+                  : 'Próxima'}
             </button>
           </div>
         </>
