@@ -1,12 +1,133 @@
-/* TESTE: link discreto da Lente (scanner). Provisorio, so pra teste. */
-.inicio-lente-teste {
-  align-self: center;
-  margin-top: var(--space-3);
-  padding: 6px 10px;
+/* A Lente: card de destaque (escanear rótulo). Tom dourado pra se distinguir dos
+   cards vinho (Unidade/Continuar) sem competir com a ação principal. */
+.inicio-lente {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: auto;
+  margin: var(--space-3) var(--space-4) 0;
+  padding: 14px 15px;
+  border-radius: var(--radius-card);
+  border: 1.5px solid rgba(212, 165, 116, 0.45);
+  background: rgba(212, 165, 116, 0.14);
+  text-align: left;
+  transition: transform 80ms ease-out;
+}
+
+.inicio-lente:active {
+  transform: translateY(1px);
+}
+
+.inicio-lente-ico {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-control);
+  background: rgba(212, 165, 116, 0.28);
+  color: var(--gold-700);
+}
+
+.inicio-lente-txt {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.inicio-lente-topo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.inicio-lente-titulo {
+  font: 600 var(--text-md) / 1.1 var(--font-display);
+  color: var(--wine-900);
+}
+
+.inicio-lente-badge {
+  flex: none;
+  background: var(--gold-700);
+  color: var(--bg);
+  font: 600 10px / 1 var(--font-ui);
+  padding: 4px 7px;
+  border-radius: var(--radius-control);
+}
+
+.inicio-lente-sub {
+  margin-top: 2px;
   font-size: var(--text-xs);
-  color: var(--neutral-500);
-  text-decoration: underline;
-  text-underline-offset: 2px;
+  line-height: 1.3;
+  color: var(--neutral-600);
+}
+
+.inicio-lente-seta {
+  flex: none;
+  color: var(--gold-700);
+}
+
+/* ---------- Card-foco: contexto da unidade + Continuar em um so (hero) ---------- */
+.inicio-foco {
+  display: block;
+  width: auto;
+  margin: var(--space-3) var(--space-4) 0;
+  padding: var(--space-4);
+  border-radius: var(--radius-card);
+  background: var(--wine-900);
+  color: var(--bg);
+  text-align: left;
+  box-shadow: 0 5px 0 #2c1216;
+  transition:
+    transform 80ms ease-out,
+    box-shadow 80ms ease-out;
+}
+
+.inicio-foco:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 #2c1216;
+}
+
+.inicio-foco-eyebrow {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold-500);
+}
+
+.inicio-foco-titulo {
+  margin-top: var(--space-1);
+  font: 600 var(--text-lg) / 1.2 var(--font-display);
+}
+
+.inicio-foco-prog {
+  margin-top: var(--space-3);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.inicio-foco-cont {
+  font: 500 var(--text-xs) / 1 var(--font-mono);
+  color: var(--gold-500);
+}
+
+.inicio-foco-cta {
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid rgba(250, 250, 248, 0.15);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--gold-500);
+}
+
+.inicio-foco-cta-txt {
+  flex: 1;
+  font: 600 var(--text-md) / 1.1 var(--font-display);
+  color: var(--bg);
 }
 
 /* ---------- Inicio: cabecalho com saudacao + stats ---------- */

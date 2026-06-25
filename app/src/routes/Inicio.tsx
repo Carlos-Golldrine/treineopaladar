@@ -3,13 +3,14 @@
  * Junta o foco do Duolingo (contexto da unidade + 1 acao principal) com a
  * clareza do Uber (atalhos descobriveis em cards). Reusa os dados do engine.
  */
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useProgresso, useWallet } from '../engine';
 import { unidadesDoObjetivo } from '../trilha/ordem';
 import { useDesbloqueios } from '../trilha/desbloqueios';
 import { Ic } from '../icones/Icones';
 import { Mascotinho } from '../mascote';
+import { AberturaHome, deveTocarAberturaHome } from '../onboarding/AberturaHome';
 import { GatePrimer, sincronizarBadge } from '../notificacoes';
 import { RodapeTchin } from '../components/RodapeTchin';
 import './inicio.css';
@@ -24,8 +25,11 @@ function saudacao(): string {
 export default function Inicio() {
   const navigate = useNavigate();
   const { wallet, streakEfetivo, streakEmRisco } = useWallet();
-  const { progresso, revisoesVencidas, objetivo } = useProgresso();
+  const { progresso, objetivo } = useProgresso();
   const desbloqueios = useDesbloqueios();
+  /* Abertura da home: rosto aparece/sorri/esvanece; so depois o mascote entra
+     pela lateral (o card de coach). Toca uma vez por carga. */
+  const [introTocando, setIntroTocando] = useState(deveTocarAberturaHome);
 
   const unidades = useMemo(() => unidadesDoObjetivo(objetivo), [objetivo]);
 
@@ -67,15 +71,12 @@ export default function Inicio() {
     else navigate('/pratica');
   };
 
-  const revisar = () => {
-    if (revisoesVencidas.length > 0) navigate(`/licao/${revisoesVencidas[0]}`);
-    else navigate('/pratica');
-  };
-
   const pct = atual && atual.total > 0 ? (atual.concluidas / atual.total) * 100 : 0;
 
   return (
     <>
+      {introTocando && <AberturaHome onFim={() => setIntroTocando(false)} />}
+
       <header className="inicio-topo app-chrome">
         <div className="inicio-saud">
           <p className="inicio-saud-eyebrow">{saudacao()}</p>
@@ -98,10 +99,10 @@ export default function Inicio() {
       </header>
 
       {atual && (
-        <button type="button" className="inicio-unidade tap" onClick={() => navigate('/trilha')}>
-          <p className="inicio-unidade-eyebrow">Unidade {atual.numero}</p>
-          <h2 className="inicio-unidade-titulo">{atual.unidade.meta.titulo}</h2>
-          <div className="inicio-unidade-prog">
+        <button type="button" className="inicio-foco tap" onClick={continuar}>
+          <p className="inicio-foco-eyebrow">Unidade {atual.numero}</p>
+          <h2 className="inicio-foco-titulo">{atual.unidade.meta.titulo}</h2>
+          <div className="inicio-foco-prog">
             <div
               className="inicio-bar"
               role="progressbar"
@@ -111,25 +112,12 @@ export default function Inicio() {
             >
               <div className="inicio-bar-fill" style={{ width: `${pct}%` }} />
             </div>
-            <span className="inicio-unidade-cont">
+            <span className="inicio-foco-cont">
               {atual.concluidas}/{atual.total}
             </span>
           </div>
         </button>
       )}
-
-      <button type="button" className="inicio-continuar tap" onClick={continuar}>
-        <span className="inicio-continuar-ico">
-          <Ic nome="taca" size={24} />
-        </span>
-        <span className="inicio-continuar-txt">
-          <span className="inicio-continuar-titulo">Continuar</span>
-          <span className="inicio-continuar-sub">
-            {atual?.tituloLicao ? `${atual.tituloLicao} · sua próxima lição` : 'Prática com rótulos de verdade'}
-          </span>
-        </span>
-        <Ic nome="seta-direita" size={20} className="inicio-continuar-seta" />
-      </button>
 
       <div className="inicio-atalhos-cab">
         <span className="inicio-atalhos-titulo">Atalhos</span>
@@ -162,43 +150,36 @@ export default function Inicio() {
           <span className="inicio-atalho-sub">Degustação em grupo</span>
         </button>
 
-        <button type="button" className="inicio-atalho tap" onClick={revisar}>
-          <span className="inicio-atalho-ico">
-            <Ic nome="relogio" size={20} />
+        <button type="button" className="inicio-atalho tap" onClick={() => navigate('/lente')}>
+          <span className="inicio-atalho-ico inicio-atalho-ico-ouro">
+            <Ic nome="lente" size={20} />
           </span>
-          <span className="inicio-atalho-titulo">Revisar</span>
-          <span className="inicio-atalho-sub">
-            {revisoesVencidas.length > 0
-              ? `${revisoesVencidas.length} ${revisoesVencidas.length === 1 ? 'carta' : 'cartas'}`
-              : 'Em dia'}
-          </span>
+          <span className="inicio-atalho-titulo">Escanear rótulo</span>
+          <span className="inicio-atalho-sub">Descubra o vinho</span>
         </button>
       </div>
 
-      <section className="inicio-coach" aria-label="Sua sequência">
-        <div className="inicio-coach-masc">
-          <div className="inicio-coach-entra">
-            <Mascotinho estado="idle" tamanho={62} />
+      {!introTocando && (
+        <section className="inicio-coach" aria-label="Sua sequência">
+          <div className="inicio-coach-masc">
+            <div className="inicio-coach-entra">
+              <Mascotinho estado="idle" tamanho={62} />
+            </div>
           </div>
-        </div>
-        <div className="inicio-coach-txt">
-          <p className="inicio-coach-titulo">
-            {streakEfetivo > 0
-              ? `Sequência de ${streakEfetivo} ${streakEfetivo === 1 ? 'dia' : 'dias'}`
-              : 'Comece sua sequência hoje'}
-          </p>
-          <p className="inicio-coach-sub">
-            {streakEfetivo > 0
-              ? 'Uma lição hoje mantém a chama acesa.'
-              : 'Uma lição hoje já acende a chama.'}
-          </p>
-        </div>
-      </section>
-
-      {/* TESTE: entrada discreta da Lente (scanner de vinho -> quiz). Provisorio. */}
-      <button type="button" className="inicio-lente-teste tap" onClick={() => navigate('/lente')}>
-        Escanear um rótulo (teste)
-      </button>
+          <div className="inicio-coach-txt">
+            <p className="inicio-coach-titulo">
+              {streakEfetivo > 0
+                ? `Sequência de ${streakEfetivo} ${streakEfetivo === 1 ? 'dia' : 'dias'}`
+                : 'Comece sua sequência hoje'}
+            </p>
+            <p className="inicio-coach-sub">
+              {streakEfetivo > 0
+                ? 'Uma lição hoje mantém a chama acesa.'
+                : 'Uma lição hoje já acende a chama.'}
+            </p>
+          </div>
+        </section>
+      )}
 
       <RodapeTchin />
 

@@ -339,6 +339,18 @@ const ICONES = {
     </>
   ),
 
+  /** A Lente: moldura de scan (eco da camera) com a taca de ouro no miolo */
+  lente: (
+    <>
+      <path {...t} d="M4.5 8 V6 A1.5 1.5 0 0 1 6 4.5 H8" />
+      <path {...t} d="M16 4.5 H18 A1.5 1.5 0 0 1 19.5 6 V8" />
+      <path {...t} d="M8 19.5 H6 A1.5 1.5 0 0 1 4.5 18 V16" />
+      <path {...t} d="M19.5 16 V18 A1.5 1.5 0 0 1 18 19.5 H16" />
+      <path {...tf(OURO)} d="M9.4 8 H14.6 C14.6 10.9 13.4 12.6 12 13.1 C10.6 12.6 9.4 10.9 9.4 8 Z" />
+      <path {...td} d="M12 13.1 V15.6 M10.6 16.4 Q12 15.7 13.4 16.4" />
+    </>
+  ),
+
   /** Saca-rolhas: cabo de ouro, espiral viva */
   'saca-rolhas': (
     <>

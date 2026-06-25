@@ -1,0 +1,37 @@
+/* ------------------------------------------------------------------ */
+/* Abertura da HOME: rosto do mascote aparece, sorri e ESVANECE (sem    */
+/* afastar/pousar). Reusa .abertura-masc (sorriso/piscar/respiro + zoom */
+/* via WAAPI) da abertura.css. So o overlay/fundo sao proprios.         */
+/* ------------------------------------------------------------------ */
+
+.abertura-home {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  pointer-events: none; /* nao bloqueia toques; some em ~2s */
+  overflow: hidden;
+}
+
+/* fundo cor-de-vinho que segura e esvanece junto com o rosto */
+.abertura-home-fundo {
+  position: absolute;
+  inset: 0;
+  background: var(--wine-700);
+  animation: abertura-home-fundo 2000ms ease-out both;
+}
+
+@keyframes abertura-home-fundo {
+  0%,
+  66% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .abertura-home {
+    display: none;
+  }
+}
