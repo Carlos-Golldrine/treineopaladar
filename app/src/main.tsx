@@ -17,6 +17,7 @@ import './app.css';
 
 import { Shell } from './components/Shell';
 import { ConvitePwa } from './components/ConvitePwa';
+import { GateTermos } from './components/GateTermos';
 import ErroRota from './components/ErroRota';
 import { recuperarChunk } from './lib/recuperarChunk';
 
@@ -141,5 +142,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <RouterProvider router={router} />
     {/* Convite de instalacao (PWA): global, so para quem esta no navegador */}
     <ConvitePwa />
+    {/* Gate de consentimento: bloqueia o app ate aceitar (18+ + privacidade) */}
+    <GateTermos />
   </React.StrictMode>,
 );

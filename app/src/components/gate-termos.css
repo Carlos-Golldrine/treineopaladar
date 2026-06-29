@@ -1,0 +1,47 @@
+/* Gate de consentimento: cobre o app inteiro ate o aceite (18+ + privacidade). */
+.gate-termos {
+  position: fixed;
+  inset: 0;
+  z-index: 1000; /* acima de tudo (abertura z-200, convite PWA, etc.) */
+  background: var(--bg);
+  display: grid;
+  place-items: center;
+  padding: max(env(safe-area-inset-top), 24px) var(--space-5)
+    calc(env(safe-area-inset-bottom) + 24px);
+}
+
+.gate-termos-cartao {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-3);
+}
+
+.gate-termos-titulo {
+  font: 600 var(--text-xl) / 1.15 var(--font-display);
+  color: var(--wine-900);
+}
+
+.gate-termos-texto {
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--neutral-700);
+  max-width: 32ch;
+}
+
+.gate-termos-link {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--wine-700);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  padding: var(--space-2);
+}
+
+.gate-termos-cta {
+  width: 100%;
+  margin-top: var(--space-2);
+}
