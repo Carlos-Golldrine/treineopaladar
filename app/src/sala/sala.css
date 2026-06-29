@@ -1,0 +1,384 @@
+/* Sala Ao Vivo: reusa o layout do quiz da Lente (.lente*) e adiciona codigo + ranking. */
+
+/* Codigo no topo (chip) e banner do anfitriao */
+.sala-codigo-chip {
+  flex: none;
+  font: 600 var(--text-sm) / 1 var(--font-mono);
+  letter-spacing: 0.12em;
+  color: var(--gold-700);
+  background: rgba(212, 165, 116, 0.18);
+  border-radius: var(--radius-control);
+  padding: 6px 10px;
+}
+
+/* ---------- Lobby ---------- */
+.sala-lobby {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-4) calc(var(--space-4) + env(safe-area-inset-bottom));
+  overflow-y: auto;
+}
+
+.sala-lobby-vinho {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: 600 var(--text-sm) / 1.2 var(--font-display);
+  color: var(--wine-700);
+}
+
+.sala-codigo-cartao {
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border-radius: var(--radius-card);
+  border: 1.5px solid rgba(212, 165, 116, 0.45);
+  background: rgba(212, 165, 116, 0.12);
+}
+
+.sala-codigo-label {
+  font: 600 var(--text-xs) / 1 var(--font-ui);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold-700);
+}
+
+.sala-codigo-grande {
+  font: 600 40px / 1 var(--font-mono);
+  letter-spacing: 0.2em;
+  color: var(--wine-900);
+}
+
+.sala-copiar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: 600 var(--text-sm) / 1 var(--font-ui);
+  color: var(--wine-700);
+  padding: 7px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--bg);
+  border: 1.5px solid var(--neutral-200);
+}
+
+.sala-lobby-sub {
+  font-size: var(--text-sm);
+  line-height: 1.4;
+  color: var(--neutral-600);
+  max-width: 30ch;
+}
+
+.sala-jogadores {
+  width: 100%;
+  max-width: 320px;
+  text-align: left;
+}
+
+.sala-jogadores-cab {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+  font: 600 var(--text-sm) / 1 var(--font-display);
+  color: var(--wine-900);
+}
+
+.sala-jogadores-n {
+  font: 600 var(--text-xs) / 1 var(--font-mono);
+  color: var(--bg);
+  background: var(--wine-700);
+  border-radius: var(--radius-pill);
+  padding: 2px 8px;
+}
+
+.sala-jogadores-lista {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sala-jog {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 8px 10px;
+  border-radius: var(--radius-control);
+  background: var(--neutral-50);
+  font: 500 var(--text-sm) / 1.2 var(--font-ui);
+  color: var(--wine-900);
+}
+
+.sala-jog-eu {
+  background: rgba(212, 165, 116, 0.18);
+}
+
+.sala-jog-bolinha {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ok-700);
+}
+
+.sala-jog-nome {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sala-jog-voce {
+  font: 600 10px / 1 var(--font-ui);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--gold-700);
+}
+
+.sala-lobby-acao {
+  width: 100%;
+  max-width: 320px;
+  margin-top: auto;
+  padding-top: var(--space-3);
+}
+
+.sala-aguardando {
+  text-align: center;
+  font: 500 var(--text-md) / 1.3 var(--font-ui);
+  color: var(--neutral-600);
+  animation: sala-pulso 1.8s ease-in-out infinite;
+}
+
+.sala-dots::after {
+  content: '…';
+}
+
+/* Contador "X de Y responderam" durante o lockstep */
+.sala-progresso {
+  margin: 0 auto var(--space-1);
+  font: 600 var(--text-xs) / 1 var(--font-mono);
+  letter-spacing: 0.04em;
+  color: var(--gold-700);
+  text-transform: uppercase;
+}
+
+/* Espera depois de responder (com o atalho do host pra revelar) */
+.sala-espera {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.sala-revelar {
+  font: 600 var(--text-sm) / 1 var(--font-ui);
+  color: var(--wine-700);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  padding: 6px 10px;
+}
+
+.sala-revelar:disabled {
+  opacity: 0.5;
+}
+
+.sala-erro {
+  margin: 0 0 var(--space-2);
+  text-align: center;
+  font: 500 var(--text-sm) / 1.3 var(--font-ui);
+  color: var(--warm-700);
+}
+
+/* Nome do vinho durante o quiz (referencia pra responder) */
+.sala-quiz-vinho {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: var(--space-2) var(--space-4) 0;
+  font: 600 var(--text-sm) / 1.2 var(--font-display);
+  color: var(--wine-700);
+  text-align: center;
+}
+
+/* Leaderboard ao vivo */
+.sala-ranking {
+  margin: 0 var(--space-4) var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-card);
+  border: 1.5px solid var(--neutral-200);
+  background: var(--neutral-50);
+}
+
+.sala-ranking-cab {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.sala-ranking-titulo {
+  font: 600 var(--text-sm) / 1 var(--font-display);
+  color: var(--wine-900);
+}
+
+.sala-ranking-ao-vivo {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font: 600 10px / 1 var(--font-ui);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--warm-700);
+}
+
+.sala-ranking-ao-vivo::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--warm-700);
+  animation: sala-pulso 1.2s ease-in-out infinite;
+}
+
+@keyframes sala-pulso {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.sala-ranking-lista,
+.sala-ranking-final {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sala-ranking-final {
+  width: 100%;
+  margin-top: var(--space-3);
+  gap: var(--space-1);
+}
+
+.sala-rank {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 7px 10px;
+  border-radius: var(--radius-control);
+  background: var(--bg);
+}
+
+.sala-rank-eu {
+  background: rgba(212, 165, 116, 0.18);
+  outline: 1.5px solid rgba(212, 165, 116, 0.5);
+}
+
+.sala-rank-pos {
+  flex: none;
+  width: 1.6em;
+  height: 1.6em;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font: 600 var(--text-sm) / 1 var(--font-mono);
+  color: var(--neutral-600);
+  background: var(--neutral-100);
+}
+
+.sala-rank-pos-1 {
+  color: #6b4a17;
+  background: var(--gold-500);
+}
+.sala-rank-pos-2 {
+  color: #4a4f55;
+  background: #d6dade;
+}
+.sala-rank-pos-3 {
+  color: #fff;
+  background: #b06a3b;
+}
+
+.sala-rank-nome {
+  flex: 1;
+  min-width: 0;
+  font: 500 var(--text-sm) / 1.2 var(--font-ui);
+  color: var(--wine-900);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sala-rank-pts {
+  flex: none;
+  font: 600 var(--text-sm) / 1 var(--font-mono);
+  color: var(--wine-700);
+}
+
+.sala-rank-vazio {
+  padding: 7px 10px;
+  font-size: var(--text-sm);
+  color: var(--neutral-500);
+}
+
+/* Reveal pos-resposta (a opcao certa/errada e a explicacao) */
+.sala-opcao-certa {
+  border-color: var(--ok-700) !important;
+  background: var(--ok-100) !important;
+}
+
+.sala-opcao-errada {
+  border-color: var(--warm-700) !important;
+  background: var(--warm-100) !important;
+}
+
+.sala-reveal {
+  margin-top: var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-card);
+}
+
+.sala-reveal-ok {
+  background: var(--ok-100);
+}
+
+.sala-reveal-erro {
+  background: var(--warm-100);
+}
+
+.sala-reveal-tit {
+  font: 600 var(--text-md) / 1.2 var(--font-display);
+  color: var(--wine-900);
+}
+
+.sala-reveal-exp {
+  margin-top: 4px;
+  font-size: var(--text-sm);
+  line-height: 1.45;
+  color: var(--neutral-700);
+}
+
+.sala-fim {
+  align-items: center;
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sala-ranking-ao-vivo::before {
+    animation: none;
+  }
+}

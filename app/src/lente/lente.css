@@ -213,6 +213,48 @@
   padding: var(--space-2);
 }
 
+/* Sala ao vivo: entrar com codigo na tela inicial */
+.lente-entrar-sala {
+  display: flex;
+  gap: var(--space-2);
+  width: 100%;
+  max-width: 320px;
+  margin-top: var(--space-2);
+}
+
+.lente-codigo-input {
+  flex: 1;
+  min-width: 0;
+  font: 600 var(--text-lg) / 1 var(--font-mono);
+  letter-spacing: 0.18em;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--wine-900);
+  background: var(--bg);
+  border: 1.5px solid var(--neutral-300);
+  border-radius: var(--radius-control);
+  padding: var(--space-3);
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.lente-codigo-input::placeholder {
+  color: var(--neutral-400);
+  letter-spacing: 0.12em;
+}
+
+.lente-codigo-input:focus {
+  outline: none;
+  border-color: var(--wine-700);
+  box-shadow: 0 0 0 3px rgba(114, 47, 55, 0.12);
+}
+
+.lente-sala-erro {
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--warm-700);
+}
+
 /* ---------- Fase analisando ---------- */
 .lente-analise-vinho {
   font: 600 var(--text-lg) / 1.25 var(--font-display);

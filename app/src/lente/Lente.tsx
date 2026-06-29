@@ -18,6 +18,8 @@ import { Ic } from '../icones/Icones';
 import { Mascotinho } from '../mascote';
 import { MascoteAnalisa } from './MascoteAnalisa';
 import { CameraCaptura } from './CameraCaptura';
+import { SalaAoVivo } from '../sala/SalaAoVivo';
+import { criarSala, entrarSala } from '../sala/api';
 import {
   criarSessaoQuiz,
   enviarFotoParaN8n,
@@ -29,7 +31,7 @@ import {
 } from './api';
 import './lente.css';
 
-type Fase = 'inicio' | 'camera' | 'analisando' | 'briefing' | 'quiz' | 'fim' | 'erro';
+type Fase = 'inicio' | 'camera' | 'analisando' | 'briefing' | 'quiz' | 'fim' | 'erro' | 'sala';
 
 interface ResultadoPergunta {
   pergunta: string;
@@ -87,6 +89,12 @@ export default function Lente() {
   const [difSel, setDifSel] = useState(240);
   const [tempoRestante, setTempoRestante] = useState(0);
   const [tempoEsgotado, setTempoEsgotado] = useState(false);
+  /* Sala ao vivo (degustacao em grupo) */
+  const [sala, setSala] = useState<{ id: string; codigo: string; ehHost: boolean } | null>(null);
+  const [modoEntrar, setModoEntrar] = useState(false);
+  const [codigo, setCodigo] = useState('');
+  const [salaErro, setSalaErro] = useState('');
+  const [salaLoad, setSalaLoad] = useState(false);
 
   const quizIdRef = useRef<string | null>(null);
   const perguntasRef = useRef<PerguntaQuiz[] | null>(null);
@@ -188,6 +196,44 @@ export default function Lente() {
     setSel(null);
     setRespostas([]);
     setFase('quiz');
+  };
+
+  /* Host: cria a sala ao vivo a partir do quiz que escaneou (espera ficar pronto). */
+  const criarSalaAoVivo = async () => {
+    if (salaLoad) return;
+    setSalaLoad(true);
+    setSalaErro('');
+    const ps = await esperarPronto();
+    if (!ps || !quizIdRef.current) {
+      setSalaLoad(false);
+      setErroMsg(erroRef.current || 'Não consegui preparar o quiz.');
+      setFase('erro');
+      return;
+    }
+    const r = await criarSala(quizIdRef.current);
+    setSalaLoad(false);
+    if (!r) {
+      setSalaErro('Não consegui criar a sala. Tente de novo.');
+      return;
+    }
+    setSala({ id: r.sala_id, codigo: r.codigo, ehHost: true });
+    setFase('sala');
+  };
+
+  /* Participante: entra numa sala pelo codigo (sem escanear). */
+  const entrarNaSala = async () => {
+    const c = codigo.trim().toUpperCase();
+    if (c.length < 4 || salaLoad) return;
+    setSalaLoad(true);
+    setSalaErro('');
+    const r = await entrarSala(c);
+    setSalaLoad(false);
+    if (!r) {
+      setSalaErro('Sala não encontrada. Confira o código.');
+      return;
+    }
+    setSala({ id: r.sala_id, codigo: r.codigo, ehHost: false });
+    setFase('sala');
   };
 
   const pollar = (id: string) => {
@@ -295,6 +341,22 @@ export default function Lente() {
     );
   }
 
+  if (fase === 'sala' && sala) {
+    return (
+      <SalaAoVivo
+        salaId={sala.id}
+        codigo={sala.codigo}
+        ehHost={sala.ehHost}
+        onSair={() => {
+          setSala(null);
+          setModoEntrar(false);
+          setCodigo('');
+          setFase('inicio');
+        }}
+      />
+    );
+  }
+
   return (
     <div className="lente">
       <header className="lente-topo app-chrome">
@@ -347,6 +409,40 @@ export default function Lente() {
             ou escolher da galeria
             <input type="file" accept="image/*" onChange={aoEscolherFoto} hidden />
           </label>
+
+          {!modoEntrar ? (
+            <button
+              type="button"
+              className="lente-link tap"
+              onClick={() => {
+                setModoEntrar(true);
+                setSalaErro('');
+              }}
+            >
+              Entrar numa sala ao vivo
+            </button>
+          ) : (
+            <div className="lente-entrar-sala">
+              <input
+                className="lente-codigo-input"
+                value={codigo}
+                onChange={(e) => setCodigo(e.target.value.toUpperCase())}
+                placeholder="CÓDIGO"
+                maxLength={6}
+                autoCapitalize="characters"
+                aria-label="Código da sala"
+              />
+              <button
+                type="button"
+                className="btn btn-primary btn-jogo tap"
+                disabled={codigo.trim().length < 4 || salaLoad}
+                onClick={() => void entrarNaSala()}
+              >
+                {salaLoad ? '...' : 'Entrar'}
+              </button>
+            </div>
+          )}
+          {salaErro && <p className="lente-sala-erro">{salaErro}</p>}
         </div>
       )}
 
@@ -400,6 +496,15 @@ export default function Lente() {
             >
               Começar
             </button>
+            <button
+              type="button"
+              className="lente-link tap"
+              onClick={() => void criarSalaAoVivo()}
+              disabled={salaLoad}
+            >
+              {salaLoad ? 'Criando sala…' : 'Criar sala ao vivo (jogar em grupo)'}
+            </button>
+            {salaErro && <p className="lente-sala-erro">{salaErro}</p>}
           </div>
         </div>
       )}
