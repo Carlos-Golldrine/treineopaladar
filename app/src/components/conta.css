@@ -62,6 +62,12 @@
   cursor: default;
 }
 
+.conta-google-logo {
+  flex: none;
+  width: 18px;
+  height: 18px;
+}
+
 .conta-embreve {
   font: 600 11px / 1 var(--font-ui);
   text-transform: uppercase;
