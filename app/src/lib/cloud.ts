@@ -29,6 +29,7 @@ function estaVazio(e: EstadoV1): boolean {
  * no mesmo aparelho.
  */
 const CHAVE_DONO = 'tp.dono';
+const CHAVE_DONO_ANON = 'tp.dono.anon';
 
 function lerDono(): string | null {
   try {
@@ -38,9 +39,20 @@ function lerDono(): string | null {
   }
 }
 
-function gravarDono(uid: string): void {
+/** True se o estado local pertence a um usuario ANONIMO — a origem de um "upgrade"
+ * (anonimo que cria/atrela conta). Distingue migrar (anonimo) de isolar (conta real). */
+function donoEraAnonimo(): boolean {
+  try {
+    return localStorage.getItem(CHAVE_DONO_ANON) === '1';
+  } catch {
+    return false;
+  }
+}
+
+function gravarDono(uid: string, anonimo: boolean): void {
   try {
     localStorage.setItem(CHAVE_DONO, uid);
+    localStorage.setItem(CHAVE_DONO_ANON, anonimo ? '1' : '0');
   } catch {
     /* modo privado / quota: o guard do write-through ainda bloqueia upload cruzado */
   }
@@ -128,26 +140,38 @@ async function reconciliar(event: AuthChangeEvent, session: Session | null): Pro
   usuarioCorrente = session?.user?.id ?? null;
   const uid = usuarioCorrente;
   if (!uid) return;
-  identificar(uid, { anonimo: Boolean(session?.user?.is_anonymous) });
+  const anon = Boolean(session?.user?.is_anonymous);
+  identificar(uid, { anonimo: anon });
   if (event !== 'INITIAL_SESSION' && event !== 'SIGNED_IN' && event !== 'USER_UPDATED') return;
 
   const dono = lerDono();
 
-  // TROCA DE IDENTIDADE: o estado local pertence a OUTRA conta (dono definido e
-  // diferente do uid da sessao). Mesclar aqui vazaria XP/progresso entre contas
-  // — exatamente o bug. Em vez disso, ADOTA a conta atual: substitui o local pelo
-  // que a nuvem dela tem (ou comeca limpo, se for conta nova). Nada se perde: o
-  // progresso de cada conta vive na nuvem sob o uid dela e volta no proximo login.
+  // TROCA DE IDENTIDADE: o estado local pertence a OUTRO uid (dono definido e diferente
+  // do uid da sessao). Mesclar entre contas REAIS vazaria XP/progresso — o bug do
+  // isolamento. Regra: se a conta nova ja tem nuvem, adota a dela; se o local e de um
+  // ANONIMO com progresso (upgrade: criou conta com uid novo), MIGRA esse progresso pra
+  // conta nova; senao (troca entre contas reais), comeca limpo. O progresso de cada conta
+  // vive na nuvem sob o uid dela e volta no proximo login.
   if (dono && dono !== uid) {
     try {
       const remoto = await carregarDaNuvem(sb, uid);
       if (remoto && !estaVazio(remoto)) {
+        // A conta nova ja tem progresso na nuvem: adota o dela.
         store.repor(remoto);
+      } else if (donoEraAnonimo() && !estaVazio(store.getEstado())) {
+        // UPGRADE: o estado local e de um ANONIMO com progresso (ex.: acabou de
+        // concluir o onboarding) e ele criou/atrelou uma conta com uid NOVO (ex.:
+        // Google quando o "manual linking" esta off -> signInWithOAuth). MIGRA o
+        // progresso para a conta nova em vez de descartar. NAO reabre o vazamento
+        // entre contas: so migra quando a ORIGEM e anonima (dono real -> conta nova
+        // segue limpa, isolada).
+        await salvarNaNuvem(sb, uid, store.getEstado());
       } else {
+        // Troca entre contas reais (ou anonimo sem progresso): comeca limpo.
         store.repor(estadoInicial(Date.now()));
         await salvarNaNuvem(sb, uid, store.getEstado());
       }
-      gravarDono(uid); // so marca como reconciliado APOS sucesso
+      gravarDono(uid, anon); // so marca como reconciliado APOS sucesso
     } catch {
       // Offline/erro: NAO mexe no local e NAO grava o dono. O write-through fica
       // bloqueado (dono != uid) ate reconciliar de novo — sem risco de contaminar.
@@ -175,7 +199,7 @@ async function reconciliar(event: AuthChangeEvent, session: Session | null): Pro
       // Reload (INITIAL_SESSION) ou conta recem-criada do anonimo (USER_UPDATED): sobe o local.
       await salvarNaNuvem(sb, uid, local);
     }
-    gravarDono(uid);
+    gravarDono(uid, anon);
   } catch {
     /* best-effort */
   }

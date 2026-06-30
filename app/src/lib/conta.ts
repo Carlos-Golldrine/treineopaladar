@@ -79,9 +79,10 @@ export async function entrarComGoogle(): Promise<ResultadoConta> {
     data: { user },
   } = await sb.auth.getUser();
 
-  // Anonimo: tenta vincular (preserva o mesmo user_id). Se "manual linking" estiver
-  // desabilitado no projeto, o endpoint responde 404; caimos para signInWithOAuth e o
-  // progresso local e reenviado ao novo usuario pela reconciliacao da nuvem (cloud.ts).
+  // Anonimo: tenta vincular (preserva o mesmo user_id, ideal). Se "manual linking"
+  // estiver desabilitado no projeto, o endpoint responde 404; caimos para signInWithOAuth
+  // (uid NOVO) e a reconciliacao da nuvem MIGRA o progresso do anonimo para a conta nova
+  // (cloud.ts, ramo de upgrade) — onboarding e XP nao se perdem.
   if (user?.is_anonymous) {
     const { error } = await sb.auth.linkIdentity({ provider: 'google', options: { redirectTo } });
     if (!error) return { ok: true };
