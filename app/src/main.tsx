@@ -30,6 +30,7 @@ import { PortaoOnboarding } from './onboarding/Portao';
 import { nuvemConfigurada } from './lib/supabase';
 import { iniciarNuvem } from './lib/cloud';
 import { iniciarTelemetria } from './lib/analytics';
+import { iniciarPixel } from './lib/pixel';
 /* Captura do beforeinstallprompt o quanto antes (efeito colateral no import) */
 import './lib/pwa';
 
@@ -129,6 +130,8 @@ registerSW({ immediate: true });
 
 /* F3: telemetria (PostHog). No-op quando nao ha chave configurada. */
 iniciarTelemetria();
+/* Meta Pixel (trafego pago). So em producao; espelha a telemetria (ver lib/pixel). */
+iniciarPixel();
 
 /* F3: sincronizacao com a nuvem (Supabase). Best-effort e fora do caminho de
    render (o app funciona na copia local mesmo sem rede). Pulada quando nao ha

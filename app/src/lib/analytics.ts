@@ -5,6 +5,21 @@
  * os eventos nomeados (ftue, licao, desafio, conta) afinam a analise de pacing.
  */
 import posthog from 'posthog-js';
+import { pixelPageView, pixelTrack, pixelTrackCustom } from './pixel';
+
+/* Eventos da telemetria que viram evento PADRAO do Meta (otimizacao de anuncio).
+   Os demais vao como evento custom com o mesmo nome (pt-BR), pra "trackear tudo". */
+const PIXEL_PADRAO: Record<string, string> = {
+  conta_criada: 'CompleteRegistration', // a conversao principal pro trafego pago
+  ftue_concluido: 'Lead', // ativou: terminou o onboarding (1a licao)
+  pwa_instalado: 'Subscribe', // instalou o PWA (proxy de "ativacao forte")
+};
+
+function espelharNoPixel(evento: string, props?: Record<string, unknown>): void {
+  const padrao = PIXEL_PADRAO[evento];
+  if (padrao) pixelTrack(padrao, props);
+  else pixelTrackCustom(evento, props);
+}
 
 // Chave publica do PostHog (client-side por design). Env var tem prioridade; fallback garante o deploy.
 const key =
@@ -48,10 +63,10 @@ function idSessao(): string {
   }
 }
 
-/** Registra um evento nomeado. No-op se a telemetria nao estiver ligada. */
+/** Registra um evento nomeado: PostHog + Meta Pixel (cada um com seu proprio gate). */
 export function track(evento: string, props?: Record<string, unknown>): void {
-  if (!ligado) return;
-  posthog.capture(evento, props);
+  if (ligado) posthog.capture(evento, props);
+  espelharNoPixel(evento, props);
 }
 
 /** Associa os eventos ao usuario (id do Supabase). No-op se desligada. */
@@ -62,10 +77,10 @@ export function identificar(userId: string, props?: Record<string, unknown>): vo
   if (props && 'anonimo' in props) posthog.register({ anonimo: Boolean(props.anonimo) });
 }
 
-/** Marca a visita de uma tela (jornada/drop-off entre as abas). */
+/** Marca a visita de uma tela: tela_vista no PostHog + PageView no Pixel (SPA). */
 export function telaVista(rota: string): void {
-  if (!ligado) return;
-  posthog.capture('tela_vista', { rota });
+  if (ligado) posthog.capture('tela_vista', { rota });
+  pixelPageView();
 }
 
 /** Desassocia (ex.: logout). No-op se desligada. */
