@@ -212,7 +212,7 @@
   margin: -28px 0 0 -28px;
   border-radius: 50%;
   border: 3px solid #46d17f;
-  animation: cam-fechar 1.3s ease-out forwards;
+  animation: cam-fechar 0.8s ease-out forwards;
 }
 
 @keyframes cam-fechar {

@@ -18,9 +18,10 @@ const MAX_LADO = 1280;
 /* ---- Verificacao de qualidade (constantes TUNAVEIS; calibrar no celular real) ---- */
 const ANALISE_LARGURA = 132; // largura do canvas de analise (mantem proporcao da moldura)
 const ANALISE_INTERVALO_MS = 160; // ~6 leituras por segundo
-const ESTABILIDADE_TICKS = 8; // frames bons E PARADOS consecutivos pra disparar (~1,3s; casa com .cam-mira-anel)
+const ESTABILIDADE_TICKS = 5; // frames bons E PARADOS pra disparar (~0,8s; casa com .cam-mira-anel)
 const ARMAR_APOS_MS = 1500; // nao dispara nesse 1o intervalo: da tempo de apontar pro vinho
-const MOVIMENTO_MAX = 10; // diferenca media de luma entre frames; acima disso = celular se movendo
+const MOVIMENTO_MAX = 20; // diferenca media de luma entre frames; acima disso = celular se movendo.
+// Tolerante de proposito (a mao sempre treme um pouco): foto tremida de verdade ja cai na NITIDEZ_MIN.
 const LUMA_ESCURO = 55; // claridade media abaixo disso = escuro
 const LUMA_CLAROU = 222; // claridade media acima disso = estourado
 const SATURACAO_MAX = 0.03; // fracao de pixels saturados (reflexo especular) que reprova
@@ -271,7 +272,12 @@ export function CameraCaptura({
     if (proxima === 'travando') {
       bomConsecutivoRef.current += 1;
       if (bomConsecutivoRef.current >= ESTABILIDADE_TICKS) void capturar();
+    } else if (proxima === 'segurar') {
+      // bom rotulo, mas tremeu (ou cedo demais): recua devagar em vez de zerar — um
+      // tremor breve nao reinicia a contagem (segurar 100% parado na mao e impossivel).
+      bomConsecutivoRef.current = Math.max(0, bomConsecutivoRef.current - 1);
     } else {
+      // problema real (escuro / clarao / sem_rotulo / borrado): zera de vez.
       bomConsecutivoRef.current = 0;
     }
   };
