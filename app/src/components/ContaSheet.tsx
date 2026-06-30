@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { Sheet } from './Sheet';
-import { criarContaEmail, entrarOuCriar, entrarComGoogle, GOOGLE_PRONTO } from '../lib/conta';
+import { entrarOuCriar, entrarComGoogle, GOOGLE_PRONTO } from '../lib/conta';
 import { track } from '../lib/analytics';
 import './conta.css';
 
@@ -32,19 +32,21 @@ export function ContaSheet({ onFechar, onSucesso, modoInicial }: Props) {
     setErro(null);
     setCarregando(true);
     const conta = email.trim();
-    const r = modo === 'criar' ? await criarContaEmail(conta, senha) : await entrarOuCriar(conta, senha);
+    // Login-first nos DOIS modos: se o e-mail+senha batem numa conta existente, ENTRA
+    // direto (em vez de barrar com "ja tem conta"); se o e-mail e novo, cria; se a senha
+    // esta errada, avisa que as credenciais nao conferem.
+    const r = await entrarOuCriar(conta, senha);
     setCarregando(false);
     if (!r.ok) {
       setErro(r.erro ?? 'Tente de novo.');
       return;
     }
-    if (modo === 'criar' || r.criado) {
-      // Conta criada agora (modo criar, ou "entrar" num e-mail que ainda nao tinha
-      // conta): confirma e o chamador leva pro onboarding.
+    if (r.criado) {
+      // Conta criada agora (e-mail novo): confirma e o chamador leva pro onboarding.
       track('conta_criada', { metodo: 'email' });
       setFeito({ confirmar: Boolean(r.confirmarEmail) });
     } else {
-      // Login numa conta existente.
+      // Entrou numa conta existente (mesmo se o usuario estava no modo "criar").
       track('login', { metodo: 'email' });
       onSucesso?.({ criado: false });
       onFechar();

@@ -133,7 +133,7 @@ export async function entrarOuCriar(email: string, senha: string): Promise<Resul
       const cm = criar.error.message.toLowerCase();
       if (cm.includes('already') || cm.includes('registered') || cm.includes('exists')) {
         // o e-mail existe de verdade -> o login falhou por senha errada
-        return { ok: false, erro: 'Esse e-mail já tem conta. Confira a senha.' };
+        return { ok: false, erro: 'E-mail ou senha não conferem.' };
       }
       return { ok: false, erro: traduzErro(criar.error.message) };
     }
