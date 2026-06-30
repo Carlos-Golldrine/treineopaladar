@@ -138,7 +138,10 @@ export function SalaAoVivo({
   };
 
   const sair = () => {
-    void sairSala(salaId);
+    // O host saindo do LOBBY (sala ainda nao comecou) NAO encerra a sala: ela fica
+    // aberta pra galera entrar com o codigo e o host pode voltar. Participante — ou o
+    // host no meio/fim do jogo — sai de verdade (encolhe o quorum / passa o comando).
+    if (!(host && !iniciada)) void sairSala(salaId);
     onSair();
   };
 
