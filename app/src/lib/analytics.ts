@@ -7,11 +7,18 @@
 import posthog from 'posthog-js';
 import { pixelPageView, pixelTrack, pixelTrackCustom } from './pixel';
 
+/* CONVERSAO PRINCIPAL da campanha = o evento que o Meta otimiza (CompleteRegistration).
+   A definir com o marketing entre 'conta_criada' (cadastro real) e 'ftue_concluido'
+   (terminou o onboarding). Os DOIS ficam sempre mapeados; este toggle so decide qual
+   vira CompleteRegistration e qual vira Lead. Troca aqui ou via env VITE_META_CONVERSAO
+   (precisa rebuild/redeploy de qualquer forma). Default: 'conta_criada'. */
+const CONVERSAO = (import.meta.env.VITE_META_CONVERSAO as string | undefined) ?? 'conta_criada';
+
 /* Eventos da telemetria que viram evento PADRAO do Meta (otimizacao de anuncio).
    Os demais vao como evento custom com o mesmo nome (pt-BR), pra "trackear tudo". */
 const PIXEL_PADRAO: Record<string, string> = {
-  conta_criada: 'CompleteRegistration', // a conversao principal pro trafego pago
-  ftue_concluido: 'Lead', // ativou: terminou o onboarding (1a licao)
+  conta_criada: CONVERSAO === 'conta_criada' ? 'CompleteRegistration' : 'Lead',
+  ftue_concluido: CONVERSAO === 'ftue_concluido' ? 'CompleteRegistration' : 'Lead',
   pwa_instalado: 'Subscribe', // instalou o PWA (proxy de "ativacao forte")
 };
 
