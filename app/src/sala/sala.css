@@ -121,12 +121,12 @@
   background: rgba(212, 165, 116, 0.18);
 }
 
-.sala-jog-bolinha {
+.sala-jog-avatar {
   flex: none;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--ok-700);
+}
+
+.sala-rank-avatar {
+  flex: none;
 }
 
 .sala-jog-nome {

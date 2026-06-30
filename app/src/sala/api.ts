@@ -35,6 +35,7 @@ export interface PerguntaSala {
 export interface RankItem {
   user_id: string;
   nome: string | null;
+  avatar: string | null;
   pontos: number;
   acertos: number;
   respondidas: number;

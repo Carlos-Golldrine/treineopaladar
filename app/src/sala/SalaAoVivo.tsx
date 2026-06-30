@@ -7,6 +7,7 @@
  */
 import { useEffect, useRef, useState } from 'react';
 import { Ic } from '../icones/Icones';
+import { Avatar } from '../components/Avatar';
 import {
   assinarRanking,
   assinarSala,
@@ -219,7 +220,7 @@ export function SalaAoVivo({
             <ul className="sala-jogadores-lista">
               {ranking.map((r) => (
                 <li key={r.user_id} className={`sala-jog ${r.user_id === meu ? 'sala-jog-eu' : ''}`}>
-                  <span className="sala-jog-bolinha" />
+                  <Avatar id={r.avatar} nome={r.nome} size={34} className="sala-jog-avatar" />
                   <span className="sala-jog-nome">{r.nome ?? 'Alguém'}</span>
                   {r.user_id === meu && <span className="sala-jog-voce">você</span>}
                 </li>
@@ -264,6 +265,7 @@ export function SalaAoVivo({
               {top.map((r) => (
                 <li key={r.user_id} className={`sala-rank ${r.user_id === meu ? 'sala-rank-eu' : ''}`}>
                   <span className={`sala-rank-pos sala-rank-pos-${r.posicao}`}>{r.posicao}</span>
+                  <Avatar id={r.avatar} nome={r.nome} size={26} className="sala-rank-avatar" />
                   <span className="sala-rank-nome">{r.nome ?? 'Alguém'}</span>
                   <span className="sala-rank-pts">{r.pontos}</span>
                 </li>
@@ -271,6 +273,7 @@ export function SalaAoVivo({
               {eu && eu.posicao > 3 && (
                 <li className="sala-rank sala-rank-eu">
                   <span className="sala-rank-pos">{eu.posicao}</span>
+                  <Avatar id={eu.avatar} nome={eu.nome} size={26} className="sala-rank-avatar" />
                   <span className="sala-rank-nome">Você</span>
                   <span className="sala-rank-pts">{eu.pontos}</span>
                 </li>
@@ -386,6 +389,7 @@ export function SalaAoVivo({
               {ranking.map((r) => (
                 <li key={r.user_id} className={`sala-rank ${r.user_id === meu ? 'sala-rank-eu' : ''}`}>
                   <span className={`sala-rank-pos sala-rank-pos-${r.posicao}`}>{r.posicao}</span>
+                  <Avatar id={r.avatar} nome={r.nome} size={26} className="sala-rank-avatar" />
                   <span className="sala-rank-nome">{r.nome ?? 'Alguém'}</span>
                   <span className="sala-rank-pts">{r.pontos} pts</span>
                 </li>
