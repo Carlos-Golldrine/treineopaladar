@@ -26,3 +26,26 @@ function aoMeioDia(data: string): number {
 export function horaLocal(ts: number): number {
   return new Date(ts).getHours();
 }
+
+/**
+ * Semana ISO no formato "IYYY-Www" (ex.: "2026-W27"), em America/Sao_Paulo —
+ * casa com o `to_char(... 'IYYY-"W"IW')` que a Mesa usa no servidor. A semana e
+ * a chave do placar semanal: a quinta-feira define o ano/semana ISO.
+ */
+export function semanaIso(ts: number): string {
+  const fmt = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'America/Sao_Paulo',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  });
+  const [ano, mes, dia] = fmt.format(ts).split('-').map(Number);
+  const d = new Date(Date.UTC(ano, mes - 1, dia));
+  const diaSem = (d.getUTCDay() + 6) % 7; // segunda=0 ... domingo=6
+  d.setUTCDate(d.getUTCDate() - diaSem + 3); // quinta-feira desta semana ISO
+  const anoIso = d.getUTCFullYear();
+  const primeira = new Date(Date.UTC(anoIso, 0, 4)); // 4/jan sempre cai na semana 1
+  primeira.setUTCDate(primeira.getUTCDate() - ((primeira.getUTCDay() + 6) % 7) + 3);
+  const semana = 1 + Math.round((d.getTime() - primeira.getTime()) / (7 * MS_DIA));
+  return `${anoIso}-W${String(semana).padStart(2, '0')}`;
+}

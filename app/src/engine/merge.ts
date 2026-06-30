@@ -60,6 +60,10 @@ function mesclarWallet(l: Wallet, r: Wallet, agora: number): Wallet {
   const mesmoDia = l.dataHoje === r.dataHoje;
   const dia = l.dataHoje >= r.dataHoje ? l : r;
 
+  /* Bloco da semana (placar da Mesa): mesma logica do dia, chaveada por semanaXp. */
+  const mesmaSemana = l.semanaXp === r.semanaXp;
+  const sem = l.semanaXp >= r.semanaXp ? l : r;
+
   return {
     xpTotal: max(l.xpTotal, r.xpTotal),
     cristais: economico.cristais,
@@ -75,6 +79,8 @@ function mesclarWallet(l: Wallet, r: Wallet, agora: number): Wallet {
     dataHoje: dia.dataHoje,
     licoesHoje: mesmoDia ? max(l.licoesHoje, r.licoesHoje) : dia.licoesHoje,
     praticasHoje: mesmoDia ? max(l.praticasHoje, r.praticasHoje) : dia.praticasHoje,
+    xpSemana: mesmaSemana ? max(l.xpSemana, r.xpSemana) : sem.xpSemana,
+    semanaXp: sem.semanaXp,
     criadoEm: min(l.criadoEm, r.criadoEm),
   };
 }

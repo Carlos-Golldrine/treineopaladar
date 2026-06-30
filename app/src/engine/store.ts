@@ -46,7 +46,7 @@ import {
   sessaoConcluida,
 } from './sessao';
 import type { EfeitoResposta, ResultadoSessao, Sessao, TipoSessao } from './sessao';
-import { dataLocal } from './tempo';
+import { dataLocal, semanaIso } from './tempo';
 
 export const CHAVE_STORE = 'tp.v1';
 export const VERSAO_ESTADO = 1 as const;
@@ -73,6 +73,8 @@ function walletInicial(agora: number): Wallet {
     dataHoje: dataLocal(agora),
     licoesHoje: 0,
     praticasHoje: 0,
+    xpSemana: 0,
+    semanaXp: semanaIso(agora),
     criadoEm: agora,
   };
 }
@@ -290,6 +292,12 @@ export class TPStore {
       mudou = true;
     }
 
+    const semana = semanaIso(agora);
+    if (w.semanaXp !== semana) {
+      w = { ...w, semanaXp: semana, xpSemana: 0 };
+      mudou = true;
+    }
+
     const r = regenerar({ vidas: w.vidas, vidasTs: w.vidasTs }, agora);
     if (r.vidas !== w.vidas || r.vidasTs !== w.vidasTs) {
       w = { ...w, vidas: r.vidas, vidasTs: r.vidasTs };
@@ -386,11 +394,16 @@ export class TPStore {
     if (xpAntes < w.metaDiaria && xpHoje >= w.metaDiaria) {
       cristais += CRISTAIS_META_DIARIA;
     }
+    /* XP da semana (placar da Mesa): zera se a semana virou, depois soma */
+    const semana = semanaIso(agora);
+    const xpSemana = (w.semanaXp === semana ? w.xpSemana : 0) + resultado.xp;
     w = {
       ...w,
       xpTotal: w.xpTotal + resultado.xp,
       xpHoje,
       cristais,
+      xpSemana,
+      semanaXp: semana,
       licoesHoje: sessao.tipo === 'nova' ? w.licoesHoje + 1 : w.licoesHoje,
     };
 
@@ -554,7 +567,9 @@ export class TPStore {
     if (w.xpHoje < w.metaDiaria && xpHoje >= w.metaDiaria) {
       cristais += CRISTAIS_META_DIARIA;
     }
-    return { ...w, xpTotal: w.xpTotal + xp, xpHoje, cristais };
+    const semana = semanaIso(this.agora());
+    const xpSemana = (w.semanaXp === semana ? w.xpSemana : 0) + xp;
+    return { ...w, xpTotal: w.xpTotal + xp, xpHoje, cristais, xpSemana, semanaXp: semana };
   }
 
   /* -------------------------- Loja ---------------------------- */

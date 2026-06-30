@@ -14,7 +14,7 @@ import type {
   Wallet,
 } from '../engine/types';
 import { HABILIDADES } from '../engine/types';
-import { dataLocal } from '../engine/tempo';
+import { dataLocal, semanaIso } from '../engine/tempo';
 
 function iso(ms: number | null): string | null {
   return ms == null ? null : new Date(ms).toISOString();
@@ -61,6 +61,8 @@ export async function salvarNaNuvem(sb: SupabaseClient, userId: string, e: Estad
         data_hoje: w.dataHoje,
         licoes_hoje: w.licoesHoje,
         praticas_hoje: w.praticasHoje,
+        xp_semana: w.xpSemana,
+        semana_xp: w.semanaXp,
         criado_em: iso(w.criadoEm),
       },
       { onConflict: 'user_id' },
@@ -148,6 +150,8 @@ export async function carregarDaNuvem(sb: SupabaseClient, userId: string): Promi
     dataHoje: w.data_hoje ?? dataLocal(agora),
     licoesHoje: w.licoes_hoje,
     praticasHoje: w.praticas_hoje,
+    xpSemana: w.xp_semana ?? 0,
+    semanaXp: w.semana_xp ?? semanaIso(agora),
     criadoEm: emMs(w.criado_em) ?? agora,
   };
 

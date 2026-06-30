@@ -70,6 +70,10 @@ export interface Wallet {
   licoesHoje: number;
   /** Sessoes de pratica livre concluidas hoje (soft cap proprio). */
   praticasHoje: number;
+  /** XP ganho na semana ISO corrente (placar semanal da Mesa). */
+  xpSemana: number;
+  /** Semana ISO (IYYY-Www, ex.: "2026-W27") a que xpSemana se refere. */
+  semanaXp: string;
   /** Instante (ms) de criacao da conta. D0 e isento de soft cap. */
   criadoEm: number;
 }
