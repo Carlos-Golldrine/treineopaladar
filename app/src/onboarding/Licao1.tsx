@@ -138,6 +138,10 @@ function LicaoUmReal() {
     if (!ativa || sessaoConcluida(ativa.sessao)) {
       const resultado = store.finalizarLicao();
       store.concluirOnboarding();
+      /* Marco do funil: dispara UMA vez so, no momento real de concluir o onboarding
+         (mesmo se a tela de conclusao for pulada). Vira CompleteRegistration no Meta
+         Pixel. Nao repetir na Conclusao1 (ela tambem aparece no replay/softwall). */
+      track('ftue_concluido', resultado ? { xp: resultado.xp, streak: store.streakEfetivo() } : undefined);
       if (resultado) setPasso({ t: 'conclusao', resultado });
       else navigate('/', { replace: true });
       return;

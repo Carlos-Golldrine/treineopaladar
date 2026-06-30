@@ -1,70 +1,42 @@
 /**
- * Meta Pixel (Facebook/Instagram Ads) — instrumentacao pra trafego pago.
- * ID enviado pela equipe de marketing. O Pixel base dispara PageView no load e
- * espelhamos a telemetria existente (analytics.ts) pra ca: cada navegacao vira
- * PageView e cada evento nomeado vira um evento padrao do Meta (CompleteRegistration
- * etc.) ou um evento custom — assim "trackeia tudo" sem espalhar fbq pelo codigo.
+ * Meta Pixel (Facebook/Instagram Ads) — camada fina e segura sobre o `fbq` global.
+ * O Pixel base e carregado (e gated pelo dominio de producao) no index.html; aqui
+ * ficam so os disparadores. Tudo guarded: se o fbq nao existir (dev, preview, tracker
+ * bloqueado, sem rede) vira no-op e nada quebra.
  *
- * Gated por PRODUCAO: em dev/preview nao carrega o pixel real (nao polui os dados
- * de anuncio). Os forwarders chamam window.fbq so se existir, entao sao no-op fora
- * de producao (e testaveis com um stub de window.fbq).
+ * O mapeamento app->Meta vive em analytics.ts (espelharNoPixel), chamado por TODO
+ * track(). Este modulo so expoe PageView / evento padrao / evento custom.
  */
-const PIXEL_ID = (import.meta.env.VITE_META_PIXEL_ID as string | undefined) ?? '1666225634676067';
+type Fbq = (metodo: string, evento: string, params?: Record<string, unknown>) => void;
 
-declare global {
-  interface Window {
-    fbq?: ((...args: unknown[]) => void) & { queue?: unknown[]; loaded?: boolean; version?: string; callMethod?: unknown };
-    _fbq?: unknown;
+function fbq(): Fbq | null {
+  const f = (window as unknown as { fbq?: Fbq }).fbq;
+  return typeof f === 'function' ? f : null;
+}
+
+/** PageView (load inicial vem do index.html; aqui sao as trocas de rota da SPA). */
+export function pixelPageView(): void {
+  try {
+    fbq()?.('track', 'PageView');
+  } catch {
+    /* tracker bloqueado: no-op */
   }
 }
 
-let ligado = false;
-
-/** True quando ha Pixel configurado (sempre, com o ID do marketing como fallback). */
-export function pixelConfigurado(): boolean {
-  return Boolean(PIXEL_ID);
-}
-
-/** Carrega o Meta Pixel e dispara o primeiro PageView. So em producao. No-op repetido. */
-export function iniciarPixel(): void {
-  if (ligado || !PIXEL_ID) return;
-  if (!import.meta.env.PROD) return; // dev/preview nao manda pro pixel real
-  carregarFbevents();
-  window.fbq?.('init', PIXEL_ID);
-  window.fbq?.('track', 'PageView');
-  ligado = true;
-}
-
-/* Snippet oficial do Meta reescrito em TS: cria window.fbq (fila) e injeta o fbevents.js. */
-function carregarFbevents(): void {
-  if (window.fbq) return;
-  const n = function (...args: unknown[]) {
-    if (n.callMethod) (n.callMethod as (...a: unknown[]) => void)(...args);
-    else n.queue!.push(args);
-  } as Window['fbq'] & { queue: unknown[] };
-  n.queue = [];
-  n.loaded = true;
-  n.version = '2.0';
-  window.fbq = n;
-  window._fbq = window._fbq || n;
-  const t = document.createElement('script');
-  t.async = true;
-  t.src = 'https://connect.facebook.net/en_US/fbevents.js';
-  const s = document.getElementsByTagName('script')[0];
-  s.parentNode?.insertBefore(t, s);
-}
-
-/** PageView (navegacao SPA). */
-export function pixelPageView(): void {
-  window.fbq?.('track', 'PageView');
-}
-
-/** Evento PADRAO do Meta (CompleteRegistration, Lead, Purchase, Contact...). */
-export function pixelTrack(evento: string, props?: Record<string, unknown>): void {
-  window.fbq?.('track', evento, props);
+/** Evento PADRAO do Meta (CompleteRegistration, Lead, Subscribe, ViewContent...). */
+export function pixelTrack(evento: string, params?: Record<string, unknown>): void {
+  try {
+    fbq()?.('track', evento, params);
+  } catch {
+    /* no-op */
+  }
 }
 
 /** Evento CUSTOM (nome livre) — pra "trackear tudo" o que ja existe na telemetria. */
-export function pixelTrackCustom(evento: string, props?: Record<string, unknown>): void {
-  window.fbq?.('trackCustom', evento, props);
+export function pixelTrackCustom(nome: string, params?: Record<string, unknown>): void {
+  try {
+    fbq()?.('trackCustom', nome, params);
+  } catch {
+    /* no-op */
+  }
 }

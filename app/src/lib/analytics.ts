@@ -8,24 +8,49 @@ import posthog from 'posthog-js';
 import { pixelPageView, pixelTrack, pixelTrackCustom } from './pixel';
 
 /* CONVERSAO PRINCIPAL da campanha = o evento que o Meta otimiza (CompleteRegistration).
-   A definir com o marketing entre 'conta_criada' (cadastro real) e 'ftue_concluido'
-   (terminou o onboarding). Os DOIS ficam sempre mapeados; este toggle so decide qual
-   vira CompleteRegistration e qual vira Lead. Troca aqui ou via env VITE_META_CONVERSAO
-   (precisa rebuild/redeploy de qualquer forma). Default: 'conta_criada'. */
-const CONVERSAO = (import.meta.env.VITE_META_CONVERSAO as string | undefined) ?? 'conta_criada';
+   Escolha do marketing: 'ftue_concluido' (terminou o onboarding, DEFAULT) ou 'conta_criada'
+   (cadastro real). Os DOIS ficam sempre mapeados; este toggle so decide qual vira
+   CompleteRegistration e qual vira Lead. Troca aqui ou via env VITE_META_CONVERSAO. */
+const CONVERSAO = (import.meta.env.VITE_META_CONVERSAO as string | undefined) ?? 'ftue_concluido';
 
-/* Eventos da telemetria que viram evento PADRAO do Meta (otimizacao de anuncio).
-   Os demais vao como evento custom com o mesmo nome (pt-BR), pra "trackear tudo". */
+/* Eventos do app -> evento PADRAO do Meta (otimizacao/medicao da campanha). */
 const PIXEL_PADRAO: Record<string, string> = {
-  conta_criada: CONVERSAO === 'conta_criada' ? 'CompleteRegistration' : 'Lead',
   ftue_concluido: CONVERSAO === 'ftue_concluido' ? 'CompleteRegistration' : 'Lead',
-  pwa_instalado: 'Subscribe', // instalou o PWA (proxy de "ativacao forte")
+  conta_criada: CONVERSAO === 'conta_criada' ? 'CompleteRegistration' : 'Lead',
+  pwa_instalado: 'Subscribe', // instalou o PWA (ativacao forte)
 };
+
+/* Nomes "bonitos" pros eventos-chave do funil no Gerenciador de Eventos. Tudo que nao
+   esta aqui nem em PIXEL_PADRAO vai como custom com o nome cru -> "trackeia tudo". */
+const PIXEL_RENOMEAR: Record<string, string> = {
+  ftue_iniciado: 'IniciouOnboarding',
+  licao_concluida: 'LicaoConcluida',
+  desafio_concluido: 'DesafioConcluido',
+  pratica_concluida: 'PraticaConcluida',
+  lente_quiz_concluido: 'UsouLente',
+  mesa_entrou: 'EntrouNaMesa',
+};
+
+/* A conversao (CompleteRegistration) conta no MAXIMO uma vez por navegador, pra nao
+   inflar a metrica da campanha se o evento de origem repetir. */
+function devoContarConversao(): boolean {
+  try {
+    if (localStorage.getItem('tp.pixel.creg')) return false;
+    localStorage.setItem('tp.pixel.creg', '1');
+    return true;
+  } catch {
+    return true; // sem localStorage: melhor contar do que perder a conversao
+  }
+}
 
 function espelharNoPixel(evento: string, props?: Record<string, unknown>): void {
   const padrao = PIXEL_PADRAO[evento];
-  if (padrao) pixelTrack(padrao, props);
-  else pixelTrackCustom(evento, props);
+  if (padrao) {
+    if (padrao === 'CompleteRegistration' && !devoContarConversao()) return;
+    pixelTrack(padrao, props);
+    return;
+  }
+  pixelTrackCustom(PIXEL_RENOMEAR[evento] ?? evento, props);
 }
 
 // Chave publica do PostHog (client-side por design). Env var tem prioridade; fallback garante o deploy.

@@ -1,37 +1,46 @@
 # Meta Pixel — Treine seu Paladar
 
-Pixel ID: **1666225634676067** (enviado pelo marketing).
+Pixel ID: **1666225634676067** (marketing).
 
 ## Como funciona
-O Pixel é carregado em `app/src/lib/pixel.ts` (gated por produção: dev/preview não
-mandam nada pro pixel real, pra não poluir os dados de anúncio). A instrumentação
-**reaproveita a telemetria que já existe**: todo `track(evento)` do app é espelhado no
-Pixel por `app/src/lib/analytics.ts` (`espelharNoPixel`), e cada navegação (`telaVista`)
-vira um `PageView`. Não há `fbq` espalhado pelo código.
+- **Base**: snippet do Meta no `app/index.html`, **gated pelo domínio de produção**
+  (`paladar.tchintchin.com.br`). Em dev/preview/pages.dev o pixel não carrega — não
+  polui os dados de anúncio. Dispara o `PageView` inicial.
+- **Camada fina**: `app/src/lib/pixel.ts` — wrapper guarded sobre o `fbq` global
+  (sem fbq = no-op). Expõe `pixelPageView` / `pixelTrack` / `pixelTrackCustom`.
+- **Mapeamento**: `app/src/lib/analytics.ts` (`espelharNoPixel`) é chamado por **todo**
+  `track()` do app, e `telaVista()` dispara `PageView` a cada troca de tela na SPA.
+  Não há `fbq` espalhado pelo código.
 
-- **PageView** — no load (snippet base) e a cada troca de tela na SPA.
-- **Eventos padrão do Meta** (otimização/medição) — ver tabela abaixo.
-- **Eventos custom** — todos os outros ~25 eventos da telemetria vão como `trackCustom`
-  com o nome em pt-BR (ex.: `licao_concluida`, `mesa_entrou`, `desafio_concluido`,
-  `pratica_concluida`). Servem pra montar Conversões Personalizadas no Gerenciador.
-
-## Eventos padrão (mapa em `analytics.ts`)
-| Evento do app | Evento Meta | O que é |
+## Eventos
+| Evento do app | Vai pro Meta como | |
 |---|---|---|
-| `conta_criada` **ou** `ftue_concluido` | **CompleteRegistration** | a CONVERSÃO principal (otimização) |
+| `ftue_concluido` *(default)* ou `conta_criada` | **CompleteRegistration** | conversão (otimização) |
 | o outro dos dois | **Lead** | qualificação |
 | `pwa_instalado` | **Subscribe** | instalou o PWA |
+| `ftue_iniciado` | `IniciouOnboarding` (custom) | |
+| `licao_concluida` | `LicaoConcluida` (custom) | |
+| `desafio_concluido` | `DesafioConcluido` (custom) | |
+| `pratica_concluida` | `PraticaConcluida` (custom) | |
+| `lente_quiz_concluido` | `UsouLente` (custom) | |
+| `mesa_entrou` | `EntrouNaMesa` (custom) | |
+| todos os outros (~15) | mesmo nome, como custom | "trackeia tudo" |
+
+A conversão (CompleteRegistration) **conta no máximo 1x por navegador** (flag
+`tp.pixel.creg`), pra não inflar a métrica.
 
 ## Conversão principal (decisão de marketing)
-Qual evento o anúncio otimiza fica no toggle `CONVERSAO` no topo de `analytics.ts`:
+Toggle `CONVERSAO` no topo de `analytics.ts` (ou env `VITE_META_CONVERSAO`):
+- `'ftue_concluido'` **(default, escolha do marketing)** — converte ao terminar a 1ª lição.
+- `'conta_criada'` — converte ao criar a conta real.
 
-- `'conta_criada'` (default) — a conversão é criar a conta real.
-- `'ftue_concluido'` — a conversão é terminar o onboarding (1ª lição).
+Os dois ficam sempre mapeados; o toggle só decide qual é `CompleteRegistration` e qual é
+`Lead`. Trocar exige rebuild/redeploy.
 
-Os dois ficam sempre mapeados; o toggle só decide qual vira `CompleteRegistration` e qual
-vira `Lead`. Pode trocar pela env `VITE_META_CONVERSAO` (precisa rebuild/redeploy).
+`ftue_concluido` dispara **uma vez só**, no momento real de concluir o onboarding
+(`Licao1.tsx`), mesmo se a tela de conclusão for pulada — e **não** na `Conclusao1`
+(que reaparece no replay/softwall).
 
 ## Testar antes de rodar a campanha
-Use o **Meta Pixel Helper** (extensão do Chrome) ou **Eventos de Teste** no Gerenciador
-de Eventos, abrindo o site de produção (`paladar.tchintchin.com.br`). Em dev/preview o
-pixel fica desligado de propósito.
+**Meta Pixel Helper** (extensão do Chrome) ou **Eventos de Teste** no Gerenciador de
+Eventos, abrindo `paladar.tchintchin.com.br` (em dev/preview o pixel fica desligado).
